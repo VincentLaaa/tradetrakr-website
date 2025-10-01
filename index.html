@@ -62,6 +62,17 @@
       box-shadow: 0 0 20px rgba(166,120,255,0.6);
     }
     .btn-lg { font-size: 1.1rem; padding: 1rem 2rem; }
+    .btn-disabled {
+      background: #4d4d4d;
+      opacity: 0.6;
+      cursor: not-allowed;
+      animation: none;
+      pointer-events: none;
+    }
+    .btn-disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
@@ -207,7 +218,7 @@
         <a href="#demo">Demo</a>
         <a href="#pricing">Pricing</a>
       </nav>
-      <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn">Join Beta Now</a>
+      <a class="btn btn-disabled" aria-disabled="true" tabindex="-1" role="button">Coming Soon</a>
     </div>
   </header>
 
@@ -217,7 +228,7 @@
       <div class="hero-text">
         <h1><span class="typing" id="typing"></span></h1>
         <p>With AI-powered insights, tilt tracking, and model-level stats, TradeTrakr shows you what really drives performance.</p>
-        <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn btn-lg">Join Beta Now</a>
+        <a class="btn btn-lg btn-disabled" aria-disabled="true" tabindex="-1" role="button">Coming Soon</a>
       </div>
       <div class="hero-image">
         <img src="dashboard-preview.png" alt="TradeTrakr Dashboard Preview" />
@@ -296,7 +307,7 @@
       <div class="pricing-card">
         <h3>$20<span>/month</span></h3>
         <p class="beta-tag">Unlock the full power of TradeTrakr at the lifetime beta rate.</p>
-        <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn">Choose the plan</a>
+        <a class="btn btn-disabled" aria-disabled="true" tabindex="-1" role="button">Coming Soon</a>
         <ul class="features-list">
           <li>All core features</li>
           <li>Tilt Meter</li>
@@ -312,7 +323,7 @@
         <div class="discount-badge">37% OFF</div>
         <h3>$150<span>/year</span></h3>
         <p class="beta-tag">Best value — keep your yearly discount for life.</p>
-        <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn">Choose the plan</a>
+        <a class="btn btn-disabled" aria-disabled="true" tabindex="-1" role="button">Coming Soon</a>
         <ul class="features-list">
           <li>All core features</li>
           <li>Tilt Meter</li>
