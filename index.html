@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradeTrakr — AI-Powered Trading Journal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global */
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0d0b14;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+    .section-header { text-align: center; margin-bottom: 2.5rem; }
+
+    /* Scroll progress bar with shimmer */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 2000;
+      background: linear-gradient(270deg, #7b2ff7, #a678ff, #7b2ff7);
+      background-size: 600% 600%;
+      animation: shimmer 6s linear infinite;
+      transition: width 0.1s ease-out;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header */
+    .header { background: #0d0b14; border-bottom: 1px solid #231b33; position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+    .logo { font-size: 1.4rem; font-weight: 700; color: #a678ff; }
+    .nav a { margin: 0 1rem; font-weight: 500; color: #bbb; transition: color 0.2s ease; }
+    .nav a:hover { color: #fff; }
+
+    /* Buttons */
+    .btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      background: linear-gradient(90deg, #7b2ff7, #a678ff);
+      color: white;
+      display: inline-block;
+      animation: pulse 2.5s infinite;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(166,120,255,0.6);
+    }
+    .btn-lg { font-size: 1.1rem; padding: 1rem 2rem; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+    }
+
+    /* Hero with animated background */
+    .hero {
+      position: relative;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 20%, rgba(167,120,255,0.15), transparent 40%),
+                  radial-gradient(circle at 80% 30%, rgba(123,47,247,0.1), transparent 40%),
+                  radial-gradient(circle at 50% 80%, rgba(166,120,255,0.1), transparent 40%);
+      animation: moveBackground 20s linear infinite;
+      z-index: 0;
+    }
+    @keyframes moveBackground {
+      0% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(50px,50px) scale(1.1); }
+      100% { transform: translate(0,0) scale(1); }
+    }
+    .hero-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; position: relative; z-index: 1; }
+    .hero-text h1 { font-size: 2.8rem; margin-bottom: 1rem; color: #fff; }
+    .hero-text p { margin-bottom: 1.5rem; color: #ccc; }
+
+    /* Typing effect */
+    .typing { border-right: 3px solid #a678ff; white-space: nowrap; overflow: hidden; display: inline-block; }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    .hero-image img {
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 25px rgba(167,120,255,0.5);
+      transform: perspective(1000px) rotateX(4deg) rotateY(-6deg);
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+    }
+    .hero-image img:hover {
+      transform: perspective(1000px) rotateX(0) rotateY(0) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 40px rgba(167,120,255,0.7);
+    }
+
+    /* Features */
+    .features { padding: 5rem 0; }
+    .feature-row { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-bottom: 4rem; }
+    .feature-text { flex: 1; }
+    .feature-text h3 { margin-bottom: 0.6rem; color: #fff; }
+    .feature-text p { color: #aaa; }
+    .feature-img { flex: 1; }
+    .feature-img img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); animation: floaty 6s ease-in-out infinite; }
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Demo */
+    .demo { padding: 5rem 0; background: #120d1c; }
+    .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+    .demo-card { background: #171322; padding: 2rem; border-radius: 12px; border: 1px solid #2a1f3f; transition: transform 0.2s ease, border-color 0.2s ease; }
+    .demo-card:hover { transform: translateY(-5px); border-color: #a678ff; }
+    .demo-card h3 { margin-bottom: 1rem; color: #a678ff; }
+    .ai-text { font-style: italic; color: #ccc; min-height: 60px; }
+
+    /* Tilt Meter */
+    .tilt-meter { text-align: center; margin-top: 1rem; }
+    .circular-chart {
+      display: block;
+      margin: 0 auto;
+      max-width: 140px;
+      max-height: 140px;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: #2a1f3f;
+      stroke-width: 3.8;
+    }
+    .circle {
+      fill: none;
+      stroke-width: 3.8;
+      stroke: #a678ff;
+      stroke-linecap: round;
+      transition: stroke-dasharray 1s ease;
+    }
+    .percentage {
+      fill: #fff;
+      font-size: 0.35em;
+      text-anchor: middle;
+    }
+
+    /* Pricing */
+    .pricing { padding: 5rem 0; text-align: center; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .pricing-card { position: relative; background: #171322; padding: 2.5rem; border-radius: 14px; border: 1px solid #2a1f3f; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .pricing-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 10px 25px rgba(167,120,255,0.3); }
+    .pricing-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+    .price { font-size: 2.2rem; color: #a678ff; font-weight: 700; }
+    .price span { font-size: 1rem; color: #bbb; margin-left: 4px; }
+    .beta-tag { margin: 1rem 0; color: #aaa; font-size: 0.9rem; }
+    .pricing-card.recommended { border: 2px solid #a678ff; animation: pulseGlow 3s infinite; }
+    @keyframes pulseGlow { 0% { box-shadow: 0 0 0px rgba(167,120,255,0.3); } 50% { box-shadow: 0 0 30px rgba(167,120,255,0.6); } 100% { box-shadow: 0 0 0px rgba(167,120,255,0.3); } }
+    .discount-badge { position: absolute; top: -12px; right: -12px; background: linear-gradient(90deg, #7b2ff7, #a678ff); color: white; font-weight: 600; font-size: 0.9rem; padding: 0.4rem 0.8rem; border-radius: 20px; transform: rotate(6deg); }
+
+    /* Waitlist */
+    .waitlist { padding: 5rem 0; text-align: center; background: #171322; }
+    .waitlist input[type="email"] { padding: 0.8rem; width: 250px; border-radius: 6px; border: none; margin-right: 0.6rem; }
+    .waitlist button { padding: 0.8rem 1.4rem; border-radius: 6px; border: none; background: linear-gradient(90deg, #7b2ff7, #a678ff); color: white; font-weight: 600; cursor: pointer; transition: all 0.3s ease; animation: pulse 2.5s infinite; }
+    .waitlist button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(166,120,255,0.6); }
+
+    /* Footer */
+    .footer { background: #0d0b14; border-top: 1px solid #231b33; padding: 2rem 0; text-align: center; color: #888; }
+
+    /* Section fade-in */
+    section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    section.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <!-- Progress bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">TradeTrakr</div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <a href="#waitlist" class="btn">Join Beta Now</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1><span class="typing" id="typing"></span></h1>
+        <p>With AI-powered insights, tilt tracking, and model-level stats, TradeTrakr shows you what really drives performance.</p>
+        <a href="#waitlist" class="btn btn-lg">Join Beta Now</a>
+      </div>
+      <div class="hero-image">
+        <img src="dashboard-preview.png" alt="TradeTrakr Dashboard Preview" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="container section-header"><h2>Features That Stand Out</h2></div>
+    <div class="container feature-row">
+      <div class="feature-text"><h3>AI Insights</h3><p>Our AI analyzes your sessions and reveals patterns you miss.</p></div>
+      <div class="feature-img"><img src="ai-insight.png" alt="AI Insights Screenshot"></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-img"><img src="tilt-meter.png" alt="Tilt Meter Screenshot"></div>
+      <div class="feature-text"><h3>Tilt Meter</h3><p>Track emotions and discipline session by session.</p></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-text"><h3>Model Stats</h3><p>Break down results by strategy: win %, trade counts, rule adherence.</p></div>
+      <div class="feature-img"><img src="model-stats.png" alt="Model Stats Screenshot"></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-img"><img src="day-journal.png" alt="Day Journal Screenshot"></div>
+      <div class="feature-text"><h3>Day Journals</h3><p>Log trades, notes, and rule adherence in a clean format.</p></div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section id="demo" class="demo">
+    <div class="container section-header"><h2>Interactive Demo</h2></div>
+    <div class="container demo-grid">
+      <div class="demo-card"><h3>AI Insight</h3><p class="ai-text" id="aiText">“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”</p></div>
+      <div class="demo-card tilt-card">
+        <h3>Tilt Meter</h3>
+        <div class="tilt-meter">
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <path class="circle-bg"
+              d="M18 2.0845
+                 a 15.9155 15.9155 0 0 1 0 31.831
+                 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <path id="tiltCircle" class="circle"
+              stroke-dasharray="0, 100"
+              d="M18 2.0845
+                 a 15.9155 15.9155 0 0 1 0 31.831
+                 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <text id="tiltText" x="18" y="20.35" class="percentage">Tilt 0%</text>
+          </svg>
+        </div>
+      </div>
+      <div class="demo-card">
+        <h3>Trading Model Stats</h3>
+        <ul class="stats-list">
+          <li><span>Win Rate:</span> 62%
+            <div class="bar-container"><div id="barWin" class="bar"></div></div>
+          </li>
+          <li><span>Trades:</span> 124</li>
+          <li><span>Rules Followed:</span> 87%
+            <div class="bar-container"><div id="barRules" class="bar"></div></div>
+          </li>
+          <li><span>Most Broken Rule:</span> Exits too early</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="pricing">
+    <div class="container section-header">
+      <h2>Exclusive Beta Pricing</h2>
+      <p>Lock in your lifetime price before public launch 🚀</p>
+    </div>
+    <div class="container pricing-grid">
+      <div class="pricing-card">
+        <h3>Monthly</h3>
+        <p class="price">$20<span>/mo</span></p>
+        <p class="beta-tag">Lifetime Beta Price — Never Increases</p>
+        <a href="#waitlist" class="btn">Join Beta Now</a>
+      </div>
+      <div class="pricing-card recommended">
+        <div class="discount-badge">37% OFF</div>
+        <h3>Yearly</h3>
+        <p class="price">$150<span>/yr</span></p>
+        <p class="beta-tag">Lifetime Beta Price — Never Increases</p>
+        <a href="#waitlist" class="btn">Join Beta Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waitlist -->
+  <section id="waitlist" class="waitlist">
+    <div class="container">
+      <h2>Join the Beta</h2>
+      <form>
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Join Beta Now</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2025 TradeTrakr — The Future of Trading Journals</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Prevent auto-scroll to hash on refresh
+    if (window.location.hash) {
+      history.replaceState(null, null, ' ');
+    }
+
+    // Scroll progress bar
+    const progressBar = document.getElementById("progress-bar");
+    window.addEventListener("scroll", () => {
+      let scrollTop = window.scrollY;
+      let docHeight = document.body.scrollHeight - window.innerHeight;
+      let scrolled = (scrollTop / docHeight) * 100;
+      progressBar.style.width = scrolled + "%";
+    });
+
+    // Hero typing effect
+    const text = "Smarter Journaling. Smarter Trading.";
+    let i = 0;
+    function typeEffect() {
+      if (i < text.length) {
+        document.getElementById("typing").textContent += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 70);
+      } else {
+        document.getElementById("typing").style.animation = "blink 0.8s infinite";
+      }
+    }
+    window.onload = typeEffect;
+
+    // Tilt Meter auto animation
+    const tiltCircle = document.getElementById("tiltCircle");
+    const tiltText = document.getElementById("tiltText");
+    function animateTilt() {
+      let value = 45;
+      let progress = 0;
+      const interval = setInterval(() => {
+        if (progress <= value) {
+          tiltCircle.setAttribute("stroke-dasharray", progress + ", 100");
+          tiltText.textContent = "Tilt " + progress + "%";
+          progress++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 30);
+    }
+    const tiltSection = document.querySelector(".tilt-card");
+    const tiltObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateTilt();
+          tiltObserver.unobserve(tiltSection);
+        }
+      });
+    }, { threshold: 0.5 });
+    tiltObserver.observe(tiltSection);
+
+    // AI Insights rotation
+    const aiText = document.getElementById("aiText");
+    const insights = [
+      "“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”",
+      "“Most profitable trades occur when you hold positions for 30+ minutes. Consider reducing early exits.”",
+      "“Rule adherence above 85% correlates with 2.5x higher profits. Stay consistent.”"
+    ];
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % insights.length;
+      aiText.textContent = insights[index];
+    }, 5000);
+
+    // Animate model stats bars
+    const barWin = document.getElementById("barWin");
+    const barRules = document.getElementById("barRules");
+    function animateBars() {
+      barWin.style.width = "62%";
+      barRules.style.width = "87%";
+    }
+    const demoSection = document.getElementById("demo");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateBars();
+          observer.unobserve(demoSection);
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(demoSection);
+
+    // Fade-in sections
+    const sections = document.querySelectorAll("section");
+    const observer2 = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer2.observe(sec));
+  </script>
+</body>
+</html>
