@@ -155,7 +155,7 @@
       text-anchor: middle;
     }
 
-    /* Stats List with bars (restored) */
+    /* Stats List */
     .stats-list { list-style: none; padding: 0; margin: 0; }
     .stats-list li { margin: 1rem 0; font-size: 0.95rem; }
     .stats-list span { color: #bbb; font-weight: 600; }
@@ -175,11 +175,10 @@
     @keyframes pulseGlow { 0% { box-shadow: 0 0 0px rgba(167,120,255,0.3); } 50% { box-shadow: 0 0 30px rgba(167,120,255,0.6); } 100% { box-shadow: 0 0 0px rgba(167,120,255,0.3); } }
     .discount-badge { position: absolute; top: -12px; right: -12px; background: linear-gradient(90deg, #7b2ff7, #a678ff); color: white; font-weight: 600; font-size: 0.9rem; padding: 0.4rem 0.8rem; border-radius: 20px; transform: rotate(6deg); }
 
-    /* Waitlist (CSS kept as-is even though section removed per your request) */
-    .waitlist { padding: 5rem 0; text-align: center; background: #171322; }
-    .waitlist input[type="email"] { padding: 0.8rem; width: 250px; border-radius: 6px; border: none; margin-right: 0.6rem; }
-    .waitlist button { padding: 0.8rem 1.4rem; border-radius: 6px; border: none; background: linear-gradient(90deg, #7b2ff7, #a678ff); color: white; font-weight: 600; cursor: pointer; transition: all 0.3s ease; animation: pulse 2.5s infinite; }
-    .waitlist button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(166,120,255,0.6); }
+    /* Feature list for pricing */
+    .features-list { list-style: none; padding: 0; margin: 1.2rem 0 0 0; text-align: left; }
+    .features-list li { margin: 0.5rem 0; padding-left: 1.2rem; position: relative; color: #ddd; }
+    .features-list li::before { content: "✓"; position: absolute; left: 0; color: #a678ff; font-weight: bold; }
 
     /* Footer */
     .footer { background: #0d0b14; border-top: 1px solid #231b33; padding: 2rem 0; text-align: center; color: #888; }
@@ -188,7 +187,6 @@
     section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     section.visible { opacity: 1; transform: translateY(0); }
 
-    /* Responsive additions */
     @media (max-width: 768px) {
       .hero-inner { flex-direction: column; text-align: center; }
       .hero-text h1 { font-size: 2rem; }
@@ -293,23 +291,40 @@
       <p>Lock in your lifetime price before public launch 🚀</p>
     </div>
     <div class="container pricing-grid">
+
+      <!-- Monthly -->
       <div class="pricing-card">
-        <h3>Monthly</h3>
-        <p class="price">$20<span>/mo</span></p>
-        <p class="beta-tag">Lifetime Beta Price — Never Increases</p>
-        <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn">Join Beta Now</a>
+        <h3>$20<span>/month</span></h3>
+        <p class="beta-tag">Unlock the full power of TradeTrakr at the lifetime beta rate.</p>
+        <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn">Choose the plan</a>
+        <ul class="features-list">
+          <li>All core features</li>
+          <li>Tilt Meter</li>
+          <li>Trading Model Statistics</li>
+          <li>AI Insights</li>
+          <li>Day Journals</li>
+          <li>Performance Tracking</li>
+        </ul>
       </div>
+
+      <!-- Yearly -->
       <div class="pricing-card recommended">
         <div class="discount-badge">37% OFF</div>
-        <h3>Yearly</h3>
-        <p class="price">$150<span>/yr</span></p>
-        <p class="beta-tag">Lifetime Beta Price — Never Increases</p>
-        <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn">Join Beta Now</a>
+        <h3>$150<span>/year</span></h3>
+        <p class="beta-tag">Best value — keep your yearly discount for life.</p>
+        <a href="https://whop.com/shock-invest/monthly-membership-a0-f13f/" target="_blank" rel="noopener noreferrer" class="btn">Choose the plan</a>
+        <ul class="features-list">
+          <li>All core features</li>
+          <li>Tilt Meter</li>
+          <li>Trading Model Statistics</li>
+          <li>AI Insights</li>
+          <li>Day Journals</li>
+          <li>Performance Tracking</li>
+        </ul>
       </div>
+
     </div>
   </section>
-
-  <!-- (Waitlist section removed per your request; CSS retained) -->
 
   <!-- Footer -->
   <footer class="footer">
@@ -320,12 +335,8 @@
 
   <!-- Scripts -->
   <script>
-    // Prevent auto-scroll to hash on refresh
-    if (window.location.hash) {
-      history.replaceState(null, null, ' ');
-    }
+    if (window.location.hash) { history.replaceState(null, null, ' '); }
 
-    // Scroll progress bar
     const progressBar = document.getElementById("progress-bar");
     window.addEventListener("scroll", () => {
       let scrollTop = window.scrollY;
@@ -334,7 +345,6 @@
       progressBar.style.width = scrolled + "%";
     });
 
-    // Hero typing effect
     const text = "Smarter Journaling. Smarter Trading.";
     let i = 0;
     function typeEffect() {
@@ -348,34 +358,24 @@
     }
     window.onload = typeEffect;
 
-    // Tilt Meter auto animation
     const tiltCircle = document.getElementById("tiltCircle");
     const tiltText = document.getElementById("tiltText");
     function animateTilt() {
-      let value = 45;
-      let progress = 0;
+      let value = 45, progress = 0;
       const interval = setInterval(() => {
         if (progress <= value) {
           tiltCircle.setAttribute("stroke-dasharray", progress + ", 100");
           tiltText.textContent = "Tilt " + progress + "%";
           progress++;
-        } else {
-          clearInterval(interval);
-        }
+        } else clearInterval(interval);
       }, 30);
     }
     const tiltSection = document.querySelector(".tilt-card");
     const tiltObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateTilt();
-          tiltObserver.unobserve(tiltSection);
-        }
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) { animateTilt(); tiltObserver.unobserve(tiltSection); } });
     }, { threshold: 0.5 });
     tiltObserver.observe(tiltSection);
 
-    // AI Insights rotation
     const aiText = document.getElementById("aiText");
     const insights = [
       "“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”",
@@ -383,37 +383,20 @@
       "“Rule adherence above 85% correlates with 2.5x higher profits. Stay consistent.”"
     ];
     let index = 0;
-    setInterval(() => {
-      index = (index + 1) % insights.length;
-      aiText.textContent = insights[index];
-    }, 5000);
+    setInterval(() => { index = (index + 1) % insights.length; aiText.textContent = insights[index]; }, 5000);
 
-    // Animate model stats bars
     const barWin = document.getElementById("barWin");
     const barRules = document.getElementById("barRules");
-    function animateBars() {
-      barWin.style.width = "62%";
-      barRules.style.width = "87%";
-    }
+    function animateBars() { barWin.style.width = "62%"; barRules.style.width = "87%"; }
     const demoSection = document.getElementById("demo");
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateBars();
-          observer.unobserve(demoSection);
-        }
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) { animateBars(); observer.unobserve(demoSection); } });
     }, { threshold: 0.3 });
     observer.observe(demoSection);
 
-    // Fade-in sections
     const sections = document.querySelectorAll("section");
     const observer2 = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); } });
     }, { threshold: 0.2 });
     sections.forEach(sec => observer2.observe(sec));
   </script>
