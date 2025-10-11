@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradeTrakR — Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-ambient" aria-hidden="true"></div>
+  <main class="card auth-card">
+    <header class="card-header">
+      <span class="auth-badge">TradeTrakR Portal</span>
+      <h1>Secure License Sign-In</h1>
+      <p class="subtitle">Verify your Whop license key to unlock the protected downloads.</p>
+    </header>
+
+    <div class="input-wrap">
+      <label class="sr-only" for="license-input">Whop license key</label>
+      <input
+        id="license-input"
+        type="text"
+        name="license"
+        autocomplete="off"
+        placeholder="whop_live_XXXXXXXXXXXX"
+        aria-describedby="status"
+      />
+    </div>
+
+    <button id="validate-btn" class="primary-btn" type="button">Validate License</button>
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <div class="helper-actions">
+      <a href="https://whop.com" target="_blank" rel="noopener noreferrer">Need your license?</a>
+      <span>•</span>
+      <a href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Contact support on Discord</a>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to TradeTrakR site</a>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

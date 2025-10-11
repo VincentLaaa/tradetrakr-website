@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TradeTrakr — AI-Powered Trading Journal</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
   <style>
     /* Global */
     html { scroll-behavior: smooth; }
@@ -116,6 +117,12 @@
     .nav a:hover::after {
       width: 100%;
     }
+    .cta-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
 
     /* Buttons */
     .btn {
@@ -143,6 +150,16 @@
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       transition: left 0.5s ease;
     }
+    .btn.btn-outline {
+      background: rgba(76, 58, 255, 0.12);
+      border-color: rgba(118, 226, 255, 0.35);
+      animation: none;
+      box-shadow: none;
+      color: #f5f5f5;
+    }
+    .btn.btn-outline::before {
+      display: none;
+    }
     .btn:hover::before {
       left: 100%;
     }
@@ -150,6 +167,12 @@
       transform: scale(1.05) translateY(-2px);
       box-shadow: 0 10px 30px rgba(74, 144, 226, 0.3), 0 0 40px rgba(99, 102, 241, 0.2);
       border-color: rgba(74, 144, 226, 0.6);
+    }
+    .btn.btn-outline:hover {
+      transform: translateY(-2px);
+      background: rgba(76, 58, 255, 0.25);
+      box-shadow: 0 8px 20px rgba(76, 58, 255, 0.26);
+      border-color: rgba(118, 226, 255, 0.55);
     }
     
     @keyframes btnGlow {
@@ -579,6 +602,65 @@
     .features-list li { margin: 0.5rem 0; padding-left: 1.2rem; position: relative; color: #ddd; }
     .features-list li::before { content: "✓"; position: absolute; left: 0; color: #a678ff; font-weight: bold; }
 
+    /* Community */
+    .community {
+      padding: 4.5rem 0;
+      background: linear-gradient(135deg, rgba(19, 16, 30, 0.95), rgba(13, 11, 20, 0.95));
+      border-top: 1px solid rgba(74, 144, 226, 0.18);
+      border-bottom: 1px solid rgba(139, 92, 246, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .community::before,
+    .community::after {
+      content: '';
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 58, 255, 0.22), transparent 60%);
+      filter: blur(100px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .community::before {
+      top: -70px;
+      left: 8%;
+    }
+    .community::after {
+      bottom: -90px;
+      right: 6%;
+    }
+    .community-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .community-text h2 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.8rem, 2vw + 1rem, 2.3rem);
+    }
+    .community-text p {
+      margin: 0;
+      max-width: 520px;
+      color: rgba(226, 228, 255, 0.75);
+      font-size: 1rem;
+    }
+    .community .discord-btn {
+      min-width: 200px;
+      text-align: center;
+      border: 1px solid rgba(118, 226, 255, 0.45);
+      background: rgba(76, 58, 255, 0.15);
+    }
+    .community .discord-btn:hover {
+      background: rgba(76, 58, 255, 0.28);
+      box-shadow: 0 14px 32px rgba(76, 58, 255, 0.22);
+    }
+
     /* Footer */
     .footer { 
       background: linear-gradient(135deg, #0d0b14 0%, #1a1625 100%);
@@ -692,6 +774,14 @@
       .hero-text h1 { font-size: 2rem; }
       .hero { padding: 4rem 0 3rem; }
       .hero-text p { font-size: 1rem; }
+      .cta-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      .cta-group .btn {
+        width: 100%;
+        text-align: center;
+      }
       .typing {
         white-space: normal;
         border-right: none;
@@ -703,6 +793,14 @@
         max-width: 400px;
         transform: none;
         margin: 0 auto;
+      }
+      .community-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .community .discord-btn {
+        width: 100%;
       }
       .feature-row { flex-direction: column; }
     }
@@ -731,7 +829,10 @@
         <a href="#demo">Demo</a>
         <a href="#pricing">Pricing</a>
       </nav>
-      <a href="#pricing" class="btn">Get Started</a>
+      <div class="cta-group">
+        <a href="#pricing" class="btn">Get Started</a>
+        <a id="nav-signin" href="signin.html" class="btn btn-outline">Sign In</a>
+      </div>
     </div>
   </header>
 
@@ -744,7 +845,7 @@
         <a href="#pricing" class="btn btn-lg">Get Started</a>
       </div>
       <div class="hero-image">
-        <img src="dashboard-preview.png" alt="TradeTrakr Dashboard Preview" />
+        <img src="assets/dashboard-preview.png" alt="TradeTrakr Dashboard Preview" />
       </div>
     </div>
   </section>
@@ -754,23 +855,23 @@
     <div class="container section-header"><h2>Features That Stand Out</h2></div>
     <div class="container feature-row">
       <div class="feature-text"><h3>AI Insights</h3><p>Our AI highlights hidden performance patterns and uncovers opportunities you might miss — helping you refine discipline and maximize consistency.</p></div>
-      <div class="feature-img"><img src="ai-insight.png" alt="AI Insights Screenshot"></div>
+      <div class="feature-img"><img src="assets/ai-insight.png" alt="AI Insights Screenshot"></div>
     </div>
     <div class="container feature-row">
-      <div class="feature-img"><img src="tilt-meter.png" alt="Tilt Meter Screenshot"></div>
+      <div class="feature-img"><img src="assets/tilt-meter.png" alt="Tilt Meter Screenshot"></div>
       <div class="feature-text"><h3>Tilt Meter</h3><p>Stay on top of your emotions with real-time tracking. The Tilt Meter shows exactly how psychology impacts your edge and when focus starts to slip.</p></div>
     </div>
     <div class="container feature-row">
       <div class="feature-text"><h3>Model Stats</h3><p>Break down every strategy with detailed win rates, trade counts, and rule adherence. Know what works, cut what doesn’t.</p></div>
-      <div class="feature-img"><img src="model-stats.png" alt="Model Stats Screenshot"></div>
+      <div class="feature-img"><img src="assets/model-stats.png" alt="Model Stats Screenshot"></div>
     </div>
     <div class="container feature-row">
-      <div class="feature-img"><img src="day-journal.png" alt="Day Journal Screenshot"></div>
+      <div class="feature-img"><img src="assets/day-journal.png" alt="Day Journal Screenshot"></div>
       <div class="feature-text"><h3>Day Journals</h3><p>Structured trade journaling made simple. Log trades, notes, and rule adherence with clarity — then review with actionable insights.</p></div>
     </div>
     <div class="container feature-row">
       <div class="feature-text"><h3>Clarity Panel</h3><p>An always-visible overlay that keeps your key reminders pinned while you trade. Sync with the Tilt Meter and review Clarity history to see how discipline drove results.</p></div>
-      <div class="feature-img"><img src="clarity-panel.png" alt="Clarity Panel Screenshot"></div>
+      <div class="feature-img"><img src="assets/clarity-panel.png" alt="Clarity Panel Screenshot"></div>
     </div>
   </section>
 
@@ -859,6 +960,17 @@
           <li>Performance Tracking</li>
         </ul>
       </div>
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section class="community">
+    <div class="container community-inner">
+      <div class="community-text">
+        <h2>Join the TradeTrakR Discord</h2>
+        <p>Get instant release alerts, trading insights, and beta invites inside our free announcements server.</p>
+      </div>
+      <a class="btn btn-outline discord-btn" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Join Free Discord</a>
     </div>
   </section>
 

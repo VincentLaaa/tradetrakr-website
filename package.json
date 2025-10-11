@@ -1,0 +1,28 @@
+{
+  "name": "test-site",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentLaaa/tradetrakr-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VincentLaaa/tradetrakr-website/issues"
+  },
+  "homepage": "https://github.com/VincentLaaa/tradetrakr-website#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "express-session": "^1.18.2",
+    "node-fetch": "^3.3.2"
+  }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradeTrakR — Download Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-ambient" aria-hidden="true"></div>
+  <main class="card dashboard-card">
+    <header class="card-header">
+      <span class="auth-badge success">License Verified</span>
+      <h1>TradeTrakR Dashboard</h1>
+      <p class="subtitle">Welcome back! Access builds, release notes, and community announcements in one place.</p>
+    </header>
+
+    <div class="dashboard-grid">
+      <section class="panel downloads-panel">
+        <h2>Downloads</h2>
+        <p class="panel-subtitle">Latest builds are already licensed to your account.</p>
+        <div class="download-grid">
+          <a class="download-link" href="assets/tradetrakr-macos.zip" download>
+            <span class="download-icon">MAC</span>
+            <div class="download-text">
+              <strong>macOS Build</strong>
+              <small>.zip &nbsp;•&nbsp; Apple Silicon &amp; Intel</small>
+            </div>
+          </a>
+          <a class="download-link" href="assets/tradetrakr-windows.zip" download>
+            <span class="download-icon">WIN</span>
+            <div class="download-text">
+              <strong>Windows Build</strong>
+              <small>.zip &nbsp;•&nbsp; Windows 10+</small>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="panel community-panel">
+        <h2>Community &amp; Support</h2>
+        <p class="panel-subtitle">Stay synced with outage alerts, roadmap drops, and strategy sessions.</p>
+        <a class="discord-cta" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Join Announcements Discord</a>
+      </section>
+
+      <section class="panel updates-panel">
+        <h2>Latest Update</h2>
+        <ul class="update-list">
+          <li>
+            <span class="update-title">Quick Fix Update</span>
+            <span class="update-date">Released March 2025</span>
+            <span class="update-detail">• Resolved the bug where News entries wouldn’t save when closing out a day.</span>
+            <span class="update-detail">• Restored Initialize + Fetch File, now relocated under Settings for quicker access.</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="dashboard-footer-actions">
+      <button id="sign-out" type="button" class="secondary-btn sign-out">Sign Out</button>
+      <a class="back-link" href="index.html">← Return to TradeTrakR site</a>
+    </div>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
