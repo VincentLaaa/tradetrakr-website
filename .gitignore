@@ -1,2 +1,20 @@
 node_modules
 .env
+# Build artifacts
+dist/
+out/
+release/
+build/
+electron-out/
+*.zip
+*.7z
+*.dmg
+*.exe
+*.msi
+*.pkg
+*.asar
+# Dependencies
+node_modules/
+# OS/editor junk
+.DS_Store
+*.log
