@@ -250,6 +250,12 @@ button {
   margin-top: 2rem;
 }
 
+.release-version {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: rgba(214, 216, 255, 0.7);
+}
+
 .download-link {
   display: flex;
   align-items: center;
@@ -267,6 +273,12 @@ button {
   transform: translateY(-3px);
   border-color: rgba(118, 226, 255, 0.45);
   box-shadow: 0 18px 32px rgba(76, 58, 255, 0.25);
+}
+
+.download-link.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  border-style: dashed;
 }
 
 .download-icon {
@@ -407,6 +419,15 @@ button {
   font-size: 0.85rem;
   color: rgba(220, 222, 255, 0.75);
   margin-top: 0.2rem;
+}
+
+.update-detail a {
+  color: rgba(220, 222, 255, 0.9);
+  text-decoration: underline;
+}
+
+.update-detail a:hover {
+  color: #ffffff;
 }
 
 .full-width {

@@ -21,20 +21,21 @@
     <div class="dashboard-grid">
       <section class="panel downloads-panel">
         <h2>Downloads</h2>
-        <p class="panel-subtitle">Latest builds are already licensed to your account.</p>
+        <p class="panel-subtitle">Latest builds are sourced from the TradeTrakR release channel.</p>
+        <p class="release-version" id="release-version">Fetching latest release…</p>
         <div class="download-grid">
-          <a class="download-link" href="assets/tradetrakr-macos.zip" download>
+          <a id="mac-download" class="download-link disabled" href="#" target="_blank" rel="noopener noreferrer">
             <span class="download-icon">MAC</span>
             <div class="download-text">
               <strong>macOS Build</strong>
-              <small>.zip &nbsp;•&nbsp; Apple Silicon &amp; Intel</small>
+              <small>Preparing download link…</small>
             </div>
           </a>
-          <a class="download-link" href="assets/tradetrakr-windows.zip" download>
+          <a id="windows-download" class="download-link disabled" href="#" target="_blank" rel="noopener noreferrer">
             <span class="download-icon">WIN</span>
             <div class="download-text">
               <strong>Windows Build</strong>
-              <small>.zip &nbsp;•&nbsp; Windows 10+</small>
+              <small>Preparing download link…</small>
             </div>
           </a>
         </div>
@@ -48,12 +49,10 @@
 
       <section class="panel updates-panel">
         <h2>Latest Update</h2>
-        <ul class="update-list">
+        <ul class="update-list" id="update-list">
           <li>
-            <span class="update-title">Quick Fix Update</span>
-            <span class="update-date">Released March 2025</span>
-            <span class="update-detail">• Resolved the bug where News entries wouldn’t save when closing out a day.</span>
-            <span class="update-detail">• Restored Initialize + Fetch File, now relocated under Settings for quicker access.</span>
+            <span class="update-title">Checking GitHub Releases…</span>
+            <span class="update-date">Please wait</span>
           </li>
         </ul>
       </section>

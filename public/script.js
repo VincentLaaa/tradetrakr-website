@@ -1,6 +1,8 @@
 const LICENSE_FLAG_KEY = "license_valid";
 const LICENSE_VALUE_KEY = "license_key";
 const WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
+const RELEASE_API_URL = "https://api.github.com/repos/VincentLaaa/tradetrakr-releases/releases/latest";
+const RELEASE_PAGE_URL = "https://github.com/VincentLaaa/tradetrakr-releases/releases";
 
 let hwidPromise = null;
 
@@ -43,6 +45,146 @@ async function postLicenseForValidation(licenseKey) {
 function clearSavedLicense() {
   localStorage.removeItem(LICENSE_FLAG_KEY);
   localStorage.removeItem(LICENSE_VALUE_KEY);
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "Unknown release date";
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString;
+  return date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+}
+
+function setDownloadAnchor(anchor, asset, fallbackUrl, label) {
+  if (!anchor) return;
+  const title = anchor.querySelector("strong");
+  const subtitle = anchor.querySelector("small");
+
+  if (asset) {
+    anchor.href = asset.browser_download_url;
+    anchor.classList.remove("disabled");
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    if (title) {
+      title.textContent = label;
+    }
+    if (subtitle) {
+      subtitle.textContent = asset.name;
+    }
+  } else {
+    anchor.href = fallbackUrl;
+    anchor.classList.remove("disabled");
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    if (title) {
+      title.textContent = label;
+    }
+    if (subtitle) {
+      subtitle.textContent = "View latest release";
+    }
+  }
+}
+
+async function hydrateReleaseInfo() {
+  const macAnchor = document.getElementById("mac-download");
+  const windowsAnchor = document.getElementById("windows-download");
+  const versionEl = document.getElementById("release-version");
+  const updateList = document.getElementById("update-list");
+
+  if (!macAnchor || !windowsAnchor || !updateList) {
+    return;
+  }
+
+  try {
+    const response = await fetch(RELEASE_API_URL, {
+      headers: {
+        Accept: "application/vnd.github+json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Release request failed: ${response.status}`);
+    }
+
+    const release = await response.json();
+    const assets = Array.isArray(release.assets) ? release.assets : [];
+    const fallbackUrl = release.html_url || RELEASE_PAGE_URL;
+
+    const macAsset = assets.find((asset) => /mac|osx|darwin|apple/i.test(asset.name));
+    const windowsAsset = assets.find((asset) => /win|windows/i.test(asset.name));
+
+    setDownloadAnchor(macAnchor, macAsset, fallbackUrl, "macOS Build");
+    setDownloadAnchor(windowsAnchor, windowsAsset, fallbackUrl, "Windows Build");
+
+    if (versionEl) {
+      const releaseName = release.name || release.tag_name || "Latest Release";
+      versionEl.textContent = `${releaseName} • Published ${formatDate(release.published_at)}`;
+    }
+
+    updateList.innerHTML = "";
+    const entry = document.createElement("li");
+
+    const title = document.createElement("span");
+    title.className = "update-title";
+    title.textContent = release.name || release.tag_name || "Latest Update";
+
+    const dateLine = document.createElement("span");
+    dateLine.className = "update-date";
+    dateLine.textContent = `Published ${formatDate(release.published_at)}`;
+
+    entry.append(title, dateLine);
+
+    if (release.body) {
+      const lines = release.body
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0 && !/^#+\s*/.test(line));
+
+      lines.slice(0, 3).forEach((line) => {
+        const detail = document.createElement("span");
+        detail.className = "update-detail";
+        detail.textContent = line.replace(/^[-*•]\s*/, "");
+        entry.append(detail);
+      });
+    }
+
+    const linkDetail = document.createElement("span");
+    linkDetail.className = "update-detail";
+    const link = document.createElement("a");
+    link.href = fallbackUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "View full release on GitHub →";
+    linkDetail.append(link);
+    entry.append(linkDetail);
+
+    updateList.append(entry);
+  } catch (error) {
+    setDownloadAnchor(macAnchor, null, RELEASE_PAGE_URL, "macOS Build");
+    setDownloadAnchor(windowsAnchor, null, RELEASE_PAGE_URL, "Windows Build");
+
+    if (versionEl) {
+      versionEl.textContent = "Unable to fetch release info. Browse releases on GitHub.";
+    }
+
+    updateList.innerHTML = "";
+    const fallbackEntry = document.createElement("li");
+    const title = document.createElement("span");
+    title.className = "update-title";
+    title.textContent = "Latest release data unavailable";
+    const dateLine = document.createElement("span");
+    dateLine.className = "update-date";
+    dateLine.textContent = "Check GitHub releases manually.";
+    const linkDetail = document.createElement("span");
+    linkDetail.className = "update-detail";
+    const link = document.createElement("a");
+    link.href = RELEASE_PAGE_URL;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Open TradeTrakR releases →";
+    linkDetail.append(link);
+    fallbackEntry.append(title, dateLine, linkDetail);
+    updateList.append(fallbackEntry);
+  }
 }
 
 async function verifyStoredLicense() {
@@ -143,6 +285,8 @@ function initDownloadPage(isLicensed = false) {
     clearSavedLicense();
     window.location.href = "signin.html";
   });
+
+  hydrateReleaseInfo();
 }
 
 function updateIndexUi(isLicensed = false) {
