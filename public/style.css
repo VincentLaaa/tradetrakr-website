@@ -285,7 +285,7 @@ button {
   border-style: dashed;
 }
 
-.download-icon {
+.action-icon {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -296,6 +296,14 @@ button {
   border-radius: 12px;
   background: rgba(76, 58, 255, 0.18);
   color: rgba(227, 227, 255, 0.85);
+  overflow: hidden;
+}
+
+.action-icon img {
+  width: 1.4rem;
+  height: 1.4rem;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
 }
 
 .download-text strong {
@@ -378,6 +386,10 @@ button {
 .discord-cta:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 32px rgba(76, 58, 255, 0.28);
+}
+
+.discord-text {
+  font-weight: 600;
 }
 
 .quick-links {
@@ -500,9 +512,13 @@ button {
     align-items: flex-start;
   }
 
-  .download-icon {
-    font-size: 1.2rem;
+  .action-icon {
     min-width: 2.2rem;
     min-height: 2.2rem;
+  }
+
+  .action-icon img {
+    width: 1.2rem;
+    height: 1.2rem;
   }
 }
