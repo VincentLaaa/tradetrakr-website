@@ -10,8 +10,8 @@
     /* Global */
 html { scroll-behavior: smooth; }
 :root {
-  --bg-primary: #04010d;
-  --bg-secondary: #0a0523;
+  --bg-primary: #050608;
+  --bg-secondary: #10121c;
   --accent-electric: #00f6ff;
   --accent-violet: #7f5af0;
   --accent-magenta: #ff4ecd;
@@ -24,9 +24,9 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at 20% 20%, rgba(0, 246, 255, 0.08), transparent 35%),
-              radial-gradient(circle at 80% 0%, rgba(127, 90, 240, 0.16), transparent 45%),
-              linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 55%, #040015 100%);
+  background: radial-gradient(circle at 20% 20%, rgba(0, 246, 255, 0.07), transparent 40%),
+              radial-gradient(circle at 80% 0%, rgba(127, 90, 240, 0.12), transparent 50%),
+              linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 60%, #070814 100%);
   background-attachment: fixed;
   color: var(--text-primary);
   overflow-x: hidden;
@@ -42,13 +42,13 @@ body {
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(0, 246, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(127, 90, 240, 0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: gridMove 24s linear infinite;
+        linear-gradient(rgba(0, 246, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(127, 90, 240, 0.025) 1px, transparent 1px);
+      background-size: 70px 70px;
+      animation: gridMove 26s linear infinite;
       z-index: -1;
       pointer-events: none;
-      opacity: 0.8;
+      opacity: 0.65;
     }
     
     @keyframes gridMove {
