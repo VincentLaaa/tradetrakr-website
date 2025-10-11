@@ -299,6 +299,15 @@ button {
   overflow: hidden;
 }
 
+.action-icon.github {
+  background: #ffffff;
+  border: 1px solid rgba(118, 226, 255, 0.25);
+}
+
+.action-icon.github img {
+  filter: none;
+}
+
 .action-icon img {
   width: 1.4rem;
   height: 1.4rem;
