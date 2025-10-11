@@ -256,6 +256,10 @@ button {
   color: rgba(214, 216, 255, 0.7);
 }
 
+.download-grid.release-only {
+  grid-template-columns: 1fr;
+}
+
 .download-link {
   display: flex;
   align-items: center;

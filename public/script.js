@@ -54,43 +54,12 @@ function formatDate(dateString) {
   return date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
 }
 
-function setDownloadAnchor(anchor, asset, fallbackUrl, label) {
-  if (!anchor) return;
-  const title = anchor.querySelector("strong");
-  const subtitle = anchor.querySelector("small");
-
-  if (asset) {
-    anchor.href = asset.browser_download_url;
-    anchor.classList.remove("disabled");
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
-    if (title) {
-      title.textContent = label;
-    }
-    if (subtitle) {
-      subtitle.textContent = asset.name;
-    }
-  } else {
-    anchor.href = fallbackUrl;
-    anchor.classList.remove("disabled");
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
-    if (title) {
-      title.textContent = label;
-    }
-    if (subtitle) {
-      subtitle.textContent = "View latest release";
-    }
-  }
-}
-
 async function hydrateReleaseInfo() {
-  const macAnchor = document.getElementById("mac-download");
-  const windowsAnchor = document.getElementById("windows-download");
+  const releaseLink = document.getElementById("release-link");
   const versionEl = document.getElementById("release-version");
   const updateList = document.getElementById("update-list");
 
-  if (!macAnchor || !windowsAnchor || !updateList) {
+  if (!releaseLink || !updateList) {
     return;
   }
 
@@ -106,14 +75,9 @@ async function hydrateReleaseInfo() {
     }
 
     const release = await response.json();
-    const assets = Array.isArray(release.assets) ? release.assets : [];
-    const fallbackUrl = release.html_url || RELEASE_PAGE_URL;
-
-    const macAsset = assets.find((asset) => /mac|osx|darwin|apple/i.test(asset.name));
-    const windowsAsset = assets.find((asset) => /win|windows/i.test(asset.name));
-
-    setDownloadAnchor(macAnchor, macAsset, fallbackUrl, "macOS Build");
-    setDownloadAnchor(windowsAnchor, windowsAsset, fallbackUrl, "Windows Build");
+    const fallbackUrl = release.html_url || releaseLink.href || RELEASE_PAGE_URL;
+    releaseLink.href = fallbackUrl;
+    releaseLink.classList.remove("disabled");
 
     if (versionEl) {
       const releaseName = release.name || release.tag_name || "Latest Release";
@@ -159,8 +123,8 @@ async function hydrateReleaseInfo() {
 
     updateList.append(entry);
   } catch (error) {
-    setDownloadAnchor(macAnchor, null, RELEASE_PAGE_URL, "macOS Build");
-    setDownloadAnchor(windowsAnchor, null, RELEASE_PAGE_URL, "Windows Build");
+    releaseLink.href = RELEASE_PAGE_URL;
+    releaseLink.classList.remove("disabled");
 
     if (versionEl) {
       versionEl.textContent = "Unable to fetch release info. Browse releases on GitHub.";
