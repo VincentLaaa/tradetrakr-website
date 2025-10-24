@@ -35,6 +35,20 @@ app.use(
 const staticDir = path.join(__dirname, "public");
 app.use(express.static(staticDir));
 
+const marketingPages = {
+  "/trading-journal": "trading-journal.html",
+  "/ai-trading-journal": "ai-trading-journal.html",
+  "/trading-journal-features": "trading-journal-features.html",
+  "/download": "download.html",
+  "/signin": "signin.html"
+};
+
+Object.entries(marketingPages).forEach(([route, file]) => {
+  app.get([route, `${route}/`], (_req, res) => {
+    res.sendFile(path.join(staticDir, file));
+  });
+});
+
 app.post("/api/validate", async (req, res) => {
   try {
     const { licenseKey } = req.body || {};

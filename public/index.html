@@ -3,9 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradeTrakr — AI-Powered Trading Journal</title>
+  <title>TradeTrakR | The Smart Trading Journal for Futures & Forex Traders</title>
+  <meta name="description" content="TradeTrakR is an intelligent trading journal that helps funded traders track P&L, psychology, and performance insights with AI-powered analytics." />
+  <meta name="keywords" content="trading journal, trade tracker, funded trading, futures trading, forex trading, P&L analytics, trade log, best trading journal app, AI trading journal" />
+  <link rel="canonical" href="https://tradetrakr.com/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="TradeTrakR | The Smart Trading Journal for Funded Traders" />
+  <meta property="og:description" content="Track P&L, psychology, and trading performance with AI-powered analytics." />
+  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta property="og:url" content="https://tradetrakr.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TradeTrakR | The Smart Trading Journal for Funded Traders" />
+  <meta name="twitter:description" content="Track P&L, psychology, and trading performance with AI-powered analytics." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="script.js" defer></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "TradeTrakR",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web, Windows, macOS",
+      "description": "TradeTrakR is a smart trading journal that helps funded traders analyze P&L, psychology, and performance using AI.",
+      "url": "https://tradetrakr.com",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
   <style>
     /* Global */
 html { scroll-behavior: smooth; }
@@ -289,10 +318,15 @@ body {
       50% { background-position: 100% 50%; }
     }
     .hero-text p { margin-bottom: 1.5rem; color: var(--text-muted); }
-
-    /* Typing effect */
-    .typing { border-right: 3px solid var(--accent-magenta); white-space: nowrap; overflow: hidden; display: inline-block; }
-    @keyframes blink { 50% { border-color: transparent; } }
+    .hero-text p a {
+      color: var(--accent-electric);
+      text-decoration: underline;
+      text-decoration-color: rgba(0, 246, 255, 0.4);
+    }
+    .hero-text p a:hover {
+      color: var(--accent-violet);
+      text-decoration-color: rgba(127, 90, 240, 0.6);
+    }
 
     .hero-image img {
       max-width: 600px;
@@ -379,6 +413,49 @@ body {
       transform: scale(1.02);
     }
     @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .journal-overview {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .journal-overview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13, 16, 34, 0.72), rgba(5, 6, 14, 0.55));
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .journal-overview .container {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      text-align: center;
+    }
+    .journal-overview ul {
+      list-style: none;
+      padding: 0;
+      margin: 2.5rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .journal-overview li {
+      background: rgba(13, 16, 34, 0.82);
+      border-radius: 18px;
+      padding: 1.8rem;
+      border: 1px solid rgba(0, 246, 255, 0.18);
+      box-shadow: 0 18px 40px rgba(5, 0, 26, 0.5);
+      color: var(--text-muted);
+    }
+    .journal-overview li strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .journal-overview a {
+      color: var(--accent-electric);
+    }
 
     /* Demo */
     .demo { 
@@ -688,6 +765,28 @@ body {
       color: rgba(214, 216, 255, 0.6);
       position: relative;
     }
+    .footer-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: rgba(226, 228, 255, 0.8);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover {
+      color: var(--accent-electric);
+    }
     .footer::before {
       content: '';
       position: absolute;
@@ -796,16 +895,7 @@ body {
         flex-direction: column;
         width: 100%;
       }
-      .cta-group .btn {
-        width: 100%;
-        text-align: center;
-      }
-      .typing {
-        white-space: normal;
-        border-right: none;
-        animation: none;
-        display: inline;
-      }
+      .cta-group .btn { width: 100%; text-align: center; }
       .hero-image img {
         width: 100%;
         max-width: 400px;
@@ -821,6 +911,8 @@ body {
         width: 100%;
       }
       .feature-row { flex-direction: column; }
+      .journal-overview ul { grid-template-columns: 1fr; }
+      .footer-links { flex-direction: column; gap: 0.6rem; }
     }
   </style>
 </head>
@@ -843,7 +935,9 @@ body {
     <div class="container header-inner">
       <div class="logo">TradeTrakr</div>
       <nav class="nav">
-        <a href="#features">Features</a>
+        <a href="trading-journal.html">Trading Journal</a>
+        <a href="ai-trading-journal.html">AI Analytics</a>
+        <a href="trading-journal-features.html">Journal Features</a>
         <a href="#demo">Demo</a>
         <a href="#pricing">Pricing</a>
       </nav>
@@ -858,44 +952,48 @@ body {
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-text">
-        <h1><span class="typing" id="typing"></span></h1>
-        <p>With AI-powered insights, tilt tracking, and model-level stats, TradeTrakr shows you what really drives performance.</p>
+        <h1>The Most Advanced Trading Journal for Modern Traders</h1>
+        <p>TradeTrakR is a trading journal designed for funded traders in futures and forex who want AI-powered analytics to track P&amp;L, trading psychology, and execution discipline in one place.</p>
+        <p>Explore why professionals call it the best trading journal app in our <a href="trading-journal-features.html">trading journal features guide</a> and see how the AI trading journal keeps your edge sharp.</p>
         <a href="#pricing" class="btn btn-lg">Get Started</a>
       </div>
       <div class="hero-image">
-        <img src="assets/dashboard-preview.png" alt="TradeTrakr Dashboard Preview" />
+        <img src="assets/dashboard-preview.png" alt="Trading journal dashboard interface in TradeTrakR" />
       </div>
     </div>
   </section>
 
   <!-- Features -->
   <section id="features" class="features">
-    <div class="container section-header"><h2>Features That Stand Out</h2></div>
-    <div class="container feature-row">
-      <div class="feature-text"><h3>AI Insights</h3><p>Our AI highlights hidden performance patterns and uncovers opportunities you might miss — helping you refine discipline and maximize consistency.</p></div>
-      <div class="feature-img"><img src="assets/ai-insight.png" alt="AI Insights Screenshot"></div>
+    <div class="container section-header">
+      <h2>Trading Journal Features That Stand Out</h2>
+      <p>Discover how the TradeTrakR trading journal combines AI-powered trade analysis, emotional tracking, and actionable insights for funded futures and forex traders.</p>
     </div>
     <div class="container feature-row">
-      <div class="feature-img"><img src="assets/tilt-meter.png" alt="Tilt Meter Screenshot"></div>
-      <div class="feature-text"><h3>Tilt Meter</h3><p>Stay on top of your emotions with real-time tracking. The Tilt Meter shows exactly how psychology impacts your edge and when focus starts to slip.</p></div>
+      <div class="feature-text"><h3>AI-Powered Trade Analysis</h3><p>Our AI trading journal analytics highlight hidden performance patterns and surface the setups that drive your edge. Learn how <a href="ai-trading-journal.html">AI-powered trade analysis</a> transforms every review session.</p></div>
+      <div class="feature-img"><img src="assets/ai-insight.png" alt="AI trading journal analytics dashboard" loading="lazy"></div>
     </div>
     <div class="container feature-row">
-      <div class="feature-text"><h3>Model Stats</h3><p>Break down every strategy with detailed win rates, trade counts, and rule adherence. Know what works, cut what doesn’t.</p></div>
-      <div class="feature-img"><img src="assets/model-stats.png" alt="Model Stats Screenshot"></div>
+      <div class="feature-img"><img src="assets/tilt-meter.png" alt="Trading journal tilt meter for tracking emotions" loading="lazy"></div>
+      <div class="feature-text"><h3>Track P&amp;L and Emotions</h3><p>Stay on top of your emotions with real-time tilt tracking. TradeTrakR shows how psychology impacts your P&amp;L so your futures trading journal keeps you disciplined.</p></div>
     </div>
     <div class="container feature-row">
-      <div class="feature-img"><img src="assets/day-journal.png" alt="Day Journal Screenshot"></div>
-      <div class="feature-text"><h3>Day Journals</h3><p>Structured trade journaling made simple. Log trades, notes, and rule adherence with clarity — then review with actionable insights.</p></div>
+      <div class="feature-text"><h3>Strategy-Level Trading Log</h3><p>Break down every strategy with detailed win rates, trade counts, and rule adherence. The best trading journal app makes it easy to double down on what works.</p></div>
+      <div class="feature-img"><img src="assets/model-stats.png" alt="Trading journal strategy performance stats" loading="lazy"></div>
     </div>
     <div class="container feature-row">
-      <div class="feature-text"><h3>Clarity Panel</h3><p>An always-visible overlay that keeps your key reminders pinned while you trade. Sync with the Tilt Meter and review Clarity history to see how discipline drove results.</p></div>
-      <div class="feature-img"><img src="assets/clarity-panel.png" alt="Clarity Panel Screenshot"></div>
+      <div class="feature-img"><img src="assets/day-journal.png" alt="Daily trading journal entry template" loading="lazy"></div>
+      <div class="feature-text"><h3>Daily Trading Journal Entries</h3><p>Structured trade journaling made simple. Log trades, notes, and rules with clarity so your forex trading journal stays consistent across sessions.</p></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-text"><h3>Discipline Coach for Funded Traders</h3><p>An always-visible clarity panel pins reminders while you trade and keeps funded trader rules front and center. Review your trading journal clarity history to see how discipline influences results.</p></div>
+      <div class="feature-img"><img src="assets/clarity-panel.png" alt="Funded trading journal discipline reminders" loading="lazy"></div>
     </div>
   </section>
 
   <!-- Demo -->
   <section id="demo" class="demo">
-    <div class="container section-header"><h2>Interactive Demo</h2></div>
+    <div class="container section-header"><h2>Interactive Trading Journal Demo</h2></div>
     <div class="container demo-grid">
       <div class="demo-card"><h3>AI Insight</h3><p class="ai-text" id="aiText">“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”</p></div>
       <div class="demo-card tilt-card">
@@ -938,11 +1036,24 @@ body {
     </div>
   </section>
 
+  <section class="journal-overview">
+    <div class="container">
+      <h2>Why Funded Traders Choose the TradeTrakR Trading Journal</h2>
+      <p>TradeTrakR combines AI-powered trade analysis, deep P&amp;L analytics, and structured note-taking so funded futures and forex traders can review every session with confidence.</p>
+      <ul>
+        <li><strong>AI-Powered Trade Analysis</strong> Turn session data into AI trading journal insights that highlight the patterns and setups responsible for your best returns.</li>
+        <li><strong>Track P&amp;L and Emotions</strong> Pair your trading log with psychology tracking to stay disciplined, even during volatile futures trading journal sessions.</li>
+        <li><strong>Designed for Funded Traders</strong> Document prop firm rules, risk targets, and execution checklists inside the best trading journal app built for serious traders.</li>
+      </ul>
+      <p>Ready to go deeper? <a href="trading-journal.html">Explore the complete trading journal</a> or <a href="trading-journal-features.html">compare every trading journal feature</a>.</p>
+    </div>
+  </section>
+
   <!-- Pricing -->
   <section id="pricing" class="pricing">
     <div class="container section-header">
-      <h2>Exclusive Beta Pricing</h2>
-      <p>Lock in your lifetime price before public launch 🚀</p>
+      <h2>Trading Journal Beta Pricing</h2>
+      <p>Lock in your lifetime trading journal price before public launch 🚀</p>
     </div>
     <div class="container pricing-grid">
 
@@ -956,9 +1067,9 @@ body {
           <li>Tilt Meter</li>
           <li>Trading Model Statistics</li>
           <li>AI Insights</li>
-          <li>Day Journals</li>
+          <li>Daily Trading Journal Entries</li>
           <li>Clarity Panel</li>
-          <li>Performance Tracking</li>
+          <li>Trading Journal Performance Tracking</li>
         </ul>
       </div>
 
@@ -973,9 +1084,9 @@ body {
           <li>Tilt Meter</li>
           <li>Trading Model Statistics</li>
           <li>AI Insights</li>
-          <li>Day Journals</li>
+          <li>Daily Trading Journal Entries</li>
           <li>Clarity Panel</li>
-          <li>Performance Tracking</li>
+          <li>Trading Journal Performance Tracking</li>
         </ul>
       </div>
     </div>
@@ -985,8 +1096,8 @@ body {
   <section class="community">
     <div class="container community-inner">
       <div class="community-text">
-        <h2>Join the TradeTrakR Discord</h2>
-        <p>Get instant release alerts, trading insights, and beta invites inside our free announcements server.</p>
+        <h2>Join the TradeTrakR Trading Journal Community</h2>
+        <p>Get instant release alerts, trading journal tips, and beta invites inside our free announcements server.</p>
       </div>
       <a class="btn btn-outline discord-btn" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Join Free Discord</a>
     </div>
@@ -995,6 +1106,12 @@ body {
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
+      <div class="footer-links">
+        <a href="trading-journal.html">Trading Journal Overview</a>
+        <a href="ai-trading-journal.html">Trading Journal AI Analytics</a>
+        <a href="trading-journal-features.html#pl-tracker">Trading Journal P&amp;L Tracker</a>
+        <a href="trading-journal-features.html#funded-trader-tools">Trading Journal Tools for Funded Traders</a>
+      </div>
       <p style="position: relative; z-index: 1;">© 2025 <span style="background: linear-gradient(45deg, #4a90e2, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600;">TradeTrakr</span> — The Future of Trading Journals</p>
     </div>
   </footer>
@@ -1010,19 +1127,6 @@ body {
       let scrolled = (scrollTop / docHeight) * 100;
       progressBar.style.width = scrolled + "%";
     });
-
-    const text = "Smarter Journaling. Smarter Trading.";
-    let i = 0;
-    function typeEffect() {
-      if (i < text.length) {
-        document.getElementById("typing").textContent += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, 70);
-      } else {
-        document.getElementById("typing").style.animation = "blink 0.8s infinite";
-      }
-    }
-    window.onload = typeEffect;
 
     const tiltCircle = document.getElementById("tiltCircle");
     const tiltText = document.getElementById("tiltText");

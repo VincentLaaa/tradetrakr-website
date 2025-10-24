@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /download
+Disallow: /signin
+
+Sitemap: https://tradetrakr.com/sitemap.xml
