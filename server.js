@@ -44,8 +44,11 @@ const marketingPages = {
 };
 
 Object.entries(marketingPages).forEach(([route, file]) => {
-  app.get([route, `${route}/`], (_req, res) => {
-    res.sendFile(path.join(staticDir, file));
+  const variants = [route, `${route}/`, `${route}.html`];
+  variants.forEach((pattern) => {
+    app.get(pattern, (_req, res) => {
+      res.sendFile(path.join(staticDir, file));
+    });
   });
 });
 
