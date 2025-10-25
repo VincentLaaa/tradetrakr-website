@@ -33,6 +33,7 @@ app.use(
 );
 
 const staticDir = path.join(__dirname, "public");
+app.use("/public", express.static(staticDir));
 app.use(express.static(staticDir));
 
 const marketingPages = {
