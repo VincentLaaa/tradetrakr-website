@@ -96,21 +96,7 @@
     </div>
   </main>
 
-  <script>
-    (function enforceRootPath() {
-      if (!/^https?:$/.test(window.location.protocol)) return;
-      const segment = "/public";
-      const { pathname, search, hash } = window.location;
-      if (pathname === segment || pathname === `${segment}/`) {
-        history.replaceState(null, "", `/${search}${hash}`);
-        return;
-      }
-      if (pathname.startsWith(`${segment}/`)) {
-        const newPath = pathname.slice(segment.length) || "/";
-        history.replaceState(null, "", `${newPath}${search}${hash}`);
-      }
-    })();
-  </script>
+  </footer>
 
   <script src="script.js" defer></script>
 </body>

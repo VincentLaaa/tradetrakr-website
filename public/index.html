@@ -1121,20 +1121,6 @@ body {
   <script>
     if (window.location.hash) { history.replaceState(null, null, ' '); }
 
-    (function enforceRootPath() {
-      if (!/^https?:$/.test(window.location.protocol)) return;
-      const segment = "/public";
-      const { pathname, search, hash } = window.location;
-      if (pathname === segment || pathname === `${segment}/`) {
-        history.replaceState(null, "", `/${search}${hash}`);
-        return;
-      }
-      if (pathname.startsWith(`${segment}/`)) {
-        const newPath = pathname.slice(segment.length) || "/";
-        history.replaceState(null, "", `${newPath}${search}${hash}`);
-      }
-    })();
-
     const progressBar = document.getElementById("progress-bar");
     window.addEventListener("scroll", () => {
       let scrollTop = window.scrollY;
