@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Key Trading Performance Metrics to Track (With Formulas &amp; Examples) | TradeTrakR Blog</title>
+  <meta name="description" content="Win rate, expectancy, R-multiple, MAE/MFE, drawdown, profit factor, and a simple Sharpe-like consistency score—definitions, formulas, examples, and a free cheat sheet." />
+  <link rel="canonical" href="https://tradetrakr.com/blog/posts/key-trading-performance-metrics-to-track" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta property="og:title" content="Key Trading Performance Metrics to Track (With Formulas &amp; Examples) | TradeTrakR Blog" />
+  <meta property="og:description" content="Get the must-track trading performance metrics with plain-language definitions, formulas, examples, and a downloadable cheat sheet." />
+  <meta property="og:url" content="https://tradetrakr.com/blog/posts/key-trading-performance-metrics-to-track" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Key Trading Performance Metrics to Track (With Formulas &amp; Examples)" />
+  <meta name="twitter:description" content="Learn the core trading metrics—win rate, expectancy, R-multiple, drawdown, MAE/MFE, profit factor, consistency score—and grab the cheat sheet." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .post-container {
+      margin: 0 auto;
+      max-width: var(--blog-maxw);
+      padding: clamp(2.25rem, 4vw, 3.5rem) 1.5rem 4rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .post-hero h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      letter-spacing: -0.015em;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: rgba(233, 234, 240, 0.7);
+    }
+
+    .intro {
+      display: grid;
+      gap: 1.2rem;
+      color: rgba(233, 234, 240, 0.82);
+    }
+
+    .learn-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .toc {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.72);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .toc h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .toc ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .metric-block {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.68);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .metric-block:not(:last-child) {
+      margin-bottom: 1.25rem;
+    }
+
+    .metric-block h3 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .metric-block dl {
+      margin: 0;
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .metric-block dt {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.88);
+    }
+
+    .metric-block dd {
+      margin: 0;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .metric-table {
+      overflow-x: auto;
+      border-radius: var(--blog-radius);
+      border: 1px solid var(--blog-border);
+      background: rgba(21, 22, 27, 0.7);
+    }
+
+    .metric-table table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    .metric-table th,
+    .metric-table td {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--blog-border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .metric-table th {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.9);
+      background: rgba(18, 19, 26, 0.9);
+    }
+
+    .metric-table tr:nth-child(even) td {
+      background: rgba(27, 29, 38, 0.55);
+    }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
+      color: #050417;
+      font-weight: 600;
+      border: 1px solid rgba(0, 246, 255, 0.35);
+      box-shadow: 0 18px 36px rgba(19, 0, 60, 0.42);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .download-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 22px 44px rgba(19, 0, 60, 0.48);
+    }
+
+    .workflow-list,
+    .decision-list,
+    .faq-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .faq-list {
+      gap: 1rem;
+    }
+
+    .faq-list dt {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.88);
+    }
+
+    .faq-list dd {
+      margin: 0;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .cta-box {
+      border: 1px solid rgba(127, 90, 240, 0.4);
+      border-radius: var(--blog-radius);
+      background: linear-gradient(135deg, rgba(15, 16, 28, 0.95), rgba(25, 20, 46, 0.85));
+      padding: 1.75rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #0b0b18;
+      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
+      border: 1px solid rgba(0, 246, 255, 0.35);
+      box-shadow: 0 16px 30px rgba(19, 0, 60, 0.4);
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 20px 40px rgba(19, 0, 60, 0.45);
+    }
+
+    @media (max-width: 720px) {
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .toc,
+      .cta-box {
+        padding: 1.25rem;
+      }
+    }
+
+    /* tt:style - Variant G Research */
+    .tt-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: rgba(233, 234, 240, 0.7);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(42, 44, 52, 0.5);
+    }
+    
+    .tt-meta span {
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .tt-tag {
+      background: rgba(124, 92, 255, 0.15);
+      color: rgba(124, 92, 255, 0.9);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .research-section {
+      counter-increment: section;
+      position: relative;
+    }
+    
+    .research-section::before {
+      content: counter(section) ".";
+      position: absolute;
+      left: -2rem;
+      color: rgba(124, 92, 255, 0.6);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .post-container {
+      counter-reset: section;
+    }
+    
+    .research-section h2 {
+      margin-left: 1.5rem;
+    }
+    
+    .figure-caption {
+      font-size: 0.85rem;
+      color: rgba(233, 234, 240, 0.6);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    
+    .research-faq details {
+      margin: 1rem 0;
+      border: 1px solid rgba(42, 44, 52, 0.5);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    
+    .research-faq summary {
+      font-weight: 600;
+      cursor: pointer;
+      color: rgba(124, 92, 255, 0.9);
+    }
+    
+    .research-faq summary:focus {
+      outline: 2px solid rgba(124, 92, 255, 0.5);
+      outline-offset: 2px;
+    }
+    
+    .research-faq[open] summary {
+      margin-bottom: 0.75rem;
+    }
+    
+    .why-this-matters {
+      background: rgba(34, 204, 136, 0.1);
+      border-left: 4px solid rgba(34, 204, 136, 0.5);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .why-this-matters h3 {
+      margin: 0 0 0.5rem 0;
+      color: rgba(34, 204, 136, 0.9);
+      font-size: 1rem;
+    }
+    
+    .why-this-matters ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    
+    .why-this-matters li {
+      margin: 0.25rem 0;
+    }
+    /* /tt:style */
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Key Trading Performance Metrics to Track",
+      "description": "Master the core trading performance metrics—definitions, formulas, examples, and how to act on them—plus download the cheat sheet.",
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-01-27",
+      "wordCount": 1450,
+      "timeRequired": "PT12M",
+      "author": {
+        "@type": "Person",
+        "name": "TradeTrakR Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "TradeTrakR"
+      },
+      "image": "https://tradetrakr.com/assets/preview.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://tradetrakr.com/blog/posts/key-trading-performance-metrics-to-track"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tradetrakr.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://tradetrakr.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Key Trading Performance Metrics to Track",
+          "item": "https://tradetrakr.com/blog/posts/key-trading-performance-metrics-to-track"
+        }
+      ]
+    }
+  </script>
+</head>
+<body data-tt-variant="G">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="../../index.html">TradeTrakR</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../index.html#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li aria-current="page">Key Trading Performance Metrics to Track</li>
+    </ol>
+  </nav>
+
+  <article class="post-container">
+    <section class="post-hero">
+      <h1>Key Trading Performance Metrics to Track</h1>
+      <div class="tt-meta">
+        <span class="tt-author">TradeTrakR Editorial</span>
+        <span>·</span>
+        <time datetime="2025-01-27">January 27, 2025</time>
+        <span>·</span>
+        <span class="tt-reading">~12 min read</span>
+        <span>·</span>
+        <span class="tt-tag">[Metrics]</span>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p>The key trading performance metrics you monitor determine whether your journal translates into consistent execution. Track the wrong numbers and you chase vanity stats; track the right ones and you know exactly when to scale, pause, or adjust rules. This guide walks through the core metrics every trading journal should capture—complete with definitions, formulas, numeric examples, and a downloadable Trading Metrics Cheat Sheet so you can apply the math without guesswork.</p>
+      <div class="why-this-matters">
+        <h3>Why this matters</h3>
+        <ul>
+          <li>Why focusing on decision-grade metrics beats obsessing over vanity stats</li>
+          <li>Plain-language formulas for the core trading metrics and how to deploy them</li>
+          <li>How to connect each metric to risk management, psychology, and playbook adjustments</li>
+          <li>A repeatable cadence for daily, weekly, and monthly metric reviews</li>
+          <li>Where to download the Trading Metrics Cheat Sheet for quick reference</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#why-metrics">Why Metrics Matter (But Only the Right Ones)</a></li>
+        <li><a href="#core-metrics">The Core Metrics (Definitions, Formulas, Examples)</a></li>
+        <li><a href="#putting-to-work">Putting Metrics to Work (Decisions &gt; Numbers)</a></li>
+        <li><a href="#review-cadence">Metric Review Cadence</a></li>
+        <li><a href="#metrics-table">Metric Summary Table</a></li>
+        <li><a href="#download">Download: Trading Metrics Cheat Sheet</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#further-reading">Further Reading</a></li>
+        <li><a href="#cta">Explore TradeTrakR</a></li>
+      </ul>
+    </nav>
+
+    <section id="why-metrics" class="post-section research-section" aria-labelledby="why-metrics-heading">
+      <h2 id="why-metrics-heading">Why Metrics Matter (But Only the Right Ones)</h2>
+      <p>Metrics are only useful if they inform decisions. Win rate alone cannot tell you if a system is profitable. Average profit without context ignores how much you risked to earn it. The goal is to build a dashboard that links back to your trading journal notes: Which setups deliver positive expectancy? What happens when you break a rule? How do emotions influence drawdowns?</p>
+      <p>Vanity metrics—like total P&amp;L without risk normalization—create false confidence. Focus on measures that explain why results happened and what needs to change. Every metric below should map to a lever you can adjust, whether that is stop placement, time-of-day participation, or psychology prompts.</p>
+    </section>
+
+    <section id="core-metrics" class="post-section research-section" aria-labelledby="core-metrics-heading">
+      <h2 id="core-metrics-heading">The Core Metrics (Definitions, Formulas, Examples)</h2>
+      <p>Use these mini blueprints to calculate the numbers that matter. Each metric includes a definition, formula, quick example, and actionable takeaway.</p>
+
+      <div class="metric-block" id="metric-win-rate">
+        <h3>Win Rate</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Percentage of trades that end positive. Helps gauge execution consistency but must be paired with payoff ratios.</dd>
+          <dt>Formula</dt>
+          <dd>Wins ÷ Total Trades × 100</dd>
+          <dt>Example</dt>
+          <dd>62 wins out of 100 trades = <strong>62%</strong> win rate.</dd>
+          <dt>Action</dt>
+          <dd>Segment by setup or instrument. If a strategy drops below minimum viable win rate, pause and review journal entries.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-avg">
+        <h3>Average Win / Average Loss</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Mean dollar or R value of winning trades versus losing trades.</dd>
+          <dt>Formula</dt>
+          <dd>Average Win = Sum of winning trade profits ÷ # of winning trades (same for losses).</dd>
+          <dt>Example</dt>
+          <dd>Avg Win = +$275; Avg Loss = -$180.</dd>
+          <dt>Action</dt>
+          <dd>Investigate outliers. Trim or tag extraordinary events (news spikes) to avoid skewing expectations.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-expectancy">
+        <h3>Expectancy (per trade)</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Average profit or loss per trade accounting for win rate and payoff.</dd>
+          <dt>Formula</dt>
+          <dd>(Win Rate × Avg Win) − (Loss Rate × Avg Loss). In R terms: (Win Rate × Avg Win R) − (Loss Rate × Avg Loss R).</dd>
+          <dt>Example</dt>
+          <dd>(0.62 × 275) − (0.38 × 180) = <strong>$102.10</strong> per trade.</dd>
+          <dt>Action</dt>
+          <dd>Measure expectancy by setup and time of day. If expectancy turns negative, adjust risk or halt trading until you resolve the cause.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-rmultiple">
+        <h3>R-Multiple</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Trade result expressed in units of initial risk (R). Normalizes performance across instruments and sizes.</dd>
+          <dt>Formula</dt>
+          <dd>Trade P&amp;L ÷ Initial Risk (R).</dd>
+          <dt>Example</dt>
+          <dd>+$540 gain on $180 risk = <strong>+3.0R</strong>.</dd>
+          <dt>Action</dt>
+          <dd>Target average R > 1 for winners. Use the distribution of R to set realistic daily profit targets.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-profit-factor">
+        <h3>Profit Factor</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Ratio of gross gains to gross losses. Indicates how effectively winners offset losers.</dd>
+          <dt>Formula</dt>
+          <dd>Gross Winning P&amp;L ÷ Gross Losing P&amp;L.</dd>
+          <dt>Example</dt>
+          <dd>$18,700 ÷ $10,400 = <strong>1.80</strong>.</dd>
+          <dt>Action</dt>
+          <dd>Combine with drawdown and sample size. Aim for PF ≥ 1.4 while maintaining acceptable drawdowns.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-drawdown">
+        <h3>Drawdown (Max &amp; Average)</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Peak-to-trough equity decline, measured in dollars, percentage, or R.</dd>
+          <dt>Formula</dt>
+          <dd>Max DD = Max(Peak Equity − Trough Equity) / Peak Equity. Average DD = Mean of drawdown periods.</dd>
+          <dt>Example</dt>
+          <dd>Max DD = -$4,200 (−7.5%); Avg DD = -$1,150.</dd>
+          <dt>Action</dt>
+          <dd>Set hard limits (e.g., stop trading at -3R daily). Calculate the recovery percentage required to reach new highs.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-mae-mfe">
+        <h3>MAE / MFE</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Maximum Adverse Excursion (largest unrealized loss) and Maximum Favorable Excursion (largest unrealized gain) per trade.</dd>
+          <dt>Formula</dt>
+          <dd>Track high-water marks of unrealized P&amp;L during each trade.</dd>
+          <dt>Example</dt>
+          <dd>Avg MAE = -0.85R; Avg MFE = +1.9R.</dd>
+          <dt>Action</dt>
+          <dd>Compare MAE to stop losses—if MAE consistently hits -0.5R, stops may be too wide. Use MFE to calibrate profit targets or trailing exits.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-session">
+        <h3>Time-of-Day / Session Expectancy</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Expectancy segmented by trading session or 15–30 minute windows.</dd>
+          <dt>Formula</dt>
+          <dd>Expectancy per bucket = Σ P&amp;L in bucket ÷ # trades in bucket.</dd>
+          <dt>Example</dt>
+          <dd>New York open (9:30–10:00 a.m.) expectancy = +0.75R; Lunch (12:00–13:00) expectancy = -0.28R.</dd>
+          <dt>Action</dt>
+          <dd>Throttle size or avoid “red zones.” Highlight the top 2–3 windows to prioritize.</dd>
+        </dl>
+      </div>
+
+      <div class="metric-block" id="metric-consistency">
+        <h3>Consistency Proxy (Sharpe-Like)</h3>
+        <dl>
+          <dt>Definition</dt>
+          <dd>Simplified signal-to-noise ratio for returns. Higher values indicate smoother equity curves.</dd>
+          <dt>Formula</dt>
+          <dd>Mean(R) ÷ Standard Deviation(R) per trade or per day.</dd>
+          <dt>Example</dt>
+          <dd>Mean = +0.42R; StDev = 0.95R → Score = <strong>0.44</strong>.</dd>
+          <dt>Action</dt>
+          <dd>Use to judge sizing changes. Rising expectancy with falling consistency might signal volatility or psychology issues.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="putting-to-work" class="post-section" aria-labelledby="putting-to-work-heading">
+      <h2 id="putting-to-work-heading">Putting Metrics to Work (Decisions &gt; Numbers)</h2>
+      <p>Metrics become potent when they trigger rule changes, not just dashboard admiration. Tie each insight to an action:</p>
+      <ul class="workflow-list">
+        <li><strong>Optimize targets:</strong> If MFE shows most trades peak near +1.6R, experiment with scaling out earlier instead of holding for +3R.</li>
+        <li><strong>Tighten stops:</strong> When MAE rarely exceeds -0.6R, shrink stops to reduce average loss without raising stop-outs.</li>
+        <li><strong>Time filtering:</strong> If expectancy plummets during low-liquidity sessions, reduce size or step away entirely.</li>
+        <li><strong>Psychology adjustments:</strong> Pair rule-adherence logs with drawdowns. If most large drawdowns follow rule breaks, add stronger cooldown triggers.</li>
+      </ul>
+      <p>Document the change in your trading journal and track its impact over the next 20–30 trades before locking it in.</p>
+    </section>
+
+    <section id="review-cadence" class="post-section" aria-labelledby="review-cadence-heading">
+      <h2 id="review-cadence-heading">Metric Review Cadence</h2>
+      <p>Reviewing every metric every day leads to paralysis. Adopt a cadence that balances awareness with deep dives.</p>
+      <ul class="workflow-list">
+        <li><strong>Daily (5 minutes):</strong> Record P&amp;L in R, note rule breaks, log one insight from the day.</li>
+        <li><strong>Weekly (30 minutes):</strong> Update expectancy, profit factor, MAE/MFE, and session expectancy. Decide on one experiment for the upcoming week.</li>
+        <li><strong>Monthly (45–60 minutes):</strong> Review drawdowns, consistency score, and performance across market regimes (volatility bins). Rebalance risk parameters if needed.</li>
+      </ul>
+      <p>Consistency beats intensity. Short, frequent updates ensure metrics stay aligned with real trading behavior.</p>
+    </section>
+
+    <section id="metrics-table" class="post-section" aria-labelledby="metrics-table-heading">
+      <h2 id="metrics-table-heading">Metric Summary Table</h2>
+      <p>Print or bookmark this table for a snapshot of each metric, its formula, and how to use it.</p>
+      <figure class="metric-table" tabindex="0">
+        <caption>Key trading metrics at a glance (verify formulas with your journal platform)</caption>
+        <table aria-label="Key trading performance metrics summary">
+          <thead>
+            <tr>
+              <th scope="col">Metric</th>
+              <th scope="col">Definition</th>
+              <th scope="col">Formula</th>
+              <th scope="col">Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Win Rate</th>
+              <td>Percent of trades that close green.</td>
+              <td>Wins ÷ Total Trades × 100</td>
+              <td>Monitor execution quality; compare by setup.</td>
+            </tr>
+            <tr>
+              <th scope="row">Average Win / Loss</th>
+              <td>Mean size of winners vs. losers.</td>
+              <td>Σ Wins ÷ # Wins; Σ Losses ÷ # Losses</td>
+              <td>Check if reward-risk supports expectancy targets.</td>
+            </tr>
+            <tr>
+              <th scope="row">Expectancy</th>
+              <td>Average profit per trade after accounting for win rate and payoff.</td>
+              <td>(Win Rate × Avg Win) − (Loss Rate × Avg Loss)</td>
+              <td>Decide when to scale or pause strategies.</td>
+            </tr>
+            <tr>
+              <th scope="row">R-Multiple</th>
+              <td>Profit expressed in units of initial risk.</td>
+              <td>P&amp;L ÷ Initial Risk</td>
+              <td>Normalize performance across instruments.</td>
+            </tr>
+            <tr>
+              <th scope="row">Profit Factor</th>
+              <td>Ratio of gross wins to gross losses.</td>
+              <td>Gross Wins ÷ Gross Losses</td>
+              <td>Validate that wins sufficiently offset losses.</td>
+            </tr>
+            <tr>
+              <th scope="row">Drawdown</th>
+              <td>Peak-to-trough equity decline.</td>
+              <td>(Peak − Trough) ÷ Peak</td>
+              <td>Set pain thresholds and recovery plans.</td>
+            </tr>
+            <tr>
+              <th scope="row">MAE / MFE</th>
+              <td>Largest unrealized loss or gain during a trade.</td>
+              <td>Track max adverse/favorable excursion</td>
+              <td>Tune stops and targets to market structure.</td>
+            </tr>
+            <tr>
+              <th scope="row">Session Expectancy</th>
+              <td>Expectancy segmented by time or session.</td>
+              <td>Σ P&amp;L per bucket ÷ # trades in bucket</td>
+              <td>Focus on high-quality trading windows.</td>
+            </tr>
+            <tr>
+              <th scope="row">Consistency Score</th>
+              <td>Signal-to-noise ratio for returns.</td>
+              <td>Mean(R) ÷ StdDev(R)</td>
+              <td>Evaluate smoothness before sizing up.</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <section id="download" class="post-section" aria-labelledby="download-heading">
+      <h2 id="download-heading">Download: Trading Metrics Cheat Sheet</h2>
+      <p>Print the one-page Trading Metrics Cheat Sheet to keep formulas and use cases within reach during reviews.</p>
+      <a class="download-link" href="../assets/trading-metrics-cheatsheet.md" target="_blank" rel="noopener">Get the Trading Metrics Cheat Sheet</a>
+      <p>Update the sheet whenever your trading journal adds a new setup or analytics view so the numbers you track stay aligned with your edge.</p>
+    </section>
+
+    <section id="faqs" class="post-section research-faq" aria-labelledby="faqs-heading">
+      <h2 id="faqs-heading">Frequently Asked Questions</h2>
+      <details>
+        <summary>What sample size do I need before trusting a metric?</summary>
+        <p>Target at least 30–50 trades per setup or session segment. For daily expectancy, use multiple weeks so variance evens out.</p>
+      </details>
+      <details>
+        <summary>Expectancy is positive but equity is flat—why?</summary>
+        <p>Check drawdown depth and variance. Large losers, rule breaks, or reduced trade frequency can cancel out a positive expectancy.</p>
+      </details>
+      <details>
+        <summary>Should I measure in dollars or R?</summary>
+        <p>Use both. Dollars show bottom-line impact; R normalizes risk so you can compare across instruments and account sizes.</p>
+      </details>
+      <details>
+        <summary>How do I handle outliers when calculating averages?</summary>
+        <p>Tag outliers in your journal. Consider capped averages (trim values beyond 2–3 standard deviations) or analyze with and without them.</p>
+      </details>
+      <details>
+        <summary>Do systematic traders need these metrics?</summary>
+        <p>Yes—the metrics confirm whether automated strategies stay within expected performance bands and detect drift early.</p>
+      </details>
+    </section>
+
+    <section id="further-reading" class="post-section" aria-labelledby="further-reading-heading">
+      <h2 id="further-reading-heading">Further Reading</h2>
+      <p>Expand your analytics and psychology toolkit with these resources:</p>
+      <ul class="decision-list">
+        <li><a href="../../trading-journal.html">TradeTrakR trading journal overview</a> featuring <a href="../../ai-trading-journal.html">AI trading journal workflows</a> and <a href="../../trading-journal-features.html#funded-trader-tools">trading psychology tracking</a>.</li>
+        <li><a href="../../blog/posts/ai-powered-trading-journal-analytics.html">AI-Powered Trading Journal Analytics</a>.</li>
+        <li><a href="../../blog/posts/automated-trade-tracker.html">Automated Trade Tracker</a>.</li>
+        <li><a href="../../blog/posts/mastering-trading-psychology-for-consistent-trades.html">Mastering Trading Psychology for Consistent Trades</a>.</li>
+        <li><a href="../../blog/posts/how-to-manage-emotions-in-day-trading.html">How to Manage Emotions in Day Trading</a>.</li>
+        <li><a href="../../stats/how-many-trades-per-day-do-day-traders-make.html">How many trades per day do day traders make?</a></li>
+        <li><a href="../../stats/trading-journal-usage-and-benefits-stats.html">Trading journal usage and benefits stats</a>.</li>
+      </ul>
+    </section>
+
+    <section id="cta" class="post-section" aria-labelledby="cta-heading">
+      <div class="cta-box">
+        <h2 id="cta-heading" style="margin:0;">Explore TradeTrakR</h2>
+        <p>Automate your trading journal, capture the metrics that matter, and keep psychology accountable in one workspace.</p>
+        <ul>
+          <li>AI-Powered Pattern Insights</li>
+          <li>Psychology &amp; Rule-Adherence Tracking</li>
+          <li>Clean, Minimal UX for Focus</li>
+        </ul>
+        <a href="../../trading-journal.html" class="cta-link">Learn more</a>
+      </div>
+    </section>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="../../index.html">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../index.html#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </div>
+      <p>© 2025 TradeTrakR — Data-driven trading journal insights.</p>
+    </div>
+  </footer>
+  <!-- tt:applied v1 -->
+</body>
+</html>
