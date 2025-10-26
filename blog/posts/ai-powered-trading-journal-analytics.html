@@ -11,11 +11,11 @@
   <meta property="og:description" content="You track every trade but still don't understand why you're losing. Here's how AI-powered journal analytics help you see your blind spots—and finally break the cycle of inconsistency." />
   <meta property="og:url" content="https://tradetrakr.com/blog/posts/ai-powered-trading-journal-analytics" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta property="og:image" content="https://tradetrakr.com/assets/og/ai-powered-trading-journal-analytics-hero.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI-Powered Trading Journal Analytics: Turning Data Into Discipline" />
   <meta name="twitter:description" content="You track every trade but still don't understand why you're losing. Here's how AI journaling helps you finally see your blind spots." />
-  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/og/ai-powered-trading-journal-analytics-hero.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -195,11 +195,59 @@
   <!-- tt:style-start -->
   <style>
     .tt-hero {
-      margin: 0 0 1.5rem 0;
+      margin: 0 0 1.25rem 0;
       max-width: 100%;
     }
-    .tt-hero img {
-      border-radius: 12px;
+    .tt-hero--screenshot {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tt-hero--screenshot figure,
+    .tt-hero--screenshot {
+      display: block;
+    }
+    .tt-hero--screenshot img {
+      border-radius: 16px;
+      border: 1px solid rgba(42,44,52,0.6);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+    .tt-hero--gradient {
+      border-radius: 16px;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(55,208,255,0.15), transparent 50%),
+                  linear-gradient(135deg, rgba(124,92,255,0.18), rgba(34,204,136,0.14)),
+                  #0f0f13;
+      border: 1px solid rgba(42,44,52,0.6);
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tt-hero__inner {
+      padding: 18px 22px;
+      text-align: center;
+    }
+    .tt-hero__badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(42,44,52,0.6);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.03);
+    }
+    .tt-hero__kicker {
+      margin: 0.5rem 0 0;
+      color: rgba(162,168,179,0.8);
+    }
+    .tt-hero--off {
+      height: 0.25rem;
+    }
+    @media (max-width: 840px) {
+      .tt-hero--screenshot img {
+        width: 100%;
+        height: auto;
+      }
     }
     .tt-fig {
       margin: 1.25rem 0;
@@ -444,7 +492,16 @@
         "@type": "Organization",
         "name": "TradeTrakR"
       },
-      "image": "https://tradetrakr.com/assets/preview.png",
+      "image": [
+        "https://tradetrakr.com/assets/preview.png",
+        {
+          "@type": "ImageObject",
+          "url": "https://tradetrakr.com/assets/og/ai-powered-trading-journal-analytics-hero.webp",
+          "width": 1200,
+          "height": 630,
+          "caption": "AI-Powered Trading Journal Analytics — TradeTrakR dashboard hero"
+        }
+      ],
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://tradetrakr.com/blog/posts/ai-powered-trading-journal-analytics"
@@ -518,14 +575,14 @@
     
     <div class="post-content">
     <!-- tt:hero-start -->
-    <figure class="tt-hero" role="presentation" aria-hidden="true">
-      <img src="../images/ai-analytics/hero-illustration.svg" 
-           alt="AI-powered trading journal analytics visualization"
-           width="1280"
-           height="720"
-           loading="eager"
-           fetchpriority="high"
-           style="width:100%;height:auto;border-radius:12px;"/>
+    <figure class="tt-hero tt-hero--screenshot">
+      <picture>
+        <source type="image/webp" srcset="../images/ai-analytics/hero-dashboard-800x450.webp 800w, ../images/ai-analytics/hero-dashboard-1280x720.webp 1280w" sizes="(max-width: 840px) 100vw, 1100px" />
+        <img src="../images/ai-analytics/hero-dashboard-1280x720.webp"
+             alt="AI-Powered Trading Journal Analytics — real TradeTrakR dashboard screenshot"
+             width="1280" height="720" loading="eager" fetchpriority="high" decoding="async" />
+      </picture>
+      <figcaption>AI journaling with real data — not abstract art. This page uses actual dashboard visuals to ground the concepts.</figcaption>
     </figure>
     <!-- tt:hero-end -->
     
