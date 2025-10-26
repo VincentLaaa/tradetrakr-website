@@ -613,14 +613,50 @@
       <p><strong>Example 1: The Overtrading Pattern</strong></p>
       <p>After a losing streak, the model flagged higher aggression and overtrading in the first 30 minutes of each session. Not just "you trade more"—but *specifically* in those first 30 minutes, after overnight loss stress. The AI showed a correlation between pre-market preparation (or lack of it) and early-session impulse trades.</p>
       <p>Solution: Implement a 15-minute pre-market routine and a first-trade size cap. Result: Win rate improved 12% within a month.</p>
+      
+      <!-- tt:chart-a-start -->
+      <figure class="tt-fig tt-fig--wide" role="group" aria-label="Expectancy by time of day">
+        <img src="../images/ai-analytics/time-of-day-expectancy.svg"
+             alt="Bar chart — expectancy by 30-minute buckets showing red and green zones"
+             loading="lazy"
+             decoding="async"
+             width="1100"
+             height="520" />
+        <figcaption>Expectancy by 30-minute buckets; highlight red/green zones to throttle or avoid.</figcaption>
+      </figure>
+      <!-- tt:chart-a-end -->
 
       <p><strong>Example 2: The Win Streak Comedown</strong></p>
       <p>One trader logged emotions daily and discovered that 70% of his bad decisions came after early wins. Not losses—wins. The euphoria from morning profits led to breaking rules, abandoning setups, and trading "because it feels good."</p>
       <p>Solution: AI flagged the pattern; the trader built a post-win checklist. When you're up early, take a 20-minute walk before the next trade.</p>
+      
+      <!-- tt:heatmap-start -->
+      <figure class="tt-fig" role="group" aria-label="Emotion outcome correlation">
+        <img src="../images/ai-analytics/emotion-correlation-heatmap.svg"
+             alt="Heatmap showing correlation between emotion tags and trade outcomes"
+             loading="lazy"
+             decoding="async"
+             width="900"
+             height="400" />
+        <figcaption>Emotion tags vs outcome correlation (demo). Track patterns like revenge, FOMO, hesitation.</figcaption>
+      </figure>
+      <!-- tt:heatmap-end -->
 
       <p><strong>Example 3: The Hidden Setup Family</strong></p>
       <p>AI clustering revealed that low-volatility, multi-leg fades were actually a single setup—not three different ones. The trader thought they were trading variation and complexity. They were trading the same edge with different names.</p>
       <p>Solution: Consolidate and refine. Fewer setups, better execution.</p>
+      
+      <!-- tt:cluster-mini-start -->
+      <figure class="tt-fig" role="group" aria-label="Setup clustering visualization">
+        <img src="../images/ai-analytics/setup-clusters.svg"
+             alt="Cluster diagram grouping low-volatility multi-leg fade family"
+             loading="lazy"
+             decoding="async"
+             width="700"
+             height="400" />
+        <figcaption>Clustering can reveal one setup hiding behind many names.</figcaption>
+      </figure>
+      <!-- tt:cluster-mini-end -->
 
       <p>These aren't hypothetical "if you had perfect data" scenarios. These are real discoveries from traders who stopped guessing and started measuring.</p>
     </section>
@@ -637,10 +673,35 @@
       </ul>
       <p>This isn't about perfection. It's about progress. One insight at a time, one adjustment per week. That's how you build consistency—and confidence.</p>
       <p>Working on one hypothesis at a time keeps you from rewriting your entire playbook based on a single dashboard session. You're learning to trade yourself better, not replacing yourself with a robot.</p>
+      
+      <!-- tt:loop-diagram-start -->
+      <figure class="tt-fig tt-fig--wide" role="group" aria-label="Weekly accountability loop">
+        <img src="../images/ai-analytics/weekly-loop-flow.svg"
+             alt="Five-step weekly loop: Collect → Analyze → Hypothesize → Implement → Evaluate"
+             loading="lazy"
+             decoding="async"
+             width="1000"
+             height="400" />
+        <figcaption>15-minute Sunday review. One rule change per week.</figcaption>
+      </figure>
+      <!-- tt:loop-diagram-end -->
     </section>
 
     <section id="validation" class="post-section" aria-labelledby="validation-heading">
       <h2 id="validation-heading">How to Avoid the AI Trap (Overfitting &amp; Noise)</h2>
+      
+      <!-- tt:guardrails-start -->
+      <figure class="tt-fig" role="group" aria-label="Overfitting guardrails checklist">
+        <img src="../images/ai-analytics/overfitting-guardrails.svg"
+             alt="Checklist: sample size, rolling windows, effect size, predefined criteria"
+             loading="lazy"
+             decoding="async"
+             width="900"
+             height="600" />
+        <figcaption>Guardrails that keep you from chasing noise.</figcaption>
+      </figure>
+      <!-- tt:guardrails-end -->
+      
       <p>Here's the thing: AI can find patterns that don't actually exist. It's called overfitting. You see a correlation—maybe you trade better on Wednesdays!—but it's just noise. How do you avoid this?</p>
       <p><strong>Sample size matters.</strong> Don't rebuild your playbook every week. One "pattern" in last week's 12 trades isn't a pattern—it's coincidence. Wait for at least 30-50 trades before making changes.</p>
       <p><strong>Effect size before novelty.</strong> Cool graphics aren't enough. Require a meaningful expectancy shift (+0.3R minimum) and drawdown reduction before changing behavior. If it doesn't move the needle, it's not real.</p>
@@ -719,6 +780,22 @@
         </table>
       </figure>
     </section>
+
+    <!-- tt:methodology-start -->
+    <section id="methodology" class="post-section" aria-labelledby="methodology-heading">
+      <details>
+        <summary><h2 id="methodology-heading" style="display:inline;">How We Compute These Stats</h2></summary>
+        <p>If you see stat callouts with placeholder values (X%, Y%, Z%), they will be replaced with validated data from one of these sources:</p>
+        <ul>
+          <li><strong>Internal aggregate data:</strong> TradeTrakR journal exports analyzed over a 90-day rolling window</li>
+          <li><strong>Public research:</strong> When available, we cite peer-reviewed studies on trader behavior and rule adherence</li>
+          <li><strong>Demo data:</strong> Placeholder values clearly marked as examples for illustrative purposes</li>
+        </ul>
+        <p>All stats require a minimum sample size of 30-50 trades per tag or category. Rolling windows ensure effects persist across market regimes.</p>
+        <p><strong>Disclaimer:</strong> Your results will vary based on your specific trading style, markets, and risk management. These stats are for educational purposes only.</p>
+      </details>
+    </section>
+    <!-- tt:methodology-end -->
 
     <section id="faqs" class="post-section" aria-labelledby="faqs-heading">
       <h2 id="faqs-heading">FAQs</h2>
