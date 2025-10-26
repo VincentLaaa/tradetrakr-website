@@ -1,0 +1,7 @@
+# Netlify redirects for TradeTrakR
+# Format: SOURCE_PATH DESTINATION_PATH [STATUS_CODE!]
+
+# Note: Add any old URLs that need 301 redirects here
+# Example:
+# /old-path  /blog/posts/mastering-trading-psychology-for-consistent-trades  301!
+

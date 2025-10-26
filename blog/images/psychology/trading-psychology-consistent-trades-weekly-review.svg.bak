@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="1100" height="520">
+  <defs>
+    <linearGradient id="bgGrad6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f101c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#15191f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1100" height="520" fill="url(#bgGrad6)" rx="12"/>
+  
+  <!-- Title -->
+  <text x="550" y="45" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#00f6ff" text-anchor="middle">Weekly Psychology Review &amp; Metrics</text>
+  
+  <!-- Left: Review Process -->
+  <g transform="translate(80, 90)">
+    <rect x="0" y="0" width="480" height="390" rx="10" fill="rgba(0, 246, 255, 0.08)" stroke="rgba(0, 246, 255, 0.25)" stroke-width="2"/>
+    <text x="240" y="40" font-family="system-ui" font-size="16" font-weight="600" fill="#00f6ff" text-anchor="middle">30–45 Minute Workflow</text>
+    <line x1="40" y1="60" x2="440" y2="60" stroke="rgba(0, 246, 255, 0.25)" stroke-width="1"/>
+    
+    <g transform="translate(40, 90)">
+      <circle cx="8" cy="8" r="6" fill="#00f6ff"/>
+      <text x="25" y="13" font-family="system-ui" font-size="13" font-weight="600" fill="#00f6ff">Emotion Tag Frequency</text>
+      <text x="35" y="35" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">• By day, instrument, time of day</text>
+      
+      <circle cx="8" cy="70" r="6" fill="#7f5af0"/>
+      <text x="25" y="75" font-family="system-ui" font-size="13" font-weight="600" fill="#7f5af0">Rule Adherence vs Breaks</text>
+      <text x="35" y="97" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">• Count adherence, find repeat offenders</text>
+      
+      <circle cx="8" cy="132" r="6" fill="#ff4ecd"/>
+      <text x="25" y="137" font-family="system-ui" font-size="13" font-weight="600" fill="#ff4ecd">Trigger Analysis</text>
+      <text x="35" y="159" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">• Missed moves, news, life stress</text>
+      
+      <circle cx="8" cy="194" r="6" fill="#00f6ff"/>
+      <text x="25" y="199" font-family="system-ui" font-size="13" font-weight="600" fill="#00f6ff">One Improvement Mandate</text>
+      <text x="35" y="221" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">• Single focus for next week</text>
+      
+      <circle cx="8" cy="256" r="6" fill="#7f5af0"/>
+      <text x="25" y="261" font-family="system-ui" font-size="13" font-weight="600" fill="#7f5af0">Archive &amp; Share</text>
+      <text x="35" y="283" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">• Monthly folder review after quarter</text>
+    </g>
+  </g>
+  
+  <!-- Right: Metrics -->
+  <g transform="translate(600, 90)">
+    <rect x="0" y="0" width="420" height="390" rx="10" fill="rgba(127, 90, 240, 0.08)" stroke="rgba(127, 90, 240, 0.25)" stroke-width="2"/>
+    <text x="210" y="40" font-family="system-ui" font-size="16" font-weight="600" fill="#7f5af0" text-anchor="middle">Validation Metrics</text>
+    <line x1="30" y1="60" x2="390" y2="60" stroke="rgba(127, 90, 240, 0.25)" stroke-width="1"/>
+    
+    <g transform="translate(30, 100)">
+      <text x="0" y="25" font-family="system-ui" font-size="13" font-weight="600" fill="#00f6ff">Rule Adherence Rate</text>
+      <text x="10" y="45" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)"># adherers ÷ total sessions</text>
+      <text x="10" y="65" font-family="system-ui" font-size="11" fill="#00f6ff">Target: +5% weekly</text>
+      
+      <text x="0" y="115" font-family="system-ui" font-size="13" font-weight="600" fill="#ff4ecd">Tilt Frequency</text>
+      <text x="10" y="135" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">Tilt/revenge tags per week</text>
+      <text x="10" y="155" font-family="system-ui" font-size="11" fill="#ff4ecd">Target: Decrease -50%</text>
+      
+      <text x="0" y="205" font-family="system-ui" font-size="13" font-weight="600" fill="#7f5af0">Expectancy Stability</text>
+      <text x="10" y="225" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">Calm sessions vs tilt sessions</text>
+      <text x="10" y="245" font-family="system-ui" font-size="11" fill="#7f5af0">Target: 2:1 ratio</text>
+      
+      <text x="0" y="295" font-family="system-ui" font-size="13" font-weight="600" fill="#00f6ff">Drawdown Containment</text>
+      <text x="10" y="315" font-family="system-ui" font-size="11" fill="rgba(233, 234, 240, 0.7)">Max intraday before/after</text>
+      <text x="10" y="335" font-family="system-ui" font-size="11" fill="#00f6ff">Target: -30% reduction</text>
+    </g>
+  </g>
+  
+  <!-- Arrow between sections -->
+  <path d="M 560 285 L 600 285" stroke="#ff4ecd" stroke-width="2" fill="none" marker-end="url(#arrow2)" opacity="0.6"/>
+  
+  <!-- Note box -->
+  <g transform="translate(200, 500)">
+    <rect x="0" y="0" width="700" height="30" rx="6" fill="rgba(255, 78, 205, 0.1)" stroke="rgba(255, 78, 205, 0.3)" stroke-width="1"/>
+    <text x="350" y="22" font-family="system-ui" font-size="12" fill="rgba(233, 234, 240, 0.9)" text-anchor="middle">💡 Share mandate with accountability partner to increase follow-through</text>
+  </g>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff4ecd" />
+    </marker>
+  </defs>
+</svg>
+

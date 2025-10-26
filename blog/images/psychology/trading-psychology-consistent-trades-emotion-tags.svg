@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" width="1100" height="620">
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#161a25;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d2130;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1100" height="620" fill="url(#bgGrad4)" rx="12"/>
+  
+  <!-- Title -->
+  <text x="550" y="45" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#00f6ff" text-anchor="middle">Emotion Tags &amp; Triggers</text>
+  
+  <!-- FOMO -->
+  <g transform="translate(80, 80)">
+    <rect x="0" y="0" width="200" height="130" rx="10" fill="rgba(127, 90, 240, 0.1)" stroke="rgba(127, 90, 240, 0.4)" stroke-width="2"/>
+    <text x="100" y="35" font-family="system-ui" font-size="16" font-weight="600" fill="#7f5af0" text-anchor="middle">FOMO</text>
+    <text x="15" y="60" font-family="system-ui" font-size="11" fill="#f0f0f0">Triggers:</text>
+    <text x="15" y="80" font-family="system-ui" font-size="10" fill="#ffffff">• Missed breakout</text>
+    <text x="15" y="95" font-family="system-ui" font-size="10" fill="#ffffff">• Social media hype</text>
+    <text x="15" y="110" font-family="system-ui" font-size="10" fill="#ffffff">• Rapid tape moves</text>
+  </g>
+  
+  <!-- Fear -->
+  <g transform="translate(300, 80)">
+    <rect x="0" y="0" width="200" height="130" rx="10" fill="rgba(255, 78, 205, 0.1)" stroke="rgba(255, 78, 205, 0.4)" stroke-width="2"/>
+    <text x="100" y="35" font-family="system-ui" font-size="16" font-weight="600" fill="#ff4ecd" text-anchor="middle">Fear</text>
+    <text x="15" y="60" font-family="system-ui" font-size="11" fill="#f0f0f0">Triggers:</text>
+    <text x="15" y="80" font-family="system-ui" font-size="10" fill="#ffffff">• Early loss</text>
+    <text x="15" y="95" font-family="system-ui" font-size="10" fill="#ffffff">• Volatility spike</text>
+    <text x="15" y="110" font-family="system-ui" font-size="10" fill="#ffffff">• News break</text>
+  </g>
+  
+  <!-- Overconfidence -->
+  <g transform="translate(520, 80)">
+    <rect x="0" y="0" width="200" height="130" rx="10" fill="rgba(255, 162, 0, 0.1)" stroke="rgba(255, 162, 0, 0.4)" stroke-width="2"/>
+    <text x="100" y="35" font-family="system-ui" font-size="16" font-weight="600" fill="#ffa200" text-anchor="middle">Overconf.</text>
+    <text x="15" y="60" font-family="system-ui" font-size="11" fill="#f0f0f0">Triggers:</text>
+    <text x="15" y="80" font-family="system-ui" font-size="10" fill="#ffffff">• Win streak</text>
+    <text x="15" y="95" font-family="system-ui" font-size="10" fill="#ffffff">• Big gain</text>
+    <text x="15" y="110" font-family="system-ui" font-size="10" fill="#ffffff">• Lucky fills</text>
+  </g>
+  
+  <!-- Revenge -->
+  <g transform="translate(740, 80)">
+    <rect x="0" y="0" width="200" height="130" rx="10" fill="rgba(255, 50, 50, 0.1)" stroke="rgba(255, 50, 50, 0.4)" stroke-width="2"/>
+    <text x="100" y="35" font-family="system-ui" font-size="16" font-weight="600" fill="#ff3232" text-anchor="middle">Revenge</text>
+    <text x="15" y="60" font-family="system-ui" font-size="11" fill="#f0f0f0">Triggers:</text>
+    <text x="15" y="80" font-family="system-ui" font-size="10" fill="#ffffff">• Rule break</text>
+    <text x="15" y="95" font-family="system-ui" font-size="10" fill="#ffffff">• Large loss</text>
+    <text x="15" y="110" font-family="system-ui" font-size="10" fill="#ffffff">• Slippage pain</text>
+  </g>
+  
+  <!-- Arrow down from tags -->
+  <line x1="550" y1="230" x2="550" y2="280" stroke="#00f6ff" stroke-width="3" marker-end="url(#arrow1)"/>
+  
+  <!-- Counter-Actions Section -->
+  <text x="550" y="330" font-family="system-ui" font-size="18" font-weight="600" fill="#00f6ff" text-anchor="middle">Counter-Actions</text>
+  
+  <!-- Actions grid -->
+  <g transform="translate(80, 360)">
+    <rect x="0" y="0" width="220" height="110" rx="8" fill="rgba(0, 246, 255, 0.08)" stroke="rgba(0, 246, 255, 0.3)" stroke-width="1.5"/>
+    <text x="110" y="30" font-family="system-ui" font-size="13" font-weight="600" fill="#00f6ff" text-anchor="middle">FOMO / Fear</text>
+    <text x="20" y="55" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Pause 5 min</text>
+    <text x="20" y="75" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Re-read checklist</text>
+    <text x="20" y="95" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Reduce size 50%</text>
+  </g>
+  
+  <g transform="translate(320, 360)">
+    <rect x="0" y="0" width="220" height="110" rx="8" fill="rgba(255, 162, 0, 0.08)" stroke="rgba(255, 162, 0, 0.3)" stroke-width="1.5"/>
+    <text x="110" y="30" font-family="system-ui" font-size="13" font-weight="600" fill="#ffa200" text-anchor="middle">Overconfidence</text>
+    <text x="20" y="55" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Base size only</text>
+    <text x="20" y="75" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Recite risk rules</text>
+    <text x="20" y="95" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Note why streak works</text>
+  </g>
+  
+  <g transform="translate(560, 360)">
+    <rect x="0" y="0" width="220" height="110" rx="8" fill="rgba(255, 50, 50, 0.08)" stroke="rgba(255, 50, 50, 0.3)" stroke-width="1.5"/>
+    <text x="110" y="30" font-family="system-ui" font-size="13" font-weight="600" fill="#ff3232" text-anchor="middle">Revenge / Tilt</text>
+    <text x="20" y="55" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Cooldown 20 min</text>
+    <text x="20" y="75" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Walk away</text>
+    <text x="20" y="95" font-family="system-ui" font-size="11" fill="#e8e8e8" text-anchor="start">→ Log trigger before resume</text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#00f6ff" />
+    </marker>
+  </defs>
+</svg>
+

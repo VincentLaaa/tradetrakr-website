@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 792" width="612" height="792">
+  <defs>
+    <style>
+      .header { font-family: 'Poppins', system-ui, sans-serif; font-weight: 600; font-size: 18px; fill: #00f6ff; }
+      .section-title { font-family: 'Poppins', system-ui, sans-serif; font-weight: 600; font-size: 12px; fill: #7f5af0; text-transform: uppercase; letter-spacing: 0.05em; }
+      .label { font-family: system-ui, sans-serif; font-size: 10px; fill: rgba(233, 234, 240, 0.9); font-weight: 500; }
+      .field { font-family: system-ui, sans-serif; font-size: 10px; fill: rgba(233, 234, 240, 0.6); }
+      .line { stroke: rgba(0, 246, 255, 0.2); stroke-width: 1; }
+      .box { fill: none; stroke: rgba(0, 246, 255, 0.25); stroke-width: 1; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="612" height="792" fill="#0f101c"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="612" height="50" fill="#15161b"/>
+  <text x="306" y="32" class="header" text-anchor="middle">Daily Psychology Log</text>
+  
+  <line x1="40" y1="55" x2="572" y2="55" class="line"/>
+  
+  <!-- Date -->
+  <text x="40" y="75" class="label">Date:</text>
+  <rect x="80" y="64" width="200" height="14" class="box"/>
+  
+  <text x="300" y="75" class="label">Session:</text>
+  <rect x="350" y="64" width="150" height="14" class="box"/>
+  
+  <text x="510" y="75" class="label">Instrument:</text>
+  <rect x="570" y="64" width="40" height="14" class="box"/>
+  
+  <line x1="40" y1="85" x2="572" y2="85" class="line"/>
+  
+  <!-- Pre-Market -->
+  <text x="40" y="110" class="section-title">Pre-Market Intention</text>
+  
+  <rect x="40" y="115" width="532" height="30" class="box"/>
+  <text x="43" y="130" class="label">What's your #1 goal today? What setups are allowed?</text>
+  
+  <text x="40" y="160" class="label">Energy level:</text>
+  <rect x="100" y="151" width="15" height="15" class="box" fill="none" stroke="#00f6ff"/>
+  <text x="125" y="161" class="field">High</text>
+  <rect x="150" y="151" width="15" height="15" class="box" fill="none" stroke="#00f6ff"/>
+  <text x="175" y="161" class="field">Medium</text>
+  <rect x="230" y="151" width="15" height="15" class="box" fill="none" stroke="#00f6ff"/>
+  <text x="255" y="161" class="field">Low</text>
+  
+  <text x="350" y="160" class="label">Risk per trade:</text>
+  <rect x="420" y="151" width="80" height="15" class="box"/>
+  <text x="430" y="162" class="field">Max daily loss:</text>
+  <rect x="510" y="151" width="60" height="15" class="box"/>
+  
+  <line x1="40" y1="180" x2="572" y2="180" class="line"/>
+  
+  <!-- In-Session -->
+  <text x="40" y="205" class="section-title">In-Session: Emotion Tags</text>
+  
+  <text x="40" y="225" class="label">Trade #1</text>
+  <rect x="40" y="235" width="532" height="18" class="box"/>
+  <text x="43" y="247" class="field">Emotion: FOMO / Fear / Overconf / Revenge / Tilt / Calm</text>
+  
+  <text x="40" y="265" class="label">Trigger:</text>
+  <rect x="80" y="258" width="200" height="15" class="box"/>
+  <text x="295" y="268" class="label">Counter-action:</text>
+  <rect x="370" y="258" width="200" height="15" class="box"/>
+  
+  <text x="40" y="295" class="label">Trade #2</text>
+  <rect x="40" y="303" width="532" height="18" class="box"/>
+  <text x="43" y="315" class="field">Emotion: FOMO / Fear / Overconf / Revenge / Tilt / Calm</text>
+  
+  <text x="40" y="323" class="label">Trigger:</text>
+  <rect x="80" y="316" width="200" height="15" class="box"/>
+  <text x="295" y="326" class="label">Counter-action:</text>
+  <rect x="370" y="316" width="200" height="15" class="box"/>
+  
+  <text x="40" y="350" class="label">Trade #3</text>
+  <rect x="40" y="358" width="532" height="18" class="box"/>
+  <text x="43" y="370" class="field">Emotion: FOMO / Fear / Overconf / Revenge / Tilt / Calm</text>
+  
+  <text x="40" y="380" class="label">Trigger:</text>
+  <rect x="80" y="373" width="200" height="15" class="box"/>
+  <text x="295" y="390" class="label">Counter-action:</text>
+  <rect x="370" y="373" width="200" height="15" class="box"/>
+  
+  <line x1="40" y1="400" x2="572" y2="400" class="line"/>
+  
+  <!-- Cooldowns -->
+  <text x="40" y="425" class="section-title">Cooldown Events</text>
+  
+  <text x="40" y="448" class="label">Rule breaks: Y / N</text>
+  <rect x="140" y="441" width="100" height="15" class="box"/>
+  
+  <text x="40" y="473" class="label">Cooldown triggered? Y / N</text>
+  <rect x="200" y="466" width="100" height="15" class="box"/>
+  
+  <text x="40" y="498" class="label">Reason:</text>
+  <rect x="100" y="491" width="472" height="30" class="box"/>
+  
+  <line x1="40" y1="535" x2="572" y2="535" class="line"/>
+  
+  <!-- Post-Session -->
+  <text x="40" y="560" class="section-title">Post-Session Reflection</text>
+  
+  <text x="40" y="580" class="label">What helped today?</text>
+  <rect x="40" y="585" width="532" height="35" class="box"/>
+  
+  <text x="40" y="635" class="label">What hurt or could be improved?</text>
+  <rect x="40" y="640" width="532" height="35" class="box"/>
+  
+  <text x="40" y="690" class="label">Tomorrow's #1 rule to reinforce:</text>
+  <rect x="40" y="695" width="532" height="30" class="box"/>
+  
+  <!-- Footer -->
+  <line x1="40" y1="740" x2="572" y2="740" class="line"/>
+  <text x="306" y="755" class="field" text-anchor="middle">TradeTrakR Daily Psychology Log</text>
+  <text x="306" y="770" class="field" text-anchor="middle">Use before, during, and after each session</text>
+</svg>
+

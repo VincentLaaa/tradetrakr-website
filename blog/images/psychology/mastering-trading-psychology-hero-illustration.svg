@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#161a25;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d2130;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle diagonal pattern -->
+  <rect width="1280" height="720" fill="rgba(0, 246, 255, 0.02)"/>
+  <line x1="0" y1="0" x2="1280" y2="720" stroke="rgba(0, 246, 255, 0.03)" stroke-width="2"/>
+  <line x1="1280" y1="0" x2="0" y2="720" stroke="rgba(127, 90, 240, 0.03)" stroke-width="2"/>
+  
+  <!-- Main card -->
+  <g transform="translate(140, 160)">
+    <rect x="0" y="0" width="1000" height="400" rx="24" fill="#252a38" stroke="rgba(0, 246, 255, 0.3)" stroke-width="2" filter="url(#glow)"/>
+    
+    <!-- Header -->
+    <text x="500" y="65" font-family="system-ui, sans-serif" font-size="32" font-weight="600" fill="#ffffff" text-anchor="middle">Psychology Log System</text>
+    <text x="500" y="100" font-family="system-ui, sans-serif" font-size="16" fill="#00f6ff" text-anchor="middle">Track emotions • Apply rules • Review weekly</text>
+    
+    <!-- Cards -->
+    <g transform="translate(80, 140)">
+      <!-- Daily Log Card -->
+      <rect x="0" y="0" width="250" height="220" rx="16" fill="#1e2430" stroke="#00f6ff" stroke-width="2.5"/>
+      <circle cx="230" cy="30" r="8" fill="#00f6ff" opacity="0.2"/>
+      <text x="25" y="35" font-family="system-ui" font-size="13" font-weight="600" fill="#00f6ff" text-transform="uppercase" letter-spacing="0.05em">Daily Log</text>
+      <line x1="25" y1="50" x2="225" y2="50" stroke="rgba(0, 246, 255, 0.2)" stroke-width="1"/>
+      
+      <g transform="translate(25, 75)">
+        <circle cx="5" cy="5" r="4" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+        <path d="M 1 5 L 4 8 L 9 2" stroke="#00f6ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <text x="20" y="9" font-family="system-ui" font-size="12" fill="#ffffff">Pre-trade setup</text>
+        
+        <text x="0" y="40" font-family="system-ui" font-size="12" fill="#ffffff">• Tag emotions</text>
+        <text x="0" y="65" font-family="system-ui" font-size="12" fill="#ffffff">• Counter-actions</text>
+        <text x="0" y="90" font-family="system-ui" font-size="12" fill="#ffffff">• Weekly review</text>
+      </g>
+    </g>
+    
+    <!-- Emotion Tags -->
+    <g transform="translate(370, 140)">
+      <rect x="0" y="0" width="280" height="220" rx="16" fill="#1e2430" stroke="#7f5af0" stroke-width="2.5"/>
+      <circle cx="260" cy="30" r="8" fill="#7f5af0" opacity="0.2"/>
+      <text x="25" y="35" font-family="system-ui" font-size="13" font-weight="600" fill="#7f5af0" text-transform="uppercase" letter-spacing="0.05em">Emotion Tags</text>
+      <line x1="25" y1="50" x2="255" y2="50" stroke="rgba(127, 90, 240, 0.2)" stroke-width="1"/>
+      
+      <g transform="translate(25, 75)">
+        <!-- Tag examples -->
+        <rect x="0" y="0" width="110" height="32" rx="16" fill="rgba(0, 246, 255, 0.15)" stroke="rgba(0, 246, 255, 0.4)" stroke-width="1"/>
+        <text x="55" y="21" font-family="system-ui" font-size="11" fill="#00f6ff" text-anchor="middle" font-weight="600">FOMO</text>
+        
+        <rect x="0" y="45" width="110" height="32" rx="16" fill="rgba(255, 78, 205, 0.15)" stroke="rgba(255, 78, 205, 0.4)" stroke-width="1"/>
+        <text x="55" y="66" font-family="system-ui" font-size="11" fill="#ff4ecd" text-anchor="middle" font-weight="600">Tilt</text>
+        
+        <rect x="0" y="90" width="110" height="32" rx="16" fill="rgba(0, 246, 255, 0.2)" stroke="rgba(0, 246, 255, 0.5)" stroke-width="1"/>
+        <text x="55" y="111" font-family="system-ui" font-size="11" fill="#00f6ff" text-anchor="middle" font-weight="600">Calm</text>
+        
+        <text x="125" y="35" font-family="system-ui" font-size="11" fill="#ffffff" font-weight="600">→ Pause 5 min</text>
+        <text x="125" y="80" font-family="system-ui" font-size="11" fill="#ffffff" font-weight="600">→ Stop session</text>
+        <text x="125" y="125" font-family="system-ui" font-size="11" fill="#ffffff" font-weight="600">→ Continue</text>
+      </g>
+    </g>
+    
+    <!-- Weekly Review -->
+    <g transform="translate(690, 140)">
+      <rect x="0" y="0" width="250" height="220" rx="16" fill="#1e2430" stroke="#ff4ecd" stroke-width="2.5"/>
+      <circle cx="230" cy="30" r="8" fill="#ff4ecd" opacity="0.2"/>
+      <text x="25" y="35" font-family="system-ui" font-size="13" font-weight="600" fill="#ff4ecd" text-transform="uppercase" letter-spacing="0.05em">Weekly Review</text>
+      <line x1="25" y1="50" x2="225" y2="50" stroke="rgba(255, 78, 205, 0.2)" stroke-width="1"/>
+      
+      <g transform="translate(25, 75)">
+        <text x="0" y="20" font-family="system-ui" font-size="12" fill="#ffffff">• Tag frequency</text>
+        <text x="0" y="45" font-family="system-ui" font-size="12" fill="#ffffff">• Rule adherence</text>
+        <text x="0" y="70" font-family="system-ui" font-size="12" fill="#ffffff">• One improvement</text>
+        <text x="0" y="95" font-family="system-ui" font-size="12" fill="#ffffff">• Track metrics</text>
+        
+        <!-- Circular icon - moved to top right -->
+        <circle cx="165" cy="15" r="35" fill="none" stroke="#ff4ecd" stroke-width="2" opacity="0.3"/>
+        <circle cx="165" cy="15" r="20" fill="rgba(255, 78, 205, 0.1)" stroke="#ff4ecd" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Bottom caption -->
+  <text x="640" y="630" font-family="system-ui, sans-serif" font-size="16" fill="rgba(255, 255, 255, 0.7)" text-anchor="middle">A calm, repeatable psychology system: daily log, tags, cooldowns, and weekly review.</text>
+</svg>

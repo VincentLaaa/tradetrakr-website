@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="1100" height="520">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#161a25;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d2130;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="checklistCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2430;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e2430;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1100" height="520" fill="url(#bgGrad3)" rx="12"/>
+  
+  <!-- Title -->
+  <text x="550" y="45" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#00f6ff" text-anchor="middle">Pre-Trade Checklist</text>
+  
+  <!-- Checklist Card -->
+  <rect x="80" y="90" width="940" height="380" rx="12" fill="url(#checklistCard)" stroke="rgba(0, 246, 255, 0.25)" stroke-width="2"/>
+  
+  <!-- Category: Energy & Prep -->
+  <rect x="110" y="120" width="420" height="320" rx="8" fill="rgba(15, 25, 42, 0.4)" stroke="rgba(0, 246, 255, 0.2)" stroke-width="1"/>
+  <text x="120" y="145" font-family="system-ui" font-size="14" font-weight="600" fill="#00f6ff">Energy &amp; Preparation</text>
+  
+  <!-- Checklist items -->
+  <g transform="translate(120, 170)">
+    <circle cx="6" cy="6" r="5" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+    <path d="M 2 6 L 5 9 L 10 2" stroke="#00f6ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="18" y="9" font-family="system-ui" font-size="12" fill="#e8e8e8">Well-rested and hydrated</text>
+    
+    <circle cx="6" cy="40" r="5" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+    <text x="18" y="43" font-family="system-ui" font-size="12" fill="#ffffff">Focus state (no distractions)</text>
+    
+    <circle cx="6" cy="75" r="5" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+    <text x="18" y="78" font-family="system-ui" font-size="12" fill="#ffffff">Review overnight markets</text>
+    
+    <circle cx="6" cy="110" r="5" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+    <text x="18" y="113" font-family="system-ui" font-size="12" fill="#ffffff">News &amp; macro releases</text>
+    
+    <circle cx="6" cy="145" r="5" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+    <text x="18" y="148" font-family="system-ui" font-size="12" fill="#ffffff">Trade plan reviewed</text>
+    
+    <circle cx="6" cy="180" r="5" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+    <text x="18" y="183" font-family="system-ui" font-size="12" fill="#ffffff">No external stress events</text>
+  </g>
+  
+  <!-- Category: Risk & Limits -->
+  <rect x="570" y="120" width="420" height="320" rx="8" fill="rgba(21, 18, 32, 0.4)" stroke="rgba(127, 90, 240, 0.2)" stroke-width="1"/>
+  <text x="580" y="145" font-family="system-ui" font-size="14" font-weight="600" fill="#7f5af0">Risk &amp; Limits</text>
+  
+  <g transform="translate(580, 170)">
+    <circle cx="6" cy="6" r="5" fill="none" stroke="#7f5af0" stroke-width="1.5"/>
+    <path d="M 2 6 L 5 9 L 10 2" stroke="#7f5af0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="18" y="9" font-family="system-ui" font-size="12" fill="#e8e8e8">Risk per trade: 1%</text>
+    
+    <circle cx="6" cy="40" r="5" fill="none" stroke="#7f5af0" stroke-width="1.5"/>
+    <path d="M 2 46 L 5 49 L 10 42" stroke="#7f5af0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="18" y="43" font-family="system-ui" font-size="12" fill="#e8e8e8">Max position size confirmed</text>
+    
+    <circle cx="6" cy="75" r="5" fill="none" stroke="#7f5af0" stroke-width="1.5"/>
+    <text x="18" y="78" font-family="system-ui" font-size="12" fill="#ffffff">Max daily loss: -2R</text>
+    
+    <circle cx="6" cy="110" r="5" fill="none" stroke="#7f5af0" stroke-width="1.5"/>
+    <text x="18" y="113" font-family="system-ui" font-size="12" fill="#ffffff">Max trades: 5</text>
+    
+    <circle cx="6" cy="145" r="5" fill="none" stroke="#7f5af0" stroke-width="1.5"/>
+    <path d="M 2 151 L 5 154 L 10 147" stroke="#7f5af0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="18" y="148" font-family="system-ui" font-size="12" fill="#e8e8e8">Allowed setups confirmed</text>
+    
+    <circle cx="6" cy="180" r="5" fill="none" stroke="#ff4ecd" stroke-width="1.5"/>
+    <text x="18" y="183" font-family="system-ui" font-size="12" fill="rgba(255, 78, 205, 0.8)">No revenge, tilt, or FOMO state</text>
+  </g>
+  
+  <!-- Vertical divider -->
+  <line x1="550" y1="130" x2="550" y2="470" stroke="rgba(0, 246, 255, 0.1)" stroke-width="1"/>
+</svg>
+
