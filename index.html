@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradeTrakR | The Smart Trading Journal for Futures & Forex Traders</title>
+  <meta name="description" content="TradeTrakR is an intelligent trading journal that helps funded traders track P&L, psychology, and performance insights with AI-powered analytics." />
+  <meta name="keywords" content="trading journal, trade tracker, funded trading, futures trading, forex trading, P&L analytics, trade log, best trading journal app, AI trading journal" />
+  <link rel="canonical" href="https://tradetrakr.com/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="TradeTrakR | The Smart Trading Journal for Funded Traders" />
+  <meta property="og:description" content="Track P&L, psychology, and trading performance with AI-powered analytics." />
+  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta property="og:url" content="https://tradetrakr.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TradeTrakR | The Smart Trading Journal for Funded Traders" />
+  <meta name="twitter:description" content="Track P&L, psychology, and trading performance with AI-powered analytics." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "TradeTrakR",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web, Windows, macOS",
+      "description": "TradeTrakR is a smart trading journal that helps funded traders analyze P&L, psychology, and performance using AI.",
+      "url": "https://tradetrakr.com",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
+  <style>
+    /* Global */
+html { scroll-behavior: smooth; }
+:root {
+  --bg-primary: #050607;
+  --bg-secondary: #12141d;
+  --accent-electric: #00f6ff;
+  --accent-violet: #7f5af0;
+  --accent-magenta: #ff4ecd;
+  --text-primary: #f7f7ff;
+  --text-muted: rgba(229, 233, 255, 0.75);
+  --glass-bg: rgba(12, 16, 35, 0.55);
+  --glass-border: rgba(127, 90, 240, 0.35);
+  --card-shadow: 0 30px 70px rgba(11, 0, 45, 0.55);
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(0, 246, 255, 0.06), transparent 48%),
+    radial-gradient(circle at 80% 5%, rgba(127, 90, 240, 0.1), transparent 55%),
+    linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 65%, #080a14 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  position: relative;
+}
+ 
+    /* Animated tech grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 246, 255, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(127, 90, 240, 0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: gridMove 28s linear infinite;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+    .section-header { text-align: center; margin-bottom: 2.5rem; }
+
+    /* Scroll progress bar with shimmer */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 2000;
+      background: linear-gradient(270deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta), var(--accent-electric));
+      background-size: 600% 600%;
+      animation: shimmer 6s linear infinite;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 14px rgba(0, 246, 255, 0.45);
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header */
+    .header { 
+      background: linear-gradient(135deg, rgba(13, 12, 40, 0.82), rgba(17, 10, 52, 0.65)); 
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(0, 246, 255, 0.12); 
+      position: sticky; 
+      top: 0; 
+      z-index: 100;
+      box-shadow: 0 12px 40px rgba(10, 0, 45, 0.35);
+    }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+    .logo { 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta));
+      background-size: 200% 200%;
+      animation: logoGlow 3s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 22px rgba(0, 246, 255, 0.35);
+    }
+    
+    @keyframes logoGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .nav a { 
+      margin: 0 1rem; 
+      font-weight: 500; 
+      color: rgba(226, 230, 255, 0.7); 
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    .nav a:hover { 
+      color: var(--accent-electric);
+      text-shadow: 0 0 10px rgba(0, 246, 255, 0.4);
+    }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-electric), var(--accent-violet));
+      transition: width 0.3s ease;
+    }
+    .nav a:hover::after {
+      width: 100%;
+    }
+    .cta-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+
+    /* Buttons */
+    .btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.35s ease;
+      background: linear-gradient(120deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta));
+      background-size: 220% 220%;
+      color: #0b0b18;
+      display: inline-block;
+      animation: btnGlow 4s ease-in-out infinite;
+      border: 1px solid rgba(0, 246, 255, 0.45);
+      position: relative;
+      overflow: hidden;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 18px 38px rgba(19, 0, 60, 0.45);
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn.btn-outline {
+      background: rgba(0, 246, 255, 0.12);
+      border-color: rgba(0, 246, 255, 0.45);
+      animation: none;
+      box-shadow: inset 0 0 0 1px rgba(127, 90, 240, 0.35);
+      color: var(--text-primary);
+    }
+    .btn.btn-outline::before {
+      display: none;
+    }
+    .btn:hover::before {
+      left: 100%;
+    }
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 25px 55px rgba(19, 0, 60, 0.5), 0 0 40px rgba(0, 246, 255, 0.35);
+      border-color: rgba(0, 246, 255, 0.65);
+    }
+    .btn.btn-outline:hover {
+      transform: translateY(-3px);
+      background: rgba(0, 246, 255, 0.22);
+      box-shadow: 0 18px 42px rgba(0, 246, 255, 0.25);
+      border-color: rgba(127, 90, 240, 0.65);
+    }
+    
+    @keyframes btnGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .btn-lg { font-size: 1.1rem; padding: 1rem 2.4rem; letter-spacing: 0.02em; }
+    .btn-disabled {
+      background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+      opacity: 0.7;
+      cursor: not-allowed;
+      animation: disabledPulse 2s ease-in-out infinite;
+      pointer-events: none;
+      border: 1px solid rgba(100, 100, 100, 0.3);
+    }
+    .btn-disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-disabled::before {
+      display: none;
+    }
+    
+    @keyframes disabledPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Hero with animated background */
+    .hero {
+      position: relative;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 18% 20%, rgba(0, 246, 255, 0.14), transparent 45%),
+        radial-gradient(circle at 78% 28%, rgba(127, 90, 240, 0.18), transparent 48%),
+        radial-gradient(circle at 45% 78%, rgba(255, 78, 205, 0.12), transparent 50%),
+        linear-gradient(60deg, transparent 32%, rgba(0, 246, 255, 0.05) 58%, transparent 75%);
+      animation: moveBackground 20s linear infinite;
+      z-index: 0;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 98px,
+        rgba(0, 246, 255, 0.04) 100px
+      );
+      animation: scanLine 4s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    @keyframes scanLine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    @keyframes moveBackground {
+      0% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(50px,50px) scale(1.1); }
+      100% { transform: translate(0,0) scale(1); }
+    }
+    .hero-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; position: relative; z-index: 1; }
+    .hero-text h1 { 
+      font-size: 2.8rem; 
+      margin-bottom: 1rem; 
+      background: linear-gradient(45deg, #ffffff, var(--accent-electric), var(--accent-magenta));
+      background-size: 200% 200%;
+      animation: textShimmer 3s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 28px rgba(0, 246, 255, 0.25);
+    }
+    
+    @keyframes textShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero-text p { margin-bottom: 1.5rem; color: var(--text-muted); }
+    .hero-text p a {
+      color: var(--accent-electric);
+      text-decoration: underline;
+      text-decoration-color: rgba(0, 246, 255, 0.4);
+    }
+    .hero-text p a:hover {
+      color: var(--accent-violet);
+      text-decoration-color: rgba(127, 90, 240, 0.6);
+    }
+
+    .hero-image img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 
+        0 24px 44px rgba(5, 0, 26, 0.65), 
+        0 0 30px rgba(0, 246, 255, 0.25),
+        0 0 60px rgba(127, 90, 240, 0.25),
+        inset 0 0 20px rgba(255, 255, 255, 0.06);
+      transform: perspective(1000px) rotateX(4deg) rotateY(-6deg);
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+      border: 1px solid rgba(0, 246, 255, 0.25);
+      position: relative;
+    }
+    .hero-image img:hover {
+      transform: perspective(1000px) rotateX(0) rotateY(0) scale(1.02);
+      box-shadow: 
+        0 32px 60px rgba(5, 0, 26, 0.75), 
+        0 0 40px rgba(0, 246, 255, 0.45),
+        0 0 70px rgba(127, 90, 240, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.08);
+      border-color: rgba(0, 246, 255, 0.55);
+    }
+
+    /* Features */
+    .features { 
+      padding: 5rem 0; 
+      position: relative;
+    }
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        transparent 48px,
+        rgba(127, 90, 240, 0.035) 50px,
+        transparent 54px
+      );
+      pointer-events: none;
+    }
+    .feature-row { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-bottom: 4rem; }
+    .feature-text { flex: 1; }
+    .feature-text h3 { 
+      margin-bottom: 0.6rem; 
+      color: var(--text-primary);
+      text-shadow: 0 0 14px rgba(127, 90, 240, 0.35);
+      position: relative;
+    }
+    .feature-text h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-electric), transparent);
+    }
+    .feature-text p { color: var(--text-muted); }
+    .feature-img { flex: 1; }
+    .feature-img img { 
+      width: 100%; 
+      border-radius: 12px; 
+      box-shadow: 
+        0 8px 26px rgba(5, 0, 26, 0.55),
+        0 0 24px rgba(0, 246, 255, 0.18),
+        inset 0 0 24px rgba(255, 255, 255, 0.04); 
+      animation: floaty 6s ease-in-out infinite;
+      border: 1px solid rgba(127, 90, 240, 0.25);
+      transition: all 0.3s ease;
+    }
+    .feature-img img:hover {
+      box-shadow: 
+        0 14px 36px rgba(5, 0, 26, 0.7),
+        0 0 32px rgba(0, 246, 255, 0.32),
+        inset 0 0 32px rgba(255, 255, 255, 0.08);
+      border-color: rgba(0, 246, 255, 0.45);
+      transform: scale(1.02);
+    }
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .journal-overview {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .journal-overview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13, 16, 34, 0.72), rgba(5, 6, 14, 0.55));
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .journal-overview .container {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      text-align: center;
+    }
+    .journal-overview ul {
+      list-style: none;
+      padding: 0;
+      margin: 2.5rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .journal-overview li {
+      background: rgba(13, 16, 34, 0.82);
+      border-radius: 18px;
+      padding: 1.8rem;
+      border: 1px solid rgba(0, 246, 255, 0.18);
+      box-shadow: 0 18px 40px rgba(5, 0, 26, 0.5);
+      color: var(--text-muted);
+    }
+    .journal-overview li strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .journal-overview a {
+      color: var(--accent-electric);
+    }
+
+    /* Demo */
+    .demo { 
+      padding: 5rem 0; 
+      background: linear-gradient(135deg, rgba(9, 10, 18, 0.96) 0%, rgba(13, 16, 28, 0.94) 45%, rgba(6, 8, 18, 0.96) 100%);
+      position: relative;
+    }
+    .demo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(0, 246, 255, 0.12), transparent 52%),
+        radial-gradient(circle at 70% 70%, rgba(127, 90, 240, 0.08), transparent 58%);
+      pointer-events: none;
+    }
+    .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+    .demo-card { 
+      background: rgba(13, 16, 38, 0.72);
+      backdrop-filter: blur(24px);
+      padding: 2rem; 
+      border-radius: 12px; 
+      border: 1px solid rgba(0, 246, 255, 0.22); 
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .demo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(0, 246, 255, 0.06), transparent 55%, rgba(255, 78, 205, 0.08));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .demo-card:hover::before {
+      opacity: 1;
+    }
+    .demo-card:hover { 
+      transform: translateY(-8px) scale(1.02); 
+      border-color: rgba(0, 246, 255, 0.6);
+      box-shadow: 
+        0 12px 34px rgba(5, 0, 26, 0.55),
+        0 0 32px rgba(0, 246, 255, 0.18),
+        inset 0 0 28px rgba(255, 255, 255, 0.05);
+    }
+    .demo-card h3 { 
+      margin-bottom: 1rem; 
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-text { font-style: italic; color: var(--text-muted); min-height: 60px; }
+
+    /* Tilt Meter */
+    .tilt-meter { 
+      text-align: center; 
+      margin-top: 1rem;
+      position: relative;
+    }
+    .tilt-meter::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 246, 255, 0.12), transparent 70%);
+      animation: tiltGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes tiltGlow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+    .circular-chart {
+      display: block;
+      margin: 0 auto;
+      max-width: 140px;
+      max-height: 140px;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: #2a1f3f;
+      stroke-width: 3.8;
+    }
+    .circle {
+      fill: none;
+      stroke-width: 3.8;
+      stroke: url(#tiltGradient);
+      stroke-linecap: round;
+      transition: stroke-dasharray 1s ease;
+      filter: drop-shadow(0 0 4px rgba(74, 144, 226, 0.3));
+    }
+    .percentage {
+      fill: #fff;
+      font-size: 0.35em;
+      text-anchor: middle;
+    }
+
+    /* Stats List */
+    .stats-list { list-style: none; padding: 0; margin: 0; }
+    .stats-list li { margin: 1rem 0; font-size: 0.95rem; }
+    .stats-list span { color: #bbb; font-weight: 600; }
+    .bar-container { background: #2a1f3f; border-radius: 6px; overflow: hidden; margin-top: 0.4rem; }
+    .bar { height: 10px; width: 0; background: linear-gradient(90deg, #7b2ff7, #a678ff); transition: width 1.5s ease; }
+
+    /* Pricing */
+    .pricing { 
+      padding: 5rem 0; 
+      text-align: center;
+      background: linear-gradient(135deg, rgba(9, 10, 18, 0.97) 0%, rgba(14, 16, 26, 0.95) 50%, rgba(6, 7, 16, 0.97) 100%);
+      position: relative;
+    }
+    .pricing::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 246, 255, 0.1), transparent 54%),
+        radial-gradient(circle at 80% 80%, rgba(127, 90, 240, 0.08), transparent 57%);
+      pointer-events: none;
+    }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .pricing-card { 
+      position: relative; 
+      background: rgba(12, 15, 36, 0.75);
+      backdrop-filter: blur(24px);
+      padding: 2.5rem; 
+      border-radius: 14px; 
+      border: 1px solid rgba(0, 246, 255, 0.22); 
+      transition: all 0.3s ease;
+      overflow: visible;
+      z-index: 1;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(0, 246, 255, 0.05), transparent 55%, rgba(255, 78, 205, 0.06));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .pricing-card:hover::before {
+      opacity: 1;
+    }
+    .pricing-card:hover { 
+      transform: translateY(-10px) scale(1.03); 
+      box-shadow: 
+        0 18px 38px rgba(5, 0, 26, 0.55),
+        0 0 32px rgba(0, 246, 255, 0.2),
+        inset 0 0 24px rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 246, 255, 0.55);
+    }
+    .pricing-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+    .price { 
+      font-size: 2.2rem; 
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta));
+      background-size: 200% 200%;
+      animation: priceGlow 3s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @keyframes priceGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .price span { font-size: 1rem; color: var(--text-muted); margin-left: 4px; }
+    .beta-tag { margin: 1rem 0; color: rgba(228, 230, 255, 0.72); font-size: 0.9rem; }
+    .pricing-card.recommended { 
+      border: 2px solid rgba(0, 246, 255, 0.55); 
+      animation: pulseGlow 3s infinite;
+      position: relative;
+    }
+    .pricing-card.recommended::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta), var(--accent-electric));
+      background-size: 400% 400%;
+      animation: borderGlow 3s ease-in-out infinite;
+      border-radius: 16px;
+      z-index: -2;
+    }
+    
+    @keyframes borderGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @keyframes pulseGlow { 
+      0% { box-shadow: 0 0 0px rgba(0, 246, 255, 0.18); } 
+      50% { box-shadow: 0 0 32px rgba(0, 246, 255, 0.45), 0 0 55px rgba(127, 90, 240, 0.32); } 
+      100% { box-shadow: 0 0 0px rgba(0, 246, 255, 0.18); } 
+    }
+    .discount-badge { 
+      position: absolute; 
+      top: -8px; 
+      right: -8px; 
+      background: linear-gradient(135deg, var(--accent-electric), var(--accent-violet)); 
+      color: white; 
+      font-weight: 600; 
+      font-size: 0.85rem; 
+      padding: 0.3rem 0.7rem; 
+      border-radius: 16px; 
+      transform: rotate(12deg);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      white-space: nowrap;
+    }
+
+    /* Feature list for pricing */
+    .features-list { list-style: none; padding: 0; margin: 1.2rem 0 0 0; text-align: left; }
+    .features-list li { margin: 0.5rem 0; padding-left: 1.2rem; position: relative; color: var(--text-muted); }
+    .features-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-electric); font-weight: bold; }
+
+    /* Community */
+    .community {
+      padding: 4.5rem 0;
+      background: linear-gradient(135deg, rgba(8, 9, 16, 0.96), rgba(12, 13, 23, 0.95));
+      border-top: 1px solid rgba(0, 246, 255, 0.2);
+      border-bottom: 1px solid rgba(127, 90, 240, 0.16);
+      position: relative;
+      overflow: hidden;
+    }
+    .community::before,
+    .community::after {
+      content: '';
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 246, 255, 0.22), transparent 60%);
+      filter: blur(100px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .community::before {
+      top: -70px;
+      left: 8%;
+    }
+    .community::after {
+      bottom: -90px;
+      right: 6%;
+    }
+    .community-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .community-text h2 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.8rem, 2vw + 1rem, 2.3rem);
+    }
+    .community-text p {
+      margin: 0;
+      max-width: 520px;
+      color: rgba(226, 228, 255, 0.75);
+      font-size: 1rem;
+    }
+    .community .discord-btn {
+      min-width: 220px;
+      text-align: center;
+      border: 1px solid rgba(0, 246, 255, 0.45);
+      background: rgba(0, 246, 255, 0.16);
+      box-shadow: 0 16px 32px rgba(0, 246, 255, 0.15);
+    }
+    .community .discord-btn:hover {
+      background: rgba(0, 246, 255, 0.28);
+      box-shadow: 0 20px 40px rgba(0, 246, 255, 0.25);
+    }
+
+    /* Footer */
+    .footer { 
+      background: linear-gradient(135deg, rgba(4, 2, 16, 0.96) 0%, rgba(9, 5, 28, 0.96) 100%);
+      border-top: 1px solid rgba(0, 246, 255, 0.18); 
+      padding: 2rem 0; 
+      text-align: center; 
+      color: rgba(214, 216, 255, 0.6);
+      position: relative;
+    }
+    .footer-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: rgba(226, 228, 255, 0.8);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover {
+      color: var(--accent-electric);
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        transparent 88px,
+        rgba(0, 246, 255, 0.05) 92px,
+        transparent 96px
+      );
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: radial-gradient(circle, rgba(0, 246, 255, 0.85), transparent);
+      border-radius: 50%;
+      animation: float 20s linear infinite;
+      opacity: 0.4;
+    }
+    
+    .particle:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 25s;
+    }
+    
+    .particle:nth-child(2) {
+      left: 30%;
+      animation-delay: 5s;
+      animation-duration: 20s;
+      background: radial-gradient(circle, rgba(127, 90, 240, 0.85), transparent);
+    }
+    
+    .particle:nth-child(3) {
+      left: 50%;
+      animation-delay: 10s;
+      animation-duration: 30s;
+    }
+    
+    .particle:nth-child(4) {
+      left: 70%;
+      animation-delay: 15s;
+      animation-duration: 22s;
+      background: radial-gradient(circle, rgba(255, 78, 205, 0.85), transparent);
+    }
+    
+    .particle:nth-child(5) {
+      left: 85%;
+      animation-delay: 8s;
+      animation-duration: 28s;
+    }
+    
+    .particle:nth-child(6) {
+      left: 90%;
+      animation-delay: 12s;
+      animation-duration: 24s;
+      background: radial-gradient(circle, #4a90e2, transparent);
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+        transform: translateY(90vh) scale(1);
+      }
+      90% {
+        opacity: 0.6;
+        transform: translateY(10vh) scale(1);
+      }
+      100% {
+        transform: translateY(-10vh) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Section fade-in */
+    section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-text h1 { font-size: 2rem; }
+      .hero { padding: 4rem 0 3rem; }
+      .hero-text p { font-size: 1rem; }
+      .cta-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      .cta-group .btn { width: 100%; text-align: center; }
+      .hero-image img {
+        width: 100%;
+        max-width: 400px;
+        transform: none;
+        margin: 0 auto;
+      }
+      .community-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .community .discord-btn {
+        width: 100%;
+      }
+      .feature-row { flex-direction: column; }
+      .journal-overview ul { grid-template-columns: 1fr; }
+      .footer-links { flex-direction: column; gap: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress bar -->
+  <div id="progress-bar"></div>
+  
+  <!-- Floating particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">TradeTrakr</div>
+      <nav class="nav">
+        <a href="trading-journal.html">Trading Journal</a>
+        <a href="ai-trading-journal.html">AI Analytics</a>
+        <a href="trading-journal-features.html">Journal Features</a>
+        <a href="#demo">Demo</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <div class="cta-group">
+        <a href="#pricing" class="btn">Get Started</a>
+        <a id="nav-signin" href="signin.html" class="btn btn-outline">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>The Most Advanced Trading Journal for Modern Traders</h1>
+        <p>TradeTrakR is a trading journal designed for funded traders in futures and forex who want AI-powered analytics to track P&amp;L, trading psychology, and execution discipline in one place.</p>
+        <p>Explore why professionals call it the best trading journal app in our <a href="trading-journal-features.html">trading journal features guide</a> and see how the AI trading journal keeps your edge sharp.</p>
+        <a href="#pricing" class="btn btn-lg">Get Started</a>
+      </div>
+      <div class="hero-image">
+        <img src="assets/dashboard-preview.png" alt="Trading journal dashboard interface in TradeTrakR" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="container section-header">
+      <h2>Trading Journal Features That Stand Out</h2>
+      <p>Discover how the TradeTrakR trading journal combines AI-powered trade analysis, emotional tracking, and actionable insights for funded futures and forex traders.</p>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-text"><h3>AI-Powered Trade Analysis</h3><p>Our AI trading journal analytics highlight hidden performance patterns and surface the setups that drive your edge. Learn how <a href="ai-trading-journal.html">AI-powered trade analysis</a> transforms every review session.</p></div>
+      <div class="feature-img"><img src="assets/ai-insight.png" alt="AI trading journal analytics dashboard" loading="lazy"></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-img"><img src="assets/tilt-meter.png" alt="Trading journal tilt meter for tracking emotions" loading="lazy"></div>
+      <div class="feature-text"><h3>Track P&amp;L and Emotions</h3><p>Stay on top of your emotions with real-time tilt tracking. TradeTrakR shows how psychology impacts your P&amp;L so your futures trading journal keeps you disciplined.</p></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-text"><h3>Strategy-Level Trading Log</h3><p>Break down every strategy with detailed win rates, trade counts, and rule adherence. The best trading journal app makes it easy to double down on what works.</p></div>
+      <div class="feature-img"><img src="assets/model-stats.png" alt="Trading journal strategy performance stats" loading="lazy"></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-img"><img src="assets/day-journal.png" alt="Daily trading journal entry template" loading="lazy"></div>
+      <div class="feature-text"><h3>Daily Trading Journal Entries</h3><p>Structured trade journaling made simple. Log trades, notes, and rules with clarity so your forex trading journal stays consistent across sessions.</p></div>
+    </div>
+    <div class="container feature-row">
+      <div class="feature-text"><h3>Discipline Coach for Funded Traders</h3><p>An always-visible clarity panel pins reminders while you trade and keeps funded trader rules front and center. Review your trading journal clarity history to see how discipline influences results.</p></div>
+      <div class="feature-img"><img src="assets/clarity-panel.png" alt="Funded trading journal discipline reminders" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section id="demo" class="demo">
+    <div class="container section-header"><h2>Interactive Trading Journal Demo</h2></div>
+    <div class="container demo-grid">
+      <div class="demo-card"><h3>AI Insight</h3><p class="ai-text" id="aiText">“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”</p></div>
+      <div class="demo-card tilt-card">
+        <h3>Tilt Meter</h3>
+        <div class="tilt-meter">
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <defs>
+              <linearGradient id="tiltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <path class="circle-bg"
+              d="M18 2.0845
+                 a 15.9155 15.9155 0 0 1 0 31.831
+                 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <path id="tiltCircle" class="circle"
+              stroke-dasharray="0, 100"
+              d="M18 2.0845
+                 a 15.9155 15.9155 0 0 1 0 31.831
+                 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <text id="tiltText" x="18" y="20.35" class="percentage">Tilt 0%</text>
+          </svg>
+        </div>
+      </div>
+      <div class="demo-card">
+        <h3>Trading Model Stats</h3>
+        <ul class="stats-list">
+          <li><span>Win Rate:</span> 62%
+            <div class="bar-container"><div id="barWin" class="bar"></div></div>
+          </li>
+          <li><span>Trades:</span> 124</li>
+          <li><span>Rules Followed:</span> 87%
+            <div class="bar-container"><div id="barRules" class="bar"></div></div>
+          </li>
+          <li><span>Most Broken Rule:</span> Exits too early</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="journal-overview">
+    <div class="container">
+      <h2>Why Funded Traders Choose the TradeTrakR Trading Journal</h2>
+      <p>TradeTrakR combines AI-powered trade analysis, deep P&amp;L analytics, and structured note-taking so funded futures and forex traders can review every session with confidence.</p>
+      <ul>
+        <li><strong>AI-Powered Trade Analysis</strong> Turn session data into AI trading journal insights that highlight the patterns and setups responsible for your best returns.</li>
+        <li><strong>Track P&amp;L and Emotions</strong> Pair your trading log with psychology tracking to stay disciplined, even during volatile futures trading journal sessions.</li>
+        <li><strong>Designed for Funded Traders</strong> Document prop firm rules, risk targets, and execution checklists inside the best trading journal app built for serious traders.</li>
+      </ul>
+      <p>Ready to go deeper? <a href="trading-journal.html">Explore the complete trading journal</a> or <a href="trading-journal-features.html">compare every trading journal feature</a>.</p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="pricing">
+    <div class="container section-header">
+      <h2>Trading Journal Beta Pricing</h2>
+      <p>Lock in your lifetime trading journal price before public launch 🚀</p>
+    </div>
+    <div class="container pricing-grid">
+
+      <!-- Monthly -->
+      <div class="pricing-card">
+        <h3>$20<span>/month</span></h3>
+        <p class="beta-tag">Unlock the full power of TradeTrakr at the lifetime beta rate.</p>
+        <a href="https://whop.com/checkout/plan_cUBE8hPgKIUwb?d2c=true" class="btn" target="_blank" rel="noopener noreferrer">Get Monthly Plan</a>
+        <ul class="features-list">
+          <li>All core features</li>
+          <li>Tilt Meter</li>
+          <li>Trading Model Statistics</li>
+          <li>AI Insights</li>
+          <li>Daily Trading Journal Entries</li>
+          <li>Clarity Panel</li>
+          <li>Trading Journal Performance Tracking</li>
+        </ul>
+      </div>
+
+      <!-- Yearly -->
+      <div class="pricing-card recommended">
+        <div class="discount-badge">37% OFF</div>
+        <h3>$150<span>/year</span></h3>
+        <p class="beta-tag">Best value — keep your yearly discount for life.</p>
+        <a href="https://whop.com/checkout/plan_gKf7YosD7VSj5?d2c=true" class="btn" target="_blank" rel="noopener noreferrer">Get Yearly Plan</a>
+        <ul class="features-list">
+          <li>All core features</li>
+          <li>Tilt Meter</li>
+          <li>Trading Model Statistics</li>
+          <li>AI Insights</li>
+          <li>Daily Trading Journal Entries</li>
+          <li>Clarity Panel</li>
+          <li>Trading Journal Performance Tracking</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section class="community">
+    <div class="container community-inner">
+      <div class="community-text">
+        <h2>Join the TradeTrakR Trading Journal Community</h2>
+        <p>Get instant release alerts, trading journal tips, and beta invites inside our free announcements server.</p>
+      </div>
+      <a class="btn btn-outline discord-btn" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Join Free Discord</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-links">
+        <a href="trading-journal.html">Trading Journal Overview</a>
+        <a href="ai-trading-journal.html">Trading Journal AI Analytics</a>
+        <a href="trading-journal-features.html#pl-tracker">Trading Journal P&amp;L Tracker</a>
+        <a href="trading-journal-features.html#funded-trader-tools">Trading Journal Tools for Funded Traders</a>
+        <a href="blog/index.html">Trading Journal Guides</a>
+      </div>
+      <p style="position: relative; z-index: 1;">© 2025 <span style="background: linear-gradient(45deg, #4a90e2, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600;">TradeTrakr</span> — The Future of Trading Journals</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    if (window.location.hash) { history.replaceState(null, null, ' '); }
+
+    const progressBar = document.getElementById("progress-bar");
+    window.addEventListener("scroll", () => {
+      let scrollTop = window.scrollY;
+      let docHeight = document.body.scrollHeight - window.innerHeight;
+      let scrolled = (scrollTop / docHeight) * 100;
+      progressBar.style.width = scrolled + "%";
+    });
+
+    const tiltCircle = document.getElementById("tiltCircle");
+    const tiltText = document.getElementById("tiltText");
+    function animateTilt() {
+      let value = 45, progress = 0;
+      const interval = setInterval(() => {
+        if (progress <= value) {
+          tiltCircle.setAttribute("stroke-dasharray", progress + ", 100");
+          tiltText.textContent = "Tilt " + progress + "%";
+          progress++;
+        } else clearInterval(interval);
+      }, 30);
+    }
+    const tiltSection = document.querySelector(".tilt-card");
+    const tiltObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { animateTilt(); tiltObserver.unobserve(tiltSection); } });
+    }, { threshold: 0.5 });
+    tiltObserver.observe(tiltSection);
+
+    const aiText = document.getElementById("aiText");
+    const insights = [
+      "“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”",
+      "“Most profitable trades occur when you hold positions for 30+ minutes. Consider reducing early exits.”",
+      "“Rule adherence above 85% correlates with 2.5x higher profits. Stay consistent.”"
+    ];
+    let index = 0;
+    setInterval(() => { index = (index + 1) % insights.length; aiText.textContent = insights[index]; }, 5000);
+
+    const barWin = document.getElementById("barWin");
+    const barRules = document.getElementById("barRules");
+    function animateBars() { barWin.style.width = "62%"; barRules.style.width = "87%"; }
+    const demoSection = document.getElementById("demo");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { animateBars(); observer.unobserve(demoSection); } });
+    }, { threshold: 0.3 });
+    observer.observe(demoSection);
+
+    const sections = document.querySelectorAll("section");
+    const observer2 = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); } });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer2.observe(sec));
+  </script>
+</body>
+</html>
