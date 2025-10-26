@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Manage Emotions in Day Trading (Practical System) | TradeTrakR Blog</title>
+  <meta name="description" content="A practical, repeatable system to manage emotions in day trading: micro-pause protocol, emotion tags, cooldown rules, and a free 14-Day Emotion Challenge resource." />
+  <link rel="canonical" href="https://tradetrakr.com/blog/posts/how-to-manage-emotions-in-day-trading" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta property="og:title" content="How to Manage Emotions in Day Trading (Practical System) | TradeTrakR Blog" />
+  <meta property="og:description" content="Use this trading psychology playbook to tame tilt: micro-pause protocol, emotion tags, cooldown rules, daily debriefs, and a downloadable 14-Day Emotion Challenge." />
+  <meta property="og:url" content="https://tradetrakr.com/blog/posts/how-to-manage-emotions-in-day-trading" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Manage Emotions in Day Trading (Practical System) | TradeTrakR Blog" />
+  <meta name="twitter:description" content="Follow a five-step micro-pause protocol, emotion tagging system, cooldown rules, and weekly reviews—plus download the 14-Day Emotion Challenge checklist." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .post-container {
+      margin: 0 auto;
+      max-width: var(--blog-maxw);
+      padding: clamp(2.25rem, 4vw, 3.5rem) 1.5rem 4rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .post-hero h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      letter-spacing: -0.015em;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: rgba(233, 234, 240, 0.7);
+    }
+
+    .intro {
+      display: grid;
+      gap: 1.2rem;
+      color: rgba(233, 234, 240, 0.82);
+    }
+
+    .learn-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .toc {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.72);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .toc h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .toc ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
+      color: #050417;
+      font-weight: 600;
+      border: 1px solid rgba(0, 246, 255, 0.35);
+      box-shadow: 0 18px 36px rgba(19, 0, 60, 0.42);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .download-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 22px 44px rgba(19, 0, 60, 0.48);
+    }
+
+    .micro-box {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.7);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .micro-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .micro-list li::marker {
+      font-weight: 600;
+    }
+
+    .emotion-table {
+      overflow-x: auto;
+      border-radius: var(--blog-radius);
+      border: 1px solid var(--blog-border);
+      background: rgba(21, 22, 27, 0.7);
+    }
+
+    .emotion-table table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    .emotion-table th,
+    .emotion-table td {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--blog-border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .emotion-table th {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.9);
+      background: rgba(18, 19, 26, 0.9);
+    }
+
+    .emotion-table tr:nth-child(even) td {
+      background: rgba(27, 29, 38, 0.55);
+    }
+
+    .checklist-list,
+    .debrief-list,
+    .weekly-list {
+      display: grid;
+      gap: 0.5rem;
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .faq-list dt {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.88);
+    }
+
+    .faq-list dd {
+      margin: 0;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .decision-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .cta-box {
+      border: 1px solid rgba(127, 90, 240, 0.4);
+      border-radius: var(--blog-radius);
+      background: linear-gradient(135deg, rgba(15, 16, 28, 0.95), rgba(25, 20, 46, 0.85));
+      padding: 1.75rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #0b0b18;
+      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
+      border: 1px solid rgba(0, 246, 255, 0.35);
+      box-shadow: 0 16px 30px rgba(19, 0, 60, 0.4);
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 20px 40px rgba(19, 0, 60, 0.45);
+    }
+
+    @media (max-width: 720px) {
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .toc,
+      .micro-box,
+      .cta-box {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How to Manage Emotions in Day Trading",
+      "description": "A practical trading psychology system with micro-pause protocol, emotion tagging, cooldown rules, and a 14-Day Emotion Challenge download.",
+      "datePublished": "2025-10-25",
+      "dateModified": "2025-10-25",
+      "author": {
+        "@type": "Person",
+        "name": "TradeTrakR Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "TradeTrakR"
+      },
+      "image": "https://tradetrakr.com/assets/preview.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://tradetrakr.com/blog/posts/how-to-manage-emotions-in-day-trading"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tradetrakr.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://tradetrakr.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to Manage Emotions in Day Trading",
+          "item": "https://tradetrakr.com/blog/posts/how-to-manage-emotions-in-day-trading"
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="../../index.html">TradeTrakR</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../index.html#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li aria-current="page">How to Manage Emotions in Day Trading</li>
+    </ol>
+  </nav>
+
+  <article class="post-container">
+    <section class="post-hero">
+      <h1>How to Manage Emotions in Day Trading</h1>
+      <div class="post-meta">
+        <span>By TradeTrakR Editorial</span>
+        <span>Published October 25, 2025</span>
+        <span>10 minute read</span>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p>Learning how to manage emotions in day trading is the difference between disciplined execution and tilt-fueled mistakes. Intraday swings, leverage, and rapid feedback loops magnify every feeling, so a resilient trading psychology routine must live alongside your strategy. This guide delivers a practical system: a five-step micro-pause protocol, emotion tagging framework, rule-based cooldowns, daily debrief checklist, and a downloadable 14-Day Emotion Challenge to keep your discipline measurable.</p>
+      <section aria-labelledby="what-youll-learn">
+        <h2 id="what-youll-learn" style="font-size:1.2rem; letter-spacing:0.04em; text-transform:uppercase; margin:0;">What You'll Learn</h2>
+        <ul class="learn-list">
+          <li>Why emotions dominate intraday decision making and how to spot early warning signs.</li>
+          <li>How to run a repeatable five-step micro-pause protocol whenever pressure spikes.</li>
+          <li>How to tag, log, and counter core day trading emotions using a structured table.</li>
+          <li>How to use the 14-Day Emotion Challenge, daily debrief template, and weekly review to build durable habits.</li>
+          <li>Which further resources and TradeTrakR workflows help reinforce psychology tracking.</li>
+        </ul>
+      </section>
+    </section>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#why-emotions">Why Emotions Dominate Intraday Decisions</a></li>
+        <li><a href="#micro-pause">The 5-Step Micro-Pause Protocol (Repeatable)</a></li>
+        <li><a href="#emotion-tags">Emotion Tagging System</a></li>
+        <li><a href="#cooldown-framework">Rule-Based Cooldown Framework</a></li>
+        <li><a href="#emotion-challenge">The 14-Day Emotion Challenge (Download)</a></li>
+        <li><a href="#daily-debrief">Daily Debrief Template (Copy-Paste)</a></li>
+        <li><a href="#weekly-review">Weekly Review (30–45 Minutes)</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#further-reading">Further Reading</a></li>
+        <li><a href="#cta">Explore TradeTrakR</a></li>
+      </ul>
+    </nav>
+
+    <section id="why-emotions" class="post-section" aria-labelledby="why-emotions-heading">
+      <h2 id="why-emotions-heading">Why Emotions Dominate Intraday Decisions</h2>
+      <p>Day traders operate inside a compressed feedback loop. Every candle, print, and level shifts within seconds, leaving your nervous system struggling to stay even. When you combine leverage with fast-moving risk, the brain defaults to fight-or-flight responses—impulsively grabbing subpar entries, revenge trading after losses, or freezing on valid setups. Without a process to name those spikes, physiological arousal wins.</p>
+      <p>Professional desks and elite funded traders treat emotional awareness like any other KPI. They log triggers, tally rule breaks, and review how mindset shifts affected expectancy. You do not need a psychology degree; you need structure. The protocol below packages that structure so you can recognize rising pressure, slow decisions, and return to rules before damage occurs.</p>
+    </section>
+
+    <section id="micro-pause" class="post-section" aria-labelledby="micro-pause-heading">
+      <h2 id="micro-pause-heading">The 5-Step Micro-Pause Protocol (Repeatable)</h2>
+      <p>Keep this sequence within arm's reach. The goal is not to suppress emotion but to build a fast reset loop that re-centers your plan.</p>
+      <div class="micro-box" role="region" aria-label="Micro-pause protocol checklist">
+        <ol class="micro-list">
+          <li><strong>Name it.</strong> Tag the emotion instantly—FOMO, fear, boredom, tilt. Naming reduces intensity.</li>
+          <li><strong>Breathe.</strong> Take four slow inhales and exhales away from your depth-of-market or chart.</li>
+          <li><strong>Re-check rules.</strong> Confirm risk per trade, daily loss limit, and allowed setups before considering the next order.</li>
+          <li><strong>Reduce or skip.</strong> Cut size to baseline or sit out until conditions match the plan.</li>
+          <li><strong>Note it.</strong> Log the emotion, trigger, and action in your journal within 30 seconds.</li>
+        </ol>
+        <p style="margin:0;">Run the protocol after every surge of adrenaline—not just meltdowns. Repetition makes the response automatic.</p>
+      </div>
+    </section>
+
+    <section id="emotion-tags" class="post-section" aria-labelledby="emotion-tags-heading">
+      <h2 id="emotion-tags-heading">Emotion Tagging System</h2>
+      <p>Tagging creates language for your trading psychology. Track the tag, the trigger, the early warning sign, and the counter-action you commit to when it appears twice in a session.</p>
+      <figure class="emotion-table" tabindex="0">
+        <caption>Core day trading emotions, triggers, warning signs, and counter-actions</caption>
+        <table aria-label="Day trading emotion tag reference">
+          <thead>
+            <tr>
+              <th scope="col">Emotion Tag</th>
+              <th scope="col">Common Triggers</th>
+              <th scope="col">Early Warning Signs</th>
+              <th scope="col">Counter-Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">FOMO</th>
+              <td>Missed breakout, social media chatter, friends posting gains.</td>
+              <td>Mouse hovering over order ticket, flipping between timeframes, shallow breathing.</td>
+              <td>Pause five minutes, re-run setup checklist, trade only playbook entries.</td>
+            </tr>
+            <tr>
+              <th scope="row">Fear</th>
+              <td>Early loss, surprise volatility, open P&amp;L swinging rapidly.</td>
+              <td>Passing on A+ setups, tight grip on mouse, tunnel vision on P&amp;L window.</td>
+              <td>Cut size in half, review higher time-frame bias, execute only with full confirmation.</td>
+            </tr>
+            <tr>
+              <th scope="row">Overconfidence</th>
+              <td>Winning streak, large single trade win, confirmation from peers.</td>
+              <td>Stacking orders quickly, loosening stops, casual posture.</td>
+              <td>Limit next trade to baseline size, revisit risk plan, log why wins occurred.</td>
+            </tr>
+            <tr>
+              <th scope="row">Revenge</th>
+              <td>Rule violation, slippage, unexpected rejection of a level.</td>
+              <td>Spamming hotkeys, muttering at screens, skipping trade checklist.</td>
+              <td>Trigger mandatory cooldown, document frustration, restart only after calm baseline.</td>
+            </tr>
+            <tr>
+              <th scope="row">Boredom</th>
+              <td>Low volatility, waiting for setups, long consolidation.</td>
+              <td>Browsing unrelated tabs, searching for “maybe” trades, fidgeting.</td>
+              <td>Stand up, stretch, review playbook, set a 10-minute timer before next evaluation.</td>
+            </tr>
+            <tr>
+              <th scope="row">Tilt</th>
+              <td>Stacked emotional hits, fatigue, personal stress bleeding into the session.</td>
+              <td>Breaking multiple rules in a row, shaky hands, ignoring alerts.</td>
+              <td>End session immediately, log tilt drivers, schedule recovery routine.</td>
+            </tr>
+            <tr>
+              <th scope="row">Calm / Focused</th>
+              <td>Following plan, managing risk, rested state, clean environment.</td>
+              <td>Steady breathing, methodical checklist use, patient order flow reading.</td>
+              <td>Document supporting habits so you can replicate them tomorrow.</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <section id="cooldown-framework" class="post-section" aria-labelledby="cooldown-framework-heading">
+      <h2 id="cooldown-framework-heading">Rule-Based Cooldown Framework</h2>
+      <p>Set objective triggers so you do not negotiate with yourself when adrenaline spikes. Write these prompts into your Trading Journal so compliance is trackable.</p>
+      <ul class="checklist-list">
+        <li>☐ Two rule breaks in the same hour → 20-minute cooldown away from the screen.</li>
+        <li>☐ -2R day or breach of max daily loss → end session and review log before next open.</li>
+        <li>☐ Tilt tag logged twice in a session → stop trading and schedule longer recovery work.</li>
+        <li>☐ External stress or fatigue indicators (headache, distractions) → run micro-pause and reduce size to half.</li>
+        <li>☐ Heart rate or smartwatch alert → breathe, stretch, re-evaluate if conditions still align with your edge.</li>
+      </ul>
+      <p>Log each cooldown event in the 14-Day Emotion Challenge or your primary journal so you can audit discipline rates during weekly reviews.</p>
+    </section>
+
+    <section id="emotion-challenge" class="post-section" aria-labelledby="emotion-challenge-heading">
+      <h2 id="emotion-challenge-heading">The 14-Day Emotion Challenge (Download)</h2>
+      <p>Consistency grows when you measure the work. The 14-Day Emotion Challenge gives you a daily structure: pre-market intention, three emotion observations, one cooldown decision, and a reflection that locks in tomorrow's rule. Print it or open it inside your journal workspace.</p>
+      <a class="download-link" href="../assets/14-day-emotion-challenge.md" target="_blank" rel="noopener">Download the 14-Day Emotion Challenge</a>
+      <p>Pair the challenge with your micro-pause protocol. If a tag shows up three times across the 14 days, elevate the counter-action into a hard trading rule or add a pre-market reminder to address it before the opening bell.</p>
+    </section>
+
+    <section id="daily-debrief" class="post-section" aria-labelledby="daily-debrief-heading">
+      <h2 id="daily-debrief-heading">Daily Debrief Template (Copy-Paste)</h2>
+      <p>Use this five-minute closeout to connect emotions with execution quality. Drop it inside your journal or clipboard so you can paste results quickly.</p>
+      <ul class="debrief-list">
+        <li>Top two emotions that influenced decisions today.</li>
+        <li>One decision that changed after running the micro-pause protocol.</li>
+        <li>Rule adherence summary (Y/N) and which rule broke if applicable.</li>
+        <li>Quality of trade selection (A, B, or C setups) and why.</li>
+        <li>One improvement rule for tomorrow's session.</li>
+      </ul>
+      <p>Attach screenshots or order flow snippets when emotions altered execution. Visual evidence makes the pattern harder to ignore.</p>
+    </section>
+
+    <section id="weekly-review" class="post-section" aria-labelledby="weekly-review-heading">
+      <h2 id="weekly-review-heading">Weekly Review (30–45 Minutes)</h2>
+      <p>Wrap the week by translating emotion data into actionable mandates so the next five sessions begin with clarity.</p>
+      <ul class="weekly-list">
+        <li>Count each emotion tag by day and trading product to spot repetitive friction.</li>
+        <li>Audit rule adherence versus rule breaks and highlight the trigger behind every violation.</li>
+        <li>Compare expectancy, win rate, and drawdown stats on calm/focused days versus tilt or revenge days.</li>
+        <li>Choose a single behavioral experiment for next week—e.g., "Stop trading after first revenge tag" or "Mandatory micro-pause before trading news releases."</li>
+      </ul>
+      <p>Archive the weekly notes in a dedicated folder. After a quarter, scan which mandates kept resurfacing. Recurring items point to structural changes you must make outside the chart: sleep routines, pre-market warm-ups, or environment adjustments.</p>
+    </section>
+
+    <section id="faqs" class="post-section" aria-labelledby="faqs-heading">
+      <h2 id="faqs-heading">FAQs</h2>
+      <dl class="faq-list">
+        <dt>Do I need to log every emotion for every trade?</dt>
+        <dd>Focus on the moments that alter decisions—breaking a rule, chasing, hesitating, or stopping early. Calm trades can be summarized by session to keep journaling efficient.</dd>
+        <dt>How long should cooldowns last?</dt>
+        <dd>Start with 20-minute pauses for rule breaks and full-session stops when tilt appears. Extend durations if you return and repeat the same error.</dd>
+        <dt>What if emotions spike during a winning streak?</dt>
+        <dd>Overconfidence is still an emotion. Apply the protocol, reduce size, and review your risk rules. The goal is to keep wins sustainable, not to press until discipline cracks.</dd>
+        <dt>How do I avoid journaling becoming a distraction?</dt>
+        <dd>Template everything. Use checkboxes, drop-down tags, and short bullet reflections. The system above is designed to take minutes, not hours.</dd>
+        <dt>Can I run this alongside a funded account evaluation?</dt>
+        <dd>Yes—funded traders rely on rule logging to protect trailing drawdowns. Documenting every cooldown gives you evidence if you ever need to appeal a platform decision.</dd>
+      </dl>
+    </section>
+
+    <section id="further-reading" class="post-section" aria-labelledby="further-reading-heading">
+      <h2 id="further-reading-heading">Further Reading</h2>
+      <p>Build a complete discipline stack with these guides:</p>
+      <ul class="decision-list">
+        <li><a href="../../trading-journal.html">TradeTrakR trading journal overview</a> with <a href="../../trading-journal-features.html#funded-trader-tools">trading psychology tracking</a> and <a href="../../ai-trading-journal.html">AI trading journal workflows</a>.</li>
+        <li><a href="../../blog/posts/mastering-trading-psychology-for-consistent-trades.html">Mastering Trading Psychology for Consistent Trades</a>.</li>
+        <li><a href="../../blog/posts/key-trading-performance-metrics-to-track.html">Key Trading Performance Metrics to Track</a>.</li>
+        <li><a href="../../blog/posts/automated-trade-tracker.html">Automated Trade Tracker</a>.</li>
+        <li><a href="../../blog/posts/buy-trading-journal-software.html">Buy Trading Journal Software</a>.</li>
+        <li><a href="../../stats/how-many-trades-per-day-do-day-traders-make.html">How many trades per day do day traders make?</a></li>
+        <li><a href="../../stats/trading-journal-usage-and-benefits-stats.html">Trading journal usage and benefits stats</a>.</li>
+      </ul>
+    </section>
+
+    <section id="cta" class="post-section" aria-labelledby="cta-heading">
+      <div class="cta-box">
+        <h2 id="cta-heading" style="margin:0;">Explore TradeTrakR</h2>
+        <p>Automate your trading journal and keep psychology accountable with TradeTrakR.</p>
+        <ul>
+          <li>Psychology &amp; Rule-Adherence Tracking</li>
+          <li>AI-Powered Pattern Insights</li>
+          <li>Clean, Minimal UX for Focus</li>
+        </ul>
+        <a href="../../trading-journal.html" class="cta-link">Learn more</a>
+      </div>
+    </section>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="../../index.html">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../index.html#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </div>
+      <p>© 2025 TradeTrakR — Psychology-first trading journal insights.</p>
+    </div>
+  </footer>
+</body>
+</html>

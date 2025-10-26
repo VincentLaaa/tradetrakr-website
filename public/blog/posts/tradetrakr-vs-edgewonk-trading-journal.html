@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders? | TradeTrakR Blog</title>
+  <meta name="description" content="Unbiased breakdown of automation, AI insights, and prop-firm workflows so you can choose a trading journal that scales with your account." />
+  <link rel="canonical" href="https://tradetrakr.com/blog/posts/tradetrakr-vs-edgewonk-trading-journal" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta property="og:title" content="TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders? | TradeTrakR Blog" />
+  <meta property="og:description" content="Unbiased breakdown of automation, AI insights, and prop-firm workflows so you can choose a trading journal that scales with your account." />
+  <meta property="og:url" content="https://tradetrakr.com/blog/posts/tradetrakr-vs-edgewonk-trading-journal" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders?" />
+  <meta name="twitter:description" content="Unbiased breakdown of automation, AI insights, and prop-firm workflows so you can choose a trading journal that scales with your account." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .post-container {
+      margin: 0 auto;
+      max-width: var(--blog-maxw);
+      padding: clamp(2.25rem, 4vw, 3.5rem) 1.5rem 4rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .post-hero h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      letter-spacing: -0.015em;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: rgba(233, 234, 240, 0.7);
+    }
+
+    .intro {
+      display: grid;
+      gap: 1.2rem;
+      color: rgba(233, 234, 240, 0.82);
+    }
+
+    .learn-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .toc {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.7);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .toc h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .toc ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .comparison-table {
+      overflow-x: auto;
+      border-radius: var(--blog-radius);
+      border: 1px solid var(--blog-border);
+      background: rgba(21, 22, 27, 0.7);
+    }
+
+    .comparison-table table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    .comparison-table caption {
+      text-align: left;
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.85);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.9rem 1.1rem;
+      border-bottom: 1px solid var(--blog-border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .comparison-table th {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.9);
+      background: rgba(18, 19, 26, 0.9);
+    }
+
+    .comparison-table tr:nth-child(even) td {
+      background: rgba(27, 29, 38, 0.55);
+    }
+
+    .decision-list {
+      display: grid;
+      gap: 0.6rem;
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .faq-list dt {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.88);
+    }
+
+    .faq-list dd {
+      margin: 0;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .cta-box {
+      border: 1px solid rgba(127, 90, 240, 0.4);
+      border-radius: var(--blog-radius);
+      background: linear-gradient(135deg, rgba(15, 16, 28, 0.95), rgba(25, 20, 46, 0.85));
+      padding: 1.75rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .cta-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: rgba(233, 234, 240, 0.82);
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #0b0b18;
+      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
+      border: 1px solid rgba(0, 246, 255, 0.35);
+      box-shadow: 0 16px 30px rgba(19, 0, 60, 0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 20px 40px rgba(19, 0, 60, 0.45);
+    }
+
+    @media (max-width: 720px) {
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .toc,
+      .cta-box {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders?",
+      "description": "Unbiased breakdown of automation, AI insights, and prop-firm workflows so you can choose a trading journal that scales with your account.",
+      "datePublished": "2025-02-05",
+      "dateModified": "2025-02-05",
+      "author": {
+        "@type": "Person",
+        "name": "TradeTrakR Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "TradeTrakR"
+      },
+      "image": "https://tradetrakr.com/assets/preview.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://tradetrakr.com/blog/posts/tradetrakr-vs-edgewonk-trading-journal"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tradetrakr.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://tradetrakr.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders?",
+          "item": "https://tradetrakr.com/blog/posts/tradetrakr-vs-edgewonk-trading-journal"
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="../../index.html">TradeTrakR</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../index.html#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li aria-current="page">TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders?</li>
+    </ol>
+  </nav>
+
+  <article class="post-container">
+    <section class="post-hero">
+      <h1>TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders?</h1>
+      <div class="post-meta">
+        <span>By TradeTrakR Editorial</span>
+        <span>Published February 5, 2025</span>
+        <span>12 minute read</span>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p>When choosing between TradeTrakR and Edgewonk for funded trading, the decision hinges on automation preferences, AI integration depth, and prop-firm workflow alignment. This neutral comparison breaks down how each platform handles rule tracking, psychology insights, and scalability so you can match capabilities to your evaluation stage.</p>
+      <section aria-labelledby="what-youll-learn">
+        <h2 id="what-youll-learn" style="font-size:1.2rem; letter-spacing:0.04em; text-transform:uppercase; margin:0;">What You'll Learn</h2>
+        <ul class="learn-list">
+          <li>How TradeTrakR's AI narratives compare to Edgewonk's manual analysis approach.</li>
+          <li>Automation differences: direct broker sync vs. CSV import workflows.</li>
+          <li>Psychology tracking depth and prop-firm compliance features.</li>
+          <li>Pricing models and scalability for funded account growth.</li>
+          <li>Decision framework to match platform strengths with your trading style.</li>
+        </ul>
+      </section>
+    </section>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#overview">Platform Overview</a></li>
+        <li><a href="#comparison">Side-by-Side Comparison</a></li>
+        <li><a href="#automation">Automation & Data Import</a></li>
+        <li><a href="#psychology">Psychology & Rule Tracking</a></li>
+        <li><a href="#ai-insights">AI Insights & Analytics</a></li>
+        <li><a href="#pricing">Pricing & Plans</a></li>
+        <li><a href="#decision">Decision Framework</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#cta">Explore TradeTrakR</a></li>
+      </ul>
+    </nav>
+
+    <section id="overview" class="post-section" aria-labelledby="overview-heading">
+      <h2 id="overview-heading">Platform Overview</h2>
+      <p>TradeTrakR and Edgewonk serve different segments of the funded trading community. TradeTrakR emphasizes AI-powered insights with automated rule tracking, while Edgewonk focuses on manual control with deep customization options.</p>
+      
+      <section aria-labelledby="tradetrakr-overview">
+        <h3 id="tradetrakr-overview">TradeTrakR</h3>
+        <p>Built specifically for funded traders, TradeTrakR combines AI narratives with psychology tracking to help traders stay within evaluation rules. The platform emphasizes automated insights, rule adherence monitoring, and prop-firm compliance features.</p>
+      </section>
+
+      <section aria-labelledby="edgewonk-overview">
+        <h3 id="edgewonk-overview">Edgewonk</h3>
+        <p>Edgewonk offers desktop-first journaling with extensive customization options. It appeals to traders who prefer manual control over automation, with deep analytics and psychology tracking tools that require more setup but offer greater flexibility.</p>
+      </section>
+    </section>
+
+    <section id="comparison" class="post-section" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading">Side-by-Side Comparison</h2>
+      <figure class="comparison-table" tabindex="0">
+        <caption>TradeTrakR vs Edgewonk feature comparison</caption>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">TradeTrakR</th>
+              <th scope="col">Edgewonk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Platform Type</th>
+              <td>Web-first with mobile responsive design</td>
+              <td>Desktop application (Windows) with cloud sync</td>
+            </tr>
+            <tr>
+              <th scope="row">Data Import</th>
+              <td>CSV imports + planned direct broker sync</td>
+              <td>Manual CSV templates for major brokers</td>
+            </tr>
+            <tr>
+              <th scope="row">AI Insights</th>
+              <td>Explainable AI narratives on performance patterns</td>
+              <td>Manual analysis tools with planned AI modules</td>
+            </tr>
+            <tr>
+              <th scope="row">Psychology Tracking</th>
+              <td>Tilt meter, guided prompts, rule adherence scoring</td>
+              <td>Emotion tags, tilt scoring, goal tracking</td>
+            </tr>
+            <tr>
+              <th scope="row">Prop Firm Features</th>
+              <td>Built-in evaluation tracking, rule compliance alerts</td>
+              <td>Custom rule tagging and compliance journals</td>
+            </tr>
+            <tr>
+              <th scope="row">Analytics Depth</th>
+              <td>Rule-aware expectancy, session heatmaps</td>
+              <td>Advanced stats (R-multiples, equity curves)</td>
+            </tr>
+            <tr>
+              <th scope="row">Learning Curve</th>
+              <td>Intermediate with AI guidance</td>
+              <td>Advanced, requires manual configuration</td>
+            </tr>
+            <tr>
+              <th scope="row">Pricing Model</th>
+              <td>Monthly subscription with trial</td>
+              <td>One-time license with optional upgrades</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <section id="automation" class="post-section" aria-labelledby="automation-heading">
+      <h2 id="automation-heading">Automation & Data Import</h2>
+      <p>Data import workflows differ significantly between platforms, affecting daily maintenance overhead.</p>
+      
+      <section aria-labelledby="tradetrakr-imports">
+        <h3 id="tradetrakr-imports">TradeTrakR Import Workflow</h3>
+        <ul class="decision-list">
+          <li><strong>Current:</strong> Secure CSV imports with validation and error checking</li>
+          <li><strong>Roadmap:</strong> Direct sync for Tradovate, NinjaTrader, and Rithmic</li>
+          <li><strong>Prop Integration:</strong> Webhook interface for custom prop firm data</li>
+          <li><strong>Validation:</strong> Automatic fee reconciliation and contract normalization</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="edgewonk-imports">
+        <h3 id="edgewonk-imports">Edgewonk Import Workflow</h3>
+        <ul class="decision-list">
+          <li><strong>Method:</strong> Manual CSV templates for NinjaTrader, Sierra Chart, IB</li>
+          <li><strong>Customization:</strong> User-defined import formats and field mapping</li>
+          <li><strong>Control:</strong> Full manual oversight of data processing</li>
+          <li><strong>Flexibility:</strong> Supports custom broker formats and edge cases</li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="psychology" class="post-section" aria-labelledby="psychology-heading">
+      <h2 id="psychology-heading">Psychology & Rule Tracking</h2>
+      <p>Both platforms offer psychology tracking, but with different approaches to rule compliance and emotional monitoring.</p>
+      
+      <section aria-labelledby="tradetrakr-psychology">
+        <h3 id="tradetrakr-psychology">TradeTrakR Psychology Features</h3>
+        <ul class="decision-list">
+          <li><strong>Tilt Meter:</strong> Visual representation of emotional state trends</li>
+          <li><strong>Guided Prompts:</strong> Structured questions for pre/post-trade reflection</li>
+          <li><strong>Rule Adherence:</strong> Automated scoring of daily loss limits and contract sizing</li>
+          <li><strong>Cooldown Triggers:</strong> Automated pause suggestions based on rule violations</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="edgewonk-psychology">
+        <h3 id="edgewonk-psychology">Edgewonk Psychology Features</h3>
+        <ul class="decision-list">
+          <li><strong>Emotion Tags:</strong> Customizable emotional state classification</li>
+          <li><strong>Tilt Scoring:</strong> Manual rating system for emotional intensity</li>
+          <li><strong>Goal Tracking:</strong> Long-term psychological improvement metrics</li>
+          <li><strong>Journal Integration:</strong> Deep integration with trade notes and analysis</li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="ai-insights" class="post-section" aria-labelledby="ai-insights-heading">
+      <h2 id="ai-insights-heading">AI Insights & Analytics</h2>
+      <p>AI integration represents the biggest differentiator between platforms.</p>
+      
+      <section aria-labelledby="tradetrakr-ai">
+        <h3 id="tradetrakr-ai">TradeTrakR AI Features</h3>
+        <ul class="decision-list">
+          <li><strong>Explainable Narratives:</strong> Human-readable AI insights on performance patterns</li>
+          <li><strong>Rule Risk Detection:</strong> Automated alerts for compliance violations</li>
+          <li><strong>Psychology Drift:</strong> AI monitoring of emotional state trends</li>
+          <li><strong>Evaluation Projections:</strong> Predictive analytics for funded account milestones</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="edgewonk-ai">
+        <h3 id="edgewonk-ai">Edgewonk AI Features</h3>
+        <ul class="decision-list">
+          <li><strong>Current:</strong> Manual analysis tools with statistical insights</li>
+          <li><strong>Planned:</strong> AI bias detection modules in beta</li>
+          <li><strong>Customization:</strong> User-defined analysis parameters and thresholds</li>
+          <li><strong>Control:</strong> Full manual oversight of all analytical processes</li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="pricing" class="post-section" aria-labelledby="pricing-heading">
+      <h2 id="pricing-heading">Pricing & Plans</h2>
+      <p>Pricing models reflect different approaches to software delivery and support.</p>
+      
+      <section aria-labelledby="tradetrakr-pricing">
+        <h3 id="tradetrakr-pricing">TradeTrakR Pricing</h3>
+        <ul class="decision-list">
+          <li><strong>Model:</strong> Monthly subscription with free trial</li>
+          <li><strong>Updates:</strong> Continuous feature updates and improvements</li>
+          <li><strong>Support:</strong> Included customer support and onboarding</li>
+          <li><strong>Scalability:</strong> Plans scale with account size and features</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="edgewonk-pricing">
+        <h3 id="edgewonk-pricing">Edgewonk Pricing</h3>
+        <ul class="decision-list">
+          <li><strong>Model:</strong> One-time license with optional upgrades</li>
+          <li><strong>Updates:</strong> Major version updates available for additional cost</li>
+          <li><strong>Support:</strong> Community support with paid support options</li>
+          <li><strong>Ownership:</strong> Full software ownership after purchase</li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="decision" class="post-section" aria-labelledby="decision-heading">
+      <h2 id="decision-heading">Decision Framework</h2>
+      <p>Use these criteria to determine which platform aligns with your funded trading workflow.</p>
+      
+      <section aria-labelledby="choose-tradetrakr">
+        <h3 id="choose-tradetrakr">Choose TradeTrakR If:</h3>
+        <ul class="decision-list">
+          <li>You want AI-powered insights with minimal manual configuration</li>
+          <li>Prop firm compliance and rule tracking are priorities</li>
+          <li>You prefer web-based access with mobile responsiveness</li>
+          <li>Automated psychology monitoring appeals to your workflow</li>
+          <li>You're comfortable with subscription pricing for continuous updates</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="choose-edgewonk">
+        <h3 id="choose-edgewonk">Choose Edgewonk If:</h3>
+        <ul class="decision-list">
+          <li>You prefer desktop software with full manual control</li>
+          <li>Deep customization and advanced analytics are essential</li>
+          <li>You want to own the software with one-time payment</li>
+          <li>Manual CSV imports don't create workflow friction</li>
+          <li>You enjoy configuring and maintaining detailed analysis tools</li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="faqs" class="post-section" aria-labelledby="faqs-heading">
+      <h2 id="faqs-heading">FAQs</h2>
+      <dl class="faq-list">
+        <dt>Which platform is better for prop firm evaluations?</dt>
+        <dd>TradeTrakR has built-in prop firm features, while Edgewonk requires manual configuration but offers deeper customization.</dd>
+        
+        <dt>Can I migrate data between platforms?</dt>
+        <dd>Both platforms support CSV exports, making data migration possible with some manual formatting.</dd>
+        
+        <dt>Do I need AI features for funded trading?</dt>
+        <dd>AI can help identify patterns, but manual analysis in Edgewonk is equally effective for disciplined traders.</dd>
+        
+        <dt>Which has better mobile access?</dt>
+        <dd>TradeTrakR offers responsive web design, while Edgewonk is desktop-focused with limited mobile options.</dd>
+        
+        <dt>How do pricing models compare long-term?</dt>
+        <dd>TradeTrakR's subscription includes updates and support, while Edgewonk's one-time fee requires additional payments for major updates.</dd>
+      </dl>
+    </section>
+
+    <section id="cta" class="post-section" aria-labelledby="cta-heading">
+      <div class="cta-box">
+        <h2 id="cta-heading" style="margin:0;">Explore TradeTrakR</h2>
+        <p>See how TradeTrakR's AI-powered insights and prop-firm features can support your funded trading journey.</p>
+        <ul>
+          <li>AI-Powered Performance Insights</li>
+          <li>Psychology & Rule Adherence Tracking</li>
+          <li>Prop Firm Compliance Features</li>
+        </ul>
+        <a href="../../trading-journal.html" class="cta-link">Learn more</a>
+      </div>
+    </section>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="../../index.html">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../index.html#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </div>
+      <p>© 2025 TradeTrakR — Research-driven trading journal insights.</p>
+    </div>
+  </footer>
+</body>
+</html>

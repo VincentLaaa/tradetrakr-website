@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trademetria vs TraderSync vs Edgewonk vs TradeTrakR | Side-by-Side Comparison</title>
+  <meta name="description" content="Neutral comparison of Trademetria, TraderSync, Edgewonk, and TradeTrakR. Features, psychology tools, AI insights, imports, pricing notes, and who each is best for." />
+  <link rel="canonical" href="https://tradetrakr.com/blog/posts/trademetria-vs-tradersync-vs-edgewonk" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta property="og:title" content="Trademetria vs TraderSync vs Edgewonk vs TradeTrakR | Side-by-Side Comparison" />
+  <meta property="og:description" content="Neutral trading journal comparison covering Trademetria, TraderSync, Edgewonk, and TradeTrakR. Review imports, analytics, AI, psychology, pricing, and ideal use cases." />
+  <meta property="og:url" content="https://tradetrakr.com/blog/posts/trademetria-vs-tradersync-vs-edgewonk" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Trademetria vs TraderSync vs Edgewonk vs TradeTrakR | Side-by-Side Comparison" />
+  <meta name="twitter:description" content="Neutral review of Trademetria, TraderSync, Edgewonk, and TradeTrakR with feature, psychology, AI, and pricing notes." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .post-container {
+      margin: 0 auto;
+      max-width: var(--blog-maxw);
+      padding: clamp(2.25rem, 4vw, 3.5rem) 1.5rem 4rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .post-hero h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      letter-spacing: -0.015em;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: rgba(233, 234, 240, 0.7);
+    }
+
+    .intro {
+      display: grid;
+      gap: 1.2rem;
+      color: rgba(233, 234, 240, 0.82);
+    }
+
+    .learn-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .toc {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.7);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .toc h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .toc ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .post-section {
+      display: grid;
+      gap: 1.3rem;
+    }
+
+    .post-section h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 2.2vw, 2.1rem);
+      letter-spacing: -0.01em;
+    }
+
+    .post-section h3 {
+      margin: 0;
+      font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    }
+
+    .comparison-table {
+      overflow-x: auto;
+      border-radius: var(--blog-radius);
+      border: 1px solid var(--blog-border);
+      background: rgba(21, 22, 27, 0.7);
+    }
+
+    .comparison-table table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    .comparison-table caption {
+      text-align: left;
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.85);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.9rem 1.1rem;
+      border-bottom: 1px solid var(--blog-border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .comparison-table th {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.9);
+      background: rgba(18, 19, 26, 0.9);
+    }
+
+    .comparison-table tr:nth-child(even) td {
+      background: rgba(27, 29, 38, 0.55);
+    }
+
+    .cta-box {
+      border: 1px solid rgba(127, 90, 240, 0.4);
+      border-radius: var(--blog-radius);
+      background: linear-gradient(135deg, rgba(15, 16, 28, 0.95), rgba(25, 20, 46, 0.85));
+      padding: 1.75rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #0b0b18;
+      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
+      border: 1px solid rgba(0, 246, 255, 0.35);
+      box-shadow: 0 16px 30px rgba(19, 0, 60, 0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 20px 40px rgba(19, 0, 60, 0.45);
+    }
+
+    @media (max-width: 720px) {
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .toc,
+      .cta-box {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Trademetria vs TraderSync vs Edgewonk vs TradeTrakR",
+      "description": "Neutral comparison of Trademetria, TraderSync, Edgewonk, and TradeTrakR. Features, psychology tools, AI insights, imports, pricing notes, and who each is best for.",
+      "datePublished": "2025-10-25",
+      "dateModified": "2025-10-25",
+      "author": {
+        "@type": "Person",
+        "name": "TradeTrakR Editorial"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "TradeTrakR"
+      },
+      "image": "https://tradetrakr.com/assets/preview.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://tradetrakr.com/blog/posts/trademetria-vs-tradersync-vs-edgewonk"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tradetrakr.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://tradetrakr.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Trademetria vs TraderSync vs Edgewonk",
+          "item": "https://tradetrakr.com/blog/posts/trademetria-vs-tradersync-vs-edgewonk"
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="../../index.html">TradeTrakR</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../index.html#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li aria-current="page">Trademetria vs TraderSync vs Edgewonk</li>
+    </ol>
+  </nav>
+
+  <article class="post-container">
+    <section class="post-hero">
+      <h1>Trademetria vs TraderSync vs Edgewonk vs TradeTrakR</h1>
+      <div class="post-meta">
+        <span>By TradeTrakR Editorial</span>
+        <span>Published October 25, 2025</span>
+        <span>13 minute read</span>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p>Trademetria vs TraderSync vs Edgewonk is a trading journal comparison that often comes down to budget, automation, or analytics depth. To keep this guide neutral, we include TradeTrakR as a full peer so you can evaluate how each platform handles imports, psychology, AI, and futures/forex readiness without guesswork.</p>
+      <section aria-labelledby="what-youll-learn">
+        <h2 id="what-youll-learn" style="font-size:1.2rem; letter-spacing:0.04em; text-transform:uppercase; margin:0;">What You'll Learn</h2>
+        <ul class="learn-list">
+          <li>The positioning and strengths of Trademetria, TraderSync, Edgewonk, and TradeTrakR.</li>
+          <li>Feature comparisons across imports, psychology, analytics, and futures/forex readiness.</li>
+          <li>Mini reviews outlining ideal use cases and tradeoffs for each platform.</li>
+          <li>Decision cues to match journals with your workflow and risk management style.</li>
+          <li>FAQs covering imports, psychology depth, analytics evaluation, and data migration.</li>
+        </ul>
+      </section>
+    </section>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#what-sets-them-apart">What Sets These Journals Apart</a></li>
+        <li><a href="#feature-table">Side-by-Side Feature Table</a></li>
+        <li><a href="#mini-reviews">Mini Reviews</a></li>
+        <li><a href="#choose-platform">Which One Should You Choose?</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#further-reading">Further Reading</a></li>
+        <li><a href="#cta">Explore TradeTrakR</a></li>
+      </ul>
+    </nav>
+
+    <section id="what-sets-them-apart" class="post-section" aria-labelledby="what-sets-them-apart-heading">
+      <h2 id="what-sets-them-apart-heading">What Sets These Journals Apart</h2>
+      <p>Although all four platforms help traders log and review performance, each emphasizes different priorities. Pricing and features evolve, so always verify details directly with the vendor before subscribing.</p>
+      <ul class="decision-list">
+        <li><strong>Trademetria:</strong> Known for a budget-friendly entry point and consolidated dashboards for multi-account tracking. Simplicity and exports appeal to traders managing multiple accounts or prop firm evaluations.</li>
+        <li><strong>TraderSync:</strong> Offers broad auto-import coverage, mobile access, and ready-made analytics that reduce manual setup. Ideal for traders who want automation with a modern interface.</li>
+        <li><strong>Edgewonk:</strong> Caters to power users who value deep customization, analytics, and psychology tracking. Manual imports are the tradeoff for granular control.</li>
+        <li><strong>TradeTrakR:</strong> Focuses on AI-assisted insights, psychology prompts, and a calm UI built for futures and forex traders. Compliance-ready exports make it useful for funded or prop firm routines.</li>
+      </ul>
+    </section>
+
+    <section id="feature-table" class="post-section" aria-labelledby="feature-table-heading">
+      <h2 id="feature-table-heading">Side-by-Side Feature Table</h2>
+      <p>The table below compares the core workflows that most traders consider before selecting a journal. Use it to narrow your shortlist, then explore the mini reviews for deeper context.</p>
+      <figure class="comparison-table" tabindex="0">
+        <caption>Comparison of Trademetria, TraderSync, Edgewonk, and TradeTrakR</caption>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Capability</th>
+              <th scope="col">Trademetria</th>
+              <th scope="col">TraderSync</th>
+              <th scope="col">Edgewonk</th>
+              <th scope="col">TradeTrakR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Auto-Imports / Broker Integrations</th>
+              <td>API + CSV coverage for 40+ brokers (IB, CQG, Rithmic, MetaTrader, Thinkorswim, etc.).</td>
+              <td>API and CSV imports for Tradovate, Rithmic, NinjaTrader, CQG, Interactive Brokers, MetaTrader, and more.</td>
+              <td>Manual CSV templates for NinjaTrader, Sierra Chart, MetaTrader, Interactive Brokers; user must manage updates.</td>
+              <td>CSV uploads currently; direct sync rolling out for Tradovate, NinjaTrader, Rithmic; webhook hooks for custom desks.</td>
+            </tr>
+            <tr>
+              <th scope="row">Platforms</th>
+              <td>Web app with mobile-responsive layout; Android/iOS companion apps.</td>
+              <td>Web + native iOS and Android apps.</td>
+              <td>Desktop (Windows) with optional cloud sync; web reader in latest releases.</td>
+              <td>Web app with responsive mobile UX; desktop companion in roadmap.</td>
+            </tr>
+            <tr>
+              <th scope="row">Learning Curve</th>
+              <td>Beginner to intermediate; streamlined setup with templates.</td>
+              <td>Intermediate; guided setup and templates smooth onboarding.</td>
+              <td>Advanced; requires custom configuration and manual upkeep.</td>
+              <td>Intermediate; AI summaries assist interpretation and shorten ramp time.</td>
+            </tr>
+            <tr>
+              <th scope="row">Journaling Workflow</th>
+              <td>Strategy tagging, note fields, screenshot uploads, account consolidation.</td>
+              <td>Tags, notes, screenshots, video attachments, and playbook templates.</td>
+              <td>Detailed journaling fields for goals, emotions, tags, and narrative entries.</td>
+              <td>Strategy library with checklists, timeline context, media attachments.</td>
+            </tr>
+            <tr>
+              <th scope="row">Psychology / Emotion Tracking</th>
+              <td>Emotion tags, risk mindset dashboards, rule adherence reminders.</td>
+              <td>Mood check-ins, discipline surveys, end-of-day prompts.</td>
+              <td>Tilt scores, emotional triggers, goal tracking.</td>
+              <td>Tilt meter with breathing prompts, rule adherence journaling, cooldown reminders.</td>
+            </tr>
+            <tr>
+              <th scope="row">AI Insights / Coaching Suggestions</th>
+              <td>AI signal scoring in beta; scenario-based alerts emerging.</td>
+              <td>Pattern detection for overtrading, time-of-day edges, instrument performance.</td>
+              <td>AI bias detection in beta; most insights remain manual.</td>
+              <td>Explainable AI narratives covering expectancy drift, risk, and psychology cues.</td>
+            </tr>
+            <tr>
+              <th scope="row">Analytics Depth</th>
+              <td>Expectancy, streaks, P&amp;L dashboards, per-strategy filters.</td>
+              <td>Expectancy, profit factor, MAE/MFE, streak tracking, risk metrics.</td>
+              <td>Advanced analytics (R-multiples, equity curves, custom metrics).</td>
+              <td>Rule-aware expectancy, volatility buckets, session heatmaps, discipline scores.</td>
+            </tr>
+            <tr>
+              <th scope="row">Futures/Forex Readiness</th>
+              <td>Multiplier controls, rollover alerts, session analytics.</td>
+              <td>Tick/point normalization, contract multipliers, rollover templates.</td>
+              <td>Custom tick value inputs, contract rollover tracking via tags.</td>
+              <td>Built-in contract library, auto rollover mapping, micro contract normalization.</td>
+            </tr>
+            <tr>
+              <th scope="row">Custom Dashboards / Filters</th>
+              <td>Modular dashboards, account consolidation, tag filters.</td>
+              <td>Custom dashboards, tag filtering, heatmaps, mobile widgets.</td>
+              <td>User-defined filters, dashboards, and downloadable datasets.</td>
+              <td>Dynamic dashboards for rules, strategies, sessions, psychology trends.</td>
+            </tr>
+            <tr>
+              <th scope="row">Data Ownership / Export Options</th>
+              <td>CSV, PDF, broker-style statements, screenshot exports.</td>
+              <td>CSV/PDF exports, screenshot archives, shareable reports.</td>
+              <td>Full dataset exports (CSV/Excel/PDF) with custom fields.</td>
+              <td>Audit-ready exports with rule ledgers, attachments, AI-written summaries.</td>
+            </tr>
+            <tr>
+              <th scope="row">Pricing Model</th>
+              <td>Tiered monthly plans with annual discounts—verify latest on vendor site.</td>
+              <td>Tiered monthly/annual plans—verify latest on vendor site.</td>
+              <td>One-time license plus optional upgrades—verify latest on vendor site.</td>
+              <td>Monthly subscription with free trial—verify latest on vendor site.</td>
+            </tr>
+            <tr>
+              <th scope="row">Best For</th>
+              <td>Traders needing consolidated multi-account dashboards and simple pricing.</td>
+              <td>Traders seeking auto-import breadth, mobile access, and guided analytics.</td>
+              <td>Power users who want granular analytics and psychology depth with full control.</td>
+              <td>Traders prioritizing AI insights, psychology tracking, and futures/forex readiness.</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <section id="mini-reviews" class="post-section" aria-labelledby="mini-reviews-heading">
+      <h2 id="mini-reviews-heading">Mini Reviews</h2>
+      <p>Each journal solves similar problems but prioritizes different workflows. Use these summaries to understand how the feature table translates into daily usage.</p>
+
+
+      <section aria-labelledby="review-trademetria">
+        <h3 id="review-trademetria">Trademetria</h3>
+        <p>Trademetria fits traders who want an affordable entry point with consolidated analytics. The platform aggregates accounts, tracks drawdown, and delivers clear dashboards without extensive setup. Its exports resemble broker statements, which helps when reporting to coaches or prop firms.</p>
+        <p>The tradeoff is lighter psychology tooling and fewer automation features compared to competitors. Traders who rely on advanced AI coaching or deep journaling prompts may need supplementary tools. Trademetria shines for multi-account management and budget-conscious traders who prefer straightforward dashboards.</p>
+      </section>
+
+      <section aria-labelledby="review-tradersync">
+        <h3 id="review-tradersync">TraderSync</h3>
+        <p>TraderSync emphasizes breadth: broad broker integrations, mobile apps, and guided analytics. Auto-imports reduce manual work for futures, forex, and equities desks, while templates streamline tagging and reviews. Expectancy, streaks, and heatmaps are available out of the box.</p>
+        <p>Because automation handles so much setup, traders should periodically verify import mappings and fee assumptions. AI pattern detection offers quick wins, but deeper psychology routines are less prescriptive than Edgewonk’s. TraderSync is ideal for traders wanting automation and polished UX who can schedule periodic quality checks.</p>
+      </section>
+
+      <section aria-labelledby="review-edgewonk">
+        <h3 id="review-edgewonk">Edgewonk</h3>
+        <p>Edgewonk caters to traders who enjoy customizing every detail. It provides rich analytics—R-multiples, equity curves, custom metrics—and robust psychology journaling. You can build bespoke rule tagging, performance filters, and goal tracking.</p>
+        <p>The flip side is manual imports and a denser interface. New users face a steeper learning curve, and maintaining CSV templates is part of the routine. Edgewonk excels for traders who want maximum control and are comfortable investing time to tailor the platform.</p>
+      </section>
+
+      <section aria-labelledby="review-tradetrakr">
+        <h3 id="review-tradetrakr">TradeTrakR</h3>
+        <p>TradeTrakR blends AI narratives with psychology tracking in a calm interface tailored to futures and forex workflows. Strategy checklists, tilt meters, and rule ledgers help traders stay compliant, while AI summaries translate performance into actionable plain language.</p>
+        <p>Currently, traders upload CSV files while direct integrations continue rolling out. The platform is web-first, though a desktop companion is planned. TradeTrakR suits traders who want proactive coaching, futures/forex readiness, and audit-ready exports without overwhelming UI.</p>
+      </section>
+
+***
+
+    <section id="choose-platform" class="post-section" aria-labelledby="choose-platform-heading">
+      <h2 id="choose-platform-heading">Which One Should You Choose?</h2>
+      <p>Match each journal to your workflow using the cues below:</p>
+      <ul class="decision-list">
+        <li><strong>Choose Trademetria if</strong> you prioritize consolidated dashboards, simple pricing, and lightweight journaling.</li>
+        <li><strong>Choose TraderSync if</strong> you need broad auto-import coverage, mobile access, and plug-and-play analytics.</li>
+        <li><strong>Choose Edgewonk if</strong> you want deep analytics, customizable psychology tracking, and don’t mind manual imports.</li>
+        <li><strong>Choose TradeTrakR if</strong> you value AI-assisted insights, psychology prompts, and futures/forex-friendly workflows.</li>
+      </ul>
+      <p>Some traders mix tools—using one for journaling and another for analytics or automation. Ensure export formats stay compatible so data moves with you.</p>
+    </section>
+
+    <section id="faqs" class="post-section" aria-labelledby="faqs-heading">
+      <h2 id="faqs-heading">FAQs</h2>
+      <dl class="faq-list">
+        <dt>Is auto-import necessary or is CSV enough?</dt>
+        <dd>Auto-imports save time and reduce errors, especially for high-volume traders. If your trade count is manageable, CSV uploads can work—just confirm formatting and contract multipliers before importing.</dd>
+        <dt>Which journal offers the deepest psychology features?</dt>
+        <dd>Edgewonk and TradeTrakR emphasize psychology the most. Edgewonk delivers granular journaling frameworks, while TradeTrakR blends prompts with tilt tracking and AI reminders. TraderSync and Trademetria provide lighter tagging.</dd>
+        <dt>How do I evaluate analytics depth without overfitting?</dt>
+        <dd>Focus on expectancy, MAE/MFE, streaks, and drawdown. Test new filters slowly and look for recurring patterns across instruments or sessions before updating your playbook.</dd>
+        <dt>Can I switch journals without losing historical notes or screenshots?</dt>
+        <dd>Export trades, notes, and attachments regularly. When migrating, import trade data first, then reattach notes or media. Maintaining an external archive keeps context intact.</dd>
+        <dt>Do these platforms handle pricing changes automatically?</dt>
+        <dd>Plans and features evolve often. Verify current pricing, integrations, and trials directly on vendor sites before subscribing.</dd>
+      </dl>
+    </section>
+
+    <section id="further-reading" class="post-section" aria-labelledby="further-reading-heading">
+      <h2 id="further-reading-heading">Further Reading</h2>
+      <p>Continue exploring journaling workflows with the resources below:</p>
+      <ul class="decision-list">
+        <li><a href="../../trading-journal.html">TradeTrakR trading journal overview</a> with <a href="../../ai-trading-journal.html">AI trading journal</a> and <a href="../../trading-journal-features.html#funded-trader-tools">trading psychology tracking</a>.</li>
+        <li><a href="../../blog/posts/tradersync-vs-edgewonk-vs-tradezella.html">TraderSync vs Edgewonk vs TradeZella vs TradeTrakR</a>.</li>
+        <li><a href="../../blog/posts/best-trading-journals-for-futures-traders.html">Best trading journals for futures traders</a>.</li>
+        <li><a href="../../blog/posts/best-trading-journal-for-prop-firm-traders.html">Best trading journal for prop firm traders</a>.</li>
+        <li><a href="../../stats/how-many-trades-per-day-do-day-traders-make.html">How many trades per day do day traders make?</a></li>
+        <li><a href="../../stats/trading-journal-usage-and-benefits-stats.html">Trading journal usage and benefits stats</a>.</li>
+      </ul>
+    </section>
+
+    <section id="cta" class="post-section" aria-labelledby="cta-heading">
+      <div class="cta-box">
+        <h2 id="cta-heading" style="margin:0;">Explore TradeTrakR</h2>
+        <p>See how TradeTrakR combines AI performance insights with psychology tracking in a calm interface built for futures and forex traders.</p>
+        <ul>
+          <li>AI-Powered Performance Insights</li>
+          <li>Psychology &amp; Emotion Tracking</li>
+          <li>Clean, Minimal UX with Futures/Forex Focus</li>
+        </ul>
+        <a href="../../trading-journal.html" class="cta-link">Learn more</a>
+      </div>
+    </section>
