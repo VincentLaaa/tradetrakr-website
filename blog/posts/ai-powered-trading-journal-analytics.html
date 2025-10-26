@@ -192,6 +192,78 @@
     }
   </style>
   <!-- /tt:style -->
+  <!-- tt:style-start -->
+  <style>
+    .tt-hero {
+      margin: 0 0 1.5rem 0;
+      max-width: 100%;
+    }
+    .tt-hero img {
+      border-radius: 12px;
+    }
+    .tt-fig {
+      margin: 1.25rem 0;
+      max-width: 100%;
+    }
+    .tt-fig--wide {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tt-fig--wide img {
+      width: 100%;
+      height: auto;
+    }
+    .tt-stat {
+      border: 1px solid rgba(42,44,52,0.6);
+      background: rgba(21,22,27,0.7);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .tt-stat__value {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: rgba(0,246,255,0.9);
+      margin-bottom: 0.25rem;
+    }
+    .tt-stat__label {
+      color: rgba(233,234,240,0.85);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .tt-stat__subtext {
+      color: rgba(233,234,240,0.7);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .tt-stat__footnote {
+      color: rgba(233,234,240,0.5);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(42,44,52,0.6);
+      padding-top: 0.5rem;
+    }
+    .tt-stat__footnote a {
+      color: rgba(127,90,240,0.8);
+      text-decoration: none;
+    }
+    .tt-stat__footnote a:hover {
+      color: rgba(127,90,240,1);
+    }
+    @media (max-width: 720px) {
+      .tt-fig--wide {
+        padding: 0 0.75rem;
+      }
+      .tt-stat {
+        padding: 0.85rem 1rem;
+      }
+      .tt-stat__value {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+  <!-- tt:style-end -->
   <style>
     .post-container {
       margin: 0 auto;
@@ -445,6 +517,18 @@
     </nav>
     
     <div class="post-content">
+    <!-- tt:hero-start -->
+    <figure class="tt-hero" role="presentation" aria-hidden="true">
+      <img src="../images/ai-analytics/hero-illustration.svg" 
+           alt="AI-powered trading journal analytics visualization"
+           width="1280"
+           height="720"
+           loading="eager"
+           fetchpriority="high"
+           style="width:100%;height:auto;border-radius:12px;"/>
+    </figure>
+    <!-- tt:hero-end -->
+    
     <section class="post-hero">
       <h1>AI-Powered Trading Journal Analytics: Turning Data Into Discipline</h1>
       <div class="tt-meta">

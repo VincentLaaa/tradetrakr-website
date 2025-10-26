@@ -1,0 +1,58 @@
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="600" fill="#0b0c17"/>
+  
+  <!-- Header -->
+  <text x="450" y="40" fill="rgba(233,234,240,0.95)" font-family="system-ui" font-size="20" font-weight="600" text-anchor="middle">Guardrails That Keep You From Chasing Noise</text>
+  
+  <!-- Checklist items -->
+  <g id="check1" transform="translate(50,80)">
+    <circle cx="15" cy="20" r="12" fill="rgba(0,255,136,0.2)" stroke="rgba(0,255,136,0.8)" stroke-width="2"/>
+    <text x="15" y="26" fill="rgba(0,255,136,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+    <rect x="35" y="5" width="810" height="70" fill="rgba(21,22,27,0.5)" stroke="rgba(42,44,52,0.6)" stroke-width="2" rx="10"/>
+    <text x="50" y="28" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="16" font-weight="600">Sample Size Matters</text>
+    <text x="50" y="52" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14">Don't rebuild your playbook every week.</text>
+    <text x="50" y="70" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="12">Wait for at least 30-50 trades before making changes.</text>
+  </g>
+  
+  <g id="check2" transform="translate(50,160)">
+    <circle cx="15" cy="20" r="12" fill="rgba(0,246,255,0.2)" stroke="rgba(0,246,255,0.8)" stroke-width="2"/>
+    <text x="15" y="26" fill="rgba(0,246,255,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+    <rect x="35" y="5" width="810" height="70" fill="rgba(21,22,27,0.5)" stroke="rgba(42,44,52,0.6)" stroke-width="2" rx="10"/>
+    <text x="50" y="28" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="16" font-weight="600">Effect Size Before Novelty</text>
+    <text x="50" y="52" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14">Cool graphics aren't enough.</text>
+    <text x="50" y="70" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="12">Require +0.3R expectancy shift and drawdown reduction.</text>
+  </g>
+  
+  <g id="check3" transform="translate(50,240)">
+    <circle cx="15" cy="20" r="12" fill="rgba(127,90,240,0.2)" stroke="rgba(127,90,240,0.8)" stroke-width="2"/>
+    <text x="15" y="26" fill="rgba(127,90,240,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+    <rect x="35" y="5" width="810" height="70" fill="rgba(21,22,27,0.5)" stroke="rgba(42,44,52,0.6)" stroke-width="2" rx="10"/>
+    <text x="50" y="28" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="16" font-weight="600">Rolling Validation</text>
+    <text x="50" y="52" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14">Re-run on rolling 3-6 month windows.</text>
+    <text x="50" y="70" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="12">Only keep insights that survive the test of time.</text>
+  </g>
+  
+  <g id="check4" transform="translate(50,320)">
+    <circle cx="15" cy="20" r="12" fill="rgba(255,77,205,0.2)" stroke="rgba(255,77,205,0.8)" stroke-width="2"/>
+    <text x="15" y="26" fill="rgba(255,77,205,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+    <rect x="35" y="5" width="810" height="70" fill="rgba(21,22,27,0.5)" stroke="rgba(42,44,52,0.6)" stroke-width="2" rx="10"/>
+    <text x="50" y="28" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="16" font-weight="600">Predefined Acceptance Criteria</text>
+    <text x="50" y="52" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14">Decide success metrics in advance.</text>
+    <text x="50" y="70" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="12">Don't move the goalposts when results disappoint.</text>
+  </g>
+  
+  <g id="check5" transform="translate(50,400)">
+    <circle cx="15" cy="20" r="12" fill="rgba(0,255,136,0.2)" stroke="rgba(0,255,136,0.8)" stroke-width="2"/>
+    <text x="15" y="26" fill="rgba(0,255,136,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+    <rect x="35" y="5" width="810" height="70" fill="rgba(21,22,27,0.5)" stroke="rgba(42,44,52,0.6)" stroke-width="2" rx="10"/>
+    <text x="50" y="28" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="16" font-weight="600">Trust But Verify</text>
+    <text x="50" y="52" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14">Keep insights on probation for 2-3 weeks.</text>
+    <text x="50" y="70" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="12">Archive what doesn't work; keep what does.</text>
+  </g>
+  
+  <!-- Bottom quote -->
+  <text x="450" y="520" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="16" font-style="italic" text-anchor="middle">"The goal isn't to find patterns.</text>
+  <text x="450" y="545" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="16" font-style="italic" text-anchor="middle">It's to find real patterns that hold up when you actually trade them."</text>
+  
+  <desc>Checklist showing 5 guardrails to prevent overfitting in AI trading journal analysis: 1) Sample size matters (30-50 trades minimum), 2) Effect size before novelty (require meaningful expectancy shifts), 3) Rolling validation (re-run on rolling windows), 4) Predefined acceptance criteria (set success metrics in advance), 5) Trust but verify (keep insights on probation).</desc>
+</svg>

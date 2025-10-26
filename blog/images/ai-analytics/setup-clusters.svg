@@ -1,0 +1,54 @@
+<svg width="700" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="700" height="400" fill="#0b0c17"/>
+  
+  <!-- Title -->
+  <text x="350" y="30" fill="rgba(233,234,240,0.95)" font-family="system-ui" font-size="18" font-weight="600" text-anchor="middle">Hidden Setup Family (Before Clustering)</text>
+  
+  <!-- Individual "setups" before clustering -->
+  <g id="setup1">
+    <rect x="40" y="60" width="180" height="80" fill="rgba(42,44,52,0.4)" stroke="rgba(233,234,240,0.3)" stroke-width="1" rx="8"/>
+    <text x="130" y="90" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="14" font-weight="600" text-anchor="middle">Setup A</text>
+    <text x="130" y="115" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="11" text-anchor="middle">Low-vol fade</text>
+    <text x="130" y="130" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="11" text-anchor="middle">+0.2R</text>
+  </g>
+  
+  <g id="setup2">
+    <rect x="240" y="60" width="180" height="80" fill="rgba(42,44,52,0.4)" stroke="rgba(233,234,240,0.3)" stroke-width="1" rx="8"/>
+    <text x="330" y="90" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="14" font-weight="600" text-anchor="middle">Setup B</text>
+    <text x="330" y="115" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="11" text-anchor="middle">Multi-leg fade</text>
+    <text x="330" y="130" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="11" text-anchor="middle">+0.3R</text>
+  </g>
+  
+  <g id="setup3">
+    <rect x="480" y="60" width="180" height="80" fill="rgba(42,44,52,0.4)" stroke="rgba(233,234,240,0.3)" stroke-width="1" rx="8"/>
+    <text x="570" y="90" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="14" font-weight="600" text-anchor="middle">Setup C</text>
+    <text x="570" y="115" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="11" text-anchor="middle">Low-vol multi</text>
+    <text x="570" y="130" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="11" text-anchor="middle">+0.15R</text>
+  </g>
+  
+  <!-- Arrow down -->
+  <line x1="350" y1="160" x2="350" y2="200" stroke="rgba(233,234,240,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="rgba(233,234,240,0.5)"/>
+    </marker>
+  </defs>
+  
+  <!-- Clustered result -->
+  <text x="350" y="230" fill="rgba(233,234,240,0.95)" font-family="system-ui" font-size="18" font-weight="600" text-anchor="middle">After Clustering</text>
+  
+  <g id="cluster">
+    <ellipse cx="350" cy="280" rx="200" ry="80" fill="rgba(0,255,136,0.15)" stroke="rgba(0,255,136,0.6)" stroke-width="2" stroke-dasharray="8,4"/>
+    <text x="350" y="275" fill="rgba(0,255,136,0.9)" font-family="system-ui" font-size="16" font-weight="600" text-anchor="middle">Single Hidden Setup</text>
+    <text x="350" y="295" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="12" text-anchor="middle">Low-volatility, multi-leg fades</text>
+    <text x="350" y="310" fill="rgba(0,255,136,0.9)" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">Combined: +0.65R</text>
+    <text x="350" y="330" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="11" text-anchor="middle">Fewer setups, better execution</text>
+  </g>
+  
+  <!-- Insight text -->
+  <rect x="50" y="360" width="600" height="30" fill="rgba(127,90,240,0.15)" stroke="rgba(127,90,240,0.4)" stroke-width="1" rx="8"/>
+  <text x="350" y="380" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" font-style="italic" text-anchor="middle">Clustering reveals one setup hiding behind many names</text>
+  
+  <desc>Cluster diagram showing before and after AI setup clustering. Before: three separate setups (A, B, C) each showing small positive expectancy. After: AI clustering reveals they are actually variations of the same low-volatility, multi-leg fade setup, with combined expectancy of +0.65R. Key insight: consolidate setups to improve execution quality.</desc>
+</svg>
