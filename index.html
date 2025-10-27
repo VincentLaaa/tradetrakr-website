@@ -641,26 +641,36 @@ body {
       flex-direction: column;
       align-items: center;
     }
-    .trial-modal__input-group {
-      margin-bottom: 1rem;
+    .trial-modal__question {
+      margin-bottom: 1.5rem;
       width: 100%;
-      max-width: 100%;
+      text-align: left;
     }
-    .trial-modal__input-group input {
+    .trial-modal__label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+    }
+    .trial-modal__select {
       width: 100%;
-      padding: 1rem 1.2rem;
+      padding: 0.9rem 1.1rem;
       background: rgba(18, 18, 20, 0.9);
       border: 1px solid rgba(122, 44, 242, 0.35);
       border-radius: 12px;
       color: #ffffff;
-      font-size: 1rem;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
       box-sizing: border-box;
+      cursor: pointer;
     }
-    .trial-modal__input-group input::placeholder {
-      color: rgba(255, 255, 255, 0.45);
+    .trial-modal__select option {
+      background: #0D0D0F;
+      color: #ffffff;
+      padding: 0.5rem;
     }
-    .trial-modal__input-group input:focus {
+    .trial-modal__select:focus {
       outline: none;
       border-color: #7A2CF2;
       box-shadow: 0 0 0 3px rgba(122, 44, 242, 0.25);
@@ -1231,29 +1241,50 @@ body {
           <div class="trial-modal__success-icon">✅</div>
           <h2 class="trial-modal__title">You're in!</h2>
           <p class="trial-modal__text">Check your inbox soon 🚀</p>
-          <button class="trial-modal__btn primary-btn" id="continue-btn">Continue to Site</button>
+          <button class="trial-modal__btn primary-btn" id="continue-btn" style="display: none;">Continue to Site</button>
         </div>
         
-        <!-- Signup Form State -->
+        <!-- Quiz Form State -->
         <div class="trial-modal__signup">
           <h2 class="trial-modal__title" id="modal-title">Start Your Free 7-Day Trial</h2>
-          <p class="trial-modal__subtitle">Unlock automation, deeper analytics, and psychological clarity.</p>
-          <form id="trial-signup-form" class="trial-modal__form">
-            <div class="trial-modal__input-group">
-              <input 
-                type="email" 
-                id="trial-email-input" 
-                placeholder="Enter your email address"
-                required
-                autocomplete="email"
-                aria-label="Email address"
-              />
+          <p class="trial-modal__subtitle">Answer a few quick questions to unlock your trial.</p>
+          <form id="trial-quiz-form" class="trial-modal__form">
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">How long have you been trading?</label>
+              <select id="question-1" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="under-1-year">Under 1 year</option>
+                <option value="1-2-years">1-2 years</option>
+                <option value="2-5-years">2-5 years</option>
+                <option value="5-plus-years">5+ years</option>
+              </select>
             </div>
+            
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">Have you ever used a trading journal?</label>
+              <select id="question-2" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="no">No, never</option>
+                <option value="tried">Tried but gave up</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="yes">Yes, regularly</option>
+              </select>
+            </div>
+            
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">Are you ready to start tracking your trades?</label>
+              <select id="question-3" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="absolutely">Absolutely! Let's go</option>
+                <option value="yes">Yes, I'm ready</option>
+                <option value="maybe">Maybe, let's see</option>
+              </select>
+            </div>
+            
             <div class="trial-modal__error" id="trial-error" role="alert"></div>
             <div class="trial-modal__actions">
               <button type="submit" class="trial-modal__btn primary-btn" id="activate-btn">
-                <span class="btn-text">Activate Trial</span>
-                <span class="btn-loading" style="display: none;">Sending...</span>
+                <span class="btn-text">Claim Your Free Trial</span>
               </button>
               <button type="button" class="trial-modal__btn secondary-btn" id="no-thanks-btn">No thanks</button>
             </div>
@@ -1438,36 +1469,6 @@ body {
     </div>
   </section>
 
-  <!-- Signup Section -->
-  <section class="signup" id="signup">
-    <div class="container section-header">
-      <h2>Start Your Free 7-Day Trial</h2>
-      <p>Join funded traders using TradeTrakR to track P&L, psychology, and AI-powered insights.</p>
-    </div>
-    <div class="container signup-form-wrapper">
-      <div class="signup-form-container">
-        <form id="signup-form" class="signup-form">
-          <div class="form-group">
-            <label for="email-input" class="sr-only">Email Address</label>
-            <input 
-              type="email" 
-              id="email-input" 
-              name="email" 
-              placeholder="Enter your email address"
-              required
-              autocomplete="email"
-            />
-          </div>
-          <button type="submit" class="btn btn-lg" id="signup-submit-btn">
-            <span class="btn-text">Start Free 7-Day Trial</span>
-            <span class="btn-loading" style="display: none;">Sending...</span>
-          </button>
-          <p id="signup-status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <!-- Community -->
   <section class="community">
     <div class="container community-inner">
@@ -1547,93 +1548,16 @@ body {
     }, { threshold: 0.2 });
     sections.forEach(sec => observer2.observe(sec));
 
-    // Signup Form Handler
-    const BACKEND_URL = 'https://tradetrakr-signup-api.onrender.com'; // TODO: Replace with your actual backend URL
-    const signupForm = document.getElementById('signup-form');
-    const signupBtn = document.getElementById('signup-submit-btn');
-    const signupStatus = document.getElementById('signup-status');
-    const emailInput = document.getElementById('email-input');
-    const signupBtnText = signupBtn.querySelector('.btn-text');
-    const signupBtnLoading = signupBtn.querySelector('.btn-loading');
-
-    function setSignupStatus(message, type = '') {
-      signupStatus.textContent = message;
-      signupStatus.className = type || '';
-    }
-
-    function setLoadingState(isLoading) {
-      signupBtn.disabled = isLoading;
-      if (isLoading) {
-        signupBtnText.style.display = 'none';
-        signupBtnLoading.style.display = 'inline-flex';
-      } else {
-        signupBtnText.style.display = 'inline';
-        signupBtnLoading.style.display = 'none';
-      }
-    }
-
-    if (signupForm) {
-      signupForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = emailInput.value.trim();
-        
-        if (!email) {
-          setSignupStatus('Please enter your email address.', 'error');
-          return;
-        }
-
-        setLoadingState(true);
-        setSignupStatus('Sending your signup request...', 'info');
-
-        try {
-          const response = await fetch(`${BACKEND_URL}/api/signup`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email })
-          });
-
-          const data = await response.json();
-
-          if (response.ok && response.status === 200) {
-            setSignupStatus('✅ You\'re in! Check your inbox soon 🚀', 'success');
-            emailInput.value = '';
-            emailInput.blur();
-          } else if (response.status === 409) {
-            setSignupStatus('⚠️ This email is already subscribed.', 'error');
-          } else if (response.status === 400) {
-            setSignupStatus('❌ Please enter a valid email address.', 'error');
-          } else {
-            setSignupStatus('❌ Something went wrong. Please try again.', 'error');
-          }
-        } catch (error) {
-          console.error('Signup error:', error);
-          setSignupStatus('❌ Connection failed. Please check your internet and try again.', 'error');
-        } finally {
-          setLoadingState(false);
-        }
-      });
-    }
-
     // Trial Modal Handler
-    const TRIAL_MODAL_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-      ? "http://localhost:5000"  // Local development (backend runs on port 5000)
-      : "https://tradetrakr-website.onrender.com";  // Production backend URL
-    
     const modal = document.getElementById('trial-modal');
     const modalClose = modal.querySelector('.trial-modal__close');
-    const trialForm = document.getElementById('trial-signup-form');
-    const trialEmailInput = document.getElementById('trial-email-input');
+    const trialForm = document.getElementById('trial-quiz-form');
     const activateBtn = document.getElementById('activate-btn');
     const noThanksBtn = document.getElementById('no-thanks-btn');
     const continueBtn = document.getElementById('continue-btn');
     const trialError = document.getElementById('trial-error');
     const signupState = modal.querySelector('.trial-modal__signup');
     const successState = modal.querySelector('.trial-modal__success');
-    const modalBtnText = activateBtn.querySelector('.btn-text');
-    const modalBtnLoading = activateBtn.querySelector('.btn-loading');
 
     let hasShownModal = false;
 
@@ -1682,7 +1606,7 @@ body {
     function showSuccess() {
       signupState.style.display = 'none';
       successState.style.display = 'block';
-      markAsSubscribed(); // Never show modal again after successful signup
+      markAsSubscribed(); // Never show modal again after successful quiz
       
       // Redirect to Whop checkout after 2 seconds
       setTimeout(() => {
@@ -1692,17 +1616,6 @@ body {
 
     function setTrialError(message) {
       trialError.textContent = message;
-    }
-
-    function setModalLoadingState(isLoading) {
-      activateBtn.disabled = isLoading;
-      if (isLoading) {
-        modalBtnText.style.display = 'none';
-        modalBtnLoading.style.display = 'inline-flex';
-      } else {
-        modalBtnText.style.display = 'inline';
-        modalBtnLoading.style.display = 'none';
-      }
     }
 
     // Close modal handlers
@@ -1731,48 +1644,26 @@ body {
       }
     });
 
-    // Form submission
+    // Quiz form submission
     if (trialForm) {
-      trialForm.addEventListener('submit', async (e) => {
+      trialForm.addEventListener('submit', (e) => {
         e.preventDefault();
         setTrialError('');
         
-        const email = trialEmailInput.value.trim();
+        const q1 = document.getElementById('question-1').value;
+        const q2 = document.getElementById('question-2').value;
+        const q3 = document.getElementById('question-3').value;
         
-        if (!email) {
-          setTrialError('Please enter your email address');
+        if (!q1 || !q2 || !q3) {
+          setTrialError('Please answer all questions');
           return;
         }
-
-        setModalLoadingState(true);
         
-        try {
-          const response = await fetch(`${TRIAL_MODAL_URL}/api/signup`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email })
-          });
-
-          const data = await response.json();
-
-          if (response.ok && response.status === 200) {
-            console.log(`New trial signup: ${email}`);
-            showSuccess();
-          } else if (response.status === 409) {
-            setTrialError('This email is already subscribed');
-          } else if (response.status === 400) {
-            setTrialError('Please enter a valid email address');
-          } else {
-            setTrialError('Something went wrong. Please try again.');
-          }
-        } catch (error) {
-          console.error('Trial signup error:', error);
-          setTrialError('Connection failed. Please try again.');
-        } finally {
-          setModalLoadingState(false);
-        }
+        // Log quiz responses for your records
+        console.log('Quiz responses:', { q1, q2, q3 });
+        
+        // Show success and redirect
+        showSuccess();
       });
     }
 

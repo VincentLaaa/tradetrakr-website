@@ -19,6 +19,3 @@ node_modules/
 .DS_Store
 *.log
 
-# Backend database
-backend/subscribers.db
-backend/.env
