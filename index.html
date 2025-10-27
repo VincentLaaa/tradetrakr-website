@@ -115,8 +115,10 @@ body {
       background: linear-gradient(135deg, rgba(13, 12, 40, 0.82), rgba(17, 10, 52, 0.65)); 
       backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(0, 246, 255, 0.12); 
-      position: sticky; 
-      top: 0; 
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       box-shadow: 0 12px 40px rgba(10, 0, 45, 0.35);
       transition: transform 0.3s ease-in-out;
@@ -260,6 +262,7 @@ body {
     .hero {
       position: relative;
       padding: 6rem 0;
+      padding-top: 8rem;
       overflow: hidden;
     }
     .hero::before {
@@ -1750,39 +1753,37 @@ body {
     const progressBar = document.getElementById("progress-bar");
     let lastScrollTop = 0;
     const header = document.querySelector('.header');
-    const scrollThreshold = 100; // Start hiding after scrolling 100px
-    const scrollDelta = 5; // Minimum scroll distance to trigger hide/show
+    const scrollThreshold = 100;
+    let ticking = false;
     
-    window.addEventListener("scroll", () => {
-      // Get current scroll position and clamp it to valid range
-      let scrollTop = Math.max(0, window.pageYOffset || window.scrollY || 0);
-      let docHeight = document.body.scrollHeight - window.innerHeight;
-      let scrolled = (scrollTop / docHeight) * 100;
-      progressBar.style.width = scrolled + "%";
+    function updateHeader(scrollTop) {
+      const scrollDiff = scrollTop - lastScrollTop;
       
-      // Calculate scroll difference
-      const scrollDiff = Math.abs(scrollTop - lastScrollTop);
-      
-      // Only process if scrolled enough to avoid jitter on mobile
-      if (scrollDiff > scrollDelta) {
-        // Hide/show header based on scroll direction
-        if (scrollTop > scrollThreshold && scrollTop < docHeight) {
-          if (scrollTop > lastScrollTop) {
-            // Scrolling down - hide header
-            header.classList.add('hidden');
-          } else {
-            // Scrolling up - show header
-            header.classList.remove('hidden');
-          }
-        } else if (scrollTop <= scrollThreshold) {
-          // Always show header when near the top
+      if (scrollTop <= scrollThreshold) {
+        header.classList.remove('hidden');
+      } else if (Math.abs(scrollDiff) > 5) {
+        if (scrollDiff > 0) {
+          header.classList.add('hidden');
+        } else {
           header.classList.remove('hidden');
         }
-        
-        // Update last scroll position only after significant scroll
-        lastScrollTop = scrollTop;
       }
-    });
+      
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      ticking = false;
+    }
+    
+    window.addEventListener("scroll", () => {
+      const scrollTop = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = Math.min(100, (scrollTop / docHeight) * 100);
+      progressBar.style.width = scrolled + "%";
+      
+      if (!ticking) {
+        window.requestAnimationFrame(() => updateHeader(scrollTop));
+        ticking = true;
+      }
+    }, { passive: true });
 
     const tiltCircle = document.getElementById("tiltCircle");
     const tiltText = document.getElementById("tiltText");
