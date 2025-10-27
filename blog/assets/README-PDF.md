@@ -1,58 +1,47 @@
-# Daily Psychology Log PDF Generation
+# Prop Firm Evaluation Checklist PDF
 
-## Files Created
+## Generate Using
 
-- `daily-psychology-log.svg` - Source SVG template
-- `daily-psychology-log.pdf` - **To be generated** (A4/Letter format)
-- `daily-psychology-log.png` - **To be generated** (Preview image for article)
+You can create this PDF using:
 
-## Generation Instructions
+1. **Design tools:** Figma, Adobe Illustrator, InDesign
+2. **Code-to-PDF:** Puppeteer, weasyprint, LaTeX
+3. **Design templates:** Canva, Overleaf
 
-### Option 1: Using Inkscape (Recommended)
-```bash
-# Convert SVG to PDF
-inkscape blog/assets/daily-psychology-log.svg --export-type=pdf --export-filename=blog/assets/daily-psychology-log.pdf
+## Content Structure
 
-# Convert SVG to PNG (for preview)
-inkscape blog/assets/daily-psychology-log.svg --export-type=png --export-filename=blog/assets/daily-psychology-log.png -h 1200
-```
+### Header
+- Title: "Prop Firm Evaluation Checklist"
+- Logo/Brand: TradeTrakR
+- Date fields
 
-### Option 2: Using Online Converter
-- Upload `daily-psychology-log.svg` to https://svgtopdf.com
-- Download and save as `daily-psychology-log.pdf`
-- Export PNG preview at 1200px height
+### Section 1: Pre-Trade
+- ☐ News filters configured
+- ☐ Session window verified (GMT/local)
+- ☐ Max contracts set
+- ☐ Risk per trade calculated ($X)
+- ☐ Daily loss buffer checked ($X remaining)
 
-### Option 3: Using ImageMagick
-```bash
-convert blog/assets/daily-psychology-log.svg blog/assets/daily-psychology-log.pdf
-convert -density 300 -resize 1200x1200 blog/assets/daily-psychology-log.svg blog/assets/daily-psychology-log.png
-```
+### Section 2: In-Session
+- ☐ Trailing drawdown tracker open
+- ☐ Static drawdown tracker open  
+- ☐ Rule breach counter: 0
+- ☐ Cooldown trigger: Not reached
 
-## PDF Specifications
+### Section 3: Post-Trade
+- ☐ Rule adherence logged
+- ☐ Screenshots captured
+- ☐ Notes added
+- ☐ Exported to evidence archive
 
-- Format: A4 (8.27" x 11.69") or US Letter (8.5" x 11")
-- Background: Dark theme (#0f101c)
-- Text color: Light gray (rgba(233, 234, 240))
-- Accent colors:
-  - Electric Blue: #00f6ff
-  - Violet: #7f5af0
-  - Magenta: #ff4ecd
+### Footer
+- Page 1 of 1
+- "For evaluation and funded account compliance"
 
-## Content Sections
+## Design Specs
 
-1. **Pre-Market Intention** - Date, session, energy level, risk parameters
-2. **Emotion Tags** - Trade 1-3 with emotion tags, triggers, and counter-actions
-3. **Cooldown Events** - Rule breaks, cooldown triggers, reasons
-4. **Post-Session Reflection** - What helped, what hurt, tomorrow's rule
-
-## PNG Preview
-
-- Width: 612px (maintains aspect ratio)
-- Height: 792px (A4 standard)
-- Use for article preview
-- Format: PNG with transparent background (optional)
-
-## Usage
-
-The PDF will be linked from the article's "Daily Psychology System" section with a callout box.
-
+- Size: A4 (8.27 × 11.69 in) or Letter (8.5 × 11 in)
+- Colors: Use brand gradient (#00f6ff → #7f5af0 → #ff4ecd)
+- Font: System UI or Poppins
+- Checkboxes: Circle with checkmark when filled
+- Layout: Two-column or single-column with clear sections
