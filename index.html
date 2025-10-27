@@ -2170,14 +2170,19 @@ body {
       return true;
     }
 
-    function showModal(force = false) {
+    function showModal(force = false, lockScrollImmediately = false) {
       // Don't show if localStorage says they already subscribed
       if (!force && shouldShowModal() === false) return;
       if (!force && hasShownModal) return;
       hasShownModal = true;
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
-      disableScroll(); // ✅ Use unified scroll lock
+      
+      // ✅ Only lock scroll if explicitly requested (manual trigger)
+      // Auto-trigger shows modal but allows scrolling until user interacts
+      if (lockScrollImmediately) {
+        disableScroll();
+      }
     }
     
     function markAsDismissed() {
@@ -2191,7 +2196,14 @@ body {
     function hideModal() {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
-      enableScroll(); // ✅ Use unified scroll unlock
+      enableScroll(); // ✅ Always unlock scroll on modal close
+    }
+    
+    // ✅ Lock scroll when user interacts with modal (only if not already locked)
+    function lockScrollOnInteraction() {
+      if (!document.body.dataset.scrollY) {
+        disableScroll();
+      }
     }
 
     function showSuccess() {
@@ -2208,6 +2220,21 @@ body {
     function setTrialError(message) {
       trialError.textContent = message;
     }
+
+    // ✅ Lock scroll when user interacts with modal content
+    // Attach to all interactive elements inside modal
+    const modalInteractiveElements = [
+      modal.querySelector('#activate-btn'),
+      modal.querySelector('#question-1'),
+      modal.querySelector('#question-2'),
+      modal.querySelector('#question-3'),
+      ...modal.querySelectorAll('.trial-modal__btn')
+    ].filter(Boolean); // Remove null elements
+    
+    modalInteractiveElements.forEach(element => {
+      element.addEventListener('focus', lockScrollOnInteraction, { once: true });
+      element.addEventListener('click', lockScrollOnInteraction, { once: true });
+    });
 
     // Close modal handlers
     modalClose.addEventListener('click', () => {
@@ -2251,13 +2278,20 @@ body {
       });
     }
 
-    // Show modal after 2 seconds on page load
+    // ✅ Show modal after 2 seconds on page load (NO scroll lock - user can still scroll)
     setTimeout(() => {
       // Only show on homepage (not on subpages)
       if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('.html') === false) {
-        showModal();
+        showModal(false, false); // Auto-trigger: don't lock scroll until interaction
       }
     }, 2000);
+    
+    // ✅ Safety fallback: Always unlock scroll if modal is closed
+    modal.addEventListener('transitionend', () => {
+      if (!modal.classList.contains('active')) {
+        enableScroll();
+      }
+    });
 
     // Manual Modal Handler (for "Get Started Free" buttons)
     const manualModal = document.getElementById('manual-trial-modal');
@@ -2269,12 +2303,12 @@ body {
 
     function showManualModal() {
       manualModal.style.display = 'flex';
-      disableScroll(); // ✅ Use unified scroll lock
+      disableScroll(); // ✅ Manual trigger: lock scroll immediately (user clicked button)
     }
 
     function hideManualModal() {
       manualModal.style.display = 'none';
-      enableScroll(); // ✅ Use unified scroll unlock
+      enableScroll(); // ✅ Always unlock scroll on modal close
     }
 
     function showManualSuccess() {
@@ -2286,11 +2320,18 @@ body {
       }, 2000);
     }
 
-    // Close handlers
+    // Close handlers - all ensure scroll unlock
     manualModalClose.addEventListener('click', hideManualModal);
     manualNoThanksBtn.addEventListener('click', hideManualModal);
     manualModal.querySelector('.manual-trial-modal__overlay').addEventListener('click', (e) => {
       if (e.target === e.currentTarget) hideManualModal();
+    });
+    
+    // ✅ Safety fallback for manual modal: Always unlock scroll if modal is hidden
+    manualModal.addEventListener('transitionend', () => {
+      if (manualModal.style.display === 'none') {
+        enableScroll();
+      }
     });
 
     // Form submission
