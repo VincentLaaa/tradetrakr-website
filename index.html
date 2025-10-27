@@ -770,6 +770,188 @@ body {
       }
     }
 
+    /* Manual Trigger Modal (duplicate styles) */
+    .manual-trial-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .manual-trial-modal.active {
+      display: flex;
+    }
+    .manual-trial-modal__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 6, 14, 0.92);
+      backdrop-filter: blur(12px);
+    }
+    .manual-trial-modal__content {
+      position: relative;
+      background: #0D0D0F;
+      border-radius: 24px;
+      padding: 3rem 2.5rem 2.5rem;
+      width: 100%;
+      max-width: 480px;
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      box-shadow: 
+        0 32px 80px rgba(5, 6, 14, 0.85),
+        0 0 0 1px rgba(122, 44, 242, 0.15),
+        0 0 60px rgba(122, 44, 242, 0.2);
+      animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .manual-trial-modal__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .manual-trial-modal__close:hover {
+      background: rgba(122, 44, 242, 0.2);
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+    .manual-trial-modal__body {
+      text-align: center;
+    }
+    .manual-trial-modal__title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff, #7A2CF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .manual-trial-modal__subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 2rem;
+      line-height: 1.5;
+    }
+    .manual-trial-modal__form {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .manual-trial-modal__question {
+      margin-bottom: 1.5rem;
+      width: 100%;
+      text-align: left;
+    }
+    .manual-trial-modal__label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+    }
+    .manual-trial-modal__select {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+    .manual-trial-modal__select option {
+      background: #0D0D0F;
+      color: #ffffff;
+      padding: 0.5rem;
+    }
+    .manual-trial-modal__select:focus {
+      outline: none;
+      border-color: #7A2CF2;
+      box-shadow: 0 0 0 3px rgba(122, 44, 242, 0.25);
+      background: rgba(18, 18, 20, 1);
+    }
+    .manual-trial-modal__error {
+      min-height: 1.5rem;
+      font-size: 0.9rem;
+      color: #ff4d4f;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .manual-trial-modal__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .manual-trial-modal__btn {
+      width: 100%;
+      padding: 0.95rem 1.8rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .manual-trial-modal__btn.primary-btn {
+      background: linear-gradient(135deg, #7A2CF2, #9d5ff5);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(122, 44, 242, 0.35);
+    }
+    .manual-trial-modal__btn.primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(122, 44, 242, 0.5);
+    }
+    .manual-trial-modal__btn.primary-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .manual-trial-modal__btn.secondary-btn {
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .manual-trial-modal__btn.secondary-btn:hover {
+      background: rgba(22, 22, 24, 0.95);
+      border-color: rgba(122, 44, 242, 0.45);
+    }
+    .manual-trial-modal__success {
+      padding: 1rem 0;
+    }
+    .manual-trial-modal__success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: successPulse 0.6s ease;
+    }
+    .manual-trial-modal__text {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 2rem;
+    }
+
     /* Demo */
     .demo { 
       padding: 5rem 0; 
@@ -1230,8 +1412,71 @@ body {
   </style>
 </head>
 <body>
-  <!-- Trial Signup Modal -->
-  <div id="trial-modal" class="trial-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+  <!-- Manual Trigger Popup -->
+  <div id="manual-trial-modal" class="manual-trial-modal" style="display: none;">
+    <div class="manual-trial-modal__overlay"></div>
+    <div class="manual-trial-modal__content">
+      <button class="manual-trial-modal__close" aria-label="Close modal">&times;</button>
+      <div class="manual-trial-modal__body">
+        <!-- Success State -->
+        <div class="manual-trial-modal__success" style="display: none;">
+          <div class="manual-trial-modal__success-icon">✅</div>
+          <h2 class="manual-trial-modal__title">You're in!</h2>
+          <p class="manual-trial-modal__text">Redirecting you to your free trial... 🚀</p>
+        </div>
+        
+        <!-- Quiz Form State -->
+        <div class="manual-trial-modal__signup">
+          <h2 class="manual-trial-modal__title">Start Your Free 7-Day Trial</h2>
+          <p class="manual-trial-modal__subtitle">Answer a few quick questions to unlock your trial.</p>
+          <form id="manual-trial-quiz-form" class="manual-trial-modal__form">
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">How long have you been trading?</label>
+              <select id="manual-question-1" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="under-1-year">Under 1 year</option>
+                <option value="1-2-years">1-2 years</option>
+                <option value="2-5-years">2-5 years</option>
+                <option value="5-plus-years">5+ years</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">Have you ever used a trading journal?</label>
+              <select id="manual-question-2" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="no">No, never</option>
+                <option value="tried">Tried but gave up</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="yes">Yes, regularly</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">Are you ready to start tracking your trades?</label>
+              <select id="manual-question-3" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="absolutely">Absolutely! Let's go</option>
+                <option value="yes">Yes, I'm ready</option>
+                <option value="maybe">Maybe, let's see</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__error" id="manual-trial-error" role="alert"></div>
+            <div class="manual-trial-modal__actions">
+              <button type="submit" class="manual-trial-modal__btn primary-btn" id="manual-activate-btn">
+                <span class="btn-text">Claim Your Free Trial</span>
+              </button>
+              <button type="button" class="manual-trial-modal__btn secondary-btn" id="manual-no-thanks-btn">No thanks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trial Signup Modal (Auto-trigger) -->
+  <div id="trial-modal" class="trial-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" style="display: none;">
     <div class="trial-modal__overlay"></div>
     <div class="trial-modal__content">
       <button class="trial-modal__close" aria-label="Close modal">&times;</button>
@@ -1581,8 +1826,8 @@ body {
       return true;
     }
 
-    function showModal() {
-      if (hasShownModal || !shouldShowModal()) return;
+    function showModal(force = false) {
+      if (!force && hasShownModal && !shouldShowModal()) return;
       hasShownModal = true;
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
@@ -1675,21 +1920,74 @@ body {
       }
     }, 2000);
 
-    // Make "Get Started Free" buttons open the modal
+    // Manual Modal Handler (for "Get Started Free" buttons)
+    const manualModal = document.getElementById('manual-trial-modal');
+    const manualModalClose = manualModal.querySelector('.manual-trial-modal__close');
+    const manualTrialForm = document.getElementById('manual-trial-quiz-form');
+    const manualNoThanksBtn = document.getElementById('manual-no-thanks-btn');
+    const manualSignupState = manualModal.querySelector('.manual-trial-modal__signup');
+    const manualSuccessState = manualModal.querySelector('.manual-trial-modal__success');
+
+    function showManualModal() {
+      manualModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hideManualModal() {
+      manualModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function showManualSuccess() {
+      manualSignupState.style.display = 'none';
+      manualSuccessState.style.display = 'block';
+      
+      setTimeout(() => {
+        window.location.href = 'https://whop.com/checkout/plan_5LC9GeWOWIlEy?d2c=true';
+      }, 2000);
+    }
+
+    // Close handlers
+    manualModalClose.addEventListener('click', hideManualModal);
+    manualNoThanksBtn.addEventListener('click', hideManualModal);
+    manualModal.querySelector('.manual-trial-modal__overlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) hideManualModal();
+    });
+
+    // Form submission
+    if (manualTrialForm) {
+      manualTrialForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const q1 = document.getElementById('manual-question-1').value;
+        const q2 = document.getElementById('manual-question-2').value;
+        const q3 = document.getElementById('manual-question-3').value;
+        
+        if (!q1 || !q2 || !q3) {
+          document.getElementById('manual-trial-error').textContent = 'Please answer all questions';
+          return;
+        }
+        
+        console.log('Quiz responses:', { q1, q2, q3 });
+        showManualSuccess();
+      });
+    }
+
+    // Make "Get Started Free" buttons open the manual modal
     const getStartedBtn = document.getElementById('get-started-btn');
     const heroGetStartedBtn = document.getElementById('hero-get-started-btn');
     
     if (getStartedBtn) {
       getStartedBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        showModal();
+        showManualModal();
       });
     }
     
     if (heroGetStartedBtn) {
       heroGetStartedBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        showModal();
+        showManualModal();
       });
     }
   </script>
