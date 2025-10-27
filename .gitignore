@@ -18,3 +18,7 @@ node_modules/
 # OS/editor junk
 .DS_Store
 *.log
+
+# Backend database
+backend/subscribers.db
+backend/.env

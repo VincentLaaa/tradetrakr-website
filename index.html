@@ -457,6 +457,309 @@ body {
       color: var(--accent-electric);
     }
 
+    /* Signup Form */
+    .signup {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .signup::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 246, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(127, 90, 240, 0.1), transparent 58%);
+      pointer-events: none;
+    }
+    .signup-form-wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .signup-form-container {
+      background: rgba(13, 16, 38, 0.78);
+      backdrop-filter: blur(24px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(0, 246, 255, 0.22);
+      box-shadow: 
+        0 24px 48px rgba(5, 0, 26, 0.55),
+        0 0 40px rgba(0, 246, 255, 0.18),
+        inset 0 0 32px rgba(255, 255, 255, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .signup-form input[type="email"] {
+      width: 100%;
+      padding: 0.95rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 246, 255, 0.25);
+      background: rgba(10, 8, 30, 0.9);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .signup-form input[type="email"]::placeholder {
+      color: rgba(198, 200, 255, 0.55);
+    }
+    .signup-form input[type="email"]:focus {
+      outline: none;
+      border-color: rgba(0, 246, 255, 0.65);
+      box-shadow: 0 0 0 3px rgba(0, 246, 255, 0.25), 0 12px 32px rgba(0, 246, 255, 0.15);
+      background: rgba(10, 8, 35, 0.95);
+    }
+    .signup-form .btn {
+      width: 100%;
+    }
+    #signup-status {
+      margin-top: 1.2rem;
+      min-height: 1.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+      color: rgba(245, 245, 255, 0.75);
+    }
+    #signup-status.success {
+      color: #00c878;
+    }
+    #signup-status.error {
+      color: #ff4d4f;
+    }
+    #signup-status.info {
+      color: rgba(245, 245, 255, 0.65);
+    }
+    .btn-loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-loading::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinner 0.6s linear infinite;
+    }
+    @keyframes spinner {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Trial Signup Modal */
+    .trial-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .trial-modal.active {
+      display: flex;
+    }
+    .trial-modal__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 6, 14, 0.92);
+      backdrop-filter: blur(12px);
+    }
+    .trial-modal__content {
+      position: relative;
+      background: #0D0D0F;
+      border-radius: 24px;
+      padding: 3rem 2.5rem 2.5rem;
+      width: 100%;
+      max-width: 480px;
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      box-shadow: 
+        0 32px 80px rgba(5, 6, 14, 0.85),
+        0 0 0 1px rgba(122, 44, 242, 0.15),
+        0 0 60px rgba(122, 44, 242, 0.2);
+      animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    @keyframes modalSlideIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .trial-modal__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .trial-modal__close:hover {
+      background: rgba(122, 44, 242, 0.2);
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+    .trial-modal__body {
+      text-align: center;
+    }
+    .trial-modal__title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff, #7A2CF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .trial-modal__subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 2rem;
+      line-height: 1.5;
+    }
+    .trial-modal__form {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .trial-modal__input-group {
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 100%;
+    }
+    .trial-modal__input-group input {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    .trial-modal__input-group input::placeholder {
+      color: rgba(255, 255, 255, 0.45);
+    }
+    .trial-modal__input-group input:focus {
+      outline: none;
+      border-color: #7A2CF2;
+      box-shadow: 0 0 0 3px rgba(122, 44, 242, 0.25);
+      background: rgba(18, 18, 20, 1);
+    }
+    .trial-modal__error {
+      min-height: 1.5rem;
+      font-size: 0.9rem;
+      color: #ff4d4f;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .trial-modal__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .trial-modal__btn {
+      width: 100%;
+      padding: 0.95rem 1.8rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .trial-modal__btn.primary-btn {
+      background: linear-gradient(135deg, #7A2CF2, #9d5ff5);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(122, 44, 242, 0.35);
+    }
+    .trial-modal__btn.primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(122, 44, 242, 0.5);
+    }
+    .trial-modal__btn.primary-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .trial-modal__btn.secondary-btn {
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .trial-modal__btn.secondary-btn:hover {
+      background: rgba(22, 22, 24, 0.95);
+      border-color: rgba(122, 44, 242, 0.45);
+    }
+    .trial-modal__success {
+      padding: 1rem 0;
+    }
+    .trial-modal__success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: successPulse 0.6s ease;
+    }
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .trial-modal__text {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 2rem;
+    }
+    .btn-loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-loading::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinner 0.6s linear infinite;
+    }
+
+    @media (max-width: 520px) {
+      .trial-modal__content {
+        padding: 2rem 1.5rem 1.5rem;
+        max-width: 100%;
+      }
+      .trial-modal__title {
+        font-size: 1.5rem;
+      }
+      .trial-modal__subtitle {
+        font-size: 0.95rem;
+      }
+    }
+
     /* Demo */
     .demo { 
       padding: 5rem 0; 
@@ -917,6 +1220,49 @@ body {
   </style>
 </head>
 <body>
+  <!-- Trial Signup Modal -->
+  <div id="trial-modal" class="trial-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="trial-modal__overlay"></div>
+    <div class="trial-modal__content">
+      <button class="trial-modal__close" aria-label="Close modal">&times;</button>
+      <div class="trial-modal__body">
+        <!-- Success State -->
+        <div class="trial-modal__success" style="display: none;">
+          <div class="trial-modal__success-icon">✅</div>
+          <h2 class="trial-modal__title">You're in!</h2>
+          <p class="trial-modal__text">Check your inbox soon 🚀</p>
+          <button class="trial-modal__btn primary-btn" id="continue-btn">Continue to Site</button>
+        </div>
+        
+        <!-- Signup Form State -->
+        <div class="trial-modal__signup">
+          <h2 class="trial-modal__title" id="modal-title">Start Your Free 7-Day Trial</h2>
+          <p class="trial-modal__subtitle">Unlock automation, deeper analytics, and psychological clarity.</p>
+          <form id="trial-signup-form" class="trial-modal__form">
+            <div class="trial-modal__input-group">
+              <input 
+                type="email" 
+                id="trial-email-input" 
+                placeholder="Enter your email address"
+                required
+                autocomplete="email"
+                aria-label="Email address"
+              />
+            </div>
+            <div class="trial-modal__error" id="trial-error" role="alert"></div>
+            <div class="trial-modal__actions">
+              <button type="submit" class="trial-modal__btn primary-btn" id="activate-btn">
+                <span class="btn-text">Activate Trial</span>
+                <span class="btn-loading" style="display: none;">Sending...</span>
+              </button>
+              <button type="button" class="trial-modal__btn secondary-btn" id="no-thanks-btn">No thanks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Progress bar -->
   <div id="progress-bar"></div>
   
@@ -1092,6 +1438,36 @@ body {
     </div>
   </section>
 
+  <!-- Signup Section -->
+  <section class="signup" id="signup">
+    <div class="container section-header">
+      <h2>Start Your Free 7-Day Trial</h2>
+      <p>Join funded traders using TradeTrakR to track P&L, psychology, and AI-powered insights.</p>
+    </div>
+    <div class="container signup-form-wrapper">
+      <div class="signup-form-container">
+        <form id="signup-form" class="signup-form">
+          <div class="form-group">
+            <label for="email-input" class="sr-only">Email Address</label>
+            <input 
+              type="email" 
+              id="email-input" 
+              name="email" 
+              placeholder="Enter your email address"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <button type="submit" class="btn btn-lg" id="signup-submit-btn">
+            <span class="btn-text">Start Free 7-Day Trial</span>
+            <span class="btn-loading" style="display: none;">Sending...</span>
+          </button>
+          <p id="signup-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- Community -->
   <section class="community">
     <div class="container community-inner">
@@ -1170,6 +1546,243 @@ body {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); } });
     }, { threshold: 0.2 });
     sections.forEach(sec => observer2.observe(sec));
+
+    // Signup Form Handler
+    const BACKEND_URL = 'https://tradetrakr-signup-api.onrender.com'; // TODO: Replace with your actual backend URL
+    const signupForm = document.getElementById('signup-form');
+    const signupBtn = document.getElementById('signup-submit-btn');
+    const signupStatus = document.getElementById('signup-status');
+    const emailInput = document.getElementById('email-input');
+    const signupBtnText = signupBtn.querySelector('.btn-text');
+    const signupBtnLoading = signupBtn.querySelector('.btn-loading');
+
+    function setSignupStatus(message, type = '') {
+      signupStatus.textContent = message;
+      signupStatus.className = type || '';
+    }
+
+    function setLoadingState(isLoading) {
+      signupBtn.disabled = isLoading;
+      if (isLoading) {
+        signupBtnText.style.display = 'none';
+        signupBtnLoading.style.display = 'inline-flex';
+      } else {
+        signupBtnText.style.display = 'inline';
+        signupBtnLoading.style.display = 'none';
+      }
+    }
+
+    if (signupForm) {
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = emailInput.value.trim();
+        
+        if (!email) {
+          setSignupStatus('Please enter your email address.', 'error');
+          return;
+        }
+
+        setLoadingState(true);
+        setSignupStatus('Sending your signup request...', 'info');
+
+        try {
+          const response = await fetch(`${BACKEND_URL}/api/signup`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email })
+          });
+
+          const data = await response.json();
+
+          if (response.ok && response.status === 200) {
+            setSignupStatus('✅ You\'re in! Check your inbox soon 🚀', 'success');
+            emailInput.value = '';
+            emailInput.blur();
+          } else if (response.status === 409) {
+            setSignupStatus('⚠️ This email is already subscribed.', 'error');
+          } else if (response.status === 400) {
+            setSignupStatus('❌ Please enter a valid email address.', 'error');
+          } else {
+            setSignupStatus('❌ Something went wrong. Please try again.', 'error');
+          }
+        } catch (error) {
+          console.error('Signup error:', error);
+          setSignupStatus('❌ Connection failed. Please check your internet and try again.', 'error');
+        } finally {
+          setLoadingState(false);
+        }
+      });
+    }
+
+    // Trial Modal Handler
+    const TRIAL_MODAL_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+      ? "http://localhost:5000"  // Local development (backend runs on port 5000)
+      : "https://tradetrakr-website.onrender.com";  // Production backend URL
+    
+    const modal = document.getElementById('trial-modal');
+    const modalClose = modal.querySelector('.trial-modal__close');
+    const trialForm = document.getElementById('trial-signup-form');
+    const trialEmailInput = document.getElementById('trial-email-input');
+    const activateBtn = document.getElementById('activate-btn');
+    const noThanksBtn = document.getElementById('no-thanks-btn');
+    const continueBtn = document.getElementById('continue-btn');
+    const trialError = document.getElementById('trial-error');
+    const signupState = modal.querySelector('.trial-modal__signup');
+    const successState = modal.querySelector('.trial-modal__success');
+    const modalBtnText = activateBtn.querySelector('.btn-text');
+    const modalBtnLoading = activateBtn.querySelector('.btn-loading');
+
+    let hasShownModal = false;
+
+    // Check if user has already seen/submitted the modal
+    function shouldShowModal() {
+      // Check if they already successfully signed up
+      if (localStorage.getItem('tradetrakr_trial_subscribed') === 'true') {
+        return false;
+      }
+      
+      // Check if they dismissed it (don't show for 30 days)
+      const dismissed = localStorage.getItem('tradetrakr_trial_dismissed');
+      if (dismissed) {
+        const dismissedDate = new Date(dismissed);
+        const daysSinceDismiss = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
+        if (daysSinceDismiss < 30) {
+          return false;
+        }
+      }
+      
+      return true;
+    }
+
+    function showModal() {
+      if (hasShownModal || !shouldShowModal()) return;
+      hasShownModal = true;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function markAsDismissed() {
+      localStorage.setItem('tradetrakr_trial_dismissed', new Date().toISOString());
+    }
+    
+    function markAsSubscribed() {
+      localStorage.setItem('tradetrakr_trial_subscribed', 'true');
+    }
+
+    function hideModal() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function showSuccess() {
+      signupState.style.display = 'none';
+      successState.style.display = 'block';
+      markAsSubscribed(); // Never show modal again after successful signup
+      
+      // Redirect to Whop checkout after 2 seconds
+      setTimeout(() => {
+        window.location.href = 'https://whop.com/checkout/plan_5LC9GeWOWIlEy?d2c=true';
+      }, 2000);
+    }
+
+    function setTrialError(message) {
+      trialError.textContent = message;
+    }
+
+    function setModalLoadingState(isLoading) {
+      activateBtn.disabled = isLoading;
+      if (isLoading) {
+        modalBtnText.style.display = 'none';
+        modalBtnLoading.style.display = 'inline-flex';
+      } else {
+        modalBtnText.style.display = 'inline';
+        modalBtnLoading.style.display = 'none';
+      }
+    }
+
+    // Close modal handlers
+    modalClose.addEventListener('click', () => {
+      markAsDismissed();
+      hideModal();
+    });
+    noThanksBtn.addEventListener('click', () => {
+      markAsDismissed();
+      hideModal();
+    });
+    continueBtn.addEventListener('click', hideModal);
+
+    // Close modal on overlay click
+    modal.querySelector('.trial-modal__overlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        markAsDismissed();
+        hideModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        hideModal();
+      }
+    });
+
+    // Form submission
+    if (trialForm) {
+      trialForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        setTrialError('');
+        
+        const email = trialEmailInput.value.trim();
+        
+        if (!email) {
+          setTrialError('Please enter your email address');
+          return;
+        }
+
+        setModalLoadingState(true);
+        
+        try {
+          const response = await fetch(`${TRIAL_MODAL_URL}/api/signup`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email })
+          });
+
+          const data = await response.json();
+
+          if (response.ok && response.status === 200) {
+            console.log(`New trial signup: ${email}`);
+            showSuccess();
+          } else if (response.status === 409) {
+            setTrialError('This email is already subscribed');
+          } else if (response.status === 400) {
+            setTrialError('Please enter a valid email address');
+          } else {
+            setTrialError('Something went wrong. Please try again.');
+          }
+        } catch (error) {
+          console.error('Trial signup error:', error);
+          setTrialError('Connection failed. Please try again.');
+        } finally {
+          setModalLoadingState(false);
+        }
+      });
+    }
+
+    // Show modal after 2 seconds on page load
+    setTimeout(() => {
+      // Only show on homepage (not on subpages)
+      if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('.html') === false) {
+        showModal();
+      }
+    }, 2000);
   </script>
 </body>
 </html>
