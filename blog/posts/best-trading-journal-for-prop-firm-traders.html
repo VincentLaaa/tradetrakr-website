@@ -454,10 +454,14 @@
   <style>
     .tt-fig { margin: 1.25rem 0; }
     .tt-fig--wide { max-width: 1100px; margin-inline: auto; }
-    .tt-hero img { border-radius: 16px; border: 1px solid var(--border, #2a2c34); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); }
+    .tt-hero img { width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--border, #2a2c34); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); }
     .tt-callout { border: 1px solid var(--border, #2a2c34); border-radius: 14px; background: var(--surface, #15161b); padding: 14px; margin: 16px 0; }
     .tt-download { display: inline-flex; gap: 0.5rem; align-items: center; border: 1px solid var(--border, #2a2c34); border-radius: 999px; padding: 0.5rem 0.9rem; text-decoration: none; }
-    @media (max-width: 760px) { .tt-fig--wide { padding: 0 12px; } }
+    @media (max-width: 760px) { 
+      .tt-fig--wide { padding: 0 12px; }
+      .tt-hero { margin: 0 -1.5rem; }
+      .tt-hero img { border-radius: 0; }
+    }
   </style>
   <!-- ttpf:style-end -->
   <script type="application/ld+json">
