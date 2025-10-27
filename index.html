@@ -2117,6 +2117,26 @@ body {
     }, { threshold: 0.2 });
     sections.forEach(sec => observer2.observe(sec));
 
+    // ✅ SCROLL LOCK FUNCTIONS - iOS-safe implementation
+    function disableScroll() {
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function enableScroll() {
+      const scrollY = document.body.dataset.scrollY || '0';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, parseInt(scrollY));
+      delete document.body.dataset.scrollY;
+    }
+
     // Trial Modal Handler
     const modal = document.getElementById('trial-modal');
     const modalClose = modal.querySelector('.trial-modal__close');
@@ -2157,9 +2177,7 @@ body {
       hasShownModal = true;
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
+      disableScroll(); // ✅ Use unified scroll lock
     }
     
     function markAsDismissed() {
@@ -2173,9 +2191,7 @@ body {
     function hideModal() {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
+      enableScroll(); // ✅ Use unified scroll unlock
     }
 
     function showSuccess() {
@@ -2208,13 +2224,6 @@ body {
     modal.querySelector('.trial-modal__overlay').addEventListener('click', (e) => {
       if (e.target === e.currentTarget) {
         markAsDismissed();
-        hideModal();
-      }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
         hideModal();
       }
     });
@@ -2260,16 +2269,12 @@ body {
 
     function showManualModal() {
       manualModal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
+      disableScroll(); // ✅ Use unified scroll lock
     }
 
     function hideManualModal() {
       manualModal.style.display = 'none';
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
+      enableScroll(); // ✅ Use unified scroll unlock
     }
 
     function showManualSuccess() {
@@ -2324,6 +2329,19 @@ body {
         showManualModal();
       });
     }
+
+    // ✅ Close modals with Escape key (unified handler for both modals)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (modal.classList.contains('active')) {
+          markAsDismissed();
+          hideModal();
+        }
+        if (manualModal && manualModal.style.display === 'flex') {
+          hideManualModal();
+        }
+      }
+    });
   </script>
 </body>
 </html>
