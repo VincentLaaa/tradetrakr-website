@@ -119,6 +119,10 @@ body {
       top: 0; 
       z-index: 100;
       box-shadow: 0 12px 40px rgba(10, 0, 45, 0.35);
+      transition: transform 0.3s ease-in-out;
+    }
+    .header.hidden {
+      transform: translateY(-100%);
     }
     .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
     .logo { 
@@ -1744,11 +1748,31 @@ body {
     if (window.location.hash) { history.replaceState(null, null, ' '); }
 
     const progressBar = document.getElementById("progress-bar");
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+    const scrollThreshold = 100; // Start hiding after scrolling 100px
+    
     window.addEventListener("scroll", () => {
       let scrollTop = window.scrollY;
       let docHeight = document.body.scrollHeight - window.innerHeight;
       let scrolled = (scrollTop / docHeight) * 100;
       progressBar.style.width = scrolled + "%";
+      
+      // Hide/show header based on scroll direction
+      if (scrollTop > scrollThreshold) {
+        if (scrollTop > lastScrollTop) {
+          // Scrolling down - hide header
+          header.classList.add('hidden');
+        } else {
+          // Scrolling up - show header
+          header.classList.remove('hidden');
+        }
+      } else {
+        // Always show header when near the top
+        header.classList.remove('hidden');
+      }
+      
+      lastScrollTop = scrollTop;
     });
 
     const tiltCircle = document.getElementById("tiltCircle");
@@ -1808,7 +1832,7 @@ body {
 
     // Check if user has already seen/submitted the modal
     function shouldShowModal() {
-      // Check if they already successfully signed up
+      // Check if they already successfully signed up (prevent auto-trigger only)
       if (localStorage.getItem('tradetrakr_trial_subscribed') === 'true') {
         return false;
       }
@@ -1827,11 +1851,15 @@ body {
     }
 
     function showModal(force = false) {
-      if (!force && hasShownModal && !shouldShowModal()) return;
+      // Don't show if localStorage says they already subscribed
+      if (!force && shouldShowModal() === false) return;
+      if (!force && hasShownModal) return;
       hasShownModal = true;
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     }
     
     function markAsDismissed() {
@@ -1846,6 +1874,8 @@ body {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     }
 
     function showSuccess() {
@@ -1931,11 +1961,15 @@ body {
     function showManualModal() {
       manualModal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     }
 
     function hideManualModal() {
       manualModal.style.display = 'none';
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     }
 
     function showManualSuccess() {
