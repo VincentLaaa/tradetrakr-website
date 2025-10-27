@@ -1751,28 +1751,37 @@ body {
     let lastScrollTop = 0;
     const header = document.querySelector('.header');
     const scrollThreshold = 100; // Start hiding after scrolling 100px
+    const scrollDelta = 5; // Minimum scroll distance to trigger hide/show
     
     window.addEventListener("scroll", () => {
-      let scrollTop = window.scrollY;
+      // Get current scroll position and clamp it to valid range
+      let scrollTop = Math.max(0, window.pageYOffset || window.scrollY || 0);
       let docHeight = document.body.scrollHeight - window.innerHeight;
       let scrolled = (scrollTop / docHeight) * 100;
       progressBar.style.width = scrolled + "%";
       
-      // Hide/show header based on scroll direction
-      if (scrollTop > scrollThreshold) {
-        if (scrollTop > lastScrollTop) {
-          // Scrolling down - hide header
-          header.classList.add('hidden');
-        } else {
-          // Scrolling up - show header
+      // Calculate scroll difference
+      const scrollDiff = Math.abs(scrollTop - lastScrollTop);
+      
+      // Only process if scrolled enough to avoid jitter on mobile
+      if (scrollDiff > scrollDelta) {
+        // Hide/show header based on scroll direction
+        if (scrollTop > scrollThreshold && scrollTop < docHeight) {
+          if (scrollTop > lastScrollTop) {
+            // Scrolling down - hide header
+            header.classList.add('hidden');
+          } else {
+            // Scrolling up - show header
+            header.classList.remove('hidden');
+          }
+        } else if (scrollTop <= scrollThreshold) {
+          // Always show header when near the top
           header.classList.remove('hidden');
         }
-      } else {
-        // Always show header when near the top
-        header.classList.remove('hidden');
+        
+        // Update last scroll position only after significant scroll
+        lastScrollTop = scrollTop;
       }
-      
-      lastScrollTop = scrollTop;
     });
 
     const tiltCircle = document.getElementById("tiltCircle");
