@@ -41,9 +41,9 @@ html { scroll-behavior: smooth; }
 :root {
   --bg-primary: #050607;
   --bg-secondary: #12141d;
-  --accent-electric: #00f6ff;
-  --accent-violet: #7f5af0;
-  --accent-magenta: #ff4ecd;
+  --accent-electric: #4c8dff;
+  --accent-violet: #6d5dfc;
+  --accent-magenta: #4338ca;
   --text-primary: #f7f7ff;
   --text-muted: rgba(229, 233, 255, 0.75);
   --glass-bg: rgba(12, 16, 35, 0.55);
@@ -54,7 +54,7 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background:
-    radial-gradient(circle at 15% 20%, rgba(0, 246, 255, 0.06), transparent 48%),
+    radial-gradient(circle at 15% 20%, rgba(76, 141, 255, 0.06), transparent 48%),
     radial-gradient(circle at 80% 5%, rgba(127, 90, 240, 0.1), transparent 55%),
     linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 65%, #080a14 100%);
   background-attachment: fixed;
@@ -72,7 +72,7 @@ body {
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(0, 246, 255, 0.01) 1px, transparent 1px),
+        linear-gradient(rgba(76, 141, 255, 0.01) 1px, transparent 1px),
         linear-gradient(90deg, rgba(127, 90, 240, 0.02) 1px, transparent 1px);
       background-size: 80px 80px;
       animation: gridMove 28s linear infinite;
@@ -102,7 +102,7 @@ body {
       background-size: 600% 600%;
       animation: shimmer 6s linear infinite;
       transition: width 0.1s ease-out;
-      box-shadow: 0 0 14px rgba(0, 246, 255, 0.45);
+      box-shadow: 0 0 14px rgba(76, 141, 255, 0.45);
     }
     @keyframes shimmer {
       0% { background-position: 0% 50%; }
@@ -114,11 +114,17 @@ body {
     .header { 
       background: linear-gradient(135deg, rgba(13, 12, 40, 0.82), rgba(17, 10, 52, 0.65)); 
       backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(0, 246, 255, 0.12); 
-      position: sticky; 
-      top: 0; 
+      border-bottom: 1px solid rgba(76, 141, 255, 0.12); 
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       box-shadow: 0 12px 40px rgba(10, 0, 45, 0.35);
+      transition: transform 0.3s ease-in-out;
+    }
+    .header.hidden {
+      transform: translateY(-100%);
     }
     .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
     .logo { 
@@ -130,7 +136,7 @@ body {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-shadow: 0 0 22px rgba(0, 246, 255, 0.35);
+      text-shadow: 0 0 22px rgba(76, 141, 255, 0.35);
     }
     
     @keyframes logoGlow {
@@ -147,7 +153,7 @@ body {
     }
     .nav a:hover { 
       color: var(--accent-electric);
-      text-shadow: 0 0 10px rgba(0, 246, 255, 0.4);
+      text-shadow: 0 0 10px rgba(76, 141, 255, 0.4);
     }
     .nav a::after {
       content: '';
@@ -180,7 +186,7 @@ body {
       color: #0b0b18;
       display: inline-block;
       animation: btnGlow 4s ease-in-out infinite;
-      border: 1px solid rgba(0, 246, 255, 0.45);
+      border: 1px solid rgba(76, 141, 255, 0.45);
       position: relative;
       overflow: hidden;
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
@@ -197,8 +203,8 @@ body {
       transition: left 0.5s ease;
     }
     .btn.btn-outline {
-      background: rgba(0, 246, 255, 0.12);
-      border-color: rgba(0, 246, 255, 0.45);
+      background: rgba(76, 141, 255, 0.12);
+      border-color: rgba(76, 141, 255, 0.45);
       animation: none;
       box-shadow: inset 0 0 0 1px rgba(127, 90, 240, 0.35);
       color: var(--text-primary);
@@ -211,13 +217,13 @@ body {
     }
     .btn:hover {
       transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 25px 55px rgba(19, 0, 60, 0.5), 0 0 40px rgba(0, 246, 255, 0.35);
-      border-color: rgba(0, 246, 255, 0.65);
+      box-shadow: 0 25px 55px rgba(19, 0, 60, 0.5), 0 0 40px rgba(76, 141, 255, 0.35);
+      border-color: rgba(76, 141, 255, 0.65);
     }
     .btn.btn-outline:hover {
       transform: translateY(-3px);
-      background: rgba(0, 246, 255, 0.22);
-      box-shadow: 0 18px 42px rgba(0, 246, 255, 0.25);
+      background: rgba(76, 141, 255, 0.22);
+      box-shadow: 0 18px 42px rgba(76, 141, 255, 0.25);
       border-color: rgba(127, 90, 240, 0.65);
     }
     
@@ -256,6 +262,7 @@ body {
     .hero {
       position: relative;
       padding: 6rem 0;
+      padding-top: 8rem;
       overflow: hidden;
     }
     .hero::before {
@@ -266,10 +273,10 @@ body {
       width: 200%;
       height: 200%;
       background: 
-        radial-gradient(circle at 18% 20%, rgba(0, 246, 255, 0.14), transparent 45%),
+        radial-gradient(circle at 18% 20%, rgba(76, 141, 255, 0.14), transparent 45%),
         radial-gradient(circle at 78% 28%, rgba(127, 90, 240, 0.18), transparent 48%),
-        radial-gradient(circle at 45% 78%, rgba(255, 78, 205, 0.12), transparent 50%),
-        linear-gradient(60deg, transparent 32%, rgba(0, 246, 255, 0.05) 58%, transparent 75%);
+        radial-gradient(circle at 45% 78%, rgba(109, 93, 252, 0.12), transparent 50%),
+        linear-gradient(60deg, transparent 32%, rgba(76, 141, 255, 0.05) 58%, transparent 75%);
       animation: moveBackground 20s linear infinite;
       z-index: 0;
     }
@@ -284,7 +291,7 @@ body {
         90deg,
         transparent 0px,
         transparent 98px,
-        rgba(0, 246, 255, 0.04) 100px
+        rgba(76, 141, 255, 0.04) 100px
       );
       animation: scanLine 4s linear infinite;
       z-index: 1;
@@ -310,7 +317,7 @@ body {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-shadow: 0 0 28px rgba(0, 246, 255, 0.25);
+      text-shadow: 0 0 28px rgba(76, 141, 255, 0.25);
     }
     
     @keyframes textShimmer {
@@ -321,7 +328,7 @@ body {
     .hero-text p a {
       color: var(--accent-electric);
       text-decoration: underline;
-      text-decoration-color: rgba(0, 246, 255, 0.4);
+      text-decoration-color: rgba(76, 141, 255, 0.4);
     }
     .hero-text p a:hover {
       color: var(--accent-violet);
@@ -335,22 +342,22 @@ body {
       border-radius: 16px;
       box-shadow: 
         0 24px 44px rgba(5, 0, 26, 0.65), 
-        0 0 30px rgba(0, 246, 255, 0.25),
+        0 0 30px rgba(76, 141, 255, 0.25),
         0 0 60px rgba(127, 90, 240, 0.25),
         inset 0 0 20px rgba(255, 255, 255, 0.06);
       transform: perspective(1000px) rotateX(4deg) rotateY(-6deg);
       transition: transform 0.6s ease, box-shadow 0.6s ease;
-      border: 1px solid rgba(0, 246, 255, 0.25);
+      border: 1px solid rgba(76, 141, 255, 0.25);
       position: relative;
     }
     .hero-image img:hover {
       transform: perspective(1000px) rotateX(0) rotateY(0) scale(1.02);
       box-shadow: 
         0 32px 60px rgba(5, 0, 26, 0.75), 
-        0 0 40px rgba(0, 246, 255, 0.45),
+        0 0 40px rgba(76, 141, 255, 0.45),
         0 0 70px rgba(127, 90, 240, 0.4),
         inset 0 0 30px rgba(255, 255, 255, 0.08);
-      border-color: rgba(0, 246, 255, 0.55);
+      border-color: rgba(76, 141, 255, 0.55);
     }
 
     /* Features */
@@ -398,7 +405,7 @@ body {
       border-radius: 12px; 
       box-shadow: 
         0 8px 26px rgba(5, 0, 26, 0.55),
-        0 0 24px rgba(0, 246, 255, 0.18),
+        0 0 24px rgba(76, 141, 255, 0.18),
         inset 0 0 24px rgba(255, 255, 255, 0.04); 
       animation: floaty 6s ease-in-out infinite;
       border: 1px solid rgba(127, 90, 240, 0.25);
@@ -407,9 +414,9 @@ body {
     .feature-img img:hover {
       box-shadow: 
         0 14px 36px rgba(5, 0, 26, 0.7),
-        0 0 32px rgba(0, 246, 255, 0.32),
+        0 0 32px rgba(76, 141, 255, 0.32),
         inset 0 0 32px rgba(255, 255, 255, 0.08);
-      border-color: rgba(0, 246, 255, 0.45);
+      border-color: rgba(76, 141, 255, 0.45);
       transform: scale(1.02);
     }
     @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -444,7 +451,7 @@ body {
       background: rgba(13, 16, 34, 0.82);
       border-radius: 18px;
       padding: 1.8rem;
-      border: 1px solid rgba(0, 246, 255, 0.18);
+      border: 1px solid rgba(76, 141, 255, 0.18);
       box-shadow: 0 18px 40px rgba(5, 0, 26, 0.5);
       color: var(--text-muted);
     }
@@ -455,6 +462,612 @@ body {
     }
     .journal-overview a {
       color: var(--accent-electric);
+    }
+
+    /* Signup Form */
+    .signup {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .signup::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(76, 141, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(127, 90, 240, 0.1), transparent 58%);
+      pointer-events: none;
+    }
+    .signup-form-wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .signup-form-container {
+      background: rgba(13, 16, 38, 0.78);
+      backdrop-filter: blur(24px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(76, 141, 255, 0.22);
+      box-shadow: 
+        0 24px 48px rgba(5, 0, 26, 0.55),
+        0 0 40px rgba(76, 141, 255, 0.18),
+        inset 0 0 32px rgba(255, 255, 255, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .signup-form input[type="email"] {
+      width: 100%;
+      padding: 0.95rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(76, 141, 255, 0.25);
+      background: rgba(10, 8, 30, 0.9);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .signup-form input[type="email"]::placeholder {
+      color: rgba(198, 200, 255, 0.55);
+    }
+    .signup-form input[type="email"]:focus {
+      outline: none;
+      border-color: rgba(76, 141, 255, 0.65);
+      box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.25), 0 12px 32px rgba(76, 141, 255, 0.15);
+      background: rgba(10, 8, 35, 0.95);
+    }
+    .signup-form .btn {
+      width: 100%;
+    }
+    #signup-status {
+      margin-top: 1.2rem;
+      min-height: 1.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+      color: rgba(245, 245, 255, 0.75);
+    }
+    #signup-status.success {
+      color: #00c878;
+    }
+    #signup-status.error {
+      color: #ff4d4f;
+    }
+    #signup-status.info {
+      color: rgba(245, 245, 255, 0.65);
+    }
+    .btn-loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-loading::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinner 0.6s linear infinite;
+    }
+    @keyframes spinner {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ✅ Fix: Trial Signup Modal - Mobile Responsive */
+    .trial-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      /* ✅ Fix: Better mobile padding */
+      padding: clamp(0.5rem, 2vw, 1rem);
+      /* ✅ Fix: Prevent scroll issues on mobile */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .trial-modal.active {
+      display: flex;
+    }
+    .trial-modal__overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 14, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 9998;
+    }
+    .trial-modal__content {
+      position: relative;
+      background: #0D0D0F;
+      border-radius: clamp(16px, 3vw, 24px);
+      /* ✅ Fix: Responsive modal padding */
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem);
+      width: 100%;
+      /* ✅ Fix: Better mobile width constraints */
+      max-width: min(480px, 90vw);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      box-shadow: 
+        0 32px 80px rgba(5, 6, 14, 0.85),
+        0 0 0 1px rgba(122, 44, 242, 0.15),
+        0 0 60px rgba(122, 44, 242, 0.2);
+      animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* ✅ Fix: Prevent modal from being too tall on mobile */
+      max-height: min(90vh, 600px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 9999;
+      /* ✅ Fix: Ensure content doesn't overflow horizontally */
+      overflow-x: hidden;
+    }
+    @keyframes modalSlideIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .trial-modal__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .trial-modal__close:hover {
+      background: rgba(122, 44, 242, 0.2);
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+    .trial-modal__body {
+      text-align: center;
+    }
+    .trial-modal__title {
+      /* ✅ Fix: Responsive modal title */
+      font-size: clamp(1.35rem, 4vw, 1.8rem);
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff, #7A2CF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      word-wrap: break-word;
+    }
+    .trial-modal__subtitle {
+      /* ✅ Fix: Responsive modal subtitle */
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+      line-height: 1.5;
+    }
+    .trial-modal__form {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .trial-modal__question {
+      margin-bottom: 1.5rem;
+      width: 100%;
+      text-align: left;
+    }
+    .trial-modal__label {
+      display: block;
+      margin-bottom: 0.6rem;
+      /* ✅ Fix: Responsive label text */
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+      text-align: left;
+    }
+    .trial-modal__select {
+      width: 100%;
+      /* ✅ Fix: Touch-friendly select inputs */
+      padding: clamp(0.75rem, 2vw, 0.9rem) clamp(0.9rem, 2vw, 1.1rem);
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      cursor: pointer;
+      /* ✅ Fix: Minimum touch target */
+      min-height: 44px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .trial-modal__select option {
+      background: #0D0D0F;
+      color: #ffffff;
+      padding: 0.5rem;
+    }
+    .trial-modal__select:focus {
+      outline: none;
+      border-color: #7A2CF2;
+      box-shadow: 0 0 0 3px rgba(122, 44, 242, 0.25);
+      background: rgba(18, 18, 20, 1);
+    }
+    .trial-modal__error {
+      min-height: 1.5rem;
+      font-size: 0.9rem;
+      color: #ff4d4f;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .trial-modal__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .trial-modal__btn {
+      width: 100%;
+      /* ✅ Fix: Responsive button sizing */
+      padding: clamp(0.8rem, 2vw, 0.95rem) clamp(1.4rem, 3vw, 1.8rem);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      /* ✅ Fix: Touch-friendly button height */
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .trial-modal__btn.primary-btn {
+      background: linear-gradient(135deg, #7A2CF2, #9d5ff5);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(122, 44, 242, 0.35);
+    }
+    .trial-modal__btn.primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(122, 44, 242, 0.5);
+    }
+    .trial-modal__btn.primary-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .trial-modal__btn.secondary-btn {
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .trial-modal__btn.secondary-btn:hover {
+      background: rgba(22, 22, 24, 0.95);
+      border-color: rgba(122, 44, 242, 0.45);
+    }
+    .trial-modal__success {
+      padding: 1rem 0;
+    }
+    .trial-modal__success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: successPulse 0.6s ease;
+    }
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .trial-modal__text {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 2rem;
+    }
+    .btn-loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-loading::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinner 0.6s linear infinite;
+    }
+
+    /* ✅ Fix: Comprehensive mobile modal styles */
+    @media (max-width: 768px) {
+      .trial-modal,
+      .manual-trial-modal {
+        padding: 0.5rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+      }
+      .trial-modal__content,
+      .manual-trial-modal__content {
+        max-width: 95vw;
+        max-height: 85vh;
+        margin: auto 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .trial-modal__content,
+      .manual-trial-modal__content {
+        padding: 1.75rem 1.25rem 1.5rem;
+        max-width: 96vw;
+        border-radius: 18px;
+      }
+      .trial-modal__title,
+      .manual-trial-modal__title {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+      .trial-modal__subtitle,
+      .manual-trial-modal__subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+      }
+      .trial-modal__question,
+      .manual-trial-modal__question {
+        margin-bottom: 1.25rem;
+      }
+      .trial-modal__btn,
+      .manual-trial-modal__btn {
+        padding: 0.85rem 1.2rem;
+        font-size: 0.9rem;
+        min-height: 46px;
+      }
+      .trial-modal__close,
+      .manual-trial-modal__close {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .trial-modal__content,
+      .manual-trial-modal__content {
+        padding: 1.5rem 1rem 1.25rem;
+        max-width: 98vw;
+      }
+      .trial-modal__title,
+      .manual-trial-modal__title {
+        font-size: 1.25rem;
+      }
+      .trial-modal__subtitle,
+      .manual-trial-modal__subtitle {
+        font-size: 0.85rem;
+      }
+      .trial-modal__label,
+      .manual-trial-modal__label {
+        font-size: 0.85rem;
+      }
+      .trial-modal__select,
+      .manual-trial-modal__select {
+        font-size: 0.85rem;
+        padding: 0.7rem 0.85rem;
+      }
+      .trial-modal__btn,
+      .manual-trial-modal__btn {
+        font-size: 0.85rem;
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    /* ✅ Fix: Manual Trigger Modal - Mobile Responsive (same as trial modal) */
+    .manual-trial-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(0.5rem, 2vw, 1rem);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .manual-trial-modal.active {
+      display: flex;
+    }
+    .manual-trial-modal__overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 14, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 9998;
+    }
+    .manual-trial-modal__content {
+      position: relative;
+      background: #0D0D0F;
+      border-radius: clamp(16px, 3vw, 24px);
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem);
+      width: 100%;
+      max-width: min(480px, 90vw);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      box-shadow: 
+        0 32px 80px rgba(5, 6, 14, 0.85),
+        0 0 0 1px rgba(122, 44, 242, 0.15),
+        0 0 60px rgba(122, 44, 242, 0.2);
+      animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-height: min(90vh, 600px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 9999;
+      overflow-x: hidden;
+    }
+    .manual-trial-modal__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .manual-trial-modal__close:hover {
+      background: rgba(122, 44, 242, 0.2);
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+    .manual-trial-modal__body {
+      text-align: center;
+    }
+    .manual-trial-modal__title {
+      font-size: clamp(1.35rem, 4vw, 1.8rem);
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff, #7A2CF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      word-wrap: break-word;
+    }
+    .manual-trial-modal__subtitle {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+      line-height: 1.5;
+    }
+    .manual-trial-modal__form {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .manual-trial-modal__question {
+      margin-bottom: 1.5rem;
+      width: 100%;
+      text-align: left;
+    }
+    .manual-trial-modal__label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+      text-align: left;
+    }
+    .manual-trial-modal__select {
+      width: 100%;
+      padding: clamp(0.75rem, 2vw, 0.9rem) clamp(0.9rem, 2vw, 1.1rem);
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      cursor: pointer;
+      min-height: 44px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .manual-trial-modal__select option {
+      background: #0D0D0F;
+      color: #ffffff;
+      padding: 0.5rem;
+    }
+    .manual-trial-modal__select:focus {
+      outline: none;
+      border-color: #7A2CF2;
+      box-shadow: 0 0 0 3px rgba(122, 44, 242, 0.25);
+      background: rgba(18, 18, 20, 1);
+    }
+    .manual-trial-modal__error {
+      min-height: 1.5rem;
+      font-size: 0.9rem;
+      color: #ff4d4f;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .manual-trial-modal__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .manual-trial-modal__btn {
+      width: 100%;
+      padding: clamp(0.8rem, 2vw, 0.95rem) clamp(1.4rem, 3vw, 1.8rem);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .manual-trial-modal__btn.primary-btn {
+      background: linear-gradient(135deg, #7A2CF2, #9d5ff5);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(122, 44, 242, 0.35);
+    }
+    .manual-trial-modal__btn.primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(122, 44, 242, 0.5);
+    }
+    .manual-trial-modal__btn.primary-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .manual-trial-modal__btn.secondary-btn {
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .manual-trial-modal__btn.secondary-btn:hover {
+      background: rgba(22, 22, 24, 0.95);
+      border-color: rgba(122, 44, 242, 0.45);
+    }
+    .manual-trial-modal__success {
+      padding: 1rem 0;
+    }
+    .manual-trial-modal__success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: successPulse 0.6s ease;
+    }
+    .manual-trial-modal__text {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 2rem;
     }
 
     /* Demo */
@@ -471,7 +1084,7 @@ body {
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 30% 30%, rgba(0, 246, 255, 0.12), transparent 52%),
+        radial-gradient(circle at 30% 30%, rgba(76, 141, 255, 0.12), transparent 52%),
         radial-gradient(circle at 70% 70%, rgba(127, 90, 240, 0.08), transparent 58%);
       pointer-events: none;
     }
@@ -481,7 +1094,7 @@ body {
       backdrop-filter: blur(24px);
       padding: 2rem; 
       border-radius: 12px; 
-      border: 1px solid rgba(0, 246, 255, 0.22); 
+      border: 1px solid rgba(76, 141, 255, 0.22); 
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -493,7 +1106,7 @@ body {
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, rgba(0, 246, 255, 0.06), transparent 55%, rgba(255, 78, 205, 0.08));
+      background: linear-gradient(45deg, rgba(76, 141, 255, 0.06), transparent 55%, rgba(109, 93, 252, 0.08));
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -502,10 +1115,10 @@ body {
     }
     .demo-card:hover { 
       transform: translateY(-8px) scale(1.02); 
-      border-color: rgba(0, 246, 255, 0.6);
+      border-color: rgba(76, 141, 255, 0.6);
       box-shadow: 
         0 12px 34px rgba(5, 0, 26, 0.55),
-        0 0 32px rgba(0, 246, 255, 0.18),
+        0 0 32px rgba(76, 141, 255, 0.18),
         inset 0 0 28px rgba(255, 255, 255, 0.05);
     }
     .demo-card h3 { 
@@ -534,7 +1147,7 @@ body {
       width: 160px;
       height: 160px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 246, 255, 0.12), transparent 70%);
+      background: radial-gradient(circle, rgba(76, 141, 255, 0.12), transparent 70%);
       animation: tiltGlow 3s ease-in-out infinite;
     }
     
@@ -589,7 +1202,7 @@ body {
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 20%, rgba(0, 246, 255, 0.1), transparent 54%),
+        radial-gradient(circle at 20% 20%, rgba(76, 141, 255, 0.1), transparent 54%),
         radial-gradient(circle at 80% 80%, rgba(127, 90, 240, 0.08), transparent 57%);
       pointer-events: none;
     }
@@ -600,7 +1213,7 @@ body {
       backdrop-filter: blur(24px);
       padding: 2.5rem; 
       border-radius: 14px; 
-      border: 1px solid rgba(0, 246, 255, 0.22); 
+      border: 1px solid rgba(76, 141, 255, 0.22); 
       transition: all 0.3s ease;
       overflow: visible;
       z-index: 1;
@@ -612,7 +1225,7 @@ body {
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, rgba(0, 246, 255, 0.05), transparent 55%, rgba(255, 78, 205, 0.06));
+      background: linear-gradient(45deg, rgba(76, 141, 255, 0.05), transparent 55%, rgba(109, 93, 252, 0.06));
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -623,9 +1236,9 @@ body {
       transform: translateY(-10px) scale(1.03); 
       box-shadow: 
         0 18px 38px rgba(5, 0, 26, 0.55),
-        0 0 32px rgba(0, 246, 255, 0.2),
+        0 0 32px rgba(76, 141, 255, 0.2),
         inset 0 0 24px rgba(255, 255, 255, 0.05);
-      border-color: rgba(0, 246, 255, 0.55);
+      border-color: rgba(76, 141, 255, 0.55);
     }
     .pricing-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
     .price { 
@@ -648,7 +1261,7 @@ body {
     .price span { font-size: 1rem; color: var(--text-muted); margin-left: 4px; }
     .beta-tag { margin: 1rem 0; color: rgba(228, 230, 255, 0.72); font-size: 0.9rem; }
     .pricing-card.recommended { 
-      border: 2px solid rgba(0, 246, 255, 0.55); 
+      border: 2px solid rgba(76, 141, 255, 0.55); 
       animation: pulseGlow 3s infinite;
       position: relative;
     }
@@ -671,9 +1284,9 @@ body {
       50% { background-position: 100% 50%; }
     }
     @keyframes pulseGlow { 
-      0% { box-shadow: 0 0 0px rgba(0, 246, 255, 0.18); } 
-      50% { box-shadow: 0 0 32px rgba(0, 246, 255, 0.45), 0 0 55px rgba(127, 90, 240, 0.32); } 
-      100% { box-shadow: 0 0 0px rgba(0, 246, 255, 0.18); } 
+      0% { box-shadow: 0 0 0px rgba(76, 141, 255, 0.18); } 
+      50% { box-shadow: 0 0 32px rgba(76, 141, 255, 0.45), 0 0 55px rgba(127, 90, 240, 0.32); } 
+      100% { box-shadow: 0 0 0px rgba(76, 141, 255, 0.18); } 
     }
     .discount-badge { 
       position: absolute; 
@@ -700,7 +1313,7 @@ body {
     .community {
       padding: 4.5rem 0;
       background: linear-gradient(135deg, rgba(8, 9, 16, 0.96), rgba(12, 13, 23, 0.95));
-      border-top: 1px solid rgba(0, 246, 255, 0.2);
+      border-top: 1px solid rgba(76, 141, 255, 0.2);
       border-bottom: 1px solid rgba(127, 90, 240, 0.16);
       position: relative;
       overflow: hidden;
@@ -712,7 +1325,7 @@ body {
       width: 240px;
       height: 240px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 246, 255, 0.22), transparent 60%);
+      background: radial-gradient(circle, rgba(76, 141, 255, 0.22), transparent 60%);
       filter: blur(100px);
       opacity: 0.7;
       pointer-events: none;
@@ -747,19 +1360,19 @@ body {
     .community .discord-btn {
       min-width: 220px;
       text-align: center;
-      border: 1px solid rgba(0, 246, 255, 0.45);
-      background: rgba(0, 246, 255, 0.16);
-      box-shadow: 0 16px 32px rgba(0, 246, 255, 0.15);
+      border: 1px solid rgba(76, 141, 255, 0.45);
+      background: rgba(76, 141, 255, 0.16);
+      box-shadow: 0 16px 32px rgba(76, 141, 255, 0.15);
     }
     .community .discord-btn:hover {
-      background: rgba(0, 246, 255, 0.28);
-      box-shadow: 0 20px 40px rgba(0, 246, 255, 0.25);
+      background: rgba(76, 141, 255, 0.28);
+      box-shadow: 0 20px 40px rgba(76, 141, 255, 0.25);
     }
 
     /* Footer */
     .footer { 
       background: linear-gradient(135deg, rgba(4, 2, 16, 0.96) 0%, rgba(9, 5, 28, 0.96) 100%);
-      border-top: 1px solid rgba(0, 246, 255, 0.18); 
+      border-top: 1px solid rgba(76, 141, 255, 0.18); 
       padding: 2rem 0; 
       text-align: center; 
       color: rgba(214, 216, 255, 0.6);
@@ -798,7 +1411,7 @@ body {
         45deg,
         transparent 0px,
         transparent 88px,
-        rgba(0, 246, 255, 0.05) 92px,
+        rgba(76, 141, 255, 0.05) 92px,
         transparent 96px
       );
     }
@@ -818,7 +1431,7 @@ body {
       position: absolute;
       width: 3px;
       height: 3px;
-      background: radial-gradient(circle, rgba(0, 246, 255, 0.85), transparent);
+      background: radial-gradient(circle, rgba(76, 141, 255, 0.85), transparent);
       border-radius: 50%;
       animation: float 20s linear infinite;
       opacity: 0.4;
@@ -847,7 +1460,7 @@ body {
       left: 70%;
       animation-delay: 15s;
       animation-duration: 22s;
-      background: radial-gradient(circle, rgba(255, 78, 205, 0.85), transparent);
+      background: radial-gradient(circle, rgba(109, 93, 252, 0.85), transparent);
     }
     
     .particle:nth-child(5) {
@@ -886,37 +1499,387 @@ body {
     section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     section.visible { opacity: 1; transform: translateY(0); }
 
+    /* ✅ Fix: Comprehensive mobile styles for index.html */
+    @media (max-width: 1024px) {
+      .container { width: 94%; }
+      .demo-grid,
+      .pricing-grid { 
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+        gap: 1.5rem;
+      }
+    }
+
     @media (max-width: 768px) {
-      .hero-inner { flex-direction: column; text-align: center; }
-      .hero-text h1 { font-size: 2rem; }
-      .hero { padding: 4rem 0 3rem; }
-      .hero-text p { font-size: 1rem; }
+      .hero-inner { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 2rem;
+      }
+      .hero-text h1 { 
+        font-size: clamp(1.75rem, 6vw, 2.4rem); 
+        line-height: 1.2;
+      }
+      .hero { 
+        padding: 5rem 0 3rem; 
+      }
+      .hero-text p { 
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem); 
+        line-height: 1.6;
+      }
       .cta-group {
         flex-direction: column;
         width: 100%;
+        gap: 1rem;
       }
-      .cta-group .btn { width: 100%; text-align: center; }
+      .cta-group .btn { 
+        width: 100%; 
+        text-align: center;
+        min-height: 48px;
+      }
       .hero-image img {
         width: 100%;
-        max-width: 400px;
+        max-width: 500px;
         transform: none;
         margin: 0 auto;
       }
+      .nav {
+        width: 100%;
+        justify-content: center;
+        gap: 0.8rem;
+      }
+      .nav a {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.5rem;
+      }
       .community-inner {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         gap: 1.5rem;
       }
       .community .discord-btn {
         width: 100%;
+        max-width: 300px;
       }
-      .feature-row { flex-direction: column; }
-      .journal-overview ul { grid-template-columns: 1fr; }
-      .footer-links { flex-direction: column; gap: 0.6rem; }
+      .feature-row { 
+        flex-direction: column; 
+        gap: 2rem;
+      }
+      .feature-text h3 {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+      }
+      .journal-overview ul { 
+        grid-template-columns: 1fr; 
+        gap: 1.2rem;
+      }
+      .footer-links { 
+        flex-direction: column; 
+        gap: 0.8rem; 
+      }
+      .section-header h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .demo-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .logo {
+        font-size: 1.2rem;
+      }
+      .nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 0.3rem;
+      }
+      .nav a {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.3rem;
+        white-space: nowrap;
+      }
+      .hero {
+        padding: 3rem 0 2rem;
+      }
+      .hero-text h1 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+      }
+      .hero-text p {
+        font-size: clamp(0.9rem, 3vw, 1rem);
+      }
+      .btn-lg {
+        font-size: 1rem;
+        padding: 0.9rem 1.8rem;
+      }
+      .features,
+      .demo,
+      .pricing {
+        padding: 3rem 0;
+      }
+      .section-header {
+        margin-bottom: 2rem;
+      }
+      .section-header h2 {
+        font-size: clamp(1.35rem, 5vw, 1.8rem);
+      }
+      .feature-text h3 {
+        font-size: 1.25rem;
+      }
+      .feature-text p,
+      .demo-card,
+      .pricing-card {
+        font-size: 0.9rem;
+      }
+      .pricing-card {
+        padding: 2rem 1.5rem;
+      }
+      .price {
+        font-size: 1.8rem;
+      }
+      .hero-image img {
+        max-width: 350px;
+      }
+      .community-text h2 {
+        font-size: clamp(1.35rem, 5vw, 1.8rem);
+      }
+      .footer {
+        padding: 1.5rem 0;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .container {
+        width: 96%;
+      }
+      .logo {
+        font-size: 1.1rem;
+      }
+      .nav a {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.25rem;
+      }
+      .hero {
+        padding: 2.5rem 0 1.5rem;
+      }
+      .hero-text h1 {
+        font-size: 1.5rem;
+      }
+      .hero-text p {
+        font-size: 0.9rem;
+      }
+      .btn-lg {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.5rem;
+      }
+      .section-header h2,
+      .community-text h2 {
+        font-size: 1.3rem;
+      }
+      .feature-text h3,
+      .demo-card h3,
+      .pricing-card h3 {
+        font-size: 1.15rem;
+      }
+      .feature-text p,
+      .demo-card p,
+      .pricing-card p {
+        font-size: 0.85rem;
+      }
+      .pricing-card {
+        padding: 1.5rem 1.25rem;
+      }
+      .price {
+        font-size: 1.6rem;
+      }
+      .features-list li {
+        font-size: 0.85rem;
+      }
+      .journal-overview li,
+      .demo-card {
+        padding: 1.25rem;
+      }
     }
   </style>
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/theme-migrate.css">
+  <script defer src="../assets/js/theme-accent.js"></script>
+
+  <!-- THEME BASE (non-destructive) -->
+  <style>
+    :root{
+      --accent:#6d5dfc; --accent-rgb:109,93,252; --accent-2:#4c8dff;
+      --bg-0:#05070d; --bg-1:#0a0f18; --text:#e6e8ef; --muted:#a8adbb;
+      --line:rgba(255,255,255,0.06);
+      --card:rgba(255,255,255,0.02);
+    }
+    body{
+      background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.65; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+    .container,.site-container{max-width:1150px;margin:0 auto;padding:0 20px}
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(5,7,13,0.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--line)}
+    .site-nav a{color:#a8adbb; text-decoration:none; margin-left:18px; font-size:.98rem}
+    .site-nav a:hover{color:var(--accent)}
+    .brand,.site-brand,.logo{font-weight:700; text-decoration:none; color:var(--text)}
+    .brand span,.logo span{color:var(--accent)}
+    section.section-block, section.section {padding:72px 0; border-top:1px solid var(--line)}
+    .glass.lift, .feature-card, .testimonial, .journal-feature, .cta-banner, .sidebar-section, .card{
+      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    }
+    .btn{display:inline-block; padding:10px 16px; border-radius:999px; font-weight:600; text-decoration:none}
+    .btn.ghost{color:var(--text); border:1px solid var(--line)}
+    .btn.ghost:hover{border-color:rgba(var(--accent-rgb),.6)}
+    .btn.primary{background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#051018}
+    .section-intro h2, .bloom, .section-title, h1, h2.section-title{
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    /* Reveal helper (class may be added later) */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.is-visible{opacity:1; transform:none}
+  </style>
+
 </head>
 <body>
+  <!-- Manual Trigger Popup -->
+  <div id="manual-trial-modal" class="manual-trial-modal" style="display: none;">
+    <div class="manual-trial-modal__overlay"></div>
+    <div class="manual-trial-modal__content glass lift">
+      <button class="manual-trial-modal__close" aria-label="Close modal">&times;</button>
+      <div class="manual-trial-modal__body">
+        <!-- Success State -->
+        <div class="manual-trial-modal__success" style="display: none;">
+          <div class="manual-trial-modal__success-icon">✅</div>
+          <h2 class="manual-trial-modal__title">You're in!</h2>
+          <p class="manual-trial-modal__text">Redirecting you to your free trial... 🚀</p>
+        </div>
+        
+        <!-- Quiz Form State -->
+        <div class="manual-trial-modal__signup">
+          <h2 class="manual-trial-modal__title">Start Your Free 7-Day Trial</h2>
+          <p class="manual-trial-modal__subtitle">Answer a few quick questions to unlock your trial.</p>
+          <form id="manual-trial-quiz-form" class="manual-trial-modal__form">
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">How long have you been trading?</label>
+              <select id="manual-question-1" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="under-1-year">Under 1 year</option>
+                <option value="1-2-years">1-2 years</option>
+                <option value="2-5-years">2-5 years</option>
+                <option value="5-plus-years">5+ years</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">Have you ever used a trading journal?</label>
+              <select id="manual-question-2" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="no">No, never</option>
+                <option value="tried">Tried but gave up</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="yes">Yes, regularly</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">Are you ready to start tracking your trades?</label>
+              <select id="manual-question-3" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="absolutely">Absolutely! Let's go</option>
+                <option value="yes">Yes, I'm ready</option>
+                <option value="maybe">Maybe, let's see</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__error" id="manual-trial-error" role="alert"></div>
+            <div class="manual-trial-modal__actions">
+              <button type="submit" class="manual-trial-modal__btn primary-btn" id="manual-activate-btn">
+                <span class="btn-text">Claim Your Free Trial</span>
+              </button>
+              <button type="button" class="manual-trial-modal__btn secondary-btn" id="manual-no-thanks-btn">No thanks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trial Signup Modal (Auto-trigger) -->
+  <div id="trial-modal" class="trial-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" style="display: none;">
+    <div class="trial-modal__overlay"></div>
+    <div class="trial-modal__content glass lift">
+      <button class="trial-modal__close" aria-label="Close modal">&times;</button>
+      <div class="trial-modal__body">
+        <!-- Success State -->
+        <div class="trial-modal__success" style="display: none;">
+          <div class="trial-modal__success-icon">✅</div>
+          <h2 class="trial-modal__title">You're in!</h2>
+          <p class="trial-modal__text">Redirecting you to your free trial... 🚀</p>
+          <button class="trial-modal__btn primary-btn" id="continue-btn" style="display: none;">Continue to Site</button>
+        </div>
+        
+        <!-- Quiz Form State -->
+        <div class="trial-modal__signup">
+          <h2 class="trial-modal__title" id="modal-title">Start Your Free 7-Day Trial</h2>
+          <p class="trial-modal__subtitle">Answer a few quick questions to unlock your trial.</p>
+          <form id="trial-quiz-form" class="trial-modal__form">
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">How long have you been trading?</label>
+              <select id="question-1" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="under-1-year">Under 1 year</option>
+                <option value="1-2-years">1-2 years</option>
+                <option value="2-5-years">2-5 years</option>
+                <option value="5-plus-years">5+ years</option>
+              </select>
+            </div>
+            
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">Have you ever used a trading journal?</label>
+              <select id="question-2" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="no">No, never</option>
+                <option value="tried">Tried but gave up</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="yes">Yes, regularly</option>
+              </select>
+            </div>
+            
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">Are you ready to start tracking your trades?</label>
+              <select id="question-3" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="absolutely">Absolutely! Let's go</option>
+                <option value="yes">Yes, I'm ready</option>
+                <option value="maybe">Maybe, let's see</option>
+              </select>
+            </div>
+            
+            <div class="trial-modal__error" id="trial-error" role="alert"></div>
+            <div class="trial-modal__actions">
+              <button type="submit" class="trial-modal__btn primary-btn" id="activate-btn">
+                <span class="btn-text">Claim Your Free Trial</span>
+              </button>
+              <button type="button" class="trial-modal__btn secondary-btn" id="no-thanks-btn">No thanks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Progress bar -->
   <div id="progress-bar"></div>
   
@@ -942,7 +1905,7 @@ body {
         <a href="#pricing">Pricing</a>
       </nav>
       <div class="cta-group">
-        <a href="#pricing" class="btn">Get Started</a>
+        <a href="#pricing" class="btn" id="get-started-btn">Get Started Free</a>
         <a id="nav-signin" href="signin.html" class="btn btn-outline">Sign In</a>
       </div>
     </div>
@@ -950,14 +1913,14 @@ body {
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-text">
-        <h1>The Most Advanced Trading Journal for Modern Traders</h1>
+    <div class="container hero-inner glass lift">
+      <div class="hero-text glass lift">
+        <h1 class="bloom">The Most Advanced Trading Journal for Modern Traders</h1>
         <p>TradeTrakR is a trading journal designed for funded traders in futures and forex who want AI-powered analytics to track P&amp;L, trading psychology, and execution discipline in one place.</p>
         <p>Explore why professionals call it the best trading journal app in our <a href="trading-journal-features.html">trading journal features guide</a> and see how the AI trading journal keeps your edge sharp.</p>
-        <a href="#pricing" class="btn btn-lg">Get Started</a>
+        <a href="#pricing" class="btn btn-lg" id="hero-get-started-btn">Get Started Free</a>
       </div>
-      <div class="hero-image">
+      <div class="hero-image glass lift">
         <img src="assets/dashboard-preview.png" alt="Trading journal dashboard interface in TradeTrakR" />
       </div>
     </div>
@@ -966,7 +1929,7 @@ body {
   <!-- Features -->
   <section id="features" class="features">
     <div class="container section-header">
-      <h2>Trading Journal Features That Stand Out</h2>
+      <h2 class="bloom">Trading Journal Features That Stand Out</h2>
       <p>Discover how the TradeTrakR trading journal combines AI-powered trade analysis, emotional tracking, and actionable insights for funded futures and forex traders.</p>
     </div>
     <div class="container feature-row">
@@ -993,10 +1956,10 @@ body {
 
   <!-- Demo -->
   <section id="demo" class="demo">
-    <div class="container section-header"><h2>Interactive Trading Journal Demo</h2></div>
+    <div class="container section-header"><h2 class="bloom">Interactive Trading Journal Demo</h2></div>
     <div class="container demo-grid">
-      <div class="demo-card"><h3>AI Insight</h3><p class="ai-text" id="aiText">“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”</p></div>
-      <div class="demo-card tilt-card">
+      <div class="demo-card glass lift"><h3>AI Insight</h3><p class="ai-text" id="aiText">“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”</p></div>
+      <div class="demo-card tilt-card glass lift">
         <h3>Tilt Meter</h3>
         <div class="tilt-meter">
           <svg viewBox="0 0 36 36" class="circular-chart">
@@ -1020,15 +1983,15 @@ body {
           </svg>
         </div>
       </div>
-      <div class="demo-card">
+      <div class="demo-card glass lift">
         <h3>Trading Model Stats</h3>
         <ul class="stats-list">
           <li><span>Win Rate:</span> 62%
-            <div class="bar-container"><div id="barWin" class="bar"></div></div>
+            <div class="progress"><div id="barWin" class="bar"></div></div>
           </li>
           <li><span>Trades:</span> 124</li>
           <li><span>Rules Followed:</span> 87%
-            <div class="bar-container"><div id="barRules" class="bar"></div></div>
+            <div class="progress"><div id="barRules" class="bar"></div></div>
           </li>
           <li><span>Most Broken Rule:</span> Exits too early</li>
         </ul>
@@ -1038,12 +2001,12 @@ body {
 
   <section class="journal-overview">
     <div class="container">
-      <h2>Why Funded Traders Choose the TradeTrakR Trading Journal</h2>
+      <h2 class="bloom">Why Funded Traders Choose the TradeTrakR Trading Journal</h2>
       <p>TradeTrakR combines AI-powered trade analysis, deep P&amp;L analytics, and structured note-taking so funded futures and forex traders can review every session with confidence.</p>
       <ul>
-        <li><strong>AI-Powered Trade Analysis</strong> Turn session data into AI trading journal insights that highlight the patterns and setups responsible for your best returns.</li>
-        <li><strong>Track P&amp;L and Emotions</strong> Pair your trading log with psychology tracking to stay disciplined, even during volatile futures trading journal sessions.</li>
-        <li><strong>Designed for Funded Traders</strong> Document prop firm rules, risk targets, and execution checklists inside the best trading journal app built for serious traders.</li>
+        <li class="glass lift"><strong>AI-Powered Trade Analysis</strong> Turn session data into AI trading journal insights that highlight the patterns and setups responsible for your best returns.</li>
+        <li class="glass lift"><strong>Track P&amp;L and Emotions</strong> Pair your trading log with psychology tracking to stay disciplined, even during volatile futures trading journal sessions.</li>
+        <li class="glass lift"><strong>Designed for Funded Traders</strong> Document prop firm rules, risk targets, and execution checklists inside the best trading journal app built for serious traders.</li>
       </ul>
       <p>Ready to go deeper? <a href="trading-journal.html">Explore the complete trading journal</a> or <a href="trading-journal-features.html">compare every trading journal feature</a>.</p>
     </div>
@@ -1052,14 +2015,14 @@ body {
   <!-- Pricing -->
   <section id="pricing" class="pricing">
     <div class="container section-header">
-      <h2>Trading Journal Beta Pricing</h2>
+      <h2 class="bloom">Trading Journal Beta Pricing</h2>
       <p>Lock in your lifetime trading journal price before public launch 🚀</p>
     </div>
     <div class="container pricing-grid">
 
       <!-- Monthly -->
-      <div class="pricing-card">
-        <h3>$20<span>/month</span></h3>
+      <div class="pricing-card glass lift">
+        <h3 class="bloom">$20<span>/month</span></h3>
         <p class="beta-tag">Unlock the full power of TradeTrakr at the lifetime beta rate.</p>
         <a href="https://whop.com/checkout/plan_cUBE8hPgKIUwb?d2c=true" class="btn" target="_blank" rel="noopener noreferrer">Get Monthly Plan</a>
         <ul class="features-list">
@@ -1074,9 +2037,9 @@ body {
       </div>
 
       <!-- Yearly -->
-      <div class="pricing-card recommended">
+      <div class="pricing-card recommended glass lift">
         <div class="discount-badge">37% OFF</div>
-        <h3>$150<span>/year</span></h3>
+        <h3 class="bloom">$150<span>/year</span></h3>
         <p class="beta-tag">Best value — keep your yearly discount for life.</p>
         <a href="https://whop.com/checkout/plan_gKf7YosD7VSj5?d2c=true" class="btn" target="_blank" rel="noopener noreferrer">Get Yearly Plan</a>
         <ul class="features-list">
@@ -1096,7 +2059,7 @@ body {
   <section class="community">
     <div class="container community-inner">
       <div class="community-text">
-        <h2>Join the TradeTrakR Trading Journal Community</h2>
+        <h2 class="bloom">Join the TradeTrakR Trading Journal Community</h2>
         <p>Get instant release alerts, trading journal tips, and beta invites inside our free announcements server.</p>
       </div>
       <a class="btn btn-outline discord-btn" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Join Free Discord</a>
@@ -1122,12 +2085,39 @@ body {
     if (window.location.hash) { history.replaceState(null, null, ' '); }
 
     const progressBar = document.getElementById("progress-bar");
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+    const scrollThreshold = 100;
+    let ticking = false;
+    
+    function updateHeader(scrollTop) {
+      const scrollDiff = scrollTop - lastScrollTop;
+      
+      if (scrollTop <= scrollThreshold) {
+        header.classList.remove('hidden');
+      } else if (Math.abs(scrollDiff) > 5) {
+        if (scrollDiff > 0) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+      }
+      
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      ticking = false;
+    }
+    
     window.addEventListener("scroll", () => {
-      let scrollTop = window.scrollY;
-      let docHeight = document.body.scrollHeight - window.innerHeight;
-      let scrolled = (scrollTop / docHeight) * 100;
+      const scrollTop = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = Math.min(100, (scrollTop / docHeight) * 100);
       progressBar.style.width = scrolled + "%";
-    });
+      
+      if (!ticking) {
+        window.requestAnimationFrame(() => updateHeader(scrollTop));
+        ticking = true;
+      }
+    }, { passive: true });
 
     const tiltCircle = document.getElementById("tiltCircle");
     const tiltText = document.getElementById("tiltText");
@@ -1170,6 +2160,273 @@ body {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); } });
     }, { threshold: 0.2 });
     sections.forEach(sec => observer2.observe(sec));
+
+    // ✅ SCROLL LOCK FUNCTIONS - iOS-safe implementation
+    function disableScroll() {
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function enableScroll() {
+      const scrollY = document.body.dataset.scrollY || '0';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, parseInt(scrollY));
+      delete document.body.dataset.scrollY;
+    }
+
+    // Trial Modal Handler
+    const modal = document.getElementById('trial-modal');
+    const modalClose = modal.querySelector('.trial-modal__close');
+    const trialForm = document.getElementById('trial-quiz-form');
+    const activateBtn = document.getElementById('activate-btn');
+    const noThanksBtn = document.getElementById('no-thanks-btn');
+    const continueBtn = document.getElementById('continue-btn');
+    const trialError = document.getElementById('trial-error');
+    const signupState = modal.querySelector('.trial-modal__signup');
+    const successState = modal.querySelector('.trial-modal__success');
+
+    let hasShownModal = false;
+
+    // Check if user has already seen/submitted the modal
+    function shouldShowModal() {
+      // Check if they already successfully signed up (prevent auto-trigger only)
+      if (localStorage.getItem('tradetrakr_trial_subscribed') === 'true') {
+        return false;
+      }
+      
+      // Check if they dismissed it (don't show for 30 days)
+      const dismissed = localStorage.getItem('tradetrakr_trial_dismissed');
+      if (dismissed) {
+        const dismissedDate = new Date(dismissed);
+        const daysSinceDismiss = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
+        if (daysSinceDismiss < 30) {
+          return false;
+        }
+      }
+      
+      return true;
+    }
+
+    function showModal(force = false, lockScrollImmediately = false) {
+      // Don't show if localStorage says they already subscribed
+      if (!force && shouldShowModal() === false) return;
+      if (!force && hasShownModal) return;
+      hasShownModal = true;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      
+      // ✅ Only lock scroll if explicitly requested (manual trigger)
+      // Auto-trigger shows modal but allows scrolling until user interacts
+      if (lockScrollImmediately) {
+        disableScroll();
+      }
+    }
+    
+    function markAsDismissed() {
+      localStorage.setItem('tradetrakr_trial_dismissed', new Date().toISOString());
+    }
+    
+    function markAsSubscribed() {
+      localStorage.setItem('tradetrakr_trial_subscribed', 'true');
+    }
+
+    function hideModal() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      enableScroll(); // ✅ Always unlock scroll on modal close
+    }
+    
+    // ✅ Lock scroll when user interacts with modal (only if not already locked)
+    function lockScrollOnInteraction() {
+      if (!document.body.dataset.scrollY) {
+        disableScroll();
+      }
+    }
+
+    function showSuccess() {
+      signupState.style.display = 'none';
+      successState.style.display = 'block';
+      markAsSubscribed(); // Never show modal again after successful quiz
+      
+      // Redirect to Whop checkout after 2 seconds
+      setTimeout(() => {
+        window.location.href = 'https://whop.com/checkout/plan_5LC9GeWOWIlEy?d2c=true';
+      }, 2000);
+    }
+
+    function setTrialError(message) {
+      trialError.textContent = message;
+    }
+
+    // ✅ Lock scroll when user interacts with modal content
+    // Attach to all interactive elements inside modal
+    const modalInteractiveElements = [
+      modal.querySelector('#activate-btn'),
+      modal.querySelector('#question-1'),
+      modal.querySelector('#question-2'),
+      modal.querySelector('#question-3'),
+      ...modal.querySelectorAll('.trial-modal__btn')
+    ].filter(Boolean); // Remove null elements
+    
+    modalInteractiveElements.forEach(element => {
+      element.addEventListener('focus', lockScrollOnInteraction, { once: true });
+      element.addEventListener('click', lockScrollOnInteraction, { once: true });
+    });
+
+    // Close modal handlers
+    modalClose.addEventListener('click', () => {
+      markAsDismissed();
+      hideModal();
+    });
+    noThanksBtn.addEventListener('click', () => {
+      markAsDismissed();
+      hideModal();
+    });
+    continueBtn.addEventListener('click', hideModal);
+
+    // Close modal on overlay click
+    modal.querySelector('.trial-modal__overlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        markAsDismissed();
+        hideModal();
+      }
+    });
+
+    // Quiz form submission
+    if (trialForm) {
+      trialForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        setTrialError('');
+        
+        const q1 = document.getElementById('question-1').value;
+        const q2 = document.getElementById('question-2').value;
+        const q3 = document.getElementById('question-3').value;
+        
+        if (!q1 || !q2 || !q3) {
+          setTrialError('Please answer all questions');
+          return;
+        }
+        
+        // Log quiz responses for your records
+        console.log('Quiz responses:', { q1, q2, q3 });
+        
+        // Show success and redirect
+        showSuccess();
+      });
+    }
+
+    // ✅ Show modal after 2 seconds on page load (NO scroll lock - user can still scroll)
+    setTimeout(() => {
+      // Only show on homepage (not on subpages)
+      if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('.html') === false) {
+        showModal(false, false); // Auto-trigger: don't lock scroll until interaction
+      }
+    }, 2000);
+    
+    // ✅ Safety fallback: Always unlock scroll if modal is closed
+    modal.addEventListener('transitionend', () => {
+      if (!modal.classList.contains('active')) {
+        enableScroll();
+      }
+    });
+
+    // Manual Modal Handler (for "Get Started Free" buttons)
+    const manualModal = document.getElementById('manual-trial-modal');
+    const manualModalClose = manualModal.querySelector('.manual-trial-modal__close');
+    const manualTrialForm = document.getElementById('manual-trial-quiz-form');
+    const manualNoThanksBtn = document.getElementById('manual-no-thanks-btn');
+    const manualSignupState = manualModal.querySelector('.manual-trial-modal__signup');
+    const manualSuccessState = manualModal.querySelector('.manual-trial-modal__success');
+
+    function showManualModal() {
+      manualModal.style.display = 'flex';
+      disableScroll(); // ✅ Manual trigger: lock scroll immediately (user clicked button)
+    }
+
+    function hideManualModal() {
+      manualModal.style.display = 'none';
+      enableScroll(); // ✅ Always unlock scroll on modal close
+    }
+
+    function showManualSuccess() {
+      manualSignupState.style.display = 'none';
+      manualSuccessState.style.display = 'block';
+      
+      setTimeout(() => {
+        window.location.href = 'https://whop.com/checkout/plan_5LC9GeWOWIlEy?d2c=true';
+      }, 2000);
+    }
+
+    // Close handlers - all ensure scroll unlock
+    manualModalClose.addEventListener('click', hideManualModal);
+    manualNoThanksBtn.addEventListener('click', hideManualModal);
+    manualModal.querySelector('.manual-trial-modal__overlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) hideManualModal();
+    });
+    
+    // ✅ Safety fallback for manual modal: Always unlock scroll if modal is hidden
+    manualModal.addEventListener('transitionend', () => {
+      if (manualModal.style.display === 'none') {
+        enableScroll();
+      }
+    });
+
+    // Form submission
+    if (manualTrialForm) {
+      manualTrialForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const q1 = document.getElementById('manual-question-1').value;
+        const q2 = document.getElementById('manual-question-2').value;
+        const q3 = document.getElementById('manual-question-3').value;
+        
+        if (!q1 || !q2 || !q3) {
+          document.getElementById('manual-trial-error').textContent = 'Please answer all questions';
+          return;
+        }
+        
+        console.log('Quiz responses:', { q1, q2, q3 });
+        showManualSuccess();
+      });
+    }
+
+    // Make "Get Started Free" buttons open the manual modal
+    const getStartedBtn = document.getElementById('get-started-btn');
+    const heroGetStartedBtn = document.getElementById('hero-get-started-btn');
+    
+    if (getStartedBtn) {
+      getStartedBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showManualModal();
+      });
+    }
+    
+    if (heroGetStartedBtn) {
+      heroGetStartedBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showManualModal();
+      });
+    }
+
+    // ✅ Close modals with Escape key (unified handler for both modals)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (modal.classList.contains('active')) {
+          markAsDismissed();
+          hideModal();
+        }
+        if (manualModal && manualModal.style.display === 'flex') {
+          hideManualModal();
+        }
+      }
+    });
   </script>
 </body>
 </html>

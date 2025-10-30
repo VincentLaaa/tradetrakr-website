@@ -24,7 +24,7 @@ html {
 body {
   margin: 0;
   font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at 10% 15%, rgba(0, 246, 255, 0.06), transparent 42%),
+  background: radial-gradient(circle at 10% 15%, rgba(76, 141, 255, 0.06), transparent 42%),
     radial-gradient(circle at 90% 0%, rgba(127, 90, 240, 0.12), transparent 55%),
     var(--blog-bg);
   color: var(--blog-text);
@@ -86,7 +86,7 @@ header.site-header {
 .logo {
   font-weight: 700;
   font-size: 1.2rem;
-  background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0));
+  background: linear-gradient(120deg, var(--accent-electric, #4c8dff), var(--accent-violet, #6d5dfc));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

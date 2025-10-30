@@ -5,9 +5,9 @@
       <stop offset="100%" style="stop-color:#191836;stop-opacity:1" />
     </linearGradient>
     <linearGradient id="flow-accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#00f6ff;stop-opacity:0.9" />
-      <stop offset="50%" style="stop-color:#7f5af0;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#ff4ecd;stop-opacity:0.9" />
+      <stop offset="0%" style="stop-color:#4c8dff;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#6d5dfc;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#4338ca;stop-opacity:0.9" />
     </linearGradient>
     <filter id="glow">
       <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -22,12 +22,12 @@
   <rect width="1100" height="520" fill="url(#flow-bg)"/>
   
   <!-- Title -->
-  <text x="550" y="45" fill="#00f6ff" font-family="system-ui, sans-serif" font-size="26" font-weight="700" text-anchor="middle">Evaluation Journaling Workflow</text>
+  <text x="550" y="45" fill="#4c8dff" font-family="system-ui, sans-serif" font-size="26" font-weight="700" text-anchor="middle">Evaluation Journaling Workflow</text>
   
   <!-- Flowchart: Pre-Trade -->
   <g id="pre-trade">
     <rect x="80" y="80" width="180" height="120" rx="12" fill="#1a1b23" stroke="url(#flow-accent)" stroke-width="2" filter="url(#glow)"/>
-    <text x="170" y="110" fill="#00f6ff" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">1. Pre-Trade Checklist</text>
+    <text x="170" y="110" fill="#4c8dff" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">1. Pre-Trade Checklist</text>
     <text x="170" y="135" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• News filters ON</text>
     <text x="170" y="150" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Max contracts set</text>
     <text x="170" y="165" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Daily buffer check</text>
@@ -40,7 +40,7 @@
   <!-- Flowchart: Trade -->
   <g id="trade">
     <rect x="350" y="80" width="180" height="120" rx="12" fill="#1a1b23" stroke="url(#flow-accent)" stroke-width="2" filter="url(#glow)"/>
-    <text x="440" y="110" fill="#7f5af0" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">2. Real-Time Rules</text>
+    <text x="440" y="110" fill="#6d5dfc" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">2. Real-Time Rules</text>
     <text x="440" y="135" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Monitor daily loss</text>
     <text x="440" y="150" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Check drawdown</text>
     <text x="440" y="165" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Contract exposure</text>
@@ -53,7 +53,7 @@
   <!-- Flowchart: Post-Trade -->
   <g id="post-trade">
     <rect x="620" y="80" width="180" height="120" rx="12" fill="#1a1b23" stroke="url(#flow-accent)" stroke-width="2" filter="url(#glow)"/>
-    <text x="710" y="110" fill="#ff4ecd" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">3. Post-Trade Debrief</text>
+    <text x="710" y="110" fill="#4338ca" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">3. Post-Trade Debrief</text>
     <text x="710" y="135" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Document rule status</text>
     <text x="710" y="150" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Attach screenshots</text>
     <text x="710" y="165" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Note deviations</text>
@@ -66,7 +66,7 @@
   <!-- Flowchart: Weekly -->
   <g id="weekly">
     <rect x="630" y="230" width="180" height="120" rx="12" fill="#1a1b23" stroke="url(#flow-accent)" stroke-width="2" filter="url(#glow)"/>
-    <text x="720" y="260" fill="#00f6ff" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">4. Weekly Audit</text>
+    <text x="720" y="260" fill="#4c8dff" font-family="system-ui, sans-serif" font-size="15" font-weight="600" text-anchor="middle">4. Weekly Audit</text>
     <text x="720" y="285" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Rule compliance score</text>
     <text x="720" y="300" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Tilt patterns review</text>
     <text x="720" y="315" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">• Export evidence</text>
@@ -78,8 +78,8 @@
   
   <!-- Cooldown decision (on the side) -->
   <g id="cooldown">
-    <rect x="850" y="150" width="180" height="150" rx="12" fill="#1a1b23" stroke="#ff4ecd" stroke-width="2"/>
-    <text x="940" y="175" fill="#ff4ecd" font-family="system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Cooldown Trigger</text>
+    <rect x="850" y="150" width="180" height="150" rx="12" fill="#1a1b23" stroke="#4338ca" stroke-width="2"/>
+    <text x="940" y="175" fill="#4338ca" font-family="system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Cooldown Trigger</text>
     <text x="940" y="200" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">IF 2+ rule breaches</text>
     <text x="940" y="220" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">OR 50% daily buffer</text>
     <text x="940" y="240" fill="#9ca3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">THEN pause + log</text>

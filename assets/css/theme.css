@@ -1,0 +1,191 @@
+:root {
+  /* Base dark surface */
+  --bg-0: #07070a;
+  --bg-1: #0b0b10;
+  --bg-2: #0f0f15;
+
+  /* Accent (dynamic; updated by JS) */
+  --accent: #6d5dfc;              /* fallback */
+  --accent-rgb: 109,93,252;
+
+  /* Derived scales (computed here but re-set by JS when accent changes) */
+  --accent-50: color-mix(in oklab, rgb(var(--accent-rgb)) 12%, white);
+  --accent-100: color-mix(in oklab, rgb(var(--accent-rgb)) 20%, white);
+  --accent-200: color-mix(in oklab, rgb(var(--accent-rgb)) 35%, white);
+  --accent-300: color-mix(in oklab, rgb(var(--accent-rgb)) 50%, white);
+  --accent-400: color-mix(in oklab, rgb(var(--accent-rgb)) 65%, white);
+  --accent-500: rgb(var(--accent-rgb)); /* base */
+  --accent-600: color-mix(in oklab, rgb(var(--accent-rgb)) 80%, black);
+  --accent-700: color-mix(in oklab, rgb(var(--accent-rgb)) 65%, black);
+  --accent-800: color-mix(in oklab, rgb(var(--accent-rgb)) 50%, black);
+
+  /* Surface styling */
+  --surface-card: linear-gradient(160deg, rgba(15,18,34,0.82), rgba(6,8,18,0.82));
+  --surface-card-muted: linear-gradient(160deg, rgba(12,15,28,0.68), rgba(5,7,16,0.68));
+  --surface-badge: linear-gradient(120deg, rgba(var(--accent-rgb), 0.12), rgba(var(--accent-rgb), 0.04));
+  --border-subtle: rgba(var(--accent-rgb), 0.12);
+  --border-strong: rgba(var(--accent-rgb), 0.28);
+  --shadow-soft: 0 12px 28px rgba(4,0,32,0.32);
+  --shadow-hover: 0 20px 46px rgba(6,0,50,0.45);
+
+  /* Glass + borders */
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: var(--border-subtle);
+  --glass-inner: rgba(255,255,255,0.06);
+  --shadow-outer: var(--shadow-soft);
+
+  /* Text */
+  --text-1: #ffffff;
+  --text-2: rgba(255,255,255,0.75);
+  --text-3: rgba(255,255,255,0.58);
+
+  /* Radii & blur */
+  --radius: 16px;
+  --blur: 10px;
+}
+
+html, body {
+  background:
+    radial-gradient(1000px 600px at 15% -10%, rgba(var(--accent-rgb), 0.22), transparent 60%),
+    radial-gradient(900px 600px at 85% 120%, rgba(var(--accent-rgb), 0.12), transparent 60%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-2));
+  color: var(--text-1);
+  min-height: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .soft-pulse {
+    animation: softPulse 3.4s ease-in-out infinite;
+  }
+}
+@keyframes softPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.35); }
+  50% { box-shadow: 0 0 40px 6px rgba(var(--accent-rgb), 0.18); }
+}
+
+/* Glass card */
+.glass {
+  position: relative;
+  background: var(--surface-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-outer);
+  overflow: hidden;
+}
+
+/* Subtle inner border / bevel via overlay */
+.glass::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 40%),
+              linear-gradient(0deg, rgba(255,255,255,0.04), transparent 35%);
+  opacity: 0.7;
+}
+
+/* Radial accent bloom behind section headers */
+.bloom {
+  position: relative;
+}
+.bloom::before {
+  content: "";
+  position: absolute; inset: -60px -120px -90px -120px;
+  background: radial-gradient(600px 300px at 50% 0%, rgba(var(--accent-rgb),0.14), transparent 60%);
+  filter: blur(20px);
+  z-index: -1;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .75rem 1.3rem;
+  border-radius: calc(var(--radius) - 6px);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(var(--accent-rgb), .3);
+  background: rgba(var(--accent-rgb), .14);
+  color: var(--text-1);
+  box-shadow: none;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+.btn:hover {
+  background: rgba(var(--accent-rgb), .22);
+  border-color: rgba(var(--accent-rgb), .45);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn.ghost {
+  background: transparent;
+  border-color: rgba(var(--accent-rgb), .32);
+  color: var(--accent-200);
+}
+.btn.ghost:hover {
+  background: rgba(var(--accent-rgb), .12);
+  border-color: rgba(var(--accent-rgb), .45);
+  color: #ffffff;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .25rem .6rem; border-radius: 9999px;
+  font-size: .8rem; letter-spacing: .2px;
+  color: var(--accent-300);
+  background: linear-gradient(90deg, rgba(var(--accent-rgb), .16), rgba(var(--accent-rgb), .05));
+  border: 1px solid rgba(var(--accent-rgb), .24);
+}
+
+/* Shimmer line */
+.shimmer {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, rgba(var(--accent-rgb), .25), transparent);
+  overflow: hidden;
+}
+.shimmer::after {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 2.8s linear infinite;
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+
+/* Progress */
+.progress {
+  height: 10px; border-radius: 9999px; overflow: hidden;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+}
+.progress > .bar {
+  height: 100%;
+  background-image: linear-gradient(90deg, var(--accent-700), var(--accent-400));
+  box-shadow: inset 0 0 10px rgba(0,0,0,.35), 0 0 20px rgba(var(--accent-rgb), .22);
+  transition: width .35s ease;
+}
+
+/* Typical containers -> glass by default */
+.section, .panel, .card, .module, .widget, .stats, .cta, .list, .tile {
+  border-radius: var(--radius);
+}
+
+/* Typography tweaks */
+h1, h2, h3 { color: var(--text-1); }
+p, li, small { color: var(--text-2); }
+
+/* Hover lift utility */
+.lift { transition: transform .18s ease, box-shadow .18s ease; }
+.lift:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>How Trading Journal Looks Like | Real Examples, Excel/App Layouts & Accountability</title>
+  <meta name="description" content="See how a trading journal looks like with real screenshots, fields to include, Excel & app examples, and prompts to stay accountable." />
+  <link rel="canonical" href="https://tradetrakr.com/blog/posts/how-trading-journal-looks-like" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How Trading Journal Looks Like | Real Examples, Excel/App Layouts & Accountability" />
+  <meta property="og:description" content="See how a trading journal looks like with real screenshots, fields to include, Excel & app examples, and prompts to stay accountable." />
+  <meta property="og:url" content="https://tradetrakr.com/blog/posts/how-trading-journal-looks-like" />
+  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Trading Journal Looks Like | Real Examples, Excel/App Layouts & Accountability" />
+  <meta name="twitter:description" content="See how a trading journal looks like with real screenshots, fields to include, Excel & app examples, and prompts to stay accountable." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+
+  <!-- Fonts / base CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../assets/css/theme-migrate.css">
+  <script defer src="../../../assets/js/theme-accent.js"></script>
+
+  <!-- Variant C styling (mirrors your example) -->
+  <style>
+    .tt-meta {
+      display:flex;flex-wrap:wrap;gap:.75rem;font-size:.9rem;color:rgba(233,234,240,.7);
+      margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(42,44,52,.5);
+    }
+    .tt-author{color:rgba(233,234,240,.85);font-weight:500;}
+    .tt-reading{color:rgba(127,90,240,.8);}
+    .tt-tag{
+      background:rgba(127,90,240,.15);color:rgba(127,90,240,.9);
+      padding:.2rem .5rem;border-radius:4px;font-size:.8rem;font-weight:500;
+    }
+    .left-rail-toc{
+      position:sticky;top:2rem;background:rgba(21,22,27,.8);border:1px solid rgba(42,44,52,.6);
+      border-radius:12px;padding:1.5rem;margin-bottom:2rem;backdrop-filter:blur(10px);
+    }
+    .left-rail-toc h3{margin:0 0 1rem 0;font-size:1rem;color:rgba(233,234,240,.9);letter-spacing:.04em;text-transform:uppercase;}
+    .left-rail-toc ul{margin:0;padding:0;list-style:none;display:grid;gap:.5rem;}
+    .left-rail-toc a{
+      color:rgba(233,234,240,.7);text-decoration:none;font-size:.9rem;padding:.4rem .6rem;border-radius:6px;transition:all .2s ease;display:block;
+    }
+    .left-rail-toc a:hover{background:rgba(127,90,240,.15);color:rgba(127,90,240,.9);}
+    .left-rail-toc a.active{background:rgba(127,90,240,.2);color:rgba(127,90,240,.95);font-weight:500;}
+
+    .mobile-toc{display:none;background:rgba(21,22,27,.7);border:1px solid rgba(42,44,52,.6);border-radius:12px;padding:1.25rem;margin:1.5rem 0;}
+    .mobile-toc h3{margin:0 0 .75rem 0;font-size:.95rem;color:rgba(233,234,240,.9);letter-spacing:.04em;text-transform:uppercase;}
+    .mobile-toc ul{margin:0;padding-left:1.2rem;display:grid;gap:.4rem;}
+    .mobile-toc a{color:rgba(233,234,240,.7);text-decoration:none;font-size:.9rem;}
+    .mobile-toc a:hover{color:rgba(127,90,240,.9);}
+
+    .post-container{display:grid;grid-template-columns:280px 1fr;gap:2rem;align-items:start;
+      margin:0 auto;max-width:var(--blog-maxw);padding:clamp(2.25rem,4vw,3.5rem) 1.5rem 4rem;}
+    @media (max-width:1024px){.post-container{grid-template-columns:1fr;gap:1.5rem}.left-rail-toc{display:none}.mobile-toc{display:block}}
+
+    .tt-hero{margin:0 0 1.25rem 0;max-width:100%;}
+    .tt-hero--screenshot{max-width:1100px;margin-left:auto;margin-right:auto;}
+    .tt-hero--screenshot img{
+      width:100%;height:auto;border-radius:16px;border:1px solid rgba(42,44,52,.6);
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+    }
+    @media (max-width:840px){.tt-hero{margin:0 -1.5rem}.tt-hero--screenshot img{border-radius:0}}
+
+    .snippet-box{
+      background:linear-gradient(135deg, rgba(15,16,28,.95), rgba(25,20,46,.85));
+      border:1px solid rgba(127,90,240,.3);border-radius:12px;padding:1.25rem;margin:1.25rem 0;
+    }
+    .snippet-box p{margin:0;color:rgba(233,234,240,.85);}
+
+    .feature-table{overflow-x:auto;border-radius:var(--blog-radius);border:1px solid var(--blog-border);background:rgba(21,22,27,.7);}
+    .feature-table table{width:100%;min-width:720px;border-collapse:collapse}
+    .feature-table th,.feature-table td{padding:.85rem 1.1rem;border-bottom:1px solid var(--blog-border);vertical-align:top;text-align:left}
+    .feature-table th{font-weight:600;color:rgba(233,234,240,.9);background:rgba(18,19,26,.9)}
+    .feature-table tr:nth-child(even) td{background:rgba(27,29,38,.55)}
+
+    .faq-list{margin:0;padding-left:1.2rem;display:grid;gap:1rem}
+    .faq-list dt{font-weight:600;color:rgba(233,234,240,.88)}
+    .faq-list dd{margin:0;color:rgba(233,234,240,.78)}
+  </style>
+
+  <!-- Schema (BlogPosting + Breadcrumb) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"How trading journal looks like",
+    "description":"See how a trading journal looks like with real screenshots, fields to include, Excel & app examples, and prompts to stay accountable.",
+    "datePublished":"2025-10-27",
+    "dateModified":"2025-10-27",
+    "author":{"@type":"Person","name":"TradeTrakR Editorial"},
+    "publisher":{"@type":"Organization","name":"TradeTrakR"},
+    "image":"https://tradetrakr.com/assets/preview.png",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://tradetrakr.com/blog/posts/how-trading-journal-looks-like"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://tradetrakr.com/"},
+      {"@type":"ListItem","position":2,"name":"Blog","item":"https://tradetrakr.com/blog/"},
+      {"@type":"ListItem","position":3,"name":"How trading journal looks like","item":"https://tradetrakr.com/blog/posts/how-trading-journal-looks-like"}
+    ]
+  }
+  </script>
+
+  <!-- THEME BASE (non-destructive) -->
+  <style>
+    :root{
+      --accent:#6d5dfc; --accent-rgb:109,93,252; --accent-2:#4c8dff;
+      --bg-0:#05070d; --bg-1:#0a0f18; --text:#e6e8ef; --muted:#a8adbb;
+      --line:rgba(255,255,255,0.06);
+      --card:rgba(255,255,255,0.02);
+    }
+    body{
+      background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.65; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+    .container,.site-container{max-width:1150px;margin:0 auto;padding:0 20px}
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(5,7,13,0.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--line)}
+    .site-nav a{color:#a8adbb; text-decoration:none; margin-left:18px; font-size:.98rem}
+    .site-nav a:hover{color:var(--accent)}
+    .brand,.site-brand,.logo{font-weight:700; text-decoration:none; color:var(--text)}
+    .brand span,.logo span{color:var(--accent)}
+    section.section-block, section.section {padding:72px 0; border-top:1px solid var(--line)}
+    .glass.lift, .feature-card, .testimonial, .journal-feature, .cta-banner, .sidebar-section, .card{
+      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    }
+    .btn{display:inline-block; padding:10px 16px; border-radius:999px; font-weight:600; text-decoration:none}
+    .btn.ghost{color:var(--text); border:1px solid var(--line)}
+    .btn.ghost:hover{border-color:rgba(var(--accent-rgb),.6)}
+    .btn.primary{background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#051018}
+    .section-intro h2, .bloom, .section-title, h1, h2.section-title{
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    /* Reveal helper (class may be added later) */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.is-visible{opacity:1; transform:none}
+  </style>
+
+</head>
+
+<body data-tt-variant="C">
+  <!-- Site header (same structure as your theme) -->
+  <header class="site-header">
+    <div class="header-inner glass lift">
+      <a class="logo" href="../../"><span>Trade</span>TrakR</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs glass lift" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Home</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li aria-current="page">How trading journal looks like</li>
+    </ol>
+  </nav>
+
+  <article class="post-container glass lift">
+    <!-- Left rail TOC -->
+    <nav class="left-rail-toc glass lift" aria-label="Table of contents">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#core">How trading journal looks like: the core sections</a></li>
+        <li><a href="#excel">How trading journal looks like in Excel (copy this layout)</a></li>
+        <li><a href="#app">How trading journal looks like in an app (what the screens show)</a></li>
+        <li><a href="#who">Who this is for (hurt points)</a></li>
+        <li><a href="#prompts">Accountability prompts</a></li>
+        <li><a href="#examples">Examples you can copy</a></li>
+        <li><a href="#levels">How trading journal looks like for beginners vs. veterans</a></li>
+        <li><a href="#shots">How trading journal looks like in screenshots</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <div class="post-content glass lift">
+
+      <!-- Post meta + H1 -->
+      <section class="post-hero glass lift">
+        <h1 class="bloom">How trading journal looks like</h1>
+        <div class="tt-meta glass lift">
+          <span class="tt-author">TradeTrakR Editorial</span>
+          <span>·</span>
+          <time datetime="2025-10-27">Oct 27, 2025</time>
+          <span>·</span>
+          <span class="tt-reading">~12 min read</span>
+          <span>·</span>
+          <span class="tt-tag badge">[Journaling]</span>
+        </div>
+      </section>
+
+      <!-- Mobile TOC -->
+      <nav class="mobile-toc glass lift" aria-label="Table of contents">
+        <h3>Contents</h3>
+        <ul>
+          <li><a href="#core">Core sections</a></li>
+          <li><a href="#excel">Excel layout</a></li>
+          <li><a href="#app">App screens</a></li>
+          <li><a href="#who">Hurt points</a></li>
+          <li><a href="#prompts">Prompts</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#levels">Beginners vs. veterans</a></li>
+          <li><a href="#shots">Screenshots</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Featured snippet-style definition box -->
+      <div class="snippet-box" role="note" aria-label="Definition">
+        <p><strong>In one glance:</strong> A trading journal looks like a structured record for each trade—<em>facts</em> (entry/exit, size, P&L), <em>context</em> (setup, market conditions), <em>risk</em> (planned vs. realized R), <em>process</em> (rules followed/broken + screenshot), <em>psychology</em> (emotion, tilt), and a short <em>review</em> with one action for next time.</p>
+      </div>
+
+      <section class="intro">
+        <p class="lead"><strong>Your trading journal isn’t a diary—it’s a behavior-change tool.</strong> If you don’t know what a trading journal looks like—the fields, screens, and weekly workflow—you’ll either skip it or build something that doesn’t hold you accountable.</p>
+        <p>This guide shows exactly how a trading journal looks like across paper, Excel/Sheets, and modern apps. You’ll get copy-paste column schemas, accountability prompts you’ll actually use, and a weekly review process that turns logs into improvements.</p>
+      </section>
+
+      <h2 id="core">How trading journal looks like: the core sections</h2>
+      <p>Every entry should include six blocks. Skip any one and you lose a chance to spot patterns or enforce discipline.</p>
+      <h3>1) Facts</h3>
+      <p>Ticker/contract, direction, size, entry/exit, fees—clean, objective “what happened.”</p>
+      <h3>2) Context</h3>
+      <p>Setup name, higher-timeframe bias, volatility, news tags (CPI/FOMC), session (Open/NY/Late)—why the trade fit conditions.</p>
+      <h3>3) Risk</h3>
+      <p>Planned stop/target, <em>R planned</em>, <em>R realized</em>, and whether stops/targets moved—“did I risk what I said I would?”</p>
+      <h3>4) Process</h3>
+      <p>Rules followed (Y/N), most broken rule, screenshot link—“did I follow the plan or freelance?”</p>
+      <h3>5) Psychology</h3>
+      <p>Pre/post emotion and a tilt score (1–10)—“was I in control or reactive?”</p>
+      <h3>6) Review</h3>
+      <p>One lesson and one next action. End-of-day: tally the top broken rule.</p>
+
+      <h2 id="excel">How trading journal looks like in Excel (copy this layout)</h2>
+      <p>Copy this column schema into Excel or Google Sheets to start today.</p>
+
+      <div class="feature-table" role="region" aria-label="Column schema">
+        <table>
+          <thead>
+            <tr><th>Column</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Date</td><td>2025-10-27</td></tr>
+            <tr><td>Time</td><td>09:45</td></tr>
+            <tr><td>Ticker/Contract</td><td>ES</td></tr>
+            <tr><td>Direction (L/S)</td><td>Long</td></tr>
+            <tr><td>Size</td><td>2</td></tr>
+            <tr><td>Entry</td><td>4750.25</td></tr>
+            <tr><td>Exit</td><td>4753.50</td></tr>
+            <tr><td>Stop (planned)</td><td>4748.00</td></tr>
+            <tr><td>Target (planned)</td><td>4756.00</td></tr>
+            <tr><td>R Planned</td><td>2.5</td></tr>
+            <tr><td>R Realized</td><td>1.5</td></tr>
+            <tr><td>Gross P&L</td><td>+650</td></tr>
+            <tr><td>Fees</td><td>-6.50</td></tr>
+            <tr><td>Net P&L</td><td>+643.50</td></tr>
+            <tr><td>Setup</td><td>Bull Flag</td></tr>
+            <tr><td>HTF Bias</td><td>Bullish</td></tr>
+            <tr><td>Volatility</td><td>High</td></tr>
+            <tr><td>News Tag</td><td>CPI</td></tr>
+            <tr><td>Session</td><td>NY</td></tr>
+            <tr><td>Rules Followed (Y/N)</td><td>N</td></tr>
+            <tr><td>Most Broken Rule</td><td>Moved stop wider</td></tr>
+            <tr><td>Emotion (pre/post)</td><td>FOMO / Relief</td></tr>
+            <tr><td>Tilt (pre/post 1–10)</td><td>7 / 3</td></tr>
+            <tr><td>Screenshot URL</td><td>https://drive.google.com/file/xyz</td></tr>
+            <tr><td>Lesson</td><td>Don’t widen stops on first pullback</td></tr>
+            <tr><td>Next Action</td><td>Review stop rules Monday</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Formulas</h3>
+      <p><strong>R Planned:</strong> Longs: (Target − Entry) / (Entry − Stop) · Shorts: (Entry − Target) / (Stop − Entry)</p>
+      <p><strong>R Realized:</strong> Longs: (Exit − Entry) / (Entry − Stop) · Shorts: (Entry − Exit) / (Stop − Entry)</p>
+      <p><strong>Net P&amp;L:</strong> Gross P&amp;L − Fees</p>
+
+      <h3>Weekly review table</h3>
+      <ul>
+        <li>Win rate, Avg R, Expectancy</li>
+        <li>Performance by weekday, session, and news tag</li>
+        <li>Rule Adherence % and Most Broken Rule</li>
+        <li>Tilt vs. R (group averages or simple correlation)</li>
+      </ul>
+
+      <ol>
+        <li>Create a <code>Trades</code> sheet with the columns above; freeze header.</li>
+        <li>Add formulas for R Planned, R Realized, Net P&amp;L.</li>
+        <li>Create a <code>Weekly Review</code> sheet with the summaries above.</li>
+        <li>Set a Sunday reminder for a 30-minute review.</li>
+      </ol>
+
+      <p>Prefer automation? Read <a href="/blog/posts/automated-trade-tracker.html">Automated Trade Tracker</a>. Keep it consistent with <a href="/blog/posts/how-to-maintain-trading-journal.html">How to maintain trading journal</a>.</p>
+
+      <h2 id="app">How trading journal looks like in an app (what the screens show)</h2>
+      <h3>Capture view</h3>
+      <ul>
+        <li>Required: date/time, ticker, direction, size, entry/exit, stop, target</li>
+        <li>One-tap emotion/news tags; tilt slider (1–10)</li>
+        <li>Attach the last 3 minutes of chart as a screenshot</li>
+        <li>Micro-prompts: “What rule gives this trade its edge?” and “Did I move my stop?”</li>
+      </ul>
+
+      <h3>Card view</h3>
+      <ul>
+        <li>Badges: Rules ✓/✗, R realized, Net P&amp;L</li>
+        <li>Two prompts: “What to keep?” / “What to change?”</li>
+      </ul>
+
+      <h3>Insights view</h3>
+      <ul>
+        <li>Filters: News tag, Weekday, Session</li>
+        <li>R distribution, Rule % trend, Tilt vs. R</li>
+        <li>Top broken rules (bar chart)</li>
+      </ul>
+
+      <p>Compare free options in <a href="/blog/posts/which-trading-journal-is-free.html">Which trading journal is free?</a> or explore deeper analytics in <a href="/features/clarity-panel.html">Clarity Panel</a>.</p>
+
+      <h2 id="who">Who this is for (and the hurt points we’re solving)</h2>
+      <h3>Beginners</h3>
+      <p><strong>Pain:</strong> Not sure what to log; scattered notes; can’t tell if you’re improving.</p>
+      <p><strong>Fix:</strong> Use the six blocks; one screenshot per trade; 5-minute end-of-day tally; after 30 trades, review win rate and rule-adherence % and pick one change.</p>
+
+      <h3>Experienced traders</h3>
+      <p><strong>Pain:</strong> Accountability drift; time-of-day and news-day blind spots; skipped screenshots.</p>
+      <p><strong>Fix:</strong> Segment by session and news in weekly review; enforce “log within 15 minutes or no trading tomorrow”; if Rule Adherence % &lt; 70%, pause and revisit plan.</p>
+
+      <h2 id="prompts">Accountability prompts you’ll actually use</h2>
+      <ul>
+        <li><strong>Pre-trade:</strong> “What rule gives this trade its edge?”</li>
+        <li><strong>Post-fill:</strong> “Did I move my stop? Why?”</li>
+        <li><strong>At exit:</strong> “Was exit per plan or emotion?”</li>
+        <li><strong>End-of-day:</strong> “Top broken rule today?” (tally weekly)</li>
+        <li><strong>Weekly:</strong> “One change to test next week?” (specific, small, measurable)</li>
+      </ul>
+
+      <h2 id="examples">Examples you can copy today</h2>
+      <h3>Example 1: Single-trade card</h3>
+      <p><strong>Facts:</strong> Long 2 ES @ 4750.25, exit 4753.50, fees −$6.50, Net P&amp;L +$643.50<br>
+         <strong>Context:</strong> Bull Flag, HTF bullish, High vol, CPI, NY session<br>
+         <strong>Risk:</strong> R planned 2.5, R realized 1.5<br>
+         <strong>Process:</strong> Rules followed: No. Most broken rule: Moved stop wider<br>
+         <strong>Psychology:</strong> Pre: FOMO (7/10). Post: Relief (3/10)<br>
+         <strong>Review:</strong> Lesson—don’t widen stops on first pullback. Next—review stop rules Monday</p>
+
+      <h3>Example 2: Week review</h3>
+      <p><strong>Stats:</strong> Win rate 55%, Avg R 1.2, Expectancy 0.4R<br>
+         <strong>Best day:</strong> Wed (Win 70%, Avg R 1.8) · <strong>Worst:</strong> Mon (Win 40%, Avg R 0.3)<br>
+         <strong>Most broken rule:</strong> “Moved stop wider” (5×)<br>
+         <strong>Action next week:</strong> Log “most broken rule” by 9:00 AM; if 2+ violations Monday, stop trading afternoon</p>
+
+      <h2 id="levels">How trading journal looks like for beginners vs. veterans</h2>
+      <h3>Beginners: must-have minimum</h3>
+      <ul>
+        <li>Date, Time, Ticker, Direction, Size, Entry, Exit, Fees</li>
+        <li>One screenshot per trade (even if you skip analysis)</li>
+        <li>Daily three bullets: “What worked? What didn’t? What’s the plan tomorrow?”</li>
+        <li>Weekly one change (fix the most broken rule)</li>
+        <li>Start dashboards after 30+ trades (enough data)</li>
+      </ul>
+
+      <h3>Veterans: advanced segmentation</h3>
+      <ul>
+        <li>Segment by news (CPI/FOMC/PPI vs. None) and session (Open/NY/Late)</li>
+        <li>Grade Rule Adherence % weekly (target 80%+; if &lt;70%, pause trading)</li>
+        <li>Track Tilt on every trade; identify triggers</li>
+        <li>Guardrails: “Stop trading if tilt &gt; 7 for three trades” or “If rule adherence &lt; 70% for 2 weeks, review plan.”</li>
+      </ul>
+
+      <h2 id="shots">How trading journal looks like in screenshots (what to show)</h2>
+
+      <h2 id="faq">FAQ</h2>
+      <dl class="faq-list">
+        <dt>Is Excel enough or do I need software?</dt>
+        <dd>Excel/Sheets is enough to start. The column schema above + weekly review beats casual journaling. Switch to software if you log 50+ trades/week or want automated news-day segmentation and rule-adherence tracking.</dd>
+
+        <dt>What’s the minimum to track?</dt>
+        <dd>For beginners: Facts (entry/exit/fees) and Process (rules Y/N). Add Context (setup, session) after 20 trades; Psychology (tilt/emotion) after 40.</dd>
+
+        <dt>How often should I review?</dt>
+        <dd>End-of-day: 5 minutes to tally “most broken rule.” Weekly: 30 minutes for win rate, expectancy, rule %, and one change. Monthly: review time-of-day and news-day performance.</dd>
+
+        <dt>Should my trading plan live in the journal?</dt>
+        <dd>Yes—keep a Rules sheet or tab and reference rule IDs in entries (e.g., “Broke rule #3: no trades in first 30 minutes on CPI days”).</dd>
+
+        <dt>How do I make screenshots easy?</dt>
+        <dd>Use a hotkey tool (ShareX/Lightshot) to auto-upload to a cloud folder; paste the URL in your Screenshot column.</dd>
+      </dl>
+
+      <!-- Internal link cluster -->
+      <p>Next reads: <a href="/blog/posts/how-to-maintain-trading-journal.html">How to maintain trading journal</a> · <a href="/blog/posts/which-trading-journal-is-free.html">Which trading journal is free?</a> · <a href="/blog/posts/automated-trade-tracker.html">Automated Trade Tracker</a> · <a href="/features/clarity-panel.html">Clarity Panel</a></p>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-inner glass lift">
+      <div class="footer-links">
+        <a href="../../">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </div>
+      <p>© 2025 TradeTrakR — Research-driven trading journal insights.</p>
+    </div>
+  </footer>
+
+  <!-- FAQ schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Is Excel enough or do I need software?","acceptedAnswer":{"@type":"Answer","text":"Excel/Sheets is enough to start. The column schema above + weekly review beats casual journaling. Switch to software if you log 50+ trades/week or want automated news-day segmentation and rule-adherence tracking."}},
+      {"@type":"Question","name":"What's the minimum to track?","acceptedAnswer":{"@type":"Answer","text":"For beginners: Facts (entry/exit/fees) and Process (rules Y/N). Add Context (setup, session) after 20 trades; Psychology (tilt/emotion) after 40."}},
+      {"@type":"Question","name":"How often should I review?","acceptedAnswer":{"@type":"Answer","text":"End-of-day: 5 minutes to tally “most broken rule.” Weekly: 30 minutes for win rate, expectancy, rule %, and one change. Monthly: review time-of-day and news-day performance."}},
+      {"@type":"Question","name":"Should my trading plan live in the journal?","acceptedAnswer":{"@type":"Answer","text":"Yes—keep a Rules sheet or tab and reference rule IDs in entries (e.g., “Broke rule #3: no trades in first 30 minutes on CPI days”)."}},
+      {"@type":"Question","name":"How do I make screenshots easy?","acceptedAnswer":{"@type":"Answer","text":"Use a hotkey tool (ShareX/Lightshot) to auto-upload to a cloud folder; paste the URL in your Screenshot column."}}
+    ]
+  }
+  </script>
+
+  <script>
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)) { els.forEach(el=>el.classList.add('is-visible')); return; }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            const d = parseInt(e.target.getAttribute('data-delay')||'0',10);
+            setTimeout(()=>e.target.classList.add('is-visible'), d);
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:.12});
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
+
+</body>
+</html>

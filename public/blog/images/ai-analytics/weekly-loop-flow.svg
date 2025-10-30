@@ -1,0 +1,63 @@
+<svg width="1000" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="400" fill="#0b0c17"/>
+  
+  <!-- Step boxes -->
+  <g id="step1">
+    <rect x="40" y="80" width="180" height="100" fill="rgba(0,246,255,0.15)" stroke="rgba(0,246,255,0.5)" stroke-width="2" rx="12"/>
+    <text x="130" y="115" fill="rgba(0,246,255,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">1. Review</text>
+    <text x="130" y="140" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="12" text-anchor="middle">Look at your week.</text>
+    <text x="130" y="160" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="11" text-anchor="middle">Patterns, correlations.</text>
+    <circle cx="130" cy="60" r="20" fill="rgba(0,246,255,0.2)" stroke="rgba(0,246,255,0.5)" stroke-width="2"/>
+    <text x="130" y="67" fill="rgba(0,246,255,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">1</text>
+  </g>
+  
+  <g id="step2">
+    <rect x="270" y="80" width="180" height="100" fill="rgba(127,90,240,0.15)" stroke="rgba(127,90,240,0.5)" stroke-width="2" rx="12"/>
+    <text x="360" y="115" fill="rgba(127,90,240,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">2. Reflect</text>
+    <text x="360" y="140" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="12" text-anchor="middle">Does it make sense?</text>
+    <text x="360" y="160" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="11" text-anchor="middle">Trust your gut.</text>
+    <circle cx="360" cy="60" r="20" fill="rgba(127,90,240,0.2)" stroke="rgba(127,90,240,0.5)" stroke-width="2"/>
+    <text x="360" y="67" fill="rgba(127,90,240,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">2</text>
+  </g>
+  
+  <g id="step3">
+    <rect x="500" y="80" width="180" height="100" fill="rgba(255,77,205,0.15)" stroke="rgba(255,77,205,0.5)" stroke-width="2" rx="12"/>
+    <text x="590" y="115" fill="rgba(255,77,205,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">3. Adjust</text>
+    <text x="590" y="140" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="12" text-anchor="middle">ONE thing to change.</text>
+    <text x="590" y="160" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="11" text-anchor="middle">One habit, one rule.</text>
+    <circle cx="590" cy="60" r="20" fill="rgba(255,77,205,0.2)" stroke="rgba(255,77,205,0.5)" stroke-width="2"/>
+    <text x="590" y="67" fill="rgba(255,77,205,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">3</text>
+  </g>
+  
+  <g id="step4">
+    <rect x="730" y="80" width="180" height="100" fill="rgba(0,255,136,0.15)" stroke="rgba(0,255,136,0.5)" stroke-width="2" rx="12"/>
+    <text x="820" y="115" fill="rgba(0,255,136,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">4. Re-test</text>
+    <text x="820" y="140" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="12" text-anchor="middle">Track for one week.</text>
+    <text x="820" y="160" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="11" text-anchor="middle">Keep or discard.</text>
+    <circle cx="820" cy="60" r="20" fill="rgba(0,255,136,0.2)" stroke="rgba(0,255,136,0.5)" stroke-width="2"/>
+    <text x="820" y="67" fill="rgba(0,255,136,0.9)" font-family="system-ui" font-size="14" font-weight="700" text-anchor="middle">4</text>
+  </g>
+  
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="rgba(233,234,240,0.5)"/>
+    </marker>
+  </defs>
+  <line x1="220" y1="130" x2="270" y2="130" stroke="rgba(233,234,240,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="450" y1="130" x2="500" y2="130" stroke="rgba(233,234,240,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="680" y1="130" x2="730" y2="130" stroke="rgba(233,234,240,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Loop back arrow -->
+  <path d="M 910,180 Q 910,240 1020,240 Q 1030,240 1030,250 Q 1030,250 20,250 Q 10,250 10,240 Q 10,240 10,240" 
+        fill="none" stroke="rgba(255,77,205,0.6)" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowhead)"/>
+  
+  <!-- Title -->
+  <text x="500" y="30" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="18" font-weight="600" text-anchor="middle">The 15-Minute Sunday Review</text>
+  
+  <!-- Footer text -->
+  <text x="500" y="300" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14" text-anchor="middle">This isn't about perfection. It's about progress.</text>
+  <text x="500" y="320" fill="rgba(233,234,240,0.6)" font-family="system-ui" font-size="12" text-anchor="middle">One insight at a time, one adjustment per week.</text>
+  
+  <desc>Flow diagram showing the 4-step weekly accountability loop: 1) Review patterns from the week, 2) Reflect on what makes sense, 3) Adjust one thing to change next week, 4) Re-test and keep or discard. The loop feeds back into itself, reinforcing continuous improvement.</desc>
+</svg>

@@ -20,6 +20,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/theme-migrate.css">
+  <script defer src="../../assets/js/theme-accent.js"></script>
   <style>
     .post-container {
       margin: 0 auto;
@@ -88,7 +91,7 @@
       text-align: center;
       background: rgba(15, 16, 28, 0.3);
       margin: 0;
-      border-top: 1px solid rgba(0, 246, 255, 0.1);
+      border-top: 1px solid rgba(76, 141, 255, 0.1);
     }
 
     .post-hero h1 {
@@ -148,10 +151,10 @@
       justify-content: center;
       padding: 0.75rem 1.4rem;
       border-radius: 10px;
-      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
+      background: linear-gradient(120deg, var(--accent-electric, #4c8dff), var(--accent-violet, #6d5dfc), var(--accent-magenta, #4338ca));
       color: #050417;
       font-weight: 600;
-      border: 1px solid rgba(0, 246, 255, 0.35);
+      border: 1px solid rgba(76, 141, 255, 0.35);
       box-shadow: 0 18px 36px rgba(19, 0, 60, 0.42);
       text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -210,7 +213,7 @@
     }
 
     .tt-callout {
-      border: 1px solid rgba(0, 246, 255, 0.35);
+      border: 1px solid rgba(76, 141, 255, 0.35);
       border-radius: var(--blog-radius);
       background: rgba(15, 25, 42, 0.6);
       padding: 1.2rem 1.4rem;
@@ -221,12 +224,12 @@
     }
 
     .tt-callout strong {
-      color: #00f6ff;
+      color: #4c8dff;
       font-weight: 600;
     }
 
     .tt-download {
-      color: #7f5af0;
+      color: #6d5dfc;
       text-decoration: underline;
       text-decoration-color: rgba(127, 90, 240, 0.5);
       font-weight: 600;
@@ -234,8 +237,8 @@
     }
 
     .tt-download:hover {
-      color: #ff4ecd;
-      text-decoration-color: rgba(255, 78, 205, 0.7);
+      color: #4338ca;
+      text-decoration-color: rgba(109, 93, 252, 0.7);
     }
 
     .vignette-box {
@@ -247,7 +250,7 @@
     }
 
     .vignette-box h3 {
-      color: rgba(0, 246, 255, 0.85);
+      color: rgba(76, 141, 255, 0.85);
       margin-bottom: 0.75rem;
       font-size: 1.1rem;
     }
@@ -275,8 +278,8 @@
       border-radius: 10px;
       font-weight: 600;
       color: #0b0b18;
-      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
-      border: 1px solid rgba(0, 246, 255, 0.35);
+      background: linear-gradient(120deg, var(--accent-electric, #4c8dff), var(--accent-violet, #6d5dfc), var(--accent-magenta, #4338ca));
+      border: 1px solid rgba(76, 141, 255, 0.35);
       box-shadow: 0 16px 30px rgba(19, 0, 60, 0.4);
       text-decoration: none;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -490,11 +493,52 @@
       ]
     }
   </script>
+
+  <!-- THEME BASE (non-destructive) -->
+  <style>
+    :root{
+      --accent:#6d5dfc; --accent-rgb:109,93,252; --accent-2:#4c8dff;
+      --bg-0:#05070d; --bg-1:#0a0f18; --text:#e6e8ef; --muted:#a8adbb;
+      --line:rgba(255,255,255,0.06);
+      --card:rgba(255,255,255,0.02);
+    }
+    body{
+      background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.65; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+    .container,.site-container{max-width:1150px;margin:0 auto;padding:0 20px}
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(5,7,13,0.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--line)}
+    .site-nav a{color:#a8adbb; text-decoration:none; margin-left:18px; font-size:.98rem}
+    .site-nav a:hover{color:var(--accent)}
+    .brand,.site-brand,.logo{font-weight:700; text-decoration:none; color:var(--text)}
+    .brand span,.logo span{color:var(--accent)}
+    section.section-block, section.section {padding:72px 0; border-top:1px solid var(--line)}
+    .glass.lift, .feature-card, .testimonial, .journal-feature, .cta-banner, .sidebar-section, .card{
+      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    }
+    .btn{display:inline-block; padding:10px 16px; border-radius:999px; font-weight:600; text-decoration:none}
+    .btn.ghost{color:var(--text); border:1px solid var(--line)}
+    .btn.ghost:hover{border-color:rgba(var(--accent-rgb),.6)}
+    .btn.primary{background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#051018}
+    .section-intro h2, .bloom, .section-title, h1, h2.section-title{
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    /* Reveal helper (class may be added later) */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.is-visible{opacity:1; transform:none}
+  </style>
+
 </head>
 <body>
   <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="../../">TradeTrakR</a>
+    <div class="header-inner glass lift">
+      <a class="logo" href="../../"><span>Trade</span>TrakR</a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="../../">Home</a>
         <a href="../../trading-journal.html">Trading Journal</a>
@@ -506,7 +550,7 @@
     </div>
   </header>
 
-  <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <nav class="breadcrumbs glass lift" aria-label="Breadcrumb">
     <ol>
       <li><a href="../../">Home</a></li>
       <li><a href="../index.html">Blog</a></li>
@@ -514,7 +558,7 @@
     </ol>
   </nav>
 
-  <article class="post-container">
+  <article class="post-container glass lift">
     <!-- tt:hero-start -->
     <figure class="tt-fig tt-fig--wide tt-hero">
       <picture>
@@ -528,8 +572,8 @@
     </figure>
     <!-- tt:hero-end -->
     
-    <section class="post-hero">
-      <h1>Mastering Trading Psychology for Consistent Trades</h1>
+    <section class="post-hero glass lift">
+      <h1 class="bloom">Mastering Trading Psychology for Consistent Trades</h1>
       <div class="post-meta">
         <span>By TradeTrakR Editorial</span>
         <span>Published October 25, 2025</span>
@@ -794,9 +838,9 @@
     </section>
 
     <section id="cta" class="post-section" aria-labelledby="cta-heading">
-      <div class="cta-box">
+      <div class="cta-box glass lift">
         <h2 id="cta-heading" style="margin:0;">Explore TradeTrakR</h2>
-        <p>Automate your trading journal and keep psychology front and center with our <a href="../../trading-journal.html" style="color: #00f6ff; text-decoration: underline;">trading journal</a>.</p>
+        <p>Automate your trading journal and keep psychology front and center with our <a href="../../trading-journal.html" style="color: #4c8dff; text-decoration: underline;">trading journal</a>.</p>
         <ul>
           <li>Psychology &amp; Rule-Adherence Tracking</li>
           <li>AI-Powered Pattern Insights</li>
@@ -808,7 +852,7 @@
   </article>
 
   <footer class="site-footer">
-    <div class="footer-inner">
+    <div class="footer-inner glass lift">
       <div class="footer-links">
         <a href="../../">Home</a>
         <a href="../../trading-journal.html">Trading Journal</a>
@@ -820,5 +864,23 @@
       <p>© 2025 TradeTrakR — Psychology-first trading journal insights.</p>
     </div>
   </footer>
+
+  <script>
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)) { els.forEach(el=>el.classList.add('is-visible')); return; }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            const d = parseInt(e.target.getAttribute('data-delay')||'0',10);
+            setTimeout(()=>e.target.classList.add('is-visible'), d);
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:.12});
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,36 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#0b0c17"/>
+  
+  <!-- Header -->
+  <text x="640" y="50" fill="rgba(233,234,240,0.95)" font-family="system-ui" font-size="20" font-weight="600" text-anchor="middle">How to Manage Emotions in Day Trading</text>
+  
+  <!-- Dashboard UI mockup -->
+  <rect x="40" y="80" width="1200" height="600" fill="rgba(21,22,27,0.9)" stroke="rgba(42,44,52,0.6)" stroke-width="2" rx="12"/>
+  
+  <!-- Main panels -->
+  <rect x="60" y="100" width="500" height="280" fill="rgba(18,19,26,0.8)" stroke="rgba(42,44,52,0.5)" stroke-width="1" rx="8"/>
+  <text x="310" y="125" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="14" font-weight="600" text-anchor="middle">Emotion Tags</text>
+  <text x="80" y="155" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="12">Session 1: Calm, Confident</text>
+  <text x="80" y="180" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="12">Session 2: FOMO, Hesitation</text>
+  <text x="80" y="205" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="12">Session 3: Revenge (cooldown)</text>
+  
+  <rect x="580" y="100" width="640" height="280" fill="rgba(18,19,26,0.8)" stroke="rgba(42,44,52,0.5)" stroke-width="1" rx="8"/>
+  <text x="900" y="125" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="14" font-weight="600" text-anchor="middle">Micro-Pause Checklist</text>
+  <circle cx="620" cy="155" r="6" fill="rgba(0,255,136,0.6)"/>
+  <text x="645" y="161" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="12">Name it</text>
+  <circle cx="620" cy="185" r="6" fill="rgba(0,255,136,0.6)"/>
+  <text x="645" y="191" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="12">Breathe</text>
+  <circle cx="620" cy="215" r="6" fill="rgba(0,255,136,0.6)"/>
+  <text x="645" y="221" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="12">Re-check rules</text>
+  
+  <rect x="60" y="400" width="1160" height="260" fill="rgba(18,19,26,0.8)" stroke="rgba(42,44,52,0.5)" stroke-width="1" rx="8"/>
+  <text x="640" y="425" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="14" font-weight="600" text-anchor="middle">Weekly P&amp;L (with Emotion Correlation)</text>
+  <text x="80" y="455" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="11">Mon: +0.8R (Calm) | Tue: -1.2R (FOMO) | Wed: +1.5R (Confident)</text>
+  <text x="80" y="480" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="11">Thu: +0.3R (Hesitation) | Fri: -0.9R (Revenge) | Cooldown triggered</text>
+  
+  <!-- Placeholder badge -->
+  <rect x="40" y="670" width="200" height="30" fill="rgba(255,68,68,0.2)" rx="15"/>
+  <text x="140" y="690" fill="rgba(255,68,68,0.9)" font-family="system-ui" font-size="12" font-weight="600" text-anchor="middle">Replace with real UI</text>
+  
+  <desc>How to Manage Emotions in Day Trading — TradeTrakR dashboard showing emotion tags, micro-pause checklist, and P&amp;L correlation. This is a mockup that should be replaced with actual product screenshots.</desc>
+</svg>

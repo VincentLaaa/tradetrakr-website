@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mastering Trading Psychology for Consistent Trades | Daily Log, Checklists & Weekly Review</title>
+  <meta name="description" content="Master trading psychology with a practical daily log, pre-trade checklist, emotion tags, cooldown rules, and a weekly review workflow so consistency shows up in your results." />
+  <link rel="canonical" href="https://tradetrakr.com/blog/posts/mastering-trading-psychology-for-consistent-trades" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta property="og:title" content="Mastering Trading Psychology for Consistent Trades" />
+  <meta property="og:description" content="Daily log, pre-trade checklist, emotion tags, cooldowns, and weekly review for consistent trades." />
+  <meta property="og:url" content="https://tradetrakr.com/blog/posts/mastering-trading-psychology-for-consistent-trades" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://tradetrakr.com/assets/og/mastering-trading-psychology-hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mastering Trading Psychology for Consistent Trades" />
+  <meta name="twitter:description" content="Daily log, pre-trade checklist, emotion tags, cooldowns, and weekly review for consistent trades." />
+  <meta name="twitter:image" content="https://tradetrakr.com/assets/og/mastering-trading-psychology-hero.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../assets/css/theme-migrate.css">
+  <script defer src="../../../assets/js/theme-accent.js"></script>
+  <style>
+    .post-container {
+      margin: 0 auto;
+      max-width: var(--blog-maxw);
+      padding: clamp(2.25rem, 4vw, 3.5rem) 1.5rem 4rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .tt-hero {
+      margin: 0;
+      border-radius: var(--blog-radius);
+      overflow: hidden;
+      background: rgba(15, 16, 28, 0.5);
+    }
+
+    .tt-hero picture {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .tt-hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--blog-radius);
+    }
+
+    .tt-hero figcaption {
+      padding: 0.85rem 1.2rem;
+      font-size: 0.875rem;
+      color: rgba(233, 234, 240, 0.6);
+      text-align: center;
+      background: rgba(15, 16, 28, 0.4);
+      margin: 0;
+    }
+
+    .tt-fig {
+      margin: 2rem 0;
+      border-radius: var(--blog-radius);
+      overflow: hidden;
+    }
+
+    .tt-fig--wide {
+      width: 100%;
+    }
+
+    .tt-fig picture {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .tt-fig img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--blog-radius);
+    }
+
+    .tt-fig figcaption {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: rgba(233, 234, 240, 0.6);
+      text-align: center;
+      background: rgba(15, 16, 28, 0.3);
+      margin: 0;
+      border-top: 1px solid rgba(76, 141, 255, 0.1);
+    }
+
+    .post-hero h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 3vw, 3rem);
+      letter-spacing: -0.015em;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: rgba(233, 234, 240, 0.7);
+    }
+
+    .intro {
+      display: grid;
+      gap: 1.2rem;
+      color: rgba(233, 234, 240, 0.82);
+    }
+
+    .learn-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .toc {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.7);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .toc h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(233, 234, 240, 0.78);
+    }
+
+    .toc ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      background: linear-gradient(120deg, var(--accent-electric, #4c8dff), var(--accent-violet, #6d5dfc), var(--accent-magenta, #4338ca));
+      color: #050417;
+      font-weight: 600;
+      border: 1px solid rgba(76, 141, 255, 0.35);
+      box-shadow: 0 18px 36px rgba(19, 0, 60, 0.42);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .download-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 22px 44px rgba(19, 0, 60, 0.48);
+    }
+
+    .emotion-table {
+      overflow-x: auto;
+      border-radius: var(--blog-radius);
+      border: 1px solid var(--blog-border);
+      background: rgba(21, 22, 27, 0.7);
+    }
+
+    .emotion-table table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+    }
+
+    .emotion-table th,
+    .emotion-table td {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--blog-border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .emotion-table th {
+      font-weight: 600;
+      color: rgba(233, 234, 240, 0.9);
+      background: rgba(18, 19, 26, 0.9);
+    }
+
+    .emotion-table tr:nth-child(even) td {
+      background: rgba(27, 29, 38, 0.55);
+    }
+
+    .checklist-list,
+    .weekly-list,
+    .metrics-list {
+      display: grid;
+      gap: 0.5rem;
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .weekly-list li,
+    .checklist-list li,
+    .metrics-list li {
+      line-height: 1.6;
+    }
+
+    .tt-callout {
+      border: 1px solid rgba(76, 141, 255, 0.35);
+      border-radius: var(--blog-radius);
+      background: rgba(15, 25, 42, 0.6);
+      padding: 1.2rem 1.4rem;
+      margin: 1.5rem 0;
+      color: rgba(233, 234, 240, 0.88);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .tt-callout strong {
+      color: #4c8dff;
+      font-weight: 600;
+    }
+
+    .tt-download {
+      color: #6d5dfc;
+      text-decoration: underline;
+      text-decoration-color: rgba(127, 90, 240, 0.5);
+      font-weight: 600;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    .tt-download:hover {
+      color: #4338ca;
+      text-decoration-color: rgba(109, 93, 252, 0.7);
+    }
+
+    .vignette-box {
+      border: 1px solid var(--blog-border);
+      border-radius: var(--blog-radius);
+      background: rgba(21, 22, 27, 0.7);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .vignette-box h3 {
+      color: rgba(76, 141, 255, 0.85);
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .vignette-box p {
+      color: rgba(233, 234, 240, 0.8);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .cta-box {
+      border: 1px solid rgba(127, 90, 240, 0.4);
+      border-radius: var(--blog-radius);
+      background: linear-gradient(135deg, rgba(15, 16, 28, 0.95), rgba(25, 20, 46, 0.85));
+      padding: 1.75rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #0b0b18;
+      background: linear-gradient(120deg, var(--accent-electric, #4c8dff), var(--accent-violet, #6d5dfc), var(--accent-magenta, #4338ca));
+      border: 1px solid rgba(76, 141, 255, 0.35);
+      box-shadow: 0 16px 30px rgba(19, 0, 60, 0.4);
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      box-shadow: 0 20px 40px rgba(19, 0, 60, 0.45);
+    }
+
+    @media (max-width: 720px) {
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .toc,
+      .cta-box,
+      .vignette-box {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+  <!-- tt:style-start -->
+  <style>
+    .tt-fig { margin: 1.25rem 0; }
+    .tt-fig--wide { max-width: 1100px; margin-inline: auto; }
+    .tt-hero img { width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--border, #2a2c34); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); }
+    .tt-callout { border: 1px solid var(--border, #2a2c34); border-radius: 14px; background: var(--surface, #15161b); padding: 14px; margin: 16px 0; }
+    .tt-download { display: inline-flex; gap: 0.5rem; align-items: center; border: 1px solid var(--border, #2a2c34); border-radius: 999px; padding: 0.5rem 0.9rem; text-decoration: none; }
+    @media (max-width: 760px) {
+      .tt-fig--wide { padding: 0 12px; }
+      .tt-hero { margin: 0 -1.5rem; }
+      .tt-hero img { border-radius: 0; }
+    }
+  </style>
+  <!-- tt:style-end -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": "https://tradetrakr.com/blog/posts/mastering-trading-psychology-for-consistent-trades",
+      "headline": "Mastering Trading Psychology for Consistent Trades",
+      "description": "A practical guide to trading psychology including emotion tags, cooldown rules, weekly reviews, and a free Daily Psychology Log.",
+      "articleSection": "Psychology",
+      "datePublished": "2025-10-25",
+      "dateModified": "2025-01-28",
+      "author": {
+        "@type": "Person",
+        "name": "Jordan Reed",
+        "jobTitle": "Trading Psychology Editor"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "TradeTrakR"
+      },
+      "image": "https://tradetrakr.com/assets/og/mastering-trading-psychology-hero.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://tradetrakr.com/blog/posts/mastering-trading-psychology-for-consistent-trades"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I master trading psychology fast?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use a Daily Psychology Log with emotion tags, trigger counter-actions when emotions repeat twice, apply cooldown rules (2 rule breaks → 20 min; tilt → stop), and do a weekly review to identify recurring patterns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do cooldowns kill my edge?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They protect it. Objective triggers prevent emotional decisions from compounding. Two consecutive rule breaks trigger a 20-minute cooldown; tilt or breach of daily loss limits stops the session immediately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I connect psychology to results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Track four key metrics: rule adherence rate, tilt frequency, expectancy stability (calm vs tilt sessions), and drawdown containment. Compare metrics before and after implementing psychology routines."
+          }
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Trading Psychology for Consistent Trades — Daily Log System",
+      "totalTime": "PT5M",
+      "description": "A five-step process to master trading psychology using a daily log system",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Pre-market Log",
+          "text": "Log energy level, risk limits, and allowed setups before opening the platform."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Tag Emotions",
+          "text": "During trading, tag emotions (FOMO, fear, overconfidence, revenge, tilt, calm) the moment they appear."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Trigger Counter-action",
+          "text": "If an emotion repeats twice in a session, immediately trigger the prescribed counter-action (pause, size reduction, or cooldown)."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Debrief",
+          "text": "Post-session: capture what helped, what hurt, and the single rule you'll reinforce tomorrow."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Weekly Review",
+          "text": "Review emotion tag frequency, rule adherence, triggers, and document one improvement mandate for next week."
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tradetrakr.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://tradetrakr.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Psychology",
+          "item": "https://tradetrakr.com/blog/#psychology"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Mastering Trading Psychology for Consistent Trades",
+          "item": "https://tradetrakr.com/blog/posts/mastering-trading-psychology-for-consistent-trades"
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ImageObject",
+          "url": "https://tradetrakr.com/assets/og/mastering-trading-psychology-hero.png",
+          "width": 1200,
+          "height": 630,
+          "caption": "A calm, repeatable psychology system: daily log, tags, cooldowns, and weekly review."
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://tradetrakr.com/blog/images/psychology/trading-psychology-consistent-trades-daily-log.svg",
+          "width": 1100,
+          "height": 520,
+          "caption": "Before, during, after: log → tag → counter-action → reflect → weekly review."
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://tradetrakr.com/blog/images/psychology/trading-psychology-consistent-trades-pre-trade-checklist.svg",
+          "width": 1100,
+          "height": 520,
+          "caption": "Guardrails before the bell: risk, allowed setups, daily limits, do-not-trade states."
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://tradetrakr.com/blog/images/psychology/trading-psychology-consistent-trades-emotion-tags.svg",
+          "width": 1100,
+          "height": 620,
+          "caption": "Name it quickly, then act: pause, size down, or lock out until calm returns."
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://tradetrakr.com/blog/images/psychology/trading-psychology-consistent-trades-cooldowns.svg",
+          "width": 1100,
+          "height": 520,
+          "caption": "Objective triggers end debates: 2 rule breaks → 20-minute pause; tilt → stop for the day."
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://tradetrakr.com/blog/images/psychology/trading-psychology-consistent-trades-weekly-review.svg",
+          "width": 1100,
+          "height": 620,
+          "caption": "Close the loop: tag counts → rule adherence → triggers → one mandate for next week."
+        }
+      ]
+    }
+  </script>
+
+  <!-- THEME BASE (non-destructive) -->
+  <style>
+    :root{
+      --accent:#6d5dfc; --accent-rgb:109,93,252; --accent-2:#4c8dff;
+      --bg-0:#05070d; --bg-1:#0a0f18; --text:#e6e8ef; --muted:#a8adbb;
+      --line:rgba(255,255,255,0.06);
+      --card:rgba(255,255,255,0.02);
+    }
+    body{
+      background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.65; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+    .container,.site-container{max-width:1150px;margin:0 auto;padding:0 20px}
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(5,7,13,0.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--line)}
+    .site-nav a{color:#a8adbb; text-decoration:none; margin-left:18px; font-size:.98rem}
+    .site-nav a:hover{color:var(--accent)}
+    .brand,.site-brand,.logo{font-weight:700; text-decoration:none; color:var(--text)}
+    .brand span,.logo span{color:var(--accent)}
+    section.section-block, section.section {padding:72px 0; border-top:1px solid var(--line)}
+    .glass.lift, .feature-card, .testimonial, .journal-feature, .cta-banner, .sidebar-section, .card{
+      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    }
+    .btn{display:inline-block; padding:10px 16px; border-radius:999px; font-weight:600; text-decoration:none}
+    .btn.ghost{color:var(--text); border:1px solid var(--line)}
+    .btn.ghost:hover{border-color:rgba(var(--accent-rgb),.6)}
+    .btn.primary{background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#051018}
+    .section-intro h2, .bloom, .section-title, h1, h2.section-title{
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    /* Reveal helper (class may be added later) */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.is-visible{opacity:1; transform:none}
+  </style>
+
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner glass lift">
+      <a class="logo" href="../../"><span>Trade</span>TrakR</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../../">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs glass lift" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Home</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li aria-current="page">Mastering Trading Psychology for Consistent Trades</li>
+    </ol>
+  </nav>
+
+  <article class="post-container glass lift">
+    <!-- tt:hero-start -->
+    <figure class="tt-fig tt-fig--wide tt-hero">
+      <picture>
+        <source type="image/png" srcset="../images/psychology/mastering-trading-psychology-hero-illustration-800x450.png 800w, ../images/psychology/mastering-trading-psychology-hero-illustration-1280x720.png 1280w" sizes="(max-width: 840px) 100vw, 1100px" />
+        <img src="../images/psychology/mastering-trading-psychology-hero-illustration.svg"
+             width="1280" height="720" loading="eager" fetchpriority="high" decoding="async"
+             alt="Mastering Trading Psychology for Consistent Trades — daily log, emotion tags, and weekly review illustration"
+             title="Mastering Trading Psychology for Consistent Trades — Hero Illustration" />
+      </picture>
+      <figcaption>A calm, repeatable psychology system: daily log, tags, cooldowns, and weekly review.</figcaption>
+    </figure>
+    <!-- tt:hero-end -->
+    
+    <section class="post-hero glass lift">
+      <h1 class="bloom">Mastering Trading Psychology for Consistent Trades</h1>
+      <div class="post-meta">
+        <span>By TradeTrakR Editorial</span>
+        <span>Published October 25, 2025</span>
+        <span>11 minute read</span>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p>Mastering trading psychology for consistent trades means building awareness loops that turn emotion into process. Beginners hesitate on A+ setups, revenge trade after early losses, and can't stick to their plan when pressure hits. Veterans face slippage when sizing up, break rules after win streaks, and hit accountability plateaus. This guide delivers a repeatable system: a Daily Psychology Log, emotion tags with counter-actions, objective cooldown rules, and a weekly review that validates improvements in your P&amp;L.</p>
+      <!-- tt:tldr-start -->
+      <div class="tt-callout" role="note">
+        <strong>TL;DR:</strong> Consistent trades come from a simple, repeatable psychology system: a daily log, emotion tags with counter-actions, objective cooldown rules, and a weekly review — tracked in one PDF.
+      </div>
+      <!-- tt:tldr-end -->
+      <section aria-labelledby="what-youll-learn">
+        <h2 id="what-youll-learn" style="font-size:1.2rem; letter-spacing:0.04em; text-transform:uppercase; margin:0;">What You'll Learn</h2>
+        <ul class="learn-list">
+          <li>Why psychology loops drive consistent trades and how to document them effectively.</li>
+          <li>How to use the downloadable Daily Psychology Log before, during, and after each session.</li>
+          <li>Ready-to-use pre-trade checklist, emotion tags, and cooldown triggers to shut down tilt.</li>
+          <li>A weekly review routine and metrics to confirm psychology improvements translate into results.</li>
+        </ul>
+      </section>
+    </section>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#why-psychology">Why Psychology Drives Consistency</a></li>
+        <li><a href="#case-vignettes">Real Examples: Psychology System in Action</a></li>
+        <li><a href="#daily-system">Trading Psychology for Consistent Trades: The Daily Psychology Log</a></li>
+        <li><a href="#pre-trade-checklist">Pre-Trade Checklist (Template)</a></li>
+        <li><a href="#emotion-tags">Emotion Management for Traders: Tags, Triggers, and Cooldowns</a></li>
+        <li><a href="#cooldown-rules">Cooldown &amp; Lockout Rules</a></li>
+        <li><a href="#weekly-review">Consistent Trades: Weekly Psychology Review &amp; Metrics</a></li>
+        <li><a href="#validate-metrics">Validating Improvements with Metrics</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#further-reading">Further Reading</a></li>
+        <li><a href="#cta">Explore TradeTrakR</a></li>
+      </ul>
+    </nav>
+
+    <section id="why-psychology" class="post-section" aria-labelledby="why-psychology-heading">
+      <h2 id="why-psychology-heading">Why Psychology Drives Consistency</h2>
+      <p>Consistency breaks when emotion overrides process. Tilt, revenge trading, fear of missing out, and overconfidence often start as small lapses that compound into catastrophic decisions. Journaling gives you awareness, but awareness alone is not enough—you need a loop that logs the emotion, identifies the trigger, and prescribes a counter-action. Each loop shrinks the gap between trigger and response, allowing your plan—not your feelings—to govern execution.</p>
+      <p>Think about the last time you abandoned your stop after a string of losses. The trade itself was just the outlet. Fatigue, lack of preparation, or pressure to recover losses built silently beforehand. When you capture those ingredients daily, you can act earlier—maybe the solution is setting a limit on screen time, or pausing the moment you catch yourself scanning for "make-back" trades. <a href="../posts/how-to-manage-emotions-in-day-trading.html">Managing emotions in day trading</a> requires consistent detective work, and the clues appear only when you log them day after day.</p>
+    </section>
+
+    <section id="case-vignettes" class="post-section">
+      <h2>Real Examples: Psychology System in Action</h2>
+      <div class="vignette-box">
+        <h3 style="margin-top:0;">Beginner: Sarah's Breakthrough</h3>
+        <p>Sarah hesitated on three perfect setups in one morning, each worth +2R. After logging pre-session emotions, she discovered fear of "getting it wrong" triggered anxiety spikes. Her counter-action: trade smaller size on the next three setups to prove the plan works. On setup #4, she entered with half-size, hit +1.5R, and logged calm focus. The psychology log showed fear appeared when she ignored her checklist—the solution wasn't better entries, it was following her pre-trade checklist 100%.</p>
+      </div>
+      <div class="vignette-box">
+        <h3 style="margin-top:0;">Veteran: Marcus's Rule Reset</h3>
+        <p>Marcus had a five-trade win streak (+7R total), then broke his sizing rule on trade #6 because he "felt in the zone." The trade lost -3R. His weekly review revealed overconfidence tags appeared twice on trade #5, but he hadn't triggered the counter-action (base size only). He added a mandatory cooldown after any +5R day and logged the commitment. Four weeks later, his adherence rate improved from 68% to 94%, and he completed two more profitable months without a single revenge trade.</p>
+      </div>
+    </section>
+
+    <section id="daily-system" class="post-section" aria-labelledby="daily-system-heading">
+      <h2 id="daily-system-heading">Trading Psychology for Consistent Trades: The Daily Psychology Log</h2>
+      <p>The Daily Psychology Log keeps this loop running. Print it or import the template into your digital notes app, then complete it before, during, and after every session.</p>
+      
+      <div class="tt-callout" role="note">
+        <strong>Download:</strong> <a class="tt-download" href="../assets/daily-psychology-log.pdf" download>Daily Psychology Log (PDF)</a>
+        <span style="margin-left: 0.5rem;">Use before, during, and after each session.</span>
+      </div>
+      
+      <a class="download-link" href="../assets/daily-psychology-log.md" download>Alternative: Download the Markdown Version</a>
+      <p>The log captures:</p>
+      <ul class="checklist-list">
+        <li><strong>Pre-trade context:</strong> Energy, focus, news, risk limits, and allowed setups so you start from a controlled state.</li>
+        <li><strong>Emotion tags during trading:</strong> Track when FOMO, fear, overconfidence, boredom, tilt, or calm surfaces.</li>
+        <li><strong>Counter-actions:</strong> Log pauses, size reductions, or lockouts you trigger when emotions spike.</li>
+        <li><strong>Rule adherence:</strong> Fast yes/no tracking plus the specific rules broken.</li>
+        <li><strong>Reflection:</strong> Capture what helped, what hurt, and the single rule you will reinforce tomorrow.</li>
+      </ul>
+      <!-- tt:fig-log-start -->
+      <figure class="tt-fig tt-fig--wide">
+        <picture>
+          <source type="image/png" srcset="../images/psychology/trading-psychology-consistent-trades-daily-log.png" />
+          <img src="../images/psychology/trading-psychology-consistent-trades-daily-log.svg" loading="lazy" decoding="async" width="1100" height="520"
+               alt="Mastering trading psychology for consistent trades — daily psychology log system diagram" title="Mastering Trading Psychology for Consistent Trades — Daily Log Diagram" />
+        </picture>
+        <figcaption>Before, during, after: log → tag → counter-action → reflect → weekly review.</figcaption>
+      </figure>
+      <!-- tt:fig-log-end -->
+    </section>
+
+    <section id="pre-trade-checklist" class="post-section" aria-labelledby="pre-trade-checklist-heading">
+      <h2 id="pre-trade-checklist-heading">Pre-Trade Checklist (Template)</h2>
+      <p>Run through the checklist aloud or on paper before you open the platform. This sets guardrails before market stress arrives.</p>
+      <ul class="checklist-list">
+        <li>Sleep and energy check (well rested, hydrated, not distracted)</li>
+        <li>Market overview (news, macro releases, overnight volatility)</li>
+        <li>Allowed instruments/tickers and any temporary “no trade” symbols</li>
+        <li>Risk per trade and max position size confirmed</li>
+        <li>Max daily loss and maximum number of trades</li>
+        <li>Top-tier setups you are cleared to execute today</li>
+        <li>"Do-not-trade" states (revenge mindset, external stress, fatigue)</li>
+      </ul>
+      <!-- tt:fig-pretrade-start -->
+      <figure class="tt-fig tt-fig--wide">
+        <picture>
+          <source type="image/png" srcset="../images/psychology/trading-psychology-consistent-trades-pre-trade-checklist.png" />
+          <img src="../images/psychology/trading-psychology-consistent-trades-pre-trade-checklist.svg" loading="lazy" decoding="async" width="1100" height="520"
+               alt="Trading psychology for consistent trades — pre-trade checklist" title="Trading Psychology for Consistent Trades — Pre-Trade Checklist" />
+        </picture>
+        <figcaption>Guardrails before the bell: risk, allowed setups, daily limits, do-not-trade states.</figcaption>
+      </figure>
+      <!-- tt:fig-pretrade-end -->
+    </section>
+
+    <section id="emotion-tags" class="post-section" aria-labelledby="emotion-tags-heading">
+      <h2 id="emotion-tags-heading">Emotion Management for Traders: Tags, Triggers, and Cooldowns</h2>
+      <p>Tag emotions the moment they show up. If an emotion repeats twice in a session, trigger the counter-action immediately.</p>
+      <figure class="emotion-table" tabindex="0">
+        <caption>Emotion tags, triggers, and counter-actions</caption>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Emotion Tag</th>
+              <th scope="col">Common Triggers</th>
+              <th scope="col">Counter-Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">FOMO</th>
+              <td>Missed breakout, social media hype, rapid tape.</td>
+              <td>Pause five minutes, re-read setup checklist, trade only validated plays.</td>
+            </tr>
+            <tr>
+              <th scope="row">Fear</th>
+              <td>Early loss, unexpected volatility, news spike.</td>
+              <td>Reduce size by half, focus on A+ setups, extend stop-to-target review.</td>
+            </tr>
+            <tr>
+              <th scope="row">Overconfidence</th>
+              <td>Winning streak, oversized gain, lucky fills.</td>
+              <td>Limit next trade to base size, recite risk rules, note why the streak worked.</td>
+            </tr>
+            <tr>
+              <th scope="row">Revenge</th>
+              <td>Rule break, large loss, frustration with slippage.</td>
+              <td>Immediate cooldown, walk away, document the trigger before re-entry.</td>
+            </tr>
+            <tr>
+              <th scope="row">Boredom</th>
+              <td>Slow market, long wait for setups, lack of focus.</td>
+              <td>Stand up, stretch, review playbook, set a timer before taking next trade.</td>
+            </tr>
+            <tr>
+              <th scope="row">Tilt</th>
+              <td>Stacked emotional hits, ignoring rules, physical fatigue.</td>
+              <td>End session, log tilt drivers, schedule recovery routine.</td>
+            </tr>
+            <tr>
+              <th scope="row">Calm / Focused</th>
+              <td>Following plan, executing familiar setups, rested state.</td>
+              <td>Note supporting habits (sleep, warm-up, environment) to repeat.</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+      <!-- tt:fig-tags-start -->
+      <figure class="tt-fig tt-fig--wide">
+        <picture>
+          <source type="image/png" srcset="../images/psychology/trading-psychology-consistent-trades-emotion-tags.png" />
+          <img src="../images/psychology/trading-psychology-consistent-trades-emotion-tags.svg" loading="lazy" decoding="async" width="1100" height="620"
+               alt="Emotion management for traders — tags, triggers, and counter-actions" title="Emotion Management for Traders — Tags & Triggers" />
+        </picture>
+        <figcaption>Name it quickly, then act: pause, size down, or lock out until calm returns.</figcaption>
+      </figure>
+      <!-- tt:fig-tags-end -->
+    </section>
+
+    <section id="cooldown-rules" class="post-section" aria-labelledby="cooldown-rules-heading">
+      <h2 id="cooldown-rules-heading">Cooldown &amp; Lockout Rules</h2>
+      <p>Codify the triggers that force a pause so you don’t negotiate with yourself mid-session.</p>
+      <ul class="checklist-list">
+        <li>☐ Two consecutive rule breaks → 20-minute cooldown.</li>
+        <li>☐ -2R day or breach of max daily loss → stop trading for the session.</li>
+        <li>☐ Heart rate/spo₂ alert or visible agitation → guided breathing + five-minute break.</li>
+        <li>☐ Tilt tag logged twice within an hour → end session and review log.</li>
+        <li>☐ External crisis (family/work emergency) → step away until focus returns.</li>
+      </ul>
+      <p>Log each cooldown in the Daily Psychology Log so you can audit discipline weekly.</p>
+      <!-- tt:fig-cooldowns-start -->
+      <figure class="tt-fig tt-fig--wide">
+        <picture>
+          <source type="image/png" srcset="../images/psychology/trading-psychology-consistent-trades-cooldowns.png" />
+          <img src="../images/psychology/trading-psychology-consistent-trades-cooldowns.svg" loading="lazy" decoding="async" width="1100" height="520"
+               alt="Consistent trades — cooldown and lockout rules checklist" title="Consistent Trades — Cooldown & Lockout Rules" />
+        </picture>
+        <figcaption>Objective triggers end debates: 2 rule breaks → 20-minute pause; tilt → stop for the day.</figcaption>
+      </figure>
+      <!-- tt:fig-cooldowns-end -->
+    </section>
+
+    <section id="weekly-review" class="post-section" aria-labelledby="weekly-review-heading">
+      <h2 id="weekly-review-heading">Consistent Trades: Weekly Psychology Review &amp; Metrics</h2>
+      <p>Dedicate 30–45 minutes after the final trading day to close the loop.</p>
+      <ul class="weekly-list">
+        <li>Review emotion tag frequency by day, instrument, and time of day.</li>
+        <li>Count rule adherence versus rule breaks; identify repeat offenders.</li>
+        <li>Analyze triggers (missed moves, news, life stress) and the counter-actions taken.</li>
+        <li>Document one improvement mandate for next week (e.g., “Stop after first revenge impulse,” “No trading after -2R”).</li>
+      </ul>
+      <p>Share the mandate with an accountability partner or mentor if possible—it increases follow-through.</p>
+      <p>Archive each weekly review in a single folder. After a quarter, scan the folder to see which mandates repeat. Those recurring items signal deep-rooted habits that require structural changes—maybe blocking certain news sources, adjusting sleep routines, or revisiting your playbook. When psychology notes surface the same issue three times, upgrade the response from a reminder to a rule baked into your trading plan. <a href="../posts/ai-powered-trading-journal-analytics.html">AI trading journal analytics</a> can help identify these patterns automatically.</p>
+      <!-- tt:fig-weekly-start -->
+      <figure class="tt-fig tt-fig--wide">
+        <picture>
+          <source type="image/png" srcset="../images/psychology/trading-psychology-consistent-trades-weekly-review.png" />
+          <img src="../images/psychology/trading-psychology-consistent-trades-weekly-review.svg" loading="lazy" decoding="async" width="1100" height="620"
+               alt="Trading psychology for consistent trades — weekly review loop and metrics" title="Trading Psychology for Consistent Trades — Weekly Review & Metrics" />
+        </picture>
+        <figcaption>Close the loop: tag counts → rule adherence → triggers → one mandate for next week.</figcaption>
+      </figure>
+      <!-- tt:fig-weekly-end -->
+    </section>
+
+    <section id="validate-metrics" class="post-section" aria-labelledby="validate-metrics-heading">
+      <h2 id="validate-metrics-heading">Validating Improvements with Metrics</h2>
+      <p>Psychology work must show up in numbers. Track these metrics before and after implementing new routines.</p>
+      <ul class="metrics-list">
+        <li><strong>Rule adherence rate:</strong> # of sessions adhering to all rules ÷ total sessions.</li>
+        <li><strong>Tilt frequency:</strong> Number of tilt or revenge tags logged per week.</li>
+        <li><strong>Expectancy stability:</strong> Compare average expectancy for sessions tagged calm/focused versus tilt.</li>
+        <li><strong>Drawdown containment:</strong> Track max intraday drawdown before and after implementing cooldown triggers.</li>
+      </ul>
+      <p>If metrics don't improve, revisit triggers and counter-actions, then iterate. Psychology routines are iterative, not one-time fixes. For deeper insights on which <a href="../posts/key-trading-performance-metrics-to-track.html">performance metrics to track</a>, see our comprehensive guide.</p>
+    </section>
+
+    <section id="faqs" class="post-section" aria-labelledby="faqs-heading">
+      <h2 id="faqs-heading">FAQs</h2>
+      <dl class="faq-list">
+        <dt>Do I log every emotion for every trade?</dt>
+        <dd>Log when emotions affect decision making—e.g., entering early, breaking rules, or feeling heightened stress. Routine trades executed calmly can be grouped by session.</dd>
+        <dt>How long should cooldowns be?</dt>
+        <dd>Minimum 20 minutes for rule breaches; full session lockout for tilt or -2R days. Build habits around these numbers before tweaking them.</dd>
+        <dt>How do I avoid bias when reviewing emotions?</dt>
+        <dd>Review logs after stepping away from screens and compare notes with a peer or mentor. Outside perspective reduces self-justification.</dd>
+        <dt>How do psychology notes connect with P&amp;L metrics?</dt>
+        <dd>Tag trades with the emotion state and compare expectancy, win rate, and rule adherence for each tag. Use these stats to prioritize mindset work. Consider using an <a href="../posts/automated-trade-tracker.html">automated trade tracker</a> to streamline this process.</dd>
+      </dl>
+    </section>
+
+    <section id="further-reading" class="post-section" aria-labelledby="further-reading-heading">
+      <h2 id="further-reading-heading">Further Reading</h2>
+      <p>Expand your consistency toolkit with these guides:</p>
+      <ul class="decision-list">
+        <li><a href="../../trading-journal.html">TradeTrakR trading journal overview</a> featuring <a href="../../trading-journal-features.html#funded-trader-tools">trading psychology tracking</a> and <a href="../../ai-trading-journal.html">AI trading journal workflows</a>.</li>
+        <li><a href="../../blog/posts/how-to-manage-emotions-in-day-trading.html">How to Manage Emotions in Day Trading</a>.</li>
+        <li><a href="../../blog/posts/key-trading-performance-metrics-to-track.html">Key Trading Performance Metrics to Track</a>.</li>
+        <li><a href="../../blog/posts/automated-trade-tracker.html">Automated Trade Tracker</a>.</li>
+        <li><a href="../../stats/how-many-trades-per-day-do-day-traders-make.html">How many trades per day do day traders make?</a></li>
+        <li><a href="../../stats/trading-journal-usage-and-benefits-stats.html">Trading journal usage and benefits stats</a>.</li>
+      </ul>
+    </section>
+
+    <section id="cta" class="post-section" aria-labelledby="cta-heading">
+      <div class="cta-box glass lift">
+        <h2 id="cta-heading" style="margin:0;">Explore TradeTrakR</h2>
+        <p>Automate your trading journal and keep psychology front and center with our <a href="../../trading-journal.html" style="color: #4c8dff; text-decoration: underline;">trading journal</a>.</p>
+        <ul>
+          <li>Psychology &amp; Rule-Adherence Tracking</li>
+          <li>AI-Powered Pattern Insights</li>
+          <li>Clean, Minimal UX for Consistency</li>
+        </ul>
+        <a href="../../trading-journal.html" class="cta-link">Learn more</a>
+      </div>
+    </section>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-inner glass lift">
+      <div class="footer-links">
+        <a href="../../">Home</a>
+        <a href="../../trading-journal.html">Trading Journal</a>
+        <a href="../../ai-trading-journal.html">AI Analytics</a>
+        <a href="../../trading-journal-features.html">Journal Features</a>
+        <a href="../../#pricing">Pricing</a>
+        <a href="../index.html">Blog</a>
+      </div>
+      <p>© 2025 TradeTrakR — Psychology-first trading journal insights.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)) { els.forEach(el=>el.classList.add('is-visible')); return; }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            const d = parseInt(e.target.getAttribute('data-delay')||'0',10);
+            setTimeout(()=>e.target.classList.add('is-visible'), d);
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:.12});
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
+
+</body>
+</html>

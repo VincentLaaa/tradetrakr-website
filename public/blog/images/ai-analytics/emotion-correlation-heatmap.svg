@@ -1,0 +1,113 @@
+<svg width="900" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="400" fill="#0b0c17"/>
+  
+  <!-- Emotion labels on Y-axis -->
+  <text x="50" y="90" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" font-weight="600" text-anchor="end">Calm</text>
+  <text x="50" y="140" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" font-weight="600" text-anchor="end">Confident</text>
+  <text x="50" y="190" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" font-weight="600" text-anchor="end">Hesitant</text>
+  <text x="50" y="240" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" font-weight="600" text-anchor="end">FOMO</text>
+  <text x="50" y="290" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" font-weight="600" text-anchor="end">Revenge</text>
+  
+  <!-- Outcome labels on X-axis -->
+  <text x="140" y="370" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" text-anchor="middle">Strong</text>
+  <text x="280" y="370" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" text-anchor="middle">Good</text>
+  <text x="420" y="370" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" text-anchor="middle">Neutral</text>
+  <text x="560" y="370" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" text-anchor="middle">Slippage</text>
+  <text x="700" y="370" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="13" text-anchor="middle">Rule Break</text>
+  
+  <!-- Heatmap cells -->
+  <!-- Calm row -->
+  <rect x="120" y="60" width="120" height="50" fill="#00ff88" opacity="0.7" rx="4"/>
+  <text x="180" y="90" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">+1.2R</text>
+  
+  <rect x="260" y="60" width="120" height="50" fill="#7fff00" opacity="0.6" rx="4"/>
+  <text x="320" y="90" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">+0.8R</text>
+  
+  <rect x="400" y="60" width="120" height="50" fill="#aaaaaa" opacity="0.3" rx="4"/>
+  <text x="460" y="90" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14" text-anchor="middle">0.1R</text>
+  
+  <rect x="540" y="60" width="120" height="50" fill="#ff8800" opacity="0.4" rx="4"/>
+  <text x="600" y="90" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.4R</text>
+  
+  <rect x="680" y="60" width="120" height="50" fill="#ff8800" opacity="0.5" rx="4"/>
+  <text x="740" y="90" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.6R</text>
+  
+  <!-- Confident row -->
+  <rect x="120" y="110" width="120" height="50" fill="#7fff00" opacity="0.7" rx="4"/>
+  <text x="180" y="140" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">+0.9R</text>
+  
+  <rect x="260" y="110" width="120" height="50" fill="#7fff00" opacity="0.6" rx="4"/>
+  <text x="320" y="140" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">+0.6R</text>
+  
+  <rect x="400" y="110" width="120" height="50" fill="#aaaaaa" opacity="0.3" rx="4"/>
+  <text x="460" y="140" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14" text-anchor="middle">0.0R</text>
+  
+  <rect x="540" y="110" width="120" height="50" fill="#ff4444" opacity="0.4" rx="4"/>
+  <text x="600" y="140" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.5R</text>
+  
+  <rect x="680" y="110" width="120" height="50" fill="#ff4444" opacity="0.5" rx="4"/>
+  <text x="740" y="140" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.8R</text>
+  
+  <!-- Hesitant row -->
+  <rect x="120" y="160" width="120" height="50" fill="#ff8800" opacity="0.4" rx="4"/>
+  <text x="320" y="190" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.3R</text>
+  
+  <rect x="260" y="160" width="120" height="50" fill="#aaaaaa" opacity="0.3" rx="4"/>
+  <text x="320" y="190" fill="rgba(233,234,240,0.7)" font-family="system-ui" font-size="14" text-anchor="middle">-0.1R</text>
+  
+  <rect x="400" y="160" width="120" height="50" fill="#aaaaaa" opacity="0.4" rx="4"/>
+  <text x="460" y="190" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="14" text-anchor="middle">-0.2R</text>
+  
+  <rect x="540" y="160" width="120" height="50" fill="#ff8800" opacity="0.5" rx="4"/>
+  <text x="600" y="190" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.5R</text>
+  
+  <rect x="680" y="160" width="120" height="50" fill="#ff8800" opacity="0.5" rx="4"/>
+  <text x="740" y="190" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.6R</text>
+  
+  <!-- FOMO row -->
+  <rect x="120" y="210" width="120" height="50" fill="#ff8800" opacity="0.4" rx="4"/>
+  <text x="180" y="240" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.5R</text>
+  
+  <rect x="260" y="210" width="120" height="50" fill="#ff8800" opacity="0.5" rx="4"/>
+  <text x="320" y="240" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.7R</text>
+  
+  <rect x="400" y="210" width="120" height="50" fill="#aaaaaa" opacity="0.4" rx="4"/>
+  <text x="460" y="240" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="14" text-anchor="middle">-0.3R</text>
+  
+  <rect x="540" y="210" width="120" height="50" fill="#ff4444" opacity="0.6" rx="4"/>
+  <text x="600" y="240" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-1.0R</text>
+  
+  <rect x="680" y="210" width="120" height="50" fill="#ff4444" opacity="0.7" rx="4"/>
+  <text x="740" y="240" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-1.3R</text>
+  
+  <!-- Revenge row -->
+  <rect x="120" y="260" width="120" height="50" fill="#ff4444" opacity="0.5" rx="4"/>
+  <text x="180" y="290" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-0.8R</text>
+  
+  <rect x="260" y="260" width="120" height="50" fill="#ff4444" opacity="0.6" rx="4"/>
+  <text x="320" y="290" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-1.1R</text>
+  
+  <rect x="400" y="260" width="120" height="50" fill="#aaaaaa" opacity="0.5" rx="4"/>
+  <text x="460" y="290" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="14" text-anchor="middle">-0.6R</text>
+  
+  <rect x="540" y="260" width="120" height="50" fill="#ff0000" opacity="0.7" rx="4"/>
+  <text x="600" y="290" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-1.5R</text>
+  
+  <rect x="680" y="260" width="120" height="50" fill="#ff0000" opacity="0.8" rx="4"/>
+  <text x="740" y="290" fill="#0b0c17" font-family="system-ui" font-size="16" font-weight="700" text-anchor="middle">-1.8R</text>
+  
+  <!-- Legend -->
+  <g transform="translate(50, 320)">
+    <text x="0" y="20" fill="rgba(233,234,240,0.9)" font-family="system-ui" font-size="12" font-weight="600">Color scale:</text>
+    <rect x="80" y="5" width="30" height="12" fill="#00ff88" opacity="0.7" rx="2"/>
+    <text x="115" y="14" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="11">+Strong</text>
+    
+    <rect x="200" y="5" width="30" height="12" fill="#ff4444" opacity="0.7" rx="2"/>
+    <text x="235" y="14" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="11">-Weak</text>
+    
+    <rect x="330" y="5" width="30" height="12" fill="#aaaaaa" opacity="0.5" rx="2"/>
+    <text x="365" y="14" fill="rgba(233,234,240,0.8)" font-family="system-ui" font-size="11">Neutral</text>
+  </g>
+  
+  <desc>Heatmap showing correlation between emotion tags (Calm, Confident, Hesitant, FOMO, Revenge) and trade outcomes. Dark green indicates high positive expectancy; red indicates high negative expectancy. Key insight: Revenge trading correlates strongly with rule breaks and slippage, while calm and confident states produce the best results.</desc>
+</svg>

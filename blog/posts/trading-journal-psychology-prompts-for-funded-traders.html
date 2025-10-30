@@ -20,6 +20,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/theme-migrate.css">
+  <script defer src="../../assets/js/theme-accent.js"></script>
   <style>
     .post-container {
       margin: 0 auto;
@@ -151,8 +154,8 @@
       border-radius: 10px;
       font-weight: 600;
       color: #0b0b18;
-      background: linear-gradient(120deg, var(--accent-electric, #00f6ff), var(--accent-violet, #7f5af0), var(--accent-magenta, #ff4ecd));
-      border: 1px solid rgba(0, 246, 255, 0.35);
+      background: linear-gradient(120deg, var(--accent-electric, #4c8dff), var(--accent-violet, #6d5dfc), var(--accent-magenta, #4338ca));
+      border: 1px solid rgba(76, 141, 255, 0.35);
       box-shadow: 0 16px 30px rgba(19, 0, 60, 0.4);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       text-decoration: none;
@@ -226,11 +229,52 @@
       ]
     }
   </script>
+
+  <!-- THEME BASE (non-destructive) -->
+  <style>
+    :root{
+      --accent:#6d5dfc; --accent-rgb:109,93,252; --accent-2:#4c8dff;
+      --bg-0:#05070d; --bg-1:#0a0f18; --text:#e6e8ef; --muted:#a8adbb;
+      --line:rgba(255,255,255,0.06);
+      --card:rgba(255,255,255,0.02);
+    }
+    body{
+      background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.65; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+    .container,.site-container{max-width:1150px;margin:0 auto;padding:0 20px}
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(5,7,13,0.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--line)}
+    .site-nav a{color:#a8adbb; text-decoration:none; margin-left:18px; font-size:.98rem}
+    .site-nav a:hover{color:var(--accent)}
+    .brand,.site-brand,.logo{font-weight:700; text-decoration:none; color:var(--text)}
+    .brand span,.logo span{color:var(--accent)}
+    section.section-block, section.section {padding:72px 0; border-top:1px solid var(--line)}
+    .glass.lift, .feature-card, .testimonial, .journal-feature, .cta-banner, .sidebar-section, .card{
+      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    }
+    .btn{display:inline-block; padding:10px 16px; border-radius:999px; font-weight:600; text-decoration:none}
+    .btn.ghost{color:var(--text); border:1px solid var(--line)}
+    .btn.ghost:hover{border-color:rgba(var(--accent-rgb),.6)}
+    .btn.primary{background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#051018}
+    .section-intro h2, .bloom, .section-title, h1, h2.section-title{
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    /* Reveal helper (class may be added later) */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.is-visible{opacity:1; transform:none}
+  </style>
+
 </head>
 <body>
   <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="../../">TradeTrakR</a>
+    <div class="header-inner glass lift">
+      <a class="logo" href="../../"><span>Trade</span>TrakR</a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="../../">Home</a>
         <a href="../../trading-journal.html">Trading Journal</a>
@@ -242,7 +286,7 @@
     </div>
   </header>
 
-  <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <nav class="breadcrumbs glass lift" aria-label="Breadcrumb">
     <ol>
       <li><a href="../../">Home</a></li>
       <li><a href="../index.html">Blog</a></li>
@@ -250,9 +294,9 @@
     </ol>
   </nav>
 
-  <article class="post-container">
-    <section class="post-hero">
-      <h1>10 Trading Journal Psychology Prompts That Reduce Tilt in Funded Challenges</h1>
+  <article class="post-container glass lift">
+    <section class="post-hero glass lift">
+      <h1 class="bloom">10 Trading Journal Psychology Prompts That Reduce Tilt in Funded Challenges</h1>
       <div class="post-meta">
         <span>By TradeTrakR Editorial</span>
         <span>Published January 22, 2025</span>
@@ -455,7 +499,7 @@
     </section>
 
     <section id="cta" class="post-section" aria-labelledby="cta-heading">
-      <div class="cta-box">
+      <div class="cta-box glass lift">
         <h2 id="cta-heading" style="margin:0;">Explore TradeTrakR</h2>
         <p>See how TradeTrakR's psychology tracking features can help you maintain discipline during funded trading challenges.</p>
         <ul>
@@ -469,7 +513,7 @@
   </article>
 
   <footer class="site-footer">
-    <div class="footer-inner">
+    <div class="footer-inner glass lift">
       <div class="footer-links">
         <a href="../../">Home</a>
         <a href="../../trading-journal.html">Trading Journal</a>
@@ -481,5 +525,23 @@
       <p>© 2025 TradeTrakR — Research-driven trading journal insights.</p>
     </div>
   </footer>
+
+  <script>
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)) { els.forEach(el=>el.classList.add('is-visible')); return; }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            const d = parseInt(e.target.getAttribute('data-delay')||'0',10);
+            setTimeout(()=>e.target.classList.add('is-visible'), d);
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:.12});
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
+
 </body>
 </html>

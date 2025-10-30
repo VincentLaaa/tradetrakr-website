@@ -5,142 +5,436 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <base href="./" />
   <title>TradeTrakR | The Smart Trading Journal for Futures & Forex Traders</title>
-  <meta name="description" content="TradeTrakR is an intelligent trading journal that helps funded traders track P&L, psychology, and performance insights with AI-powered analytics." />
+
+  <!-- SEO -->
+  <meta name="description" content="TradeTrakR is an intelligent trading journal that helps traders of all levels—funded and independent—track P&L, psychology, and performance with AI-powered analytics." />
   <meta name="keywords" content="trading journal, trade tracker, funded trading, futures trading, forex trading, P&L analytics, trade log, best trading journal app, AI trading journal" />
   <link rel="canonical" href="https://tradetrakr.com/ai-trading-journal" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Open Graph -->
   <meta property="og:title" content="AI Trading Journal Analytics | TradeTrakR" />
-  <meta property="og:description" content="See how TradeTrakR delivers AI trading journal analytics that help funded futures and forex traders optimize performance." />
+  <meta property="og:description" content="See how TradeTrakR delivers AI trading journal analytics that help funded, independent, futures and forex traders optimize performance and psychology." />
   <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
   <meta property="og:url" content="https://tradetrakr.com/ai-trading-journal" />
   <meta property="og:type" content="website" />
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI Trading Journal Analytics | TradeTrakR" />
-  <meta name="twitter:description" content="See how TradeTrakR delivers AI trading journal analytics that help funded futures and forex traders optimize performance." />
+  <meta name="twitter:description" content="See how TradeTrakR delivers AI trading journal analytics that help funded and independent traders improve results." />
   <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Structured Data -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "TradeTrakR",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web, Windows, macOS",
-      "description": "TradeTrakR is a smart trading journal that helps funded traders analyze P&L, psychology, and performance using AI.",
-      "url": "https://tradetrakr.com",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TradeTrakR",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web, Windows, macOS",
+    "description": "TradeTrakR is a smart trading journal that helps traders analyze P&L, psychology, and performance using AI.",
+    "url": "https://tradetrakr.com",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
     }
+  }
   </script>
+
+  <style>
+    :root{
+      --accent: #6d5dfc;
+      --accent-rgb: 109,93,252;
+      --accent-2: #4c8dff;
+      --bg-0:#05070d;
+      --bg-1:#0a0f18;
+      --text:#e6e8ef;
+      --muted:#a8adbb;
+      --card:rgba(255,255,255,0.02);
+      --line:rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.08), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
+      color:var(--text);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Layout */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(5,7,13,0.6);
+      backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .container{max-width:1150px;margin:0 auto;padding:0 20px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{font-weight:700; letter-spacing:.2px; text-decoration:none; color:var(--text)}
+    .brand span{color:var(--accent)}
+    .nav a{
+      color:var(--muted); text-decoration:none; margin-left:18px; font-size:.98rem;
+      transition:color .2s ease;
+    }
+    .nav a:hover{color:var(--accent)}
+
+    /* Hero */
+    .hero{
+      padding:96px 0 72px;
+      text-align:center;
+      position:relative;
+    }
+    .headline{
+      font-size: clamp(2rem, 4.6vw, 3.2rem);
+      line-height:1.1;
+      font-weight:700;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      margin-bottom:14px;
+    }
+    .lead{
+      color:var(--muted);
+      max-width:820px; margin:0 auto 28px; font-size:1.06rem;
+    }
+    .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:.5rem; padding:.75rem 1.3rem;
+      border-radius:16px;
+      font-weight:600; text-decoration:none;
+      transition:background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+      border:1px solid rgba(var(--accent-rgb), .3);
+      background: rgba(var(--accent-rgb), .14);
+      color:var(--text);
+      box-shadow:none;
+    }
+    .btn:hover{
+      background: rgba(var(--accent-rgb), .22);
+      border-color: rgba(var(--accent-rgb), .45);
+      color:#ffffff;
+      transform:translateY(-1px);
+    }
+    .btn.primary{
+      background: rgba(var(--accent-rgb), .18);
+      color:#f5f6ff;
+    }
+    .btn.primary:hover{
+      background: rgba(var(--accent-rgb), .26);
+    }
+    .btn.ghost{
+      background: transparent;
+      border-color: rgba(var(--accent-rgb), .32);
+      color: var(--accent-2);
+    }
+    .btn.ghost:hover{
+      background: rgba(var(--accent-rgb), .12);
+      border-color: rgba(var(--accent-rgb), .45);
+      color:#ffffff;
+    }
+
+    .accent-rail{
+      height:1px; width:100%;
+      background:linear-gradient(90deg, transparent, rgba(var(--accent-rgb),.45), transparent);
+      margin:44px 0 0;
+    }
+
+    /* Sections */
+    section.section{padding:72px 0; border-top:1px solid rgba(255,255,255,0.06)}
+    .section-head{text-align:center; margin-bottom:30px}
+    .section-title{
+      font-size: clamp(1.5rem, 3.1vw, 2.2rem);
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      margin-bottom:10px; font-weight:700;
+    }
+    .section-kicker{color:var(--muted); max-width:820px; margin:0 auto}
+
+    /* Cards (flatter, not bubbly) */
+    .grid{
+      display:grid; gap:22px;
+      grid-template-columns:repeat(12, 1fr);
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:22px;
+      transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .card:hover{
+      border-color:rgba(var(--accent-rgb),.45);
+      box-shadow:0 10px 30px rgba(0,0,0,.25), 0 0 0 1px rgba(var(--accent-rgb),.08) inset;
+      transform:translateY(-2px);
+      background:rgba(255,255,255,0.025);
+    }
+    .card h3{font-size:1.05rem; margin-bottom:6px}
+    .card p{color:var(--muted); font-size:.98rem}
+
+    /* Feature grids */
+    .col-4{grid-column:span 4}
+    .col-6{grid-column:span 6}
+    .col-12{grid-column:span 12}
+    @media (max-width:980px){ .col-4,.col-6{grid-column:span 12} }
+
+    /* List rows (for bullets w/out bubbles) */
+    .list{
+      display:grid; gap:12px; margin-top:12px;
+    }
+    .list-item{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:14px 0; border-bottom:1px dashed rgba(255,255,255,0.08);
+    }
+    .list-item:last-child{border-bottom:0}
+    .tick{
+      width:18px; height:18px; min-width:18px; border-radius:50%;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow:0 0 10px rgba(var(--accent-rgb),.35);
+      margin-top:3px;
+    }
+
+    /* Internal links row */
+    .inline-links{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+    .btn.link{
+      border:1px solid var(--line); color:var(--muted);
+      padding:10px 16px; border-radius:999px;
+    }
+    .btn.link:hover{color:var(--text); border-color:rgba(var(--accent-rgb),.5)}
+
+    /* CTA banner */
+    .cta{
+      text-align:center; padding:64px 0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+    }
+    .cta h3{font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin-bottom:8px}
+    .cta p{color:var(--muted); margin:0 auto 18px; max-width:760px}
+
+    /* Footer */
+    .site-footer{border-top:1px solid rgba(255,255,255,0.06); padding:28px 0 40px}
+    .foot-nav{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:10px}
+    .foot-nav a{color:var(--muted); text-decoration:none; font-size:.95rem}
+    .foot-nav a:hover{color:var(--accent)}
+    .foot-copy{color:var(--muted); text-align:center; font-size:.92rem}
+
+    /* Reveal Animations (subtle) */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.is-visible{opacity:1; transform:none}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1; transform:none}
+      .btn:hover, .card:hover{transform:none; box-shadow:none}
+    }
+  </style>
 </head>
 <body class="content-page">
-  <header class="site-header">
-    <div class="site-container">
-      <a class="site-brand" href="/">TradeTrakR</a>
-      <nav class="site-nav" aria-label="AI trading journal navigation">
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container nav" aria-label="Primary">
+      <a class="brand" href="/"><span>Trade</span>TrakR</a>
+      <nav aria-label="AI trading journal navigation">
         <a href="/">Home</a>
         <a href="trading-journal.html">Trading Journal</a>
-        <a href="ai-trading-journal.html">AI Analytics</a>
+        <a href="ai-trading-journal.html" aria-current="page">AI Analytics</a>
         <a href="trading-journal-features.html">Journal Features</a>
         <a href="/#pricing">Pricing</a>
       </nav>
     </div>
   </header>
 
-  <main class="site-main">
-    <section class="page-hero">
-      <div class="site-container">
-        <h1>AI Trading Journal Analytics That Keep Funded Traders Accountable</h1>
-        <p>TradeTrakR transforms raw trading logs into AI-powered insights, so funded futures and forex traders know exactly what drives their edge.</p>
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="headline reveal">AI Trading Journal Analytics, Without the Clutter</h1>
+        <p class="lead reveal" data-delay="80">
+          TradeTrakR turns raw logs into clear, actionable insights—so <em>any</em> trader
+          (funded, prop, or independent) can understand performance, control psychology, and scale with confidence across futures and forex.
+        </p>
+        <div class="cta-row reveal" data-delay="120">
+          <a class="btn primary" href="/#demo">Launch Trading Journal Demo</a>
+          <a class="btn ghost" href="/#pricing">Start Free Trial</a>
+        </div>
+        <div class="accent-rail"></div>
       </div>
     </section>
 
-    <section class="section-block">
-      <div class="site-container">
-        <div class="section-intro">
-          <h2>Automated Analysis from Your Trading Journal</h2>
-          <p>Feed your trading journal data into TradeTrakR and the AI engine uncovers hidden behavioral patterns, edge drift, and profit opportunities.</p>
+    <!-- Automated Analysis from Your Trading Journal (kept; cleaner layout) -->
+    <section class="section" id="automated-analysis">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title reveal">Automated Analysis from Your Trading Journal</h2>
+          <p class="section-kicker reveal" data-delay="60">
+            Feed your journal data into TradeTrakR and the AI engine uncovers behavioral patterns, edge drift, and profit opportunities.
+          </p>
         </div>
-        <div class="section-grid">
-          <article class="feature-card">
+
+        <div class="grid">
+          <article class="card col-4 reveal">
             <h3>AI-Powered Trade Analysis</h3>
-            <p>Every session generates AI trading journal summaries that highlight best setups, timing windows, and risk factors across futures and forex markets.</p>
+            <p>Every session generates summaries that highlight best setups, timing windows, and risk factors across futures and forex markets.</p>
           </article>
-          <article class="feature-card">
-            <h3>Emotion and Tilt Detection</h3>
-            <p>TradeTrakR correlates tilt meter readings with execution quality so your AI trading journal can warn you before emotions sabotage P&amp;L.</p>
+
+          <article class="card col-4 reveal" data-delay="60">
+            <h3>Emotion &amp; Tilt Detection</h3>
+            <p>Correlate tilt-meter signals and notes with execution quality—get gentle warnings before emotions sabotage P&amp;L.</p>
           </article>
-          <article class="feature-card">
+
+          <article class="card col-4 reveal" data-delay="120">
             <h3>Performance Forecasting</h3>
-            <p>Predictive analytics estimate expectancy and volatility so you know when to size up or down. The best trading journal app pairs intuition with math.</p>
+            <p>Expectancy &amp; volatility views help you know when to size up or down. Pair intuition with math, not guesswork.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section-block alt">
-      <div class="site-container">
-        <div class="section-intro">
-          <h2>AI That Understands the Funded Trader Journey</h2>
-          <p>From prop firm targets to drawdown limits, TradeTrakR’s AI trading journal keeps your focus on long-term consistency.</p>
+    <!-- Prop-friendly (kept content; broadened tone) -->
+    <section class="section" id="funded-journey">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title reveal">AI That Understands the Funded-Trader Journey</h2>
+          <p class="section-kicker reveal" data-delay="60">
+            From prop-firm targets to drawdown limits, TradeTrakR keeps your focus on long-term consistency—without excluding independent traders.
+          </p>
         </div>
-        <ul class="section-list">
-          <li><strong>Rule Compliance Alerts</strong> Receive proactive reminders when your trading journal entries show risk of violating firm rules.</li>
-          <li><strong>Pattern Recognition</strong> Identify win-rate swings by time of day, market condition, or instrument so your futures trading journal stays optimized.</li>
-          <li><strong>Psychology Coaching</strong> AI-generated prompts guide post-trade reflection, improving the human side of your trading journal routine.</li>
-        </ul>
-        <div class="cta-banner">
-          <h3>See AI Trading Journal Insights in Action</h3>
-          <p>Preview the dashboards and automations that help top funded traders maintain their edge with data-driven decisions.</p>
-          <a href="/#demo">Launch Trading Journal Demo</a>
+
+        <div class="grid">
+          <div class="col-6">
+            <div class="card reveal">
+              <h3>Operations &amp; Accountability</h3>
+              <div class="list" role="list">
+                <div class="list-item">
+                  <span class="tick" aria-hidden="true"></span>
+                  <div>
+                    <strong>Rule Compliance Alerts</strong>
+                    <p class="muted">Proactive nudges when your entries show risk of violating firm rules or your own guardrails.</p>
+                  </div>
+                </div>
+                <div class="list-item">
+                  <span class="tick" aria-hidden="true"></span>
+                  <div>
+                    <strong>Pattern Recognition</strong>
+                    <p class="muted">Track win-rate swings by time-of-day, market regime, or instrument to refine your playbook.</p>
+                  </div>
+                </div>
+                <div class="list-item">
+                  <span class="tick" aria-hidden="true"></span>
+                  <div>
+                    <strong>Psychology Coaching</strong>
+                    <p class="muted">AI prompts guide post-trade reflection and help normalize routines that protect your edge.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-6">
+            <div class="card reveal" data-delay="80">
+              <h3>See AI Journal Insights in Action</h3>
+              <p>Preview dashboards and automations that help top performers maintain their edge with data-driven decisions.</p>
+              <div class="cta-row" style="margin-top:12px">
+                <a class="btn primary" href="/#demo">Preview the Demo</a>
+                <a class="btn ghost" href="/#pricing">View Plans</a>
+              </div>
+              <p style="color:var(--muted); font-size:.9rem; margin-top:10px">
+                Compatible with prop workflows (Apex, Topstep, MyFundedFX) and self-funded accounts alike.
+              </p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="section-block">
-      <div class="site-container">
-        <div class="section-intro">
-          <h2>Connect Your Trading Journal Ecosystem</h2>
-          <p>TradeTrakR links trade logs, screenshots, and mental notes into one AI-assisted workspace for consistent growth.</p>
+    <!-- Connect Ecosystem (kept; concise) -->
+    <section class="section" id="ecosystem">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title reveal">Connect Your Trading Journal Ecosystem</h2>
+          <p class="section-kicker reveal" data-delay="60">
+            Link trade logs, screenshots, and notes into one AI-assisted workspace for consistent growth.
+          </p>
         </div>
-        <div class="section-grid">
-          <article class="feature-card">
+
+        <div class="grid">
+          <article class="card col-4 reveal">
             <h3>Trading Journal Integrations</h3>
-            <p>Connect execution platforms and import fills instantly so your AI trading journal never misses a trade.</p>
+            <p>Connect execution platforms and import fills instantly so your AI journal never misses a trade.</p>
           </article>
-          <article class="feature-card">
+
+          <article class="card col-4 reveal" data-delay="60">
             <h3>Smart Tags &amp; Filters</h3>
-            <p>Segment your trading log by strategy or rule to see where the best trading journal app recommends improvement.</p>
+            <p>Segment by strategy, rule, or market condition to see exactly where improvements compound.</p>
           </article>
-          <article class="feature-card">
+
+          <article class="card col-4 reveal" data-delay="120">
             <h3>Visual Dashboards</h3>
-            <p>Interactive visuals translate performance into action steps, making it easier to brief coaches or trading partners.</p>
+            <p>Interactive visuals translate performance into action steps—perfect for self-reviews or coach briefings.</p>
           </article>
         </div>
-        <div class="internal-links">
-          <a href="trading-journal.html">Trading Journal Overview</a>
-          <a href="trading-journal-features.html">Trading Journal Features</a>
-          <a href="/#pricing">Trading Journal Pricing</a>
+
+        <!-- Internal links preserved -->
+        <div class="inline-links reveal" style="margin-top:22px">
+          <a class="btn link" href="trading-journal.html">Trading Journal Overview</a>
+          <a class="btn link" href="trading-journal-features.html">Trading Journal Features</a>
+          <a class="btn link" href="/#pricing">Trading Journal Pricing</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clean CTA -->
+    <section class="cta" id="cta">
+      <div class="container">
+        <h3 class="reveal">Experience the Future of Journaling</h3>
+        <p class="reveal" data-delay="60">Let AI handle the analysis so you can focus on execution.</p>
+        <div class="cta-row reveal" data-delay="90">
+          <a class="btn primary" href="/#demo">Try the Demo</a>
+          <a class="btn ghost" href="/#pricing">Start Free Trial</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="site-container">
-      <nav aria-label="Footer trading journal links">
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <nav class="foot-nav" aria-label="Footer links">
         <a href="trading-journal.html">Trading Journal Overview</a>
         <a href="ai-trading-journal.html">Trading Journal AI Analytics</a>
         <a href="trading-journal-features.html#pl-tracker">Trading Journal P&amp;L Tracker</a>
         <a href="trading-journal-features.html#funded-trader-tools">Trading Journal Tools for Funded Traders</a>
         <a href="blog/index.html">Trading Journal Guides</a>
       </nav>
-      <p>© 2025 TradeTrakR — The Smart Trading Journal for Funded Traders</p>
+      <p class="foot-copy">© 2025 TradeTrakR — The Smart Trading Journal</p>
     </div>
   </footer>
+
+  <!-- Lightweight scroll-reveal (no dependencies) -->
+  <script>
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            const delay = parseInt(e.target.getAttribute('data-delay')||'0',10);
+            setTimeout(()=>e.target.classList.add('is-visible'), delay);
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:.12});
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
 </body>
 </html>
