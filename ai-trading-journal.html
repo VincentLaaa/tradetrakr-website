@@ -26,6 +26,8 @@
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/paywall.css">
+  <script defer src="assets/js/paywall.js"></script>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -265,7 +267,7 @@
         </p>
         <div class="cta-row reveal" data-delay="120">
           <a class="btn primary" href="/#demo">Launch Trading Journal Demo</a>
-          <a class="btn ghost" href="/#pricing">Start Free Trial</a>
+          <a class="btn ghost" href="/#pricing" data-open-paywall>Start Free Trial</a>
         </div>
         <div class="accent-rail"></div>
       </div>
@@ -346,7 +348,7 @@
               <p>Preview dashboards and automations that help top performers maintain their edge with data-driven decisions.</p>
               <div class="cta-row" style="margin-top:12px">
                 <a class="btn primary" href="/#demo">Preview the Demo</a>
-                <a class="btn ghost" href="/#pricing">View Plans</a>
+                <a class="btn ghost" href="/#pricing" data-open-paywall>View Plans</a>
               </div>
               <p style="color:var(--muted); font-size:.9rem; margin-top:10px">
                 Compatible with prop workflows (Apex, Topstep, MyFundedFX) and self-funded accounts alike.
@@ -400,7 +402,7 @@
         <p class="reveal" data-delay="60">Let AI handle the analysis so you can focus on execution.</p>
         <div class="cta-row reveal" data-delay="90">
           <a class="btn primary" href="/#demo">Try the Demo</a>
-          <a class="btn ghost" href="/#pricing">Start Free Trial</a>
+          <a class="btn ghost" href="/#pricing" data-open-paywall>Start Free Trial</a>
         </div>
       </div>
     </section>
@@ -436,5 +438,113 @@
       els.forEach(el=>io.observe(el));
     })();
   </script>
+
+  <!-- Paywall / Onboarding Modal -->
+  <div id="ttr-paywall" class="ttr-modal" aria-hidden="true" role="dialog" aria-labelledby="ttr-paywall-title">
+    <div class="ttr-dialog">
+      <button class="ttr-close" type="button" aria-label="Close paywall">&times;</button>
+
+      <!-- Progress -->
+      <div class="ttr-progress"><div class="ttr-bar" style="width:0%"></div></div>
+
+      <!-- Step container -->
+      <div class="ttr-step" data-step="intro">
+        <h2 id="ttr-paywall-title">Let's tailor TradeTrakR for you</h2>
+        <p>Answer a few quick questions so we can personalize your journal & insights.</p>
+        <button class="btn primary ttr-next">Get Started</button>
+      </div>
+
+      <!-- Dynamic steps mount here -->
+      <div id="ttr-steps-mount"></div>
+
+      <!-- Loading / "generating plan" -->
+      <div class="ttr-step" data-step="generate" hidden>
+        <h2>Building your custom plan…</h2>
+        <p>Analyzing goals, rules, and psychology prompts.</p>
+        <div class="ttr-loader"></div>
+      </div>
+
+      <!-- Personalized plan -->
+      <div class="ttr-step" data-step="plan" hidden>
+        <h2>Your plan is ready</h2>
+        <div id="ttr-plan-summary" class="ttr-plan"></div>
+        <button class="btn primary ttr-next">Continue</button>
+      </div>
+
+      <!-- Paywall -->
+      <div class="ttr-step" data-step="paywall" hidden>
+        <h2>Start your free trial</h2>
+        <p class="ttr-sub">Full access to AI insights, psychology tools, and rule tracking.</p>
+        <div class="ttr-pricing">
+          <div class="ttr-pricing-option" data-plan="monthly">
+            <input type="radio" name="ttr-plan" value="monthly" id="plan-monthly">
+            <div class="ttr-pricing-option-content">
+              <div class="ttr-pricing-option-title">Monthly</div>
+              <div class="ttr-pricing-option-subtitle">Billed monthly</div>
+            </div>
+            <div class="ttr-pricing-option-price">
+              <span class="ttr-pricing-option-price-main">$14.99</span>
+              <span class="ttr-pricing-option-price-sub">per month</span>
+            </div>
+            <div class="ttr-pricing-option-check"></div>
+          </div>
+          <div class="ttr-pricing-option selected" data-plan="yearly">
+            <input type="radio" name="ttr-plan" value="yearly" id="plan-yearly" checked>
+            <div class="ttr-pricing-option-content">
+              <div class="ttr-pricing-option-title">Yearly</div>
+              <div class="ttr-pricing-option-subtitle">3-day free trial, then billed yearly</div>
+            </div>
+            <div class="ttr-pricing-option-price">
+              <span class="ttr-pricing-option-price-main">$7.99</span>
+              <span class="ttr-pricing-option-price-sub">per month</span>
+            </div>
+            <div class="ttr-pricing-option-check"></div>
+          </div>
+        </div>
+        <div style="margin:20px 0;padding:16px;background:rgba(47,237,132,.08);border-radius:12px;border-left:3px solid #2fed84">
+          <p style="margin:0;color:#e6e8ef;font-size:.95rem;display:flex;align-items:center;gap:8px">
+            <span style="color:#2fed84;font-weight:700">✓</span>
+            <span>No payment now. Cancel anytime during trial.</span>
+          </p>
+        </div>
+        <button id="ttr-checkout" class="btn primary" style="width:100%;margin-top:8px">
+          Start 3-Day Free Trial
+        </button>
+        <p class="ttr-trust" style="text-align:center;margin-top:12px">
+          <span id="ttr-trial-text">Free for 3 days</span>, then <span id="ttr-billing-text">billed as $95.88 per year</span>. Cancel anytime.
+        </p>
+      </div>
+
+      <!-- One-time Offer -->
+      <div class="ttr-step" data-step="one-time-offer" hidden>
+        <button id="ttr-ultimate-close" class="ttr-close" type="button" aria-label="Close offer">&times;</button>
+        <div class="ttr-one-time-offer">
+          <h2>One-time Offer</h2>
+          <p class="ttr-urgency">You will never see this again</p>
+          
+          <div class="ttr-offer-box">
+            <div class="ttr-gift-icon">🎁</div>
+            <div class="ttr-discount-badge">
+              <span>Here's a</span>
+              <span class="ttr-discount-amount">60% OFF</span>
+              <span>Discount 🙌</span>
+            </div>
+            <div class="ttr-ultimate-price">$5.99/mo</div>
+            <p class="ttr-lowest-price">Lowest price ever</p>
+          </div>
+
+          <div class="ttr-no-payment">
+            <span>✓</span>
+            <span>No payment due now</span>
+          </div>
+
+          <button id="ttr-ultimate-checkout" class="ttr-ultimate-btn">
+            Start my 3-days FREE
+          </button>
+          <p class="ttr-billing-note">billed yearly at $71.88 per year</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

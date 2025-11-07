@@ -1743,7 +1743,13 @@ body {
   </style>
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/theme-migrate.css">
+  <link rel="stylesheet" href="assets/css/paywall.css">
   <script defer src="assets/js/theme-accent.js"></script>
+  <script defer src="assets/js/paywall.js"></script>
+  <style>
+    /* Hide old trial modals - replaced by paywall modal */
+    #trial-modal, #manual-trial-modal { display: none !important; visibility: hidden !important; }
+  </style>
 
   <!-- THEME BASE (non-destructive) -->
   <style>
@@ -1850,8 +1856,8 @@ body {
     </div>
   </div>
 
-  <!-- Trial Signup Modal (Auto-trigger) -->
-  <div id="trial-modal" class="trial-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" style="display: none;">
+  <!-- Trial Signup Modal (Auto-trigger) - DISABLED (replaced by paywall modal) -->
+  <div id="trial-modal" class="trial-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" style="display: none !important; visibility: hidden;">
     <div class="trial-modal__overlay"></div>
     <div class="trial-modal__content glass lift">
       <button class="trial-modal__close" aria-label="Close modal">&times;</button>
@@ -1939,7 +1945,7 @@ body {
         <a href="#pricing">Pricing</a>
       </nav>
       <div class="cta-group">
-        <a href="#pricing" class="btn" id="get-started-btn">Get Started Free</a>
+        <a href="#pricing" class="btn" id="get-started-btn" data-open-paywall>Get Started</a>
         <a id="nav-signin" href="signin.html" class="btn btn-outline">Sign In</a>
       </div>
     </div>
@@ -1952,7 +1958,7 @@ body {
         <h1 class="bloom">The Most Advanced Trading Journal for Modern Traders</h1>
         <p>TradeTrakR is a trading journal designed for funded traders in futures and forex who want AI-powered analytics to track P&amp;L, trading psychology, and execution discipline in one place.</p>
         <p>Explore why professionals call it the best trading journal app in our <a href="trading-journal-features.html">trading journal features guide</a> and see how the AI trading journal keeps your edge sharp.</p>
-        <a href="#pricing" class="btn btn-lg hero-cta" id="hero-get-started-btn">Get Started Free</a>
+        <a href="#pricing" class="btn btn-lg hero-cta" id="hero-get-started-btn" data-open-paywall>Get Started</a>
       </div>
       <div class="hero-image lift">
         <img src="assets/dashboard-preview.png" alt="Trading journal dashboard interface in TradeTrakR" />
@@ -2031,6 +2037,11 @@ body {
         </ul>
       </div>
     </div>
+    <div class="container" style="text-align:center;margin-top:48px;padding:32px 20px">
+      <h3 class="bloom" style="font-size:1.8rem;margin-bottom:12px">Ready to Start Your Trading Journal?</h3>
+      <p style="color:var(--muted);font-size:1.05rem;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto">Experience the full power of TradeTrakR with AI insights, psychology tracking, and rule compliance tools.</p>
+      <a href="#pricing" class="btn btn-lg" data-open-paywall style="font-size:1.1rem;padding:14px 32px">Get Started</a>
+    </div>
   </section>
 
   <section class="journal-overview">
@@ -2043,49 +2054,6 @@ body {
         <li class="glass lift"><strong>Designed for Funded Traders</strong> Document prop firm rules, risk targets, and execution checklists inside the best trading journal app built for serious traders.</li>
       </ul>
       <p>Ready to go deeper? <a href="trading-journal.html">Explore the complete trading journal</a> or <a href="trading-journal-features.html">compare every trading journal feature</a>.</p>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="pricing">
-    <div class="container section-header">
-      <h2 class="bloom">Trading Journal Beta Pricing</h2>
-      <p>Lock in your lifetime trading journal price before public launch 🚀</p>
-    </div>
-    <div class="container pricing-grid">
-
-      <!-- Monthly -->
-      <div class="pricing-card glass lift">
-        <h3 class="bloom">$20<span>/month</span></h3>
-        <p class="beta-tag">Unlock the full power of TradeTrakr at the lifetime beta rate.</p>
-        <a href="https://whop.com/checkout/plan_cUBE8hPgKIUwb?d2c=true" class="btn" target="_blank" rel="noopener noreferrer">Get Monthly Plan</a>
-        <ul class="features-list">
-          <li>All core features</li>
-          <li>Tilt Meter</li>
-          <li>Trading Model Statistics</li>
-          <li>AI Insights</li>
-          <li>Daily Trading Journal Entries</li>
-          <li>Clarity Panel</li>
-          <li>Trading Journal Performance Tracking</li>
-        </ul>
-      </div>
-
-      <!-- Yearly -->
-      <div class="pricing-card recommended glass lift">
-        <div class="discount-badge">37% OFF</div>
-        <h3 class="bloom">$150<span>/year</span></h3>
-        <p class="beta-tag">Best value — keep your yearly discount for life.</p>
-        <a href="https://whop.com/checkout/plan_gKf7YosD7VSj5?d2c=true" class="btn" target="_blank" rel="noopener noreferrer">Get Yearly Plan</a>
-        <ul class="features-list">
-          <li>All core features</li>
-          <li>Tilt Meter</li>
-          <li>Trading Model Statistics</li>
-          <li>AI Insights</li>
-          <li>Daily Trading Journal Entries</li>
-          <li>Clarity Panel</li>
-          <li>Trading Journal Performance Tracking</li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -2356,13 +2324,13 @@ body {
       });
     }
 
-    // ✅ Show modal after 2 seconds on page load (NO scroll lock - user can still scroll)
-    setTimeout(() => {
-      // Only show on homepage (not on subpages)
-      if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('.html') === false) {
-        showModal(false, false); // Auto-trigger: don't lock scroll until interaction
-      }
-    }, 2000);
+    // ✅ DISABLED - Old modal replaced by paywall modal
+    // setTimeout(() => {
+    //   // Only show on homepage (not on subpages)
+    //   if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('.html') === false) {
+    //     showModal(false, false); // Auto-trigger: don't lock scroll until interaction
+    //   }
+    // }, 2000);
     
     // ✅ Safety fallback: Always unlock scroll if modal is closed
     modal.addEventListener('transitionend', () => {
@@ -2380,6 +2348,8 @@ body {
     const manualSuccessState = manualModal.querySelector('.manual-trial-modal__success');
 
     function showManualModal() {
+      // DISABLED - Old modal replaced by paywall modal
+      return;
       manualModal.style.display = 'flex';
       disableScroll(); // ✅ Manual trigger: lock scroll immediately (user clicked button)
     }
@@ -2431,23 +2401,7 @@ body {
       });
     }
 
-    // Make "Get Started Free" buttons open the manual modal
-    const getStartedBtn = document.getElementById('get-started-btn');
-    const heroGetStartedBtn = document.getElementById('hero-get-started-btn');
-    
-    if (getStartedBtn) {
-      getStartedBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        showManualModal();
-      });
-    }
-    
-    if (heroGetStartedBtn) {
-      heroGetStartedBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        showManualModal();
-      });
-    }
+    // Old modal triggers removed - now handled by paywall.js with data-open-paywall attribute
 
     // ✅ Close modals with Escape key (unified handler for both modals)
     document.addEventListener('keydown', (e) => {
@@ -2462,5 +2416,113 @@ body {
       }
     });
   </script>
+
+  <!-- Paywall / Onboarding Modal -->
+  <div id="ttr-paywall" class="ttr-modal" aria-hidden="true" role="dialog" aria-labelledby="ttr-paywall-title">
+    <div class="ttr-dialog">
+      <button class="ttr-close" type="button" aria-label="Close paywall">&times;</button>
+
+      <!-- Progress -->
+      <div class="ttr-progress"><div class="ttr-bar" style="width:0%"></div></div>
+
+      <!-- Step container -->
+      <div class="ttr-step" data-step="intro">
+        <h2 id="ttr-paywall-title">Let's tailor TradeTrakR for you</h2>
+        <p>Answer a few quick questions so we can personalize your journal & insights.</p>
+        <button class="btn primary ttr-next">Get Started</button>
+      </div>
+
+      <!-- Dynamic steps mount here -->
+      <div id="ttr-steps-mount"></div>
+
+      <!-- Loading / "generating plan" -->
+      <div class="ttr-step" data-step="generate" hidden>
+        <h2>Building your custom plan…</h2>
+        <p>Analyzing goals, rules, and psychology prompts.</p>
+        <div class="ttr-loader"></div>
+      </div>
+
+      <!-- Personalized plan -->
+      <div class="ttr-step" data-step="plan" hidden>
+        <h2>Your plan is ready</h2>
+        <div id="ttr-plan-summary" class="ttr-plan"></div>
+        <button class="btn primary ttr-next">Continue</button>
+      </div>
+
+      <!-- Paywall -->
+      <div class="ttr-step" data-step="paywall" hidden>
+        <h2>Start your free trial</h2>
+        <p class="ttr-sub">Full access to AI insights, psychology tools, and rule tracking.</p>
+        <div class="ttr-pricing">
+          <div class="ttr-pricing-option" data-plan="monthly">
+            <input type="radio" name="ttr-plan" value="monthly" id="plan-monthly">
+            <div class="ttr-pricing-option-content">
+              <div class="ttr-pricing-option-title">Monthly</div>
+              <div class="ttr-pricing-option-subtitle">Billed monthly</div>
+            </div>
+            <div class="ttr-pricing-option-price">
+              <span class="ttr-pricing-option-price-main">$14.99</span>
+              <span class="ttr-pricing-option-price-sub">per month</span>
+            </div>
+            <div class="ttr-pricing-option-check"></div>
+          </div>
+          <div class="ttr-pricing-option selected" data-plan="yearly">
+            <input type="radio" name="ttr-plan" value="yearly" id="plan-yearly" checked>
+            <div class="ttr-pricing-option-content">
+              <div class="ttr-pricing-option-title">Yearly</div>
+              <div class="ttr-pricing-option-subtitle">3-day free trial, then billed yearly</div>
+            </div>
+            <div class="ttr-pricing-option-price">
+              <span class="ttr-pricing-option-price-main">$7.99</span>
+              <span class="ttr-pricing-option-price-sub">per month</span>
+            </div>
+            <div class="ttr-pricing-option-check"></div>
+          </div>
+        </div>
+        <div style="margin:20px 0;padding:16px;background:rgba(47,237,132,.08);border-radius:12px;border-left:3px solid #2fed84">
+          <p style="margin:0;color:#e6e8ef;font-size:.95rem;display:flex;align-items:center;gap:8px">
+            <span style="color:#2fed84;font-weight:700">✓</span>
+            <span>No payment now. Cancel anytime during trial.</span>
+          </p>
+        </div>
+        <button id="ttr-checkout" class="btn primary" style="width:100%;margin-top:8px">
+          Start 3-Day Free Trial
+        </button>
+        <p class="ttr-trust" style="text-align:center;margin-top:12px">
+          <span id="ttr-trial-text">Free for 3 days</span>, then <span id="ttr-billing-text">billed as $95.88 per year</span>. Cancel anytime.
+        </p>
+      </div>
+
+      <!-- One-time Offer -->
+      <div class="ttr-step" data-step="one-time-offer" hidden>
+        <button id="ttr-ultimate-close" class="ttr-close" type="button" aria-label="Close offer">&times;</button>
+        <div class="ttr-one-time-offer">
+          <h2>One-time Offer</h2>
+          <p class="ttr-urgency">You will never see this again</p>
+          
+          <div class="ttr-offer-box">
+            <div class="ttr-gift-icon">🎁</div>
+            <div class="ttr-discount-badge">
+              <span>Here's a</span>
+              <span class="ttr-discount-amount">60% OFF</span>
+              <span>Discount 🙌</span>
+            </div>
+            <div class="ttr-ultimate-price">$5.99/mo</div>
+            <p class="ttr-lowest-price">Lowest price ever</p>
+          </div>
+
+          <div class="ttr-no-payment">
+            <span>✓</span>
+            <span>No payment due now</span>
+          </div>
+
+          <button id="ttr-ultimate-checkout" class="ttr-ultimate-btn">
+            Start my 3-days FREE
+          </button>
+          <p class="ttr-billing-note">billed yearly at $71.88 per year</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
