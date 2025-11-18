@@ -1,6 +1,8 @@
 /**
  * Supabase Admin Client (Server-side only)
  * 
+ * WARNING: Uses Supabase service role key. Do NOT import this into client-side code.
+ * 
  * This client uses the service role key and should NEVER be imported
  * into client-side code. Only use in API routes and server components.
  * 
@@ -11,26 +13,20 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-if (!process.env.SUPABASE_URL) {
+const supabaseUrl = process.env.SUPABASE_URL!;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+if (!supabaseUrl) {
   throw new Error('Missing SUPABASE_URL environment variable');
 }
 
-if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+if (!supabaseServiceRoleKey) {
   throw new Error('Missing SUPABASE_SERVICE_ROLE_KEY environment variable');
 }
 
-/**
- * Supabase admin client with service role key
- * Has full database access - use only in server-side code
- */
-export const supabaseAdmin = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  }
-);
-
+export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false,
+  },
+});

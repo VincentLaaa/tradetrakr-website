@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { trackEvent } from '@/lib/posthogClient';
+import { trackEvent, identifyUser } from '@/lib/posthogClient';
 import type { OnboardingAnswers, OnboardingStepId } from '@/lib/types/onboarding';
 
 interface OnboardingModalProps {
@@ -18,17 +18,23 @@ function EmailCaptureStep({
   answers,
   updateAnswer,
   onNext,
+  onPrev,
+  canGoNext,
   handleAnswerSubmit,
+  handlePricingClick,
 }: {
   answers: OnboardingAnswers;
   updateAnswer: (key: keyof OnboardingAnswers, value: any) => void;
   onNext: () => void;
+  onPrev?: () => void;
+  canGoNext?: boolean;
   handleAnswerSubmit: (
     stepId: OnboardingStepId,
     questionId: string,
     answerType: string,
     answerPreview: string
   ) => void;
+  handlePricingClick?: () => void;
 }) {
   const [email, setEmail] = useState(answers.email || '');
   const [isValid, setIsValid] = useState(false);
@@ -166,6 +172,13 @@ export default function OnboardingModal({
       console.log('[ONBOARDING] Using sessionId:', id);
     }
   }, [isOpen, sessionId]);
+
+  // Identify anonymous user in PostHog when sessionId is available
+  useEffect(() => {
+    if (sessionId) {
+      identifyUser(sessionId);
+    }
+  }, [sessionId]);
 
   // Track onboarding start
   useEffect(() => {
