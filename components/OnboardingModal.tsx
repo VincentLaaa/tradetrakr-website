@@ -99,6 +99,9 @@ function getOrCreateSessionId(): string {
   if (!sessionId) {
     sessionId = crypto.randomUUID();
     localStorage.setItem(STORAGE_KEY, sessionId);
+    console.log('[ONBOARDING] Generated new sessionId:', sessionId);
+  } else {
+    console.log('[ONBOARDING] Using existing sessionId:', sessionId);
   }
   return sessionId;
 }
@@ -119,27 +122,28 @@ async function saveOnboardingToServer({
   lastStepId: string;
   source?: string;
 }) {
+  const payload = {
+    sessionId,
+    answers,
+    completed,
+    lastStepId,
+    source,
+  };
+
+  console.log('[ONBOARDING SAVE] Sending payload:', payload);
+
   try {
-    const response = await fetch('/api/onboarding/submit', {
+    const res = await fetch('/api/onboarding/submit', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sessionId,
-        answers,
-        completed,
-        lastStepId,
-        source,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
     });
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: 'Unknown error' }));
-      console.error('Failed to save onboarding:', error);
-    }
-  } catch (err) {
-    console.error('Error saving onboarding data:', err);
+    console.log('[ONBOARDING SAVE] Response status:', res.status);
+    const json = await res.json().catch(() => null);
+    console.log('[ONBOARDING SAVE] Response body:', json);
+  } catch (e) {
+    console.error('[ONBOARDING SAVE] Fetch error:', e);
   }
 }
 
@@ -159,12 +163,14 @@ export default function OnboardingModal({
     if (isOpen && !sessionId) {
       const id = getOrCreateSessionId();
       setSessionId(id);
+      console.log('[ONBOARDING] Using sessionId:', id);
     }
   }, [isOpen, sessionId]);
 
   // Track onboarding start
   useEffect(() => {
     if (isOpen && !hasTrackedStart && sessionId) {
+      console.log('[ONBOARDING] Modal opened');
       trackEvent('onboarding_started', { entryPoint });
       setHasTrackedStart(true);
     }
@@ -175,6 +181,7 @@ export default function OnboardingModal({
     if (isOpen && sessionId) {
       const stepId = STEPS[currentStepIndex]?.id;
       if (stepId) {
+        console.log('[ONBOARDING] Step viewed', { stepId, stepIndex: currentStepIndex });
         trackEvent('onboarding_step_viewed', {
           stepId,
           stepIndex: currentStepIndex,
@@ -194,6 +201,11 @@ export default function OnboardingModal({
 
     const currentStep = STEPS[currentStepIndex];
     if (currentStep) {
+      console.log('[ONBOARDING] Step completed', {
+        stepId: currentStep.id,
+        stepIndex: currentStepIndex,
+        answers,
+      });
       trackEvent('onboarding_step_completed', {
         stepId: currentStep.id,
         stepIndex: currentStepIndex,
@@ -201,7 +213,7 @@ export default function OnboardingModal({
     }
 
     setCurrentStepIndex((prev) => Math.min(prev + 1, STEPS.length - 1));
-  }, [currentStepIndex]);
+  }, [currentStepIndex, answers]);
 
   const prevStep = useCallback(() => {
     setCurrentStepIndex((prev) => Math.max(prev - 1, 0));
@@ -209,6 +221,7 @@ export default function OnboardingModal({
 
   const handleClose = useCallback(async () => {
     const currentStep = STEPS[currentStepIndex];
+    console.log('[ONBOARDING] Modal closed at step', currentStep?.id || 'unknown');
     trackEvent('onboarding_closed', {
       stepId: currentStep?.id || 'unknown',
       reason: 'manual_close',
@@ -235,6 +248,11 @@ export default function OnboardingModal({
       answerType: string,
       answerPreview: string
     ) => {
+      console.log('[ONBOARDING] Answer submitted', {
+        stepId,
+        questionId,
+        answerPreview,
+      });
       trackEvent('onboarding_answer_submitted', {
         stepId,
         questionId,
