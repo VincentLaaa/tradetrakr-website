@@ -41,13 +41,19 @@
 .ttr-pricing-option.selected .ttr-pricing-option-check{background:#2fed84;border-color:#2fed84}
 .ttr-pricing-option.selected .ttr-pricing-option-check::after{content:'✓';color:#06101a;font-weight:700;font-size:14px}
 .badge{color:#06101a;background:linear-gradient(90deg,#2fed84,#38bdf8);padding:2px 8px;border-radius:999px;font-size:.8rem;margin-left:6px}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:clamp(12px,2vw,14px) clamp(20px,3vw,24px);border-radius:12px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:clamp(0.9rem,2vw,1.05rem);transition:transform .2s,box-shadow .2s;min-height:44px;-webkit-tap-highlight-color:transparent}
-.btn:hover{transform:translateY(-1px)}
-.btn.primary{background:linear-gradient(90deg,#2fed84,#38bdf8);color:#06101a;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 8px 22px rgba(0,0,0,.22)}
-.btn.primary:hover{box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 12px 28px rgba(47,237,132,.3)}
-.btn.ghost{color:#e6e8ef;border:1px solid rgba(255,255,255,.12);background:transparent}
-.btn.ghost:hover{border-color:#2fed84;background:rgba(47,237,132,.05)}
-.btn.small{font-size:.92rem;padding:8px 12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:clamp(14px,2.5vw,16px) clamp(24px,4vw,32px);border-radius:14px;font-weight:700;text-decoration:none;border:0;cursor:pointer;font-size:clamp(0.95rem,2.2vw,1.1rem);transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);min-height:50px;-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden;letter-spacing:0.3px}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);transition:left .5s}
+.btn:hover::before{left:100%}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:linear-gradient(135deg,#2fed84 0%,#26d0ce 50%,#38bdf8 100%);color:#06101a;box-shadow:0 4px 20px rgba(47,237,132,.4),0 2px 8px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2);position:relative}
+.btn.primary::after{content:'';position:absolute;inset:0;border-radius:14px;padding:2px;background:linear-gradient(135deg,#2fed84,#38bdf8);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s}
+.btn.primary:hover{box-shadow:0 6px 28px rgba(47,237,132,.5),0 4px 12px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.3);background:linear-gradient(135deg,#35f58f 0%,#2dd8d6 50%,#45c8ff 100%)}
+.btn.primary:active{box-shadow:0 2px 12px rgba(47,237,132,.3),0 1px 4px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2)}
+.btn.ghost{color:#e6e8ef;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.03);backdrop-filter:blur(10px)}
+.btn.ghost:hover{border-color:#2fed84;background:rgba(47,237,132,.08);color:#2fed84;box-shadow:0 4px 16px rgba(47,237,132,.2)}
+.btn.ghost:active{background:rgba(47,237,132,.12);transform:scale(0.98)}
+.btn.small{font-size:clamp(0.85rem,1.8vw,0.92rem);padding:clamp(10px,1.8vw,12px) clamp(16px,2.5vw,20px);min-height:40px;font-weight:600}
 .ttr-sub{color:#9fb0c8;margin-top:-2px}
 .ttr-trust{color:#8aa0be;font-size:.92rem;margin-top:8px}
 
@@ -139,7 +145,10 @@
   .ttr-bar-label{font-size:clamp(0.7rem,1.6vw,0.85rem)}
   .ttr-chart-note{font-size:clamp(0.7rem,1.8vw,0.8rem);margin:6px 0 0}
   .ttr-comparison-note{font-size:clamp(0.7rem,1.8vw,0.8rem);margin-top:10px}
-  .btn{padding:12px 20px;font-size:clamp(0.85rem,2vw,0.95rem);min-height:44px;width:100%}
+  .btn{padding:14px 24px;font-size:clamp(0.9rem,2.2vw,1rem);min-height:48px;width:100%}
+  .btn.primary{box-shadow:0 3px 16px rgba(47,237,132,.35),0 2px 6px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2)}
+  .btn.primary:hover{box-shadow:0 4px 20px rgba(47,237,132,.45),0 3px 8px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.3)}
+  .btn.ghost{border-width:2px}
   .ttr-one-time-offer h2{font-size:clamp(1.2rem,4vw,1.6rem)}
   .ttr-ultimate-price{font-size:clamp(1.5rem,4vw,2rem)}
   .ttr-ultimate-btn{padding:12px;font-size:clamp(0.9rem,2vw,1rem);min-height:44px}

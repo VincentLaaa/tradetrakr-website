@@ -1938,11 +1938,11 @@ body {
     <div class="container header-inner">
       <div class="logo">TradeTrakr</div>
       <nav class="nav">
+        <a href="#pricing">Pricing</a>
         <a href="trading-journal.html">Trading Journal</a>
         <a href="ai-trading-journal.html">AI Analytics</a>
         <a href="trading-journal-features.html">Journal Features</a>
         <a href="#demo">Demo</a>
-        <a href="#pricing">Pricing</a>
       </nav>
       <div class="cta-group">
         <a href="#pricing" class="btn" id="get-started-btn" data-open-paywall>Get Started</a>
@@ -1991,6 +1991,84 @@ body {
     <div class="container feature-row">
       <div class="feature-text"><h3>Discipline Coach for Funded Traders</h3><p>An always-visible clarity panel pins reminders while you trade and keeps funded trader rules front and center. Review your trading journal clarity history to see how discipline influences results.</p></div>
       <div class="feature-img"><img src="assets/clarity-panel.png" alt="Funded trading journal discipline reminders" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Plans & Pricing -->
+  <section id="pricing" class="ttr-section ttr-pricing" style="padding:5rem 0;position:relative">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="bloom">Plans &amp; Pricing</h2>
+        <p style="color:var(--text-muted);font-size:1.05rem;max-width:600px;margin:0 auto">Choose the plan that fits your trading journey.</p>
+      </header>
+
+      <div class="ttr-pricing-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem;max-width:900px;margin-left:auto;margin-right:auto">
+        <!-- Monthly -->
+        <article class="ttr-pricing-card" style="position:relative;background:rgba(12,15,36,0.75);backdrop-filter:blur(24px);padding:2.5rem;border-radius:18px;border:1px solid rgba(76,141,255,0.22);transition:all 0.3s ease;overflow:visible">
+          <div class="ttr-pricing-header">
+            <h3 style="font-size:1.4rem;margin-bottom:1rem;color:var(--text-primary)">Monthly</h3>
+            <p class="ttr-price" style="font-size:2.2rem;background:linear-gradient(45deg,var(--accent-electric),var(--accent-violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-bottom:0.5rem">
+              $14.99<span style="font-size:1rem;color:var(--text-muted);margin-left:4px">/month</span>
+            </p>
+            <p class="ttr-tagline" style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1.5rem">Flexible, month-to-month.</p>
+          </div>
+          <ul class="ttr-pricing-features" style="list-style:none;padding:0;margin:1.2rem 0;text-align:left">
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Full access to TradeTrakR desktop journal
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Daily rules &amp; tilt tracking
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Unlimited trade logs &amp; sessions
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Cancel anytime
+            </li>
+          </ul>
+          <button class="btn primary" type="button" data-open-plan="monthly" style="width:100%;margin-top:1.5rem;padding:14px 24px;font-size:1.05rem;min-height:50px">
+            Start Monthly Plan
+          </button>
+        </article>
+
+        <!-- Yearly -->
+        <article class="ttr-pricing-card ttr-pricing-card--highlight" style="position:relative;background:rgba(12,15,36,0.75);backdrop-filter:blur(24px);padding:2.5rem;border-radius:18px;border:2px solid rgba(76,141,255,0.55);transition:all 0.3s ease;overflow:visible;box-shadow:0 0 32px rgba(76,141,255,0.18)">
+          <div class="ttr-pricing-tag" style="position:absolute;top:-12px;right:20px;background:linear-gradient(135deg,var(--accent-electric),var(--accent-violet));color:white;font-weight:600;font-size:0.85rem;padding:0.3rem 0.7rem;border-radius:16px;transform:rotate(5deg);box-shadow:0 4px 12px rgba(0,0,0,0.3)">Most Popular</div>
+          <div class="ttr-pricing-header">
+            <h3 style="font-size:1.4rem;margin-bottom:1rem;color:var(--text-primary)">Yearly</h3>
+            <p class="ttr-price" style="font-size:2.2rem;background:linear-gradient(45deg,var(--accent-electric),var(--accent-violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-bottom:0.5rem">
+              $7.99<span style="font-size:1rem;color:var(--text-muted);margin-left:4px">/month</span>
+            </p>
+            <p class="ttr-subtext" style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Billed as $95.88 per year</p>
+            <p class="ttr-tagline" style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1.5rem">3-day free trial included.</p>
+          </div>
+          <ul class="ttr-pricing-features" style="list-style:none;padding:0;margin:1.2rem 0;text-align:left">
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              3-day free trial – experience everything first
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Save versus monthly
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              All features &amp; updates included
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Built for serious, consistency-focused traders
+            </li>
+          </ul>
+          <button class="btn primary" type="button" data-open-plan="yearly" style="width:100%;margin-top:1.5rem;padding:14px 24px;font-size:1.05rem;min-height:50px">
+            Start 3-Day Free Trial
+          </button>
+        </article>
+      </div>
     </div>
   </section>
 
