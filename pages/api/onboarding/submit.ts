@@ -23,9 +23,23 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 import type { OnboardingAnswers } from '@/lib/types/onboarding';
 
+interface OnboardingSubmissionRequest {
+  sessionId: string;
+  answers: OnboardingAnswers;
+  completed: boolean;
+  lastStepId: string;
+  source?: string;
+}
+
+interface ApiResponse {
+  success?: boolean;
+  error?: string;
+  sessionId?: string;
+}
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<ApiResponse>
 ) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -86,3 +100,4 @@ export default async function handler(
     return res.status(500).json({ error: 'Internal server error' });
   }
 }
+

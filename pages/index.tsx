@@ -54,38 +54,33 @@ export default function Home() {
               >
                 Get Started Free
               </button>
+              <button
+                onClick={() => {
+                  console.log('[DEBUG BUTTON] Manual test triggered');
+                  trackEvent('debug_manual_test', { from: 'index_debug_button' });
+                  fetch('/api/onboarding/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      sessionId: 'debug-session-123',
+                      answers: {
+                        experienceLevel: 'Funded but inconsistent',
+                        email: 'test@example.com',
+                      },
+                      completed: false,
+                      lastStepId: 'welcome',
+                      source: 'debug_button',
+                    }),
+                  })
+                    .then((r) => r.json())
+                    .then((json) => console.log('[DEBUG BUTTON] API response', json))
+                    .catch((e) => console.error('[DEBUG BUTTON] API error', e));
+                }}
+                className="mt-4 px-4 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                🐛 Debug Test
+              </button>
             </div>
-          </div>
-        </section>
-
-        {/* Debug Button (for testing) */}
-        <section className="px-4 py-4 bg-gray-900/50">
-          <div className="container mx-auto max-w-6xl">
-            <button
-              onClick={() => {
-                trackEvent('debug_manual_test', { from: 'index_debug_button' });
-                fetch('/api/onboarding/submit', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    sessionId: 'debug-session-123',
-                    answers: {
-                      experienceLevel: 'Funded but inconsistent',
-                      email: 'test@example.com',
-                    },
-                    completed: false,
-                    lastStepId: 'welcome',
-                    source: 'debug_button',
-                  }),
-                })
-                  .then((r) => r.json())
-                  .then((json) => console.log('[DEBUG BUTTON] API response', json))
-                  .catch((e) => console.error('[DEBUG BUTTON] API error', e));
-              }}
-              className="px-4 py-2 bg-red-600 text-white text-sm rounded hover:opacity-90"
-            >
-              🐛 Debug: Test PostHog + API
-            </button>
           </div>
         </section>
 

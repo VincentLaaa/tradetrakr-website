@@ -1,11 +1,10 @@
-import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
-import { initPosthog } from '@/lib/posthogClient';
-import '../style.css';
+import type { AppProps } from 'next/app';
+import { initPostHog } from '@/lib/posthogClient';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    initPosthog();
+    initPostHog();
   }, []);
 
   return <Component {...pageProps} />;

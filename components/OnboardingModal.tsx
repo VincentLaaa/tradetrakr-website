@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { trackEvent, identifyUser } from '@/lib/posthogClient';
+import { trackEvent } from '@/lib/posthogClient';
 import type { OnboardingAnswers, OnboardingStepId } from '@/lib/types/onboarding';
 
 interface OnboardingModalProps {
@@ -18,23 +18,17 @@ function EmailCaptureStep({
   answers,
   updateAnswer,
   onNext,
-  onPrev,
-  canGoNext,
   handleAnswerSubmit,
-  handlePricingClick,
 }: {
   answers: OnboardingAnswers;
   updateAnswer: (key: keyof OnboardingAnswers, value: any) => void;
   onNext: () => void;
-  onPrev?: () => void;
-  canGoNext?: boolean;
   handleAnswerSubmit: (
     stepId: OnboardingStepId,
     questionId: string,
     answerType: string,
     answerPreview: string
   ) => void;
-  handlePricingClick?: () => void;
 }) {
   const [email, setEmail] = useState(answers.email || '');
   const [isValid, setIsValid] = useState(false);
@@ -148,6 +142,10 @@ async function saveOnboardingToServer({
     console.log('[ONBOARDING SAVE] Response status:', res.status);
     const json = await res.json().catch(() => null);
     console.log('[ONBOARDING SAVE] Response body:', json);
+
+    if (!res.ok) {
+      console.error('[ONBOARDING SAVE] Failed to save onboarding:', json);
+    }
   } catch (e) {
     console.error('[ONBOARDING SAVE] Fetch error:', e);
   }
@@ -169,21 +167,14 @@ export default function OnboardingModal({
     if (isOpen && !sessionId) {
       const id = getOrCreateSessionId();
       setSessionId(id);
-      console.log('[ONBOARDING] Using sessionId:', id);
+      console.log('[ONBOARDING] Modal opened');
     }
   }, [isOpen, sessionId]);
-
-  // Identify anonymous user in PostHog when sessionId is available
-  useEffect(() => {
-    if (sessionId) {
-      identifyUser(sessionId);
-    }
-  }, [sessionId]);
 
   // Track onboarding start
   useEffect(() => {
     if (isOpen && !hasTrackedStart && sessionId) {
-      console.log('[ONBOARDING] Modal opened');
+      console.log('[ONBOARDING] Starting onboarding flow', { entryPoint, sessionId });
       trackEvent('onboarding_started', { entryPoint });
       setHasTrackedStart(true);
     }
@@ -277,6 +268,7 @@ export default function OnboardingModal({
   );
 
   const handlePricingClick = useCallback(async () => {
+    console.log('[ONBOARDING] Pricing/CTA clicked - completing onboarding');
     trackEvent('signup_submitted', {
       source: 'onboarding',
       planSelected: 'default',

@@ -3,9 +3,6 @@
  * 
  * Handles PostHog initialization and event tracking in a Next.js environment.
  * Safe for SSR - no-ops on server side.
- * 
- * DEBUG MODE: This version includes extensive console logging to help debug
- * event tracking issues.
  */
 
 let posthog: any = null;
@@ -14,7 +11,7 @@ let isInitialized = false;
 /**
  * Initialize PostHog client (browser only)
  */
-export function initPosthog() {
+export function initPostHog() {
   if (typeof window === 'undefined') {
     return; // SSR guard
   }
@@ -34,21 +31,20 @@ export function initPosthog() {
 
   try {
     // Dynamic import to avoid SSR issues
-    import('posthog-js').then((posthogModule) => {
-      posthog = posthogModule.default || posthogModule;
+    import('posthog-js').then(({ default: posthogModule }) => {
+      posthog = posthogModule;
       posthog.init(posthogKey, {
         api_host: posthogHost,
         loaded: (ph: any) => {
-          console.log('[PostHog] Loaded callback fired');
+          console.log('[PostHog] Initialized with host:', posthogHost);
           posthog = ph;
+          isInitialized = true;
         },
       });
-      isInitialized = true;
-      console.log('[PostHog] Initialized with host:', posthogHost);
-    }).catch((err: any) => {
-      console.error('[PostHog] Failed to load PostHog module:', err);
+    }).catch((err) => {
+      console.error('[PostHog] Failed to load PostHog:', err);
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error('[PostHog] Initialization error:', err);
   }
 }
@@ -66,26 +62,28 @@ export function trackEvent(name: string, properties?: Record<string, any>) {
 
   console.log('[TRACK EVENT]', name, properties);
 
+  // Initialize if not already done
   if (!isInitialized) {
-    console.warn('[PostHog] Not initialized yet, initializing now...');
-    initPosthog();
+    initPostHog();
     // Wait a bit for initialization, then track
     setTimeout(() => {
-      try {
-        posthog.capture(name, properties);
-        console.log('[PostHog] Event captured after delayed init:', name);
-      } catch (e: any) {
-        console.error('[PostHog] capture error', e);
+      if (isInitialized && posthog) {
+        try {
+          posthog.capture(name, properties);
+        } catch (e) {
+          console.error('[PostHog] capture error', e);
+        }
       }
     }, 100);
     return;
   }
 
-  try {
-    posthog.capture(name, properties);
-    console.log('[PostHog] Event captured successfully:', name);
-  } catch (e: any) {
-    console.error('[PostHog] capture error', e);
+  if (posthog) {
+    try {
+      posthog.capture(name, properties);
+    } catch (e) {
+      console.error('[PostHog] capture error', e);
+    }
   }
 }
 
@@ -100,27 +98,28 @@ export function identifyUser(id: string, traits?: Record<string, any>) {
     return; // SSR guard
   }
 
-  console.log('[PostHog] identifyUser called:', id, traits);
+  console.log('[PostHog] identifyUser', id, traits);
 
   if (!isInitialized) {
-    console.warn('[PostHog] Not initialized yet, initializing now...');
-    initPosthog();
+    initPostHog();
     setTimeout(() => {
-      try {
-        posthog.identify(id, traits);
-        console.log('[PostHog] User identified after delayed init:', id);
-      } catch (e: any) {
-        console.error('[PostHog] identify error', e);
+      if (isInitialized && posthog) {
+        try {
+          posthog.identify(id, traits);
+        } catch (e) {
+          console.error('[PostHog] identify error', e);
+        }
       }
     }, 100);
     return;
   }
 
-  try {
-    posthog.identify(id, traits);
-    console.log('[PostHog] User identified successfully:', id);
-  } catch (e: any) {
-    console.error('[PostHog] identify error', e);
+  if (posthog) {
+    try {
+      posthog.identify(id, traits);
+    } catch (e) {
+      console.error('[PostHog] identify error', e);
+    }
   }
 }
 
@@ -134,3 +133,11 @@ export function getPostHogClient() {
   }
   return posthog;
 }
+
+export const posthogClient = {
+  init: initPostHog,
+  track: trackEvent,
+  identify: identifyUser,
+  getClient: getPostHogClient,
+};
+
