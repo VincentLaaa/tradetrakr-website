@@ -395,6 +395,14 @@
       border-left: 2px solid var(--accent-cyan); display: none; opacity: 0;
     }
     .ai-response.show { display: block; animation: fadeIn 0.5s forwards; }
+    .ai-response.show::after {
+      content: '|';
+      display: inline-block;
+      animation: blink-caret 0.75s step-end infinite;
+      color: var(--accent-cyan);
+      margin-left: 2px;
+    }
+    @keyframes blink-caret { 50% { opacity: 0; } }
 
     .tilt-card-ui {
       background: #08080b;
@@ -539,6 +547,19 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes countUp { from { opacity: 0.5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* LIVE PULSE WIDGET */
+    .live-pulse-widget {
+      position: fixed; bottom: 20px; left: 20px; background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1); padding: 10px 16px; border-radius: 30px; display: flex; align-items: center;
+      gap: 10px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 0.85rem;
+      opacity: 0; 
+      transform: translateY(20px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      max-width: 300px;
+    }
+    .pulse-dot { width: 8px; height: 8px; background: var(--accent-success); border-radius: 50%; box-shadow: 0 0 8px var(--accent-success); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+
     /* TRUSTED BY */
     .trusted-by { padding: 2rem 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 4rem; }
     .trusted-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); margin-bottom: 1.5rem; }
@@ -673,11 +694,17 @@
 </head>
 <body>
 
+  <!-- Live Activity Ticker -->
+  <div class="live-pulse-widget" id="live-ticker">
+    <div class="pulse-dot"></div>
+    <span id="live-text">User294 just used AI to analyze 30-day P&L</span>
+  </div>
+
   <div id="progress-bar"></div>
 
   <header class="header">
     <div class="container header-inner">
-      <div class="logo">TradeTrakr</div>
+      <div class="logo">TradeTrakR</div>
       <nav class="nav">
         <a href="#pricing">Pricing</a>
         <a href="trading-journal.html">Trading Journal</a>
@@ -962,7 +989,7 @@
         <a href="trading-journal-features.html#funded-trader-tools">Funded Tools</a>
         <a href="blog/index.html">Guides</a>
       </div>
-      <p style="color: var(--text-dim); font-size: 0.8rem;">© 2025 TradeTrakr — The Future of Trading Journals</p>
+      <p style="color: var(--text-dim); font-size: 0.8rem;">© 2025 TradeTrakR — The Future of Trading Journals</p>
     </div>
   </footer>
 
@@ -1055,6 +1082,42 @@
     
     window.addEventListener('load', startLiveTicker);
 
+    // Live Activity Ticker (Bottom Left)
+    const tickerWidget = document.getElementById('live-ticker');
+    const tickerText = document.getElementById('live-text');
+    const tickerMessages = [
+        "User analyzed P&L",
+        "Trader checked Psychology Score",
+        "New trade logged on NQ",
+        "User reviewed daily trade journal stats",
+        "Trader generated a new risk report"
+    ];
+    let msgIndex = 0;
+
+    function showTicker() {
+        // 1. Set Text
+        tickerText.innerText = tickerMessages[msgIndex];
+        
+        // 2. Show Widget
+        tickerWidget.style.opacity = '1';
+        tickerWidget.style.transform = 'translateY(0)';
+        
+        // 3. Hide after 6 seconds
+        setTimeout(() => {
+            tickerWidget.style.opacity = '0';
+            tickerWidget.style.transform = 'translateY(20px)';
+        }, 6000); 
+
+        // Prepare next message index
+        msgIndex = (msgIndex + 1) % tickerMessages.length;
+    }
+    
+    // Initial appearance after 3 seconds
+    setTimeout(showTicker, 3000);
+
+    // Repeat every 30 seconds (appearing roughly twice a minute)
+    setInterval(showTicker, 30000);
+
     // Dashboard Scroll Reveal
     const dashObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1068,15 +1131,40 @@
     const dashEl = document.querySelector('.hero-dashboard-display');
     if (dashEl) dashObserver.observe(dashEl);
 
-    // AI Toggle Function
+    // AI Toggle Function with Typewriter Animation
+    let aiTypeInterval = null;
     function toggleAi(el, text) {
+      // Clear any existing typing interval
+      if (aiTypeInterval) {
+        clearInterval(aiTypeInterval);
+        aiTypeInterval = null;
+      }
+      
+      // Reset active states
       document.querySelectorAll('.ai-pill').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.ai-response').forEach(r => r.remove());
+      
+      // Set active
       el.classList.add('active');
+      
+      // Create response container
       const resp = document.createElement('div');
       resp.className = 'ai-response show';
-      resp.innerText = "AI: " + text;
+      resp.textContent = ""; // Start empty
       el.after(resp);
+      
+      // Typewriter effect
+      let i = 0;
+      const fullText = "AI: " + text;
+      aiTypeInterval = setInterval(() => {
+        if (i < fullText.length) {
+          resp.textContent = fullText.substring(0, i + 1);
+          i++;
+        } else {
+          clearInterval(aiTypeInterval);
+          aiTypeInterval = null;
+        }
+      }, 20); // Speed of typing (20ms per character)
     }
 
     // Animate Tilt Meter when visible
