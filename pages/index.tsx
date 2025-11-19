@@ -54,32 +54,6 @@ export default function Home() {
               >
                 Get Started Free
               </button>
-              <button
-                onClick={() => {
-                  console.log('[DEBUG BUTTON] Manual test triggered');
-                  trackEvent('debug_manual_test', { from: 'index_debug_button' });
-                  fetch('/api/onboarding/submit', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      sessionId: 'debug-session-123',
-                      answers: {
-                        experienceLevel: 'Funded but inconsistent',
-                        email: 'test@example.com',
-                      },
-                      completed: false,
-                      lastStepId: 'welcome',
-                      source: 'debug_button',
-                    }),
-                  })
-                    .then((r) => r.json())
-                    .then((json) => console.log('[DEBUG BUTTON] API response', json))
-                    .catch((e) => console.error('[DEBUG BUTTON] API error', e));
-                }}
-                className="mt-4 px-4 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors"
-              >
-                🐛 Debug Test
-              </button>
             </div>
           </div>
         </section>

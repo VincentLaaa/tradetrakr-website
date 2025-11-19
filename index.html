@@ -8,8 +8,6 @@
   <meta name="keywords" content="trading journal, trade tracker, funded trading, futures trading, forex trading, P&L analytics, trade log, best trading journal app, AI trading journal" />
   <link rel="canonical" href="https://tradetrakr.com/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  
-  <!-- SEO & Social Meta Tags Preserved -->
   <meta property="og:title" content="TradeTrakR | The Smart Trading Journal for Funded Traders" />
   <meta property="og:description" content="Track P&L, psychology, and trading performance with AI-powered analytics." />
   <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
@@ -19,12 +17,7 @@
   <meta name="twitter:title" content="TradeTrakR | The Smart Trading Journal for Funded Traders" />
   <meta name="twitter:description" content="Track P&L, psychology, and trading performance with AI-powered analytics." />
   <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
-
-  <!-- Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="script.js" defer></script>
   <script type="application/ld+json">
     {
@@ -42,701 +35,1905 @@
       }
     }
   </script>
-
-  <!-- NEW FUTURISTIC THEME STYLES -->
   <style>
-    /* THEME VARIABLES */
-    :root {
-      --bg-obsidian: #050505;
-      --bg-void: #000000;
-      --bg-glass: rgba(20, 20, 25, 0.6);
-      --bg-glass-hover: rgba(30, 30, 35, 0.8);
-      
-      --accent-cyan: #00f3ff;
-      --accent-violet: #bd00ff;
-      --accent-blue: #2d5af5;
-      --accent-success: #0aff68;
-      --accent-danger: #ff3366;
-      
-      --text-primary: #ffffff;
-      --text-secondary: #94a3b8;
-      --text-dim: #475569;
-      
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(0, 243, 255, 0.3);
-      
-      --font-main: 'Inter', sans-serif;
-      
-      --shadow-neon: 0 0 20px rgba(0, 243, 255, 0.15);
-      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
-    }
-
-    /* GLOBAL RESET & BASE */
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: var(--font-main);
-      background-color: var(--bg-obsidian);
-      color: var(--text-primary);
-      line-height: 1.6;
-      font-weight: 300;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Background Tech Grid */
+    /* Global */
+html { scroll-behavior: smooth; }
+:root {
+  --bg-primary: #050607;
+  --bg-secondary: #12141d;
+  --accent-electric: #4c8dff;
+  --accent-violet: #6d5dfc;
+  --accent-magenta: #4338ca;
+  --text-primary: #f7f7ff;
+  --text-muted: rgba(229, 233, 255, 0.75);
+  --glass-bg: rgba(12, 16, 35, 0.55);
+  --glass-border: rgba(127, 90, 240, 0.35);
+  --card-shadow: 0 30px 70px rgba(11, 0, 45, 0.55);
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(76, 141, 255, 0.06), transparent 48%),
+    radial-gradient(circle at 80% 5%, rgba(127, 90, 240, 0.1), transparent 55%),
+    linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 65%, #080a14 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  position: relative;
+}
+ 
+    /* Animated tech grid background */
     body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: -2;
-      pointer-events: none;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      top: -20%; left: -20%; width: 140%; height: 140%;
-      background: 
-        radial-gradient(circle at 50% 0%, rgba(45, 90, 245, 0.08), transparent 40%),
-        radial-gradient(circle at 80% 50%, rgba(189, 0, 255, 0.05), transparent 40%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
-    .container { width: 90%; max-width: 1200px; margin: auto; position: relative; }
-
-    /* TYPOGRAPHY */
-    h1, h2, h3 { font-weight: 600; margin-top: 0; letter-spacing: -0.02em; }
-    h1 { font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1.1; }
-    h2 { font-size: clamp(2rem, 4vw, 3rem); }
-    p { color: var(--text-secondary); font-size: 1.05rem; }
-    
-    .bloom, h1, h2 {
-      background: linear-gradient(120deg, #fff 20%, var(--text-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .text-gradient-neon {
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* BUTTONS */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.75rem 1.5rem;
-      border-radius: 9999px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      cursor: pointer;
-      border: 1px solid transparent;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .btn.primary, .btn:not(.btn-outline) {
-      background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), rgba(189, 0, 255, 0.1));
-      border-color: rgba(255, 255, 255, 0.1);
-      color: var(--accent-cyan);
-      box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
-    }
-    .btn.primary:hover, .btn:not(.btn-outline):hover {
-      border-color: var(--accent-cyan);
-      color: #fff;
-      box-shadow: 0 0 25px rgba(0, 243, 255, 0.3);
-      transform: translateY(-2px);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
-    }
-    .btn-outline:hover {
-      border-color: var(--text-primary);
-      color: var(--text-primary);
-      background: rgba(255,255,255,0.03);
-    }
-    .btn-lg { padding: 1rem 2.5rem; font-size: 1.1rem; }
-
-    /* HEADER */
-    .header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1rem 0;
-      background: rgba(5, 5, 5, 0.7);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
-      transition: transform 0.3s ease;
-    }
-    .header.hidden { transform: translateY(-100%); }
-    .header-inner { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em; position: relative; }
-    .logo::after {
-      content: ''; position: absolute; bottom: 2px; right: -6px; width: 6px; height: 6px;
-      background: var(--accent-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--accent-cyan);
-    }
-    .nav { display: flex; gap: 2rem; }
-    .nav a { font-size: 0.9rem; font-weight: 400; color: var(--text-secondary); }
-    .nav a:hover { color: var(--accent-cyan); text-shadow: 0 0 8px rgba(0,243,255,0.4); }
-    .cta-group { display: flex; gap: 1rem; }
-
-    /* HERO with Background Dashboard */
-    .hero { 
-      padding: 10rem 0 0;
-      position: relative; 
-      overflow: visible;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .hero-inner { 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      position: relative;
-      z-index: 10;
-    }
-    
-    .hero-text {
-      max-width: 800px;
-      margin-bottom: 2rem;
-    }
-
-    .hero-text p a { color: var(--accent-cyan); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-    
-    .hero-text p { 
-      font-size: 1.2rem; 
-      max-width: 600px; 
-      margin: 1.5rem auto; 
-      color: var(--text-primary);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
-    }
-    
-    .hero-text h1 { 
-      color: #ffffff;
-      background: none;
-      -webkit-text-fill-color: initial;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.9); 
-    }
-
-    /* DASHBOARD DISPLAY - Repositioned Up and Blended */
-    .hero-dashboard-display {
-      width: 100vw;
-      max-width: 100%;
-      margin: -3rem calc(-50vw + 50%) -8rem calc(-50vw + 50%); 
-      transform: perspective(1200px) rotateX(15deg) scale(0.95) translateY(60px);
-      opacity: 0;
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%);
-      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%);
-      transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-      padding: 0 5%;
-      box-sizing: border-box;
-    }
-
-    .hero-dashboard-display.visible {
-      opacity: 0.9;
-      transform: perspective(1200px) rotateX(15deg) scale(0.98) translateY(0);
-    }
-
-    .hero-dashboard-display.visible:hover {
-      transform: perspective(1200px) rotateX(10deg) scale(1);
-      opacity: 1;
-    }
-    
-    /* LIVE DASHBOARD STYLES */
-    .dashboard-container {
-      background: #08080b;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.15);
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9), inset 0 0 100px rgba(0,0,0,0.8);
-      padding: 0;
-      overflow: hidden;
-      font-family: 'Inter', sans-serif;
-      position: relative;
-    }
-    
-    .dash-banner {
-      background: linear-gradient(180deg, #0a1812 0%, #08080b 100%);
-      padding: 30px 20px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      position: relative;
-    }
-    .dash-banner::before {
-      content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent-success), transparent);
-      box-shadow: 0 0 15px var(--accent-success);
-    }
-    .dash-icon { font-size: 2rem; margin-bottom: 0.5rem; filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.5)); }
-    .dash-welcome { font-size: 1.5rem; font-weight: 700; color: #fff; }
-    .dash-welcome span { color: var(--accent-success); text-shadow: 0 0 15px rgba(10, 255, 104, 0.4); }
-
-    .dash-controls {
-      display: flex; justify-content: center; align-items: center; gap: 15px;
-      padding: 20px; margin-top: 10px;
-    }
-    .dash-month { font-size: 1.2rem; font-weight: 700; color: #fff; }
-    .dash-btn-arrow {
-      background: var(--accent-success); color: #000; border: none; border-radius: 50%; width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: transform 0.2s;
-    }
-    .dash-btn-arrow:hover { transform: scale(1.1); }
-    .dash-btn-arrow.right { transform: rotate(180deg); } 
-    .dash-btn-arrow.right:hover { transform: rotate(180deg) scale(1.1); }
-    .dash-monthly-pl { color: var(--accent-success); font-size: 0.9rem; font-weight: 600; margin-left: 10px; }
-
-    .dash-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 15px; padding: 20px;
-    }
-    .stat-card {
-      background: #0e0e12; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 20px;
-      display: flex; flex-direction: column; justify-content: space-between;
-      min-height: 120px;
-    }
-    .stat-label { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 5px; }
-    .stat-value { font-size: 1.8rem; font-weight: 800; color: #fff; line-height: 1.1; transition: color 0.3s; }
-    .stat-value.green { color: var(--accent-success); text-shadow: 0 0 10px rgba(10, 255, 104, 0.2); }
-    .stat-value.red { color: var(--accent-danger); text-shadow: 0 0 10px rgba(255, 51, 102, 0.2); }
-    .stat-sub { font-size: 0.75rem; color: #555; margin-top: 5px; }
-
-    @media (max-width: 768px) {
-      .dash-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* SCROLL BAR */
-    #progress-bar {
-      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
-      z-index: 200; box-shadow: 0 0 10px var(--accent-cyan);
-    }
-
-    /* GLASS CARDS */
-    .glass, .pricing-card, .demo-card, .journal-overview li {
-      background: var(--bg-glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      box-shadow: var(--shadow-card);
-      transition: all 0.4s ease;
-    }
-    .glass:hover, .pricing-card:hover, .demo-card:hover, .journal-overview li:hover {
-      border-color: rgba(255,255,255,0.2); background: var(--bg-glass-hover); transform: translateY(-5px);
-    }
-
-    /* FEATURES SECTION - General */
-    .features { padding-top: 8rem; padding-bottom: 6rem; }
-    .section-header { text-align: center; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; }
-    
-    /* UPDATED LAYOUT: Zig-Zag (Side by Side) */
-    .feature-row { 
-      display: flex; 
-      flex-direction: row; /* Side by side */
-      align-items: center; 
-      gap: 4rem; 
-      margin-bottom: 6rem; 
-    }
-
-    /* Alternating order for zig-zag effect */
-    .feature-row:nth-child(even) {
-      flex-direction: row-reverse;
-    }
-    
-    /* Last row margin adjustment */
-    .feature-row:last-child {
-      margin-bottom: 2rem; 
-    }
-    
-    .feature-text {
-      flex: 1; /* Take up equal space */
-      text-align: left; /* Align left for side-by-side */
-    }
-
-    .feature-text h3 { font-size: 2rem; margin-bottom: 1rem; color: var(--text-primary); }
-    
-    /* Align the underline to the left */
-    .feature-text h3::after {
-      content: ''; display: block; width: 60px; height: 3px; background: var(--accent-violet);
-      margin: 15px 0 0 0; /* Align left */
-      box-shadow: 0 0 12px var(--accent-violet);
-    }
-
-    .feature-img { 
-      flex: 1; /* Take up equal space */
-      width: 100%; 
-      display: flex; 
-      justify-content: center; 
-      perspective: 1000px; 
-    }
-
-    /* --- INTERACTIVE FEATURE COMPONENT STYLES --- */
-
-    /* AI Analyst */
-    .ai-interface {
-      background: linear-gradient(160deg, #0b0b10 0%, #050505 100%);
-      border-radius: 16px;
-      border: 1px solid rgba(189, 0, 255, 0.2);
-      padding: 20px;
-      box-shadow: 0 0 30px rgba(189, 0, 255, 0.1);
-      font-family: 'Inter', sans-serif;
-      width: 100%;
-      max-width: 600px;
-    }
-    .ai-header {
-      color: #fff; font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;
-    }
-    .ai-dot { width: 8px; height: 8px; background: var(--accent-violet); border-radius: 50%; box-shadow: 0 0 8px var(--accent-violet); animation: pulseDot 2s infinite; }
-    .ai-questions { display: flex; flex-direction: column; gap: 10px; }
-    .ai-pill {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(189,0,255,0.3);
-      border-radius: 30px;
-      padding: 12px 18px;
-      color: #ddd;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .ai-pill:hover { background: rgba(189,0,255,0.15); border-color: var(--accent-violet); color: #fff; transform: translateX(5px); }
-    .ai-pill.active { background: rgba(189,0,255,0.25); border-color: var(--accent-violet); color: #fff; }
-    .ai-response {
-      margin-top: 10px; font-size: 0.9rem; color: var(--accent-cyan); padding-left: 10px; 
-      border-left: 2px solid var(--accent-cyan); display: none; opacity: 0;
-    }
-    .ai-response.show { display: block; animation: fadeIn 0.5s forwards; }
-
-    /* Tilt Meter */
-    .tilt-card-ui {
-      background: #08080b;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 24px;
-      width: 100%;
-      max-width: 450px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      position: relative;
-    }
-    .tilt-header { display: flex; justify-content: space-between; margin-bottom: 15px; color: #fff; font-weight: 600; }
-    .tilt-expand { font-size: 0.75rem; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #888; }
-    .tilt-content { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; }
-    .tilt-emoji-box {
-      width: 60px; height: 60px; background: #0f0f14; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .tilt-value { font-size: 1.2rem; font-weight: 700; color: #fff; }
-    .tilt-sub { font-size: 0.9rem; color: #888; margin-left: 6px; font-weight: 400; }
-
-    /* Model Stats */
-    .model-ui {
-      background: #0a0a0e;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 25px;
-      color: #fff;
-      width: 100%;
-      max-width: 700px;
-    }
-    .model-header { font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
-    .model-row {
-      background: #050507;
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      border: 1px solid rgba(255,255,255,0.05);
-      position: relative;
-      overflow: hidden;
-    }
-    .model-tag {
-      display: inline-block;
-      padding: 4px 12px;
-      background: rgba(255, 51, 102, 0.1);
-      color: var(--accent-danger);
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-    .model-tag::before { content: '● '; margin-right: 4px; }
-    .model-criteria-list { list-style: none; padding: 0; font-size: 0.9rem; color: #aaa; }
-    .model-criteria-list li { margin-bottom: 6px; }
-    .model-stats-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
-    .circular-progress { width: 60px; height: 60px; position: relative; margin-bottom: 10px; }
-    .circular-progress svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-    .circular-progress circle { fill: none; stroke-width: 4; stroke-linecap: round; }
-    .bg-circle { stroke: #222; }
-    .progress-circle { stroke: var(--accent-violet); stroke-dasharray: 150; stroke-dashoffset: 150; transition: stroke-dashoffset 1.5s ease-out; }
-    .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; font-weight: bold; }
-    .model-pl { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .model-trades { font-size: 0.85rem; color: #666; }
-
-    /* Day Journal */
-    .journal-ui {
-      background: #08080b; border: 1px solid rgba(45, 90, 245, 0.2); border-radius: 16px; padding: 20px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8); color: #fff;
-      width: 100%;
-      max-width: 650px;
-    }
-    .journal-top { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
-    .journal-date { color: var(--accent-violet); font-weight: 700; letter-spacing: 0.05em; }
-    .journal-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-    .input-fake { background: #030304; border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; color: #fff; font-family: 'Inter', monospace; }
-    .trades-today-card { background: #030304; border-radius: 12px; padding: 15px; border: 1px solid rgba(189,0,255,0.15); }
-    .trade-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
-    .trade-symbol { font-weight: 700; font-size: 1.1rem; }
-    .trade-pl { color: var(--accent-violet); font-weight: 700; font-size: 1.1rem; text-shadow: 0 0 10px rgba(189,0,255,0.4); }
-    .trade-pill { background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; color: #888; margin-right: 6px; }
-
-    /* Clarity Panel Chart - Authentic Candles */
-    .clarity-chart-bg {
-      background: #131318;
-      height: 300px; width: 100%; max-width: 600px; border-radius: 12px; position: relative; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .clarity-chart-bg::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    .candle {
-      position: absolute;
-      width: 10px;
-      opacity: 0;
-    }
-    .candle::before {
-      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-      width: 1px; background: currentColor; transform: translateX(-50%); opacity: 0.8;
-      transform: scaleY(0);
-    }
-    .candle-body {
-      position: absolute; left: -2px; right: -2px;
-      background: currentColor; border-radius: 1px;
-      transform: scaleY(0);
-    }
-    .candle.green { color: var(--accent-success); }
-    .candle.red { color: var(--accent-danger); }
-    
-    @keyframes candleGrow {
-      0% { transform: scaleY(0); opacity: 0; }
-      100% { transform: scaleY(1); opacity: 1; }
-    }
-
-    @keyframes candleLive {
-      0% { transform: scaleY(1); }
-      20% { transform: scaleY(1.15); }
-      40% { transform: scaleY(0.85); }
-      60% { transform: scaleY(1.05); }
-      80% { transform: scaleY(0.95); }
-      100% { transform: scaleY(1); }
-    }
-
-    .clarity-chart-bg.animate .candle { opacity: 1; transition: opacity 0.1s; }
-    .clarity-chart-bg.animate .candle .candle-body { animation: candleGrow 0.6s ease-out forwards; }
-    .clarity-chart-bg.animate .candle::before { animation: candleGrow 0.6s ease-out forwards; }
-    .clarity-chart-bg.animate .candle.red .candle-body,
-    .clarity-chart-bg.animate .candle.red::before { transform-origin: top; }
-    .clarity-chart-bg.animate .candle.green .candle-body,
-    .clarity-chart-bg.animate .candle.green::before { transform-origin: bottom; }
-    .clarity-chart-bg.animate .candle:nth-child(1) .candle-body, .clarity-chart-bg.animate .candle:nth-child(1)::before { animation-delay: 0ms; }
-    .clarity-chart-bg.animate .candle:nth-child(2) .candle-body, .clarity-chart-bg.animate .candle:nth-child(2)::before { animation-delay: 200ms; }
-    .clarity-chart-bg.animate .candle:nth-child(3) .candle-body, .clarity-chart-bg.animate .candle:nth-child(3)::before { animation-delay: 400ms; }
-    .clarity-chart-bg.animate .candle:nth-child(4) .candle-body, .clarity-chart-bg.animate .candle:nth-child(4)::before { animation-delay: 600ms; }
-    .clarity-chart-bg.animate .candle:nth-child(5) .candle-body,
-    .clarity-chart-bg.animate .candle:nth-child(5)::before { 
-      animation: candleGrow 0.6s ease-out forwards, candleLive 2s infinite ease-in-out 1s; 
-      animation-delay: 800ms, 1400ms;
-    }
-
-    .clarity-panel {
-      position: absolute; bottom: 20px; right: 20px;
-      background: #050507; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-      width: 240px; padding: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-      animation: floatPanel 6s ease-in-out infinite;
-      z-index: 10;
-    }
-    .clarity-title { font-size: 0.9rem; color: var(--accent-violet); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; font-weight: 600; }
-    .clarity-item {
-      display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
-      font-size: 0.85rem; color: #ccc; transition: color 0.2s; cursor: pointer;
-    }
-    .clarity-item:hover { color: #fff; }
-    .clarity-item:last-child { border-bottom: none; }
-    .pin-icon { color: var(--accent-danger); transform: rotate(45deg); font-size: 0.8rem; }
-
-    @keyframes floatPanel { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    @keyframes pulseDot { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes countUp { from { opacity: 0.5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* OTHER SECTIONS */
-    .journal-overview { padding: 6rem 0; text-align: center; }
-    .journal-overview ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; list-style: none; padding: 0; margin-top: 3rem; }
-    .journal-overview li { padding: 2rem; text-align: left; }
-    .journal-overview li strong { display: block; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--accent-cyan); }
-    .journal-overview a { color: var(--accent-cyan); }
-
-    .pricing { padding-top: 2rem; padding-bottom: 6rem; position: relative; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 900px; margin: 0 auto; }
-    .pricing-card { padding: 3rem 2rem; text-align: left; position: relative; overflow: hidden; }
-    .pricing-card.recommended { border: 1px solid var(--accent-violet); box-shadow: 0 0 30px rgba(189, 0, 255, 0.15); }
-    .pricing-card.recommended::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet)); }
-    .price { font-size: 3rem; font-weight: 700; background: linear-gradient(to right, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0; }
-    .price span { font-size: 1rem; color: var(--text-secondary); -webkit-text-fill-color: initial; }
-    .features-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; color: var(--text-secondary); }
-    .features-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent-success); font-weight: bold; }
-    .discount-badge { position: absolute; top: 1rem; right: 1rem; background: rgba(189, 0, 255, 0.2); border: 1px solid var(--accent-violet); color: var(--accent-violet); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
-
-    .section-divider {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
-      position: relative;
-      opacity: 0.6;
-    }
-    .section-divider::after {
       content: '';
-      position: absolute;
-      top: 50%; left: 0;
-      width: 40px; height: 4px;
-      background: var(--accent-violet);
-      border-radius: 2px;
-      transform: translateY(-50%);
-      box-shadow: 0 0 10px var(--accent-violet);
-      animation: dividerScan 4s ease-in-out infinite;
-    }
-    @keyframes dividerScan {
-      0% { left: 10%; opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { left: 90%; opacity: 0; }
-    }
-    
-    .bar-container { background: rgba(255,255,255,0.05); border-radius: 4px; height: 6px; overflow: hidden; margin-top: 5px; }
-    .bar { height: 100%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); border-radius: 4px; }
-    .stats-list li { display: flex; flex-direction: column; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-secondary); }
-    .stats-list span { color: #fff; font-weight: 600; display: flex; justify-content: space-between; }
-    .circle-bg { stroke: rgba(255,255,255,0.05); }
-    .circle { stroke: var(--accent-violet); filter: drop-shadow(0 0 5px var(--accent-violet)); }
-    .percentage { fill: #fff; font-family: var(--font-main); font-weight: 600; font-size: 0.4rem; }
-
-    .footer { border-top: 1px solid var(--border-subtle); padding: 4rem 0; margin-top: 4rem; background: #020202; text-align: center; }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .footer-links a { color: var(--text-dim); font-size: 0.9rem; }
-    .footer-links a:hover { color: var(--accent-cyan); }
-
-    .community { padding: 4rem 0; border-top: 1px solid var(--border-subtle); text-align: center; }
-
-    @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; text-align: center; }
-      
-      /* Stack vertically on mobile */
-      .feature-row, .feature-row:nth-child(even) { 
-        flex-direction: column; 
-        gap: 2rem;
-        text-align: center;
-      }
-      
-      /* Center text on mobile */
-      .feature-text { text-align: center; }
-      .feature-text h3::after { margin: 15px auto 0 auto; }
-      
-      .header-inner { flex-direction: column; gap: 1rem; }
-      .nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-      h1 { font-size: 2.5rem; }
-    }
-  </style>
-  
-  <link rel="stylesheet" href="assets/css/paywall.css">
-  <script src="assets/js/theme-accent.js"></script>
-  <script src="assets/js/paywall.js"></script>
-  
-  <style>
-    #trial-modal, #manual-trial-modal { display: none !important; visibility: hidden !important; }
-    
-    /* Paywall Modal Styles */
-    .ttr-modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
+      background-image: 
+        linear-gradient(rgba(76, 141, 255, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(127, 90, 240, 0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: gridMove 28s linear infinite;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+    .section-header { text-align: center; margin-bottom: 2.5rem; }
+
+    /* Scroll progress bar with shimmer */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 2000;
+      background: linear-gradient(270deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta), var(--accent-electric));
+      background-size: 600% 600%;
+      animation: shimmer 6s linear infinite;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 14px rgba(76, 141, 255, 0.45);
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header */
+    .header { 
+      background: linear-gradient(135deg, rgba(13, 12, 40, 0.82), rgba(17, 10, 52, 0.65)); 
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(76, 141, 255, 0.12); 
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      box-shadow: 0 12px 40px rgba(10, 0, 45, 0.35);
+      transition: transform 0.3s ease-in-out;
+    }
+    .header.hidden {
+      transform: translateY(-100%);
+    }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+    .logo { 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta));
+      background-size: 200% 200%;
+      animation: logoGlow 3s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 22px rgba(76, 141, 255, 0.35);
+    }
+    
+    @keyframes logoGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .nav a { 
+      margin: 0 1rem; 
+      font-weight: 500; 
+      color: rgba(226, 230, 255, 0.7); 
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    .nav a:hover { 
+      color: var(--accent-electric);
+      text-shadow: 0 0 10px rgba(76, 141, 255, 0.4);
+    }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-electric), var(--accent-violet));
+      transition: width 0.3s ease;
+    }
+    .nav a:hover::after {
+      width: 100%;
+    }
+    .cta-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+
+    /* Buttons */
+    .btn {
+      padding: 0.52rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      background: rgba(109, 93, 252, 0.16);
+      color: #f7f7ff;
+      border: 1px solid rgba(109, 93, 252, 0.35);
+      box-shadow: none;
+      text-shadow: none;
+      position: relative;
+    }
+    .btn.btn-outline {
+      background: transparent;
+      border-color: rgba(76, 141, 255, 0.32);
+      color: var(--text-primary);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      background: rgba(109, 93, 252, 0.22);
+      border-color: rgba(109, 93, 252, 0.5);
+      color: #ffffff;
+    }
+    .btn.btn-outline:hover {
+      background: rgba(76, 141, 255, 0.16);
+      border-color: rgba(76, 141, 255, 0.45);
+      color: #ffffff;
+    }
+
+    /* Home hero CTA sizing fix — smaller, tighter, still accessible */
+    .hero-cta{
+      font-size: clamp(0.95rem, 0.95vw, 1.05rem);
+      line-height: 1.15;
+      padding: 10px 18px;
+      border-radius: 14px;
+      min-height: 44px;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.06) inset,
+        0 8px 22px rgba(0,0,0,.22);
+      margin-top: 14px;
+    }
+    .hero-cta:hover{
+      transform: translateY(-1px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.08) inset,
+        0 10px 26px rgba(0,0,0,.26);
+    }
+    @media (max-width: 640px){
+      .hero-cta{
+        width: 100%;
+        text-align: center;
+        padding: 12px 16px;
+      }
+    }
+
+    /* --- Home hero CTA sizing fix (force smaller, ignore fluid globals) --- */
+    #home-hero .hero-cta,
+    #home-hero .btn.hero-cta,
+    #home-hero .primary.hero-cta{
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      font-size: 15px !important;
+      line-height: 1.15 !important;
+      padding: 10px 16px !important;
+      min-height: 44px !important;
+      width: auto !important;
+      max-width: max-content !important;
+      border-radius: 12px !important;
+      box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 8px 20px rgba(0,0,0,.18) !important;
+      transform: translateZ(0) !important;
+    }
+    #home-hero .hero-cta:hover{
+      transform: translateY(-1px) !important;
+    }
+    #home-hero .hero-cta.btn--lg,
+    #home-hero .hero-cta.large{
+      font-size: 15px !important;
+      padding: 10px 16px !important;
+    }
+    @media (max-width: 640px){
+      #home-hero .hero-cta{
+        width: fit-content !important;
+      }
+    }
+    .btn-lg { font-size: 1.1rem; padding: 1rem 2.4rem; letter-spacing: 0.02em; }
+    .btn-disabled {
+      background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+      opacity: 0.7;
+      cursor: not-allowed;
+      animation: disabledPulse 2s ease-in-out infinite;
+      pointer-events: none;
+      border: 1px solid rgba(100, 100, 100, 0.3);
+    }
+    .btn-disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-disabled::before {
+      display: none;
+    }
+    
+    @keyframes disabledPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Hero with animated background */
+    .hero {
+      position: relative;
+      padding: 6rem 0;
+      padding-top: 8rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 18% 20%, rgba(76, 141, 255, 0.14), transparent 45%),
+        radial-gradient(circle at 78% 28%, rgba(127, 90, 240, 0.18), transparent 48%),
+        radial-gradient(circle at 45% 78%, rgba(109, 93, 252, 0.12), transparent 50%),
+        linear-gradient(60deg, transparent 32%, rgba(76, 141, 255, 0.05) 58%, transparent 75%);
+      animation: moveBackground 20s linear infinite;
+      z-index: 0;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 98px,
+        rgba(76, 141, 255, 0.04) 100px
+      );
+      animation: scanLine 4s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    @keyframes scanLine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    @keyframes moveBackground {
+      0% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(50px,50px) scale(1.1); }
+      100% { transform: translate(0,0) scale(1); }
+    }
+    .hero-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; position: relative; z-index: 1; }
+    .hero-text h1 { 
+      font-size: 2.8rem; 
+      margin-bottom: 1rem; 
+      background: linear-gradient(45deg, #ffffff, var(--accent-electric), var(--accent-magenta));
+      background-size: 200% 200%;
+      animation: textShimmer 3s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 28px rgba(76, 141, 255, 0.25);
+    }
+    
+    @keyframes textShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero-text p { margin-bottom: 1.5rem; color: var(--text-muted); }
+    .hero-text p a {
+      color: var(--accent-electric);
+      text-decoration: underline;
+      text-decoration-color: rgba(76, 141, 255, 0.4);
+    }
+    .hero-text p a:hover {
+      color: var(--accent-violet);
+      text-decoration-color: rgba(127, 90, 240, 0.6);
+    }
+
+    .hero-image img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 
+        0 24px 44px rgba(5, 0, 26, 0.65), 
+        0 0 30px rgba(76, 141, 255, 0.25),
+        0 0 60px rgba(127, 90, 240, 0.25),
+        inset 0 0 20px rgba(255, 255, 255, 0.06);
+      transform: perspective(1000px) rotateX(4deg) rotateY(-6deg);
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+      border: 1px solid rgba(76, 141, 255, 0.25);
+      position: relative;
+    }
+    .hero-image img:hover {
+      transform: perspective(1000px) rotateX(0) rotateY(0) scale(1.02);
+      box-shadow: 
+        0 32px 60px rgba(5, 0, 26, 0.75), 
+        0 0 40px rgba(76, 141, 255, 0.45),
+        0 0 70px rgba(127, 90, 240, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.08);
+      border-color: rgba(76, 141, 255, 0.55);
+    }
+
+    /* Features */
+    .features { 
+      padding: 5rem 0; 
+      position: relative;
+    }
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        transparent 48px,
+        rgba(127, 90, 240, 0.035) 50px,
+        transparent 54px
+      );
+      pointer-events: none;
+    }
+    .feature-row { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-bottom: 4rem; }
+    .feature-text { flex: 1; }
+    .feature-text h3 { 
+      margin-bottom: 0.6rem; 
+      color: var(--text-primary);
+      text-shadow: 0 0 14px rgba(127, 90, 240, 0.35);
+      position: relative;
+    }
+    .feature-text h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-electric), transparent);
+    }
+    .feature-text p { color: var(--text-muted); }
+    .feature-img { flex: 1; }
+    .feature-img img { 
+      width: 100%; 
+      border-radius: 12px; 
+      box-shadow: 
+        0 8px 26px rgba(5, 0, 26, 0.55),
+        0 0 24px rgba(76, 141, 255, 0.18),
+        inset 0 0 24px rgba(255, 255, 255, 0.04); 
+      animation: floaty 6s ease-in-out infinite;
+      border: 1px solid rgba(127, 90, 240, 0.25);
+      transition: all 0.3s ease;
+    }
+    .feature-img img:hover {
+      box-shadow: 
+        0 14px 36px rgba(5, 0, 26, 0.7),
+        0 0 32px rgba(76, 141, 255, 0.32),
+        inset 0 0 32px rgba(255, 255, 255, 0.08);
+      border-color: rgba(76, 141, 255, 0.45);
+      transform: scale(1.02);
+    }
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .journal-overview {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .journal-overview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13, 16, 34, 0.72), rgba(5, 6, 14, 0.55));
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .journal-overview .container {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      text-align: center;
+    }
+    .journal-overview ul {
+      list-style: none;
+      padding: 0;
+      margin: 2.5rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .journal-overview li {
+      background: rgba(13, 16, 34, 0.82);
+      border-radius: 18px;
+      padding: 1.8rem;
+      border: 1px solid rgba(76, 141, 255, 0.18);
+      box-shadow: 0 18px 40px rgba(5, 0, 26, 0.5);
+      color: var(--text-muted);
+    }
+    .journal-overview li strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .journal-overview a {
+      color: var(--accent-electric);
+    }
+
+    /* Signup Form */
+    .signup {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .signup::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(76, 141, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(127, 90, 240, 0.1), transparent 58%);
+      pointer-events: none;
+    }
+    .signup-form-wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .signup-form-container {
+      background: rgba(13, 16, 38, 0.78);
+      backdrop-filter: blur(24px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(76, 141, 255, 0.22);
+      box-shadow: 
+        0 24px 48px rgba(5, 0, 26, 0.55),
+        0 0 40px rgba(76, 141, 255, 0.18),
+        inset 0 0 32px rgba(255, 255, 255, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .signup-form input[type="email"] {
+      width: 100%;
+      padding: 0.95rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(76, 141, 255, 0.25);
+      background: rgba(10, 8, 30, 0.9);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .signup-form input[type="email"]::placeholder {
+      color: rgba(198, 200, 255, 0.55);
+    }
+    .signup-form input[type="email"]:focus {
+      outline: none;
+      border-color: rgba(76, 141, 255, 0.65);
+      box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.25), 0 12px 32px rgba(76, 141, 255, 0.15);
+      background: rgba(10, 8, 35, 0.95);
+    }
+    .signup-form .btn {
+      width: 100%;
+    }
+    #signup-status {
+      margin-top: 1.2rem;
+      min-height: 1.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+      color: rgba(245, 245, 255, 0.75);
+    }
+    #signup-status.success {
+      color: #00c878;
+    }
+    #signup-status.error {
+      color: #ff4d4f;
+    }
+    #signup-status.info {
+      color: rgba(245, 245, 255, 0.65);
+    }
+    .btn-loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-loading::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinner 0.6s linear infinite;
+    }
+    @keyframes spinner {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ✅ Fix: Trial Signup Modal - Mobile Responsive */
+    .trial-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      /* ✅ Fix: Better mobile padding */
+      padding: clamp(0.5rem, 2vw, 1rem);
+      /* ✅ Fix: Prevent scroll issues on mobile */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    .ttr-modal[aria-hidden="false"] {
+    .trial-modal.active {
       display: flex;
     }
-    .ttr-dialog { 
-      background: #0a0a0a; 
-      border: 1px solid var(--border-subtle); 
-      box-shadow: 0 0 50px rgba(0,0,0,0.9); 
-      color: #fff; 
-      font-family: var(--font-main);
-      border-radius: 16px;
-      max-width: 600px;
-      width: 90%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      padding: 2rem;
+    .trial-modal__overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 14, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 9998;
     }
-    .ttr-close { 
-      color: #fff; 
-      background: none;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
+    .trial-modal__content {
+      position: relative;
+      background: #0D0D0F;
+      border-radius: clamp(16px, 3vw, 24px);
+      /* ✅ Fix: Responsive modal padding */
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem);
+      width: 100%;
+      /* ✅ Fix: Better mobile width constraints */
+      max-width: min(480px, 90vw);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      box-shadow: 
+        0 32px 80px rgba(5, 6, 14, 0.85),
+        0 0 0 1px rgba(122, 44, 242, 0.15),
+        0 0 60px rgba(122, 44, 242, 0.2);
+      animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* ✅ Fix: Prevent modal from being too tall on mobile */
+      max-height: min(90vh, 600px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 9999;
+      /* ✅ Fix: Ensure content doesn't overflow horizontally */
+      overflow-x: hidden;
+    }
+    @keyframes modalSlideIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .trial-modal__close {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      line-height: 1;
-      padding: 0;
-      width: 2rem;
-      height: 2rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.8rem;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      z-index: 10;
     }
-    .ttr-close:hover {
-      color: var(--accent-cyan);
+    .trial-modal__close:hover {
+      background: rgba(122, 44, 242, 0.2);
+      color: #ffffff;
+      transform: scale(1.1);
     }
-    .ttr-pricing-option { background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); }
-    .ttr-pricing-option.selected { border-color: var(--accent-cyan); background: rgba(0, 243, 255, 0.05); }
+    .trial-modal__body {
+      text-align: center;
+    }
+    .trial-modal__title {
+      /* ✅ Fix: Responsive modal title */
+      font-size: clamp(1.35rem, 4vw, 1.8rem);
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff, #7A2CF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      word-wrap: break-word;
+    }
+    .trial-modal__subtitle {
+      /* ✅ Fix: Responsive modal subtitle */
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+      line-height: 1.5;
+    }
+    .trial-modal__form {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .trial-modal__question {
+      margin-bottom: 1.5rem;
+      width: 100%;
+      text-align: left;
+    }
+    .trial-modal__label {
+      display: block;
+      margin-bottom: 0.6rem;
+      /* ✅ Fix: Responsive label text */
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+      text-align: left;
+    }
+    .trial-modal__select {
+      width: 100%;
+      /* ✅ Fix: Touch-friendly select inputs */
+      padding: clamp(0.75rem, 2vw, 0.9rem) clamp(0.9rem, 2vw, 1.1rem);
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      cursor: pointer;
+      /* ✅ Fix: Minimum touch target */
+      min-height: 44px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .trial-modal__select option {
+      background: #0D0D0F;
+      color: #ffffff;
+      padding: 0.5rem;
+    }
+    .trial-modal__select:focus {
+      outline: none;
+      border-color: #7A2CF2;
+      box-shadow: 0 0 0 3px rgba(122, 44, 242, 0.25);
+      background: rgba(18, 18, 20, 1);
+    }
+    .trial-modal__error {
+      min-height: 1.5rem;
+      font-size: 0.9rem;
+      color: #ff4d4f;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .trial-modal__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .trial-modal__btn {
+      width: 100%;
+      /* ✅ Fix: Responsive button sizing */
+      padding: clamp(0.8rem, 2vw, 0.95rem) clamp(1.4rem, 3vw, 1.8rem);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      /* ✅ Fix: Touch-friendly button height */
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .trial-modal__btn.primary-btn {
+      background: linear-gradient(135deg, #7A2CF2, #9d5ff5);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(122, 44, 242, 0.35);
+    }
+    .trial-modal__btn.primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(122, 44, 242, 0.5);
+    }
+    .trial-modal__btn.primary-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .trial-modal__btn.secondary-btn {
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .trial-modal__btn.secondary-btn:hover {
+      background: rgba(22, 22, 24, 0.95);
+      border-color: rgba(122, 44, 242, 0.45);
+    }
+    .trial-modal__success {
+      padding: 1rem 0;
+    }
+    .trial-modal__success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: successPulse 0.6s ease;
+    }
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .trial-modal__text {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 2rem;
+    }
+    .btn-loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-loading::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinner 0.6s linear infinite;
+    }
+
+    /* ✅ Fix: Comprehensive mobile modal styles */
+    @media (max-width: 768px) {
+      .trial-modal,
+      .manual-trial-modal {
+        padding: 0.5rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+      }
+      .trial-modal__content,
+      .manual-trial-modal__content {
+        max-width: 95vw;
+        max-height: 85vh;
+        margin: auto 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .trial-modal__content,
+      .manual-trial-modal__content {
+        padding: 1.75rem 1.25rem 1.5rem;
+        max-width: 96vw;
+        border-radius: 18px;
+      }
+      .trial-modal__title,
+      .manual-trial-modal__title {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+      .trial-modal__subtitle,
+      .manual-trial-modal__subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+      }
+      .trial-modal__question,
+      .manual-trial-modal__question {
+        margin-bottom: 1.25rem;
+      }
+      .trial-modal__btn,
+      .manual-trial-modal__btn {
+        padding: 0.85rem 1.2rem;
+        font-size: 0.9rem;
+        min-height: 46px;
+      }
+      .trial-modal__close,
+      .manual-trial-modal__close {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .trial-modal__content,
+      .manual-trial-modal__content {
+        padding: 1.5rem 1rem 1.25rem;
+        max-width: 98vw;
+      }
+      .trial-modal__title,
+      .manual-trial-modal__title {
+        font-size: 1.25rem;
+      }
+      .trial-modal__subtitle,
+      .manual-trial-modal__subtitle {
+        font-size: 0.85rem;
+      }
+      .trial-modal__label,
+      .manual-trial-modal__label {
+        font-size: 0.85rem;
+      }
+      .trial-modal__select,
+      .manual-trial-modal__select {
+        font-size: 0.85rem;
+        padding: 0.7rem 0.85rem;
+      }
+      .trial-modal__btn,
+      .manual-trial-modal__btn {
+        font-size: 0.85rem;
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    /* ✅ Fix: Manual Trigger Modal - Mobile Responsive (same as trial modal) */
+    .manual-trial-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(0.5rem, 2vw, 1rem);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .manual-trial-modal.active {
+      display: flex;
+    }
+    .manual-trial-modal__overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 14, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 9998;
+    }
+    .manual-trial-modal__content {
+      position: relative;
+      background: #0D0D0F;
+      border-radius: clamp(16px, 3vw, 24px);
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem);
+      width: 100%;
+      max-width: min(480px, 90vw);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      box-shadow: 
+        0 32px 80px rgba(5, 6, 14, 0.85),
+        0 0 0 1px rgba(122, 44, 242, 0.15),
+        0 0 60px rgba(122, 44, 242, 0.2);
+      animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-height: min(90vh, 600px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 9999;
+      overflow-x: hidden;
+    }
+    .manual-trial-modal__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .manual-trial-modal__close:hover {
+      background: rgba(122, 44, 242, 0.2);
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+    .manual-trial-modal__body {
+      text-align: center;
+    }
+    .manual-trial-modal__title {
+      font-size: clamp(1.35rem, 4vw, 1.8rem);
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff, #7A2CF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      word-wrap: break-word;
+    }
+    .manual-trial-modal__subtitle {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+      line-height: 1.5;
+    }
+    .manual-trial-modal__form {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .manual-trial-modal__question {
+      margin-bottom: 1.5rem;
+      width: 100%;
+      text-align: left;
+    }
+    .manual-trial-modal__label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+      text-align: left;
+    }
+    .manual-trial-modal__select {
+      width: 100%;
+      padding: clamp(0.75rem, 2vw, 0.9rem) clamp(0.9rem, 2vw, 1.1rem);
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.35);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      cursor: pointer;
+      min-height: 44px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .manual-trial-modal__select option {
+      background: #0D0D0F;
+      color: #ffffff;
+      padding: 0.5rem;
+    }
+    .manual-trial-modal__select:focus {
+      outline: none;
+      border-color: #7A2CF2;
+      box-shadow: 0 0 0 3px rgba(122, 44, 242, 0.25);
+      background: rgba(18, 18, 20, 1);
+    }
+    .manual-trial-modal__error {
+      min-height: 1.5rem;
+      font-size: 0.9rem;
+      color: #ff4d4f;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .manual-trial-modal__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .manual-trial-modal__btn {
+      width: 100%;
+      padding: clamp(0.8rem, 2vw, 0.95rem) clamp(1.4rem, 3vw, 1.8rem);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .manual-trial-modal__btn.primary-btn {
+      background: linear-gradient(135deg, #7A2CF2, #9d5ff5);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(122, 44, 242, 0.35);
+    }
+    .manual-trial-modal__btn.primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(122, 44, 242, 0.5);
+    }
+    .manual-trial-modal__btn.primary-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .manual-trial-modal__btn.secondary-btn {
+      background: rgba(18, 18, 20, 0.9);
+      border: 1px solid rgba(122, 44, 242, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .manual-trial-modal__btn.secondary-btn:hover {
+      background: rgba(22, 22, 24, 0.95);
+      border-color: rgba(122, 44, 242, 0.45);
+    }
+    .manual-trial-modal__success {
+      padding: 1rem 0;
+    }
+    .manual-trial-modal__success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: successPulse 0.6s ease;
+    }
+    .manual-trial-modal__text {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 2rem;
+    }
+
+    /* Demo */
+    .demo { 
+      padding: 5rem 0; 
+      background: linear-gradient(135deg, rgba(9, 10, 18, 0.96) 0%, rgba(13, 16, 28, 0.94) 45%, rgba(6, 8, 18, 0.96) 100%);
+      position: relative;
+    }
+    .demo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(76, 141, 255, 0.12), transparent 52%),
+        radial-gradient(circle at 70% 70%, rgba(127, 90, 240, 0.08), transparent 58%);
+      pointer-events: none;
+    }
+    .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+    .demo-card { 
+      background: rgba(13, 16, 38, 0.72);
+      backdrop-filter: blur(24px);
+      padding: 2rem; 
+      border-radius: 12px; 
+      border: 1px solid rgba(76, 141, 255, 0.22); 
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .demo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(76, 141, 255, 0.06), transparent 55%, rgba(109, 93, 252, 0.08));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .demo-card:hover::before {
+      opacity: 1;
+    }
+    .demo-card:hover { 
+      transform: translateY(-8px) scale(1.02); 
+      border-color: rgba(76, 141, 255, 0.6);
+      box-shadow: 
+        0 12px 34px rgba(5, 0, 26, 0.55),
+        0 0 32px rgba(76, 141, 255, 0.18),
+        inset 0 0 28px rgba(255, 255, 255, 0.05);
+    }
+    .demo-card h3 { 
+      margin-bottom: 1rem; 
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-text { font-style: italic; color: var(--text-muted); min-height: 60px; }
+
+    /* Tilt Meter */
+    .tilt-meter { 
+      text-align: center; 
+      margin-top: 1rem;
+      position: relative;
+    }
+    .tilt-meter::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 141, 255, 0.12), transparent 70%);
+      animation: tiltGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes tiltGlow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+    .circular-chart {
+      display: block;
+      margin: 0 auto;
+      max-width: 140px;
+      max-height: 140px;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: #2a1f3f;
+      stroke-width: 3.8;
+    }
+    .circle {
+      fill: none;
+      stroke-width: 3.8;
+      stroke: url(#tiltGradient);
+      stroke-linecap: round;
+      transition: stroke-dasharray 1s ease;
+      filter: drop-shadow(0 0 4px rgba(74, 144, 226, 0.3));
+    }
+    .percentage {
+      fill: #fff;
+      font-size: 0.35em;
+      text-anchor: middle;
+    }
+
+    /* Stats List */
+    .stats-list { list-style: none; padding: 0; margin: 0; }
+    .stats-list li { margin: 1rem 0; font-size: 0.95rem; }
+    .stats-list span { color: #bbb; font-weight: 600; }
+    .bar-container { background: #2a1f3f; border-radius: 6px; overflow: hidden; margin-top: 0.4rem; }
+    .bar { height: 10px; width: 0; background: linear-gradient(90deg, #7b2ff7, #a678ff); transition: width 1.5s ease; }
+
+    /* Pricing */
+    .pricing { 
+      padding: 5rem 0; 
+      text-align: center;
+      background: linear-gradient(135deg, rgba(9, 10, 18, 0.97) 0%, rgba(14, 16, 26, 0.95) 50%, rgba(6, 7, 16, 0.97) 100%);
+      position: relative;
+    }
+    .pricing::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(76, 141, 255, 0.1), transparent 54%),
+        radial-gradient(circle at 80% 80%, rgba(127, 90, 240, 0.08), transparent 57%);
+      pointer-events: none;
+    }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .pricing-card { 
+      position: relative; 
+      background: rgba(12, 15, 36, 0.75);
+      backdrop-filter: blur(24px);
+      padding: 2.5rem; 
+      border-radius: 14px; 
+      border: 1px solid rgba(76, 141, 255, 0.22); 
+      transition: all 0.3s ease;
+      overflow: visible;
+      z-index: 1;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(76, 141, 255, 0.05), transparent 55%, rgba(109, 93, 252, 0.06));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .pricing-card:hover::before {
+      opacity: 1;
+    }
+    .pricing-card:hover { 
+      transform: translateY(-10px) scale(1.03); 
+      box-shadow: 
+        0 18px 38px rgba(5, 0, 26, 0.55),
+        0 0 32px rgba(76, 141, 255, 0.2),
+        inset 0 0 24px rgba(255, 255, 255, 0.05);
+      border-color: rgba(76, 141, 255, 0.55);
+    }
+    .pricing-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+    .price { 
+      font-size: 2.2rem; 
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta));
+      background-size: 200% 200%;
+      animation: priceGlow 3s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @keyframes priceGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .price span { font-size: 1rem; color: var(--text-muted); margin-left: 4px; }
+    .beta-tag { margin: 1rem 0; color: rgba(228, 230, 255, 0.72); font-size: 0.9rem; }
+    .pricing-card.recommended { 
+      border: 2px solid rgba(76, 141, 255, 0.55); 
+      animation: pulseGlow 3s infinite;
+      position: relative;
+    }
+    .pricing-card.recommended::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--accent-electric), var(--accent-violet), var(--accent-magenta), var(--accent-electric));
+      background-size: 400% 400%;
+      animation: borderGlow 3s ease-in-out infinite;
+      border-radius: 16px;
+      z-index: -2;
+    }
+    
+    @keyframes borderGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @keyframes pulseGlow { 
+      0% { box-shadow: 0 0 0px rgba(76, 141, 255, 0.18); } 
+      50% { box-shadow: 0 0 32px rgba(76, 141, 255, 0.45), 0 0 55px rgba(127, 90, 240, 0.32); } 
+      100% { box-shadow: 0 0 0px rgba(76, 141, 255, 0.18); } 
+    }
+    .discount-badge { 
+      position: absolute; 
+      top: -8px; 
+      right: -8px; 
+      background: linear-gradient(135deg, var(--accent-electric), var(--accent-violet)); 
+      color: white; 
+      font-weight: 600; 
+      font-size: 0.85rem; 
+      padding: 0.3rem 0.7rem; 
+      border-radius: 16px; 
+      transform: rotate(12deg);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      white-space: nowrap;
+    }
+
+    /* Feature list for pricing */
+    .features-list { list-style: none; padding: 0; margin: 1.2rem 0 0 0; text-align: left; }
+    .features-list li { margin: 0.5rem 0; padding-left: 1.2rem; position: relative; color: var(--text-muted); }
+    .features-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-electric); font-weight: bold; }
+
+    /* Community */
+    .community {
+      padding: 4.5rem 0;
+      background: linear-gradient(135deg, rgba(8, 9, 16, 0.96), rgba(12, 13, 23, 0.95));
+      border-top: 1px solid rgba(76, 141, 255, 0.2);
+      border-bottom: 1px solid rgba(127, 90, 240, 0.16);
+      position: relative;
+      overflow: hidden;
+    }
+    .community::before,
+    .community::after {
+      content: '';
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 141, 255, 0.22), transparent 60%);
+      filter: blur(100px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .community::before {
+      top: -70px;
+      left: 8%;
+    }
+    .community::after {
+      bottom: -90px;
+      right: 6%;
+    }
+    .community-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .community-text h2 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.8rem, 2vw + 1rem, 2.3rem);
+    }
+    .community-text p {
+      margin: 0;
+      max-width: 520px;
+      color: rgba(226, 228, 255, 0.75);
+      font-size: 1rem;
+    }
+    .community .discord-btn {
+      min-width: 220px;
+      text-align: center;
+      border: 1px solid rgba(76, 141, 255, 0.45);
+      background: rgba(76, 141, 255, 0.16);
+      box-shadow: 0 16px 32px rgba(76, 141, 255, 0.15);
+    }
+    .community .discord-btn:hover {
+      background: rgba(76, 141, 255, 0.28);
+      box-shadow: 0 20px 40px rgba(76, 141, 255, 0.25);
+    }
+
+    /* Footer */
+    .footer { 
+      background: linear-gradient(135deg, rgba(4, 2, 16, 0.96) 0%, rgba(9, 5, 28, 0.96) 100%);
+      border-top: 1px solid rgba(76, 141, 255, 0.18); 
+      padding: 2rem 0; 
+      text-align: center; 
+      color: rgba(214, 216, 255, 0.6);
+      position: relative;
+    }
+    .footer-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: rgba(226, 228, 255, 0.8);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover {
+      color: var(--accent-electric);
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        transparent 88px,
+        rgba(76, 141, 255, 0.05) 92px,
+        transparent 96px
+      );
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: radial-gradient(circle, rgba(76, 141, 255, 0.85), transparent);
+      border-radius: 50%;
+      animation: float 20s linear infinite;
+      opacity: 0.4;
+    }
+    
+    .particle:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 25s;
+    }
+    
+    .particle:nth-child(2) {
+      left: 30%;
+      animation-delay: 5s;
+      animation-duration: 20s;
+      background: radial-gradient(circle, rgba(127, 90, 240, 0.85), transparent);
+    }
+    
+    .particle:nth-child(3) {
+      left: 50%;
+      animation-delay: 10s;
+      animation-duration: 30s;
+    }
+    
+    .particle:nth-child(4) {
+      left: 70%;
+      animation-delay: 15s;
+      animation-duration: 22s;
+      background: radial-gradient(circle, rgba(109, 93, 252, 0.85), transparent);
+    }
+    
+    .particle:nth-child(5) {
+      left: 85%;
+      animation-delay: 8s;
+      animation-duration: 28s;
+    }
+    
+    .particle:nth-child(6) {
+      left: 90%;
+      animation-delay: 12s;
+      animation-duration: 24s;
+      background: radial-gradient(circle, #4a90e2, transparent);
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+        transform: translateY(90vh) scale(1);
+      }
+      90% {
+        opacity: 0.6;
+        transform: translateY(10vh) scale(1);
+      }
+      100% {
+        transform: translateY(-10vh) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Section fade-in */
+    section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    /* ✅ Fix: Comprehensive mobile styles for index.html */
+    @media (max-width: 1024px) {
+      .container { width: 94%; }
+      .demo-grid,
+      .pricing-grid { 
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 2rem;
+      }
+      .hero-text h1 { 
+        font-size: clamp(1.75rem, 6vw, 2.4rem); 
+        line-height: 1.2;
+      }
+      .hero { 
+        padding: 5rem 0 3rem; 
+      }
+      .hero-text p { 
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem); 
+        line-height: 1.6;
+      }
+      .cta-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+      }
+      .cta-group .btn { 
+        width: 100%; 
+        text-align: center;
+        min-height: 48px;
+      }
+      .hero-image img {
+        width: 100%;
+        max-width: 500px;
+        transform: none;
+        margin: 0 auto;
+      }
+      .nav {
+        width: 100%;
+        justify-content: center;
+        gap: 0.8rem;
+      }
+      .nav a {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.5rem;
+      }
+      .community-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      .community .discord-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      .feature-row { 
+        flex-direction: column; 
+        gap: 2rem;
+      }
+      .feature-text h3 {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+      }
+      .journal-overview ul { 
+        grid-template-columns: 1fr; 
+        gap: 1.2rem;
+      }
+      .footer-links { 
+        flex-direction: column; 
+        gap: 0.8rem; 
+      }
+      .section-header h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .demo-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .logo {
+        font-size: 1.2rem;
+      }
+      .nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 0.3rem;
+      }
+      .nav a {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.3rem;
+        white-space: nowrap;
+      }
+      .hero {
+        padding: 3rem 0 2rem;
+      }
+      .hero-text h1 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+      }
+      .hero-text p {
+        font-size: clamp(0.9rem, 3vw, 1rem);
+      }
+      .btn-lg {
+        font-size: 1rem;
+        padding: 0.9rem 1.8rem;
+      }
+      .features,
+      .demo,
+      .pricing {
+        padding: 3rem 0;
+      }
+      .section-header {
+        margin-bottom: 2rem;
+      }
+      .section-header h2 {
+        font-size: clamp(1.35rem, 5vw, 1.8rem);
+      }
+      .feature-text h3 {
+        font-size: 1.25rem;
+      }
+      .feature-text p,
+      .demo-card,
+      .pricing-card {
+        font-size: 0.9rem;
+      }
+      .pricing-card {
+        padding: 2rem 1.5rem;
+      }
+      .price {
+        font-size: 1.8rem;
+      }
+      .hero-image img {
+        max-width: 350px;
+      }
+      .community-text h2 {
+        font-size: clamp(1.35rem, 5vw, 1.8rem);
+      }
+      .footer {
+        padding: 1.5rem 0;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .container {
+        width: 96%;
+      }
+      .logo {
+        font-size: 1.1rem;
+      }
+      .nav a {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.25rem;
+      }
+      .hero {
+        padding: 2.5rem 0 1.5rem;
+      }
+      .hero-text h1 {
+        font-size: 1.5rem;
+      }
+      .hero-text p {
+        font-size: 0.9rem;
+      }
+      .btn-lg {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.5rem;
+      }
+      .section-header h2,
+      .community-text h2 {
+        font-size: 1.3rem;
+      }
+      .feature-text h3,
+      .demo-card h3,
+      .pricing-card h3 {
+        font-size: 1.15rem;
+      }
+      .feature-text p,
+      .demo-card p,
+      .pricing-card p {
+        font-size: 0.85rem;
+      }
+      .pricing-card {
+        padding: 1.5rem 1.25rem;
+      }
+      .price {
+        font-size: 1.6rem;
+      }
+      .features-list li {
+        font-size: 0.85rem;
+      }
+      .journal-overview li,
+      .demo-card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/theme-migrate.css">
+  <link rel="stylesheet" href="assets/css/paywall.css">
+  <script defer src="assets/js/theme-accent.js"></script>
+  <script defer src="assets/js/paywall.js"></script>
+  <style>
+    /* Hide old trial modals - replaced by paywall modal */
+    #trial-modal, #manual-trial-modal { display: none !important; visibility: hidden !important; }
+  </style>
+
+  <!-- THEME BASE (non-destructive) -->
+  <style>
+    :root{
+      --accent:#6d5dfc; --accent-rgb:109,93,252; --accent-2:#4c8dff;
+      --bg-0:#05070d; --bg-1:#0a0f18; --text:#e6e8ef; --muted:#a8adbb;
+      --line:rgba(255,255,255,0.06);
+      --card:rgba(255,255,255,0.02);
+    }
+    body{
+      background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.65; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+    .container,.site-container{max-width:1150px;margin:0 auto;padding:0 20px}
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(5,7,13,0.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--line)}
+    .site-nav a{color:#a8adbb; text-decoration:none; margin-left:18px; font-size:.98rem}
+    .site-nav a:hover{color:var(--accent)}
+    .brand,.site-brand,.logo{font-weight:700; text-decoration:none; color:var(--text)}
+    .brand span,.logo span{color:var(--accent)}
+    section.section-block, section.section {padding:72px 0; border-top:1px solid var(--line)}
+    .glass.lift, .feature-card, .testimonial, .journal-feature, .cta-banner, .sidebar-section, .card{
+      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    }
+    .btn{display:inline-block; padding:10px 16px; border-radius:999px; font-weight:600; text-decoration:none}
+    .btn.ghost{color:var(--text); border:1px solid var(--line)}
+    .btn.ghost:hover{border-color:rgba(var(--accent-rgb),.6)}
+    .btn.primary{background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#051018}
+    .section-intro h2, .bloom, .section-title, h1, h2.section-title{
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    /* Reveal helper (class may be added later) */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.is-visible{opacity:1; transform:none}
   </style>
 
 </head>
 <body>
+  <!-- Manual Trigger Popup -->
+  <div id="manual-trial-modal" class="manual-trial-modal" style="display: none;">
+    <div class="manual-trial-modal__overlay"></div>
+    <div class="manual-trial-modal__content glass lift">
+      <button class="manual-trial-modal__close" aria-label="Close modal">&times;</button>
+      <div class="manual-trial-modal__body">
+        <!-- Success State -->
+        <div class="manual-trial-modal__success" style="display: none;">
+          <div class="manual-trial-modal__success-icon">✅</div>
+          <h2 class="manual-trial-modal__title">You're in!</h2>
+          <p class="manual-trial-modal__text">Redirecting you to your free trial... 🚀</p>
+        </div>
+        
+        <!-- Quiz Form State -->
+        <div class="manual-trial-modal__signup">
+          <h2 class="manual-trial-modal__title">Start Your Free 7-Day Trial</h2>
+          <p class="manual-trial-modal__subtitle">Answer a few quick questions to unlock your trial.</p>
+          <form id="manual-trial-quiz-form" class="manual-trial-modal__form">
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">How long have you been trading?</label>
+              <select id="manual-question-1" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="under-1-year">Under 1 year</option>
+                <option value="1-2-years">1-2 years</option>
+                <option value="2-5-years">2-5 years</option>
+                <option value="5-plus-years">5+ years</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">Have you ever used a trading journal?</label>
+              <select id="manual-question-2" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="no">No, never</option>
+                <option value="tried">Tried but gave up</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="yes">Yes, regularly</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__question">
+              <label class="manual-trial-modal__label">Are you ready to start tracking your trades?</label>
+              <select id="manual-question-3" required class="manual-trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="absolutely">Absolutely! Let's go</option>
+                <option value="yes">Yes, I'm ready</option>
+                <option value="maybe">Maybe, let's see</option>
+              </select>
+            </div>
+            
+            <div class="manual-trial-modal__error" id="manual-trial-error" role="alert"></div>
+            <div class="manual-trial-modal__actions">
+              <button type="submit" class="manual-trial-modal__btn primary-btn" id="manual-activate-btn">
+                <span class="btn-text">Claim Your Free Trial</span>
+              </button>
+              <button type="button" class="manual-trial-modal__btn secondary-btn" id="manual-no-thanks-btn">No thanks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Trial Signup Modal (Auto-trigger) - DISABLED (replaced by paywall modal) -->
+  <div id="trial-modal" class="trial-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" style="display: none !important; visibility: hidden;">
+    <div class="trial-modal__overlay"></div>
+    <div class="trial-modal__content glass lift">
+      <button class="trial-modal__close" aria-label="Close modal">&times;</button>
+      <div class="trial-modal__body">
+        <!-- Success State -->
+        <div class="trial-modal__success" style="display: none;">
+          <div class="trial-modal__success-icon">✅</div>
+          <h2 class="trial-modal__title">You're in!</h2>
+          <p class="trial-modal__text">Redirecting you to your free trial... 🚀</p>
+          <button class="trial-modal__btn primary-btn" id="continue-btn" style="display: none;">Continue to Site</button>
+        </div>
+        
+        <!-- Quiz Form State -->
+        <div class="trial-modal__signup">
+          <h2 class="trial-modal__title" id="modal-title">Start Your Free 7-Day Trial</h2>
+          <p class="trial-modal__subtitle">Answer a few quick questions to unlock your trial.</p>
+          <form id="trial-quiz-form" class="trial-modal__form">
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">How long have you been trading?</label>
+              <select id="question-1" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="under-1-year">Under 1 year</option>
+                <option value="1-2-years">1-2 years</option>
+                <option value="2-5-years">2-5 years</option>
+                <option value="5-plus-years">5+ years</option>
+              </select>
+            </div>
+            
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">Have you ever used a trading journal?</label>
+              <select id="question-2" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="no">No, never</option>
+                <option value="tried">Tried but gave up</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="yes">Yes, regularly</option>
+              </select>
+            </div>
+            
+            <div class="trial-modal__question">
+              <label class="trial-modal__label">Are you ready to start tracking your trades?</label>
+              <select id="question-3" required class="trial-modal__select">
+                <option value="">Select one...</option>
+                <option value="absolutely">Absolutely! Let's go</option>
+                <option value="yes">Yes, I'm ready</option>
+                <option value="maybe">Maybe, let's see</option>
+              </select>
+            </div>
+            
+            <div class="trial-modal__error" id="trial-error" role="alert"></div>
+            <div class="trial-modal__actions">
+              <button type="submit" class="trial-modal__btn primary-btn" id="activate-btn">
+                <span class="btn-text">Claim Your Free Trial</span>
+              </button>
+              <button type="button" class="trial-modal__btn secondary-btn" id="no-thanks-btn">No thanks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
   <div id="progress-bar"></div>
+  
+  <!-- Floating particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
 
+  <!-- Header -->
   <header class="header">
     <div class="container header-inner">
       <div class="logo">TradeTrakr</div>
@@ -745,509 +1942,643 @@
         <a href="trading-journal.html">Trading Journal</a>
         <a href="ai-trading-journal.html">AI Analytics</a>
         <a href="trading-journal-features.html">Journal Features</a>
+        <a href="#demo">Demo</a>
       </nav>
       <div class="cta-group">
-        <a href="#pricing" class="btn" id="get-started-btn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Started</a>
-        <a id="nav-signin" href="signin.html" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sign In</a>
+        <a href="#pricing" class="btn" id="get-started-btn" data-open-paywall>Get Started</a>
+        <a id="nav-signin" href="signin.html" class="btn btn-outline">Sign In</a>
       </div>
     </div>
   </header>
 
+  <!-- Hero -->
   <section class="hero" id="home-hero">
     <div class="container hero-inner">
       <div class="hero-text">
-        <h1>The Smart Trading Journal for <span class="text-gradient-neon">Modern Traders</span></h1>
-        <p>TradeTrakR is designed for funded traders in futures and forex who demand AI-powered analytics. Track P&amp;L, manage psychology, and sharpen your edge in one obsidian-clean interface.</p>
+        <h1 class="bloom">The Most Advanced Trading Journal for Modern Traders</h1>
+        <p>TradeTrakR is a trading journal designed for funded traders in futures and forex who want AI-powered analytics to track P&amp;L, trading psychology, and execution discipline in one place.</p>
         <p>Explore why professionals call it the best trading journal app in our <a href="trading-journal-features.html">trading journal features guide</a> and see how the AI trading journal keeps your edge sharp.</p>
+        <a href="#" class="btn btn-lg hero-cta" id="hero-get-started-btn" data-open-paywall>Get Started Now</a>
       </div>
-
-      <div class="hero-cta" style="margin-bottom: 3rem;">
-          <a href="#" class="btn btn-lg" id="hero-get-started-btn" data-open-paywall-direct onclick="event.preventDefault();">Get Started Now</a>
-      </div>
-
-      <div class="hero-dashboard-display">
-          <div class="dashboard-container">
-            <div class="dash-banner">
-              <div class="dash-icon">⚡</div>
-              <div class="dash-welcome">Welcome, <span>Trader!</span></div>
-            </div>
-            
-            <div class="dash-controls">
-              <button class="dash-btn-arrow">‹</button>
-              <div class="dash-month">November 2025</div>
-              <button class="dash-btn-arrow right">‹</button>
-              <div class="dash-monthly-pl">Monthly P&L: <span style="color:#fff" id="anim-monthly-pl">$0.00</span></div>
-            </div>
-
-            <div class="dash-grid">
-              <div class="stat-card">
-                <div>
-                  <div class="stat-label">WIN %</div>
-                  <div class="stat-value" id="anim-win">83%</div>
-                </div>
-                <div class="stat-sub">83 wins • 17 losses</div>
-              </div>
-
-              <div class="stat-card">
-                <div>
-                  <div class="stat-label">AVG WIN / LOSS</div>
-                  <div class="stat-value" style="font-size:1.4rem">$377.42</div>
-                  <div class="stat-value" style="font-size:1.2rem; opacity:0.7; color:#ff3366;">-$961.75</div>
-                </div>
-              </div>
-
-              <div class="stat-card">
-                <div>
-                  <div class="stat-label">PROFIT FACTOR</div>
-                  <div class="stat-value" id="anim-pf">1.92</div>
-                </div>
-                <div class="stat-sub">Gains $31k / Losses $16k</div>
-              </div>
-
-              <div class="stat-card">
-                <div>
-                  <div class="stat-label">TOTAL P&L</div>
-                  <div class="stat-value green" id="anim-pl">$11,160.36</div>
-                </div>
-                <div class="stat-sub">30 days accounted</div>
-              </div>
-            </div>
-          </div>
+      <div class="hero-image lift">
+        <img src="assets/dashboard-preview.png" alt="Trading journal dashboard interface in TradeTrakR" />
       </div>
     </div>
   </section>
 
+  <!-- Features -->
   <section id="features" class="features">
     <div class="container section-header">
-      <h2>Engineered for <span class="text-gradient-neon">Performance</span></h2>
-      <p>Discover how the TradeTrakR trading journal combines deep analytics with emotional intelligence tracking.</p>
+      <h2 class="bloom">Trading Journal Features That Stand Out</h2>
+      <p>Discover how the TradeTrakR trading journal combines AI-powered trade analysis, emotional tracking, and actionable insights for funded futures and forex traders.</p>
     </div>
-    
     <div class="container feature-row">
-      <div class="feature-img">
-        <div class="ai-interface">
-          <div class="ai-header"><div class="ai-dot"></div> AI Analyst & Insights</div>
-          <div class="ai-questions">
-            <div class="ai-pill" onclick="toggleAi(this, 'Your top pattern is the \'Morning Reversal\' with a 72% win rate. Consider increasing size between 9:30-10:00 AM.')">Analyze my top patterns over the last 30 days.</div>
-            <div class="ai-pill" onclick="toggleAi(this, 'Drawdowns occur mostly on Fridays after 12PM. Recommendation: Implement a hard stop at noon on Fridays.')">Review my recent drawdowns & recommend controls.</div>
-            <div class="ai-pill" onclick="toggleAi(this, 'Diagnostic: You are oversizing on losing streaks. Step 1: Reduce risk to 0.5% after 2 consecutive losses.')">I keep having red days. Diagnose why.</div>
-          </div>
-        </div>
-      </div>
-      <div class="feature-text">
-        <h3>AI-Powered Analysis</h3>
-        <p>Stop guessing. Our AI highlights hidden performance patterns and surfaces the setups that drive your edge. Click the questions to see it in action.</p>
-      </div>
+      <div class="feature-text"><h3>AI-Powered Trade Analysis</h3><p>Our AI trading journal analytics highlight hidden performance patterns and surface the setups that drive your edge. Learn how <a href="ai-trading-journal.html">AI-powered trade analysis</a> transforms every review session.</p></div>
+      <div class="feature-img"><img src="assets/ai-insight.png" alt="AI trading journal analytics dashboard" loading="lazy"></div>
     </div>
-
     <div class="container feature-row">
-      <div class="feature-img">
-        <div class="tilt-card-ui" id="tilt-trigger">
-          <div class="tilt-header">
-            <span>Psychology</span>
-            <span class="tilt-expand">Expand</span>
-          </div>
-          <div class="tilt-content">
-            <div class="tilt-emoji-box" id="tilt-emoji">😐</div>
-            <div>
-              <div class="tilt-value">Tilt Avg: <span id="tilt-score">0.0</span></div>
-              <div class="tilt-sub">(Medium)</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="feature-text">
-        <h3>P&amp;L + Psychology</h3>
-        <p>Markets are volatile; your mind shouldn't be. Real-time tilt tracking connects your emotional state directly to your P&amp;L performance.</p>
-      </div>
+      <div class="feature-img"><img src="assets/tilt-meter.png" alt="Trading journal tilt meter for tracking emotions" loading="lazy"></div>
+      <div class="feature-text"><h3>Track P&amp;L and Emotions</h3><p>Stay on top of your emotions with real-time tilt tracking. TradeTrakR shows how psychology impacts your P&amp;L so your futures trading journal keeps you disciplined.</p></div>
     </div>
-
     <div class="container feature-row">
-      <div class="feature-img">
-        <div class="model-ui" id="model-trigger">
-          <div class="model-header">Your Models</div>
-          <div class="model-row">
-            <div class="model-left">
-              <div class="model-tag">ICT</div>
-              <ul class="model-criteria-list">
-                <li>• HTF Liq Sweep</li>
-                <li>• 5m MSS</li>
-                <li>• 1m OTE</li>
-              </ul>
-            </div>
-            <div class="model-stats-right">
-              <div class="circular-progress">
-                <svg>
-                  <circle class="bg-circle" cx="30" cy="30" r="24"></circle>
-                  <circle class="progress-circle" id="model-circle" cx="30" cy="30" r="24"></circle>
-                </svg>
-                <div class="progress-text"><span id="win-rate-text">0</span>%</div>
-              </div>
-              <div class="model-pl" id="model-pl">+$0.00</div>
-              <div class="model-trades">3 Trades</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="feature-text">
-        <h3>Strategy Metrics</h3>
-        <p>Break down every strategy with granular win rates, trade counts, and rule adherence. Double down on what works, cut what doesn't.</p>
-      </div>
+      <div class="feature-text"><h3>Strategy-Level Trading Log</h3><p>Break down every strategy with detailed win rates, trade counts, and rule adherence. The best trading journal app makes it easy to double down on what works.</p></div>
+      <div class="feature-img"><img src="assets/model-stats.png" alt="Trading journal strategy performance stats" loading="lazy"></div>
     </div>
-
     <div class="container feature-row">
-      <div class="feature-img">
-        <div class="journal-ui">
-          <div class="journal-top">
-            <div class="journal-date">Edit • 2025-11-18</div>
-          </div>
-          <div class="journal-inputs">
-            <div class="input-fake">282.00</div>
-            <div class="input-fake">NQ</div>
-          </div>
-          <div class="trades-today-card">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-              <strong>Trades Today</strong>
-              <span class="trade-pill">1 TRADE</span>
-            </div>
-            <div class="trade-row">
-              <div>
-                <div class="trade-symbol">NQ</div>
-                <div style="font-size:0.8rem; color:#666;">Time: 07:21 → 08:12</div>
-              </div>
-              <div class="trade-pl">+$282.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="feature-text">
-        <h3>Daily Trading Journal</h3>
-        <p>Structured trade journaling made simple. Log trades, notes, and rules with clarity so your forex trading journal stays consistent across sessions.</p>
-      </div>
+      <div class="feature-img"><img src="assets/day-journal.png" alt="Daily trading journal entry template" loading="lazy"></div>
+      <div class="feature-text"><h3>Daily Trading Journal Entries</h3><p>Structured trade journaling made simple. Log trades, notes, and rules with clarity so your forex trading journal stays consistent across sessions.</p></div>
     </div>
-
     <div class="container feature-row">
-      <div class="feature-img">
-        <div class="clarity-chart-bg" id="candle-chart">
-          <div class="candle red" style="left:10%; bottom:150px; height:60px;">
-             <div class="candle-body" style="height:40px; top:5px;"></div>
-          </div>
-          <div class="candle red" style="left:15%; bottom:100px; height:55px;">
-             <div class="candle-body" style="height:35px; top:5px;"></div>
-          </div>
-          <div class="candle green" style="left:20%; bottom:95px; height:30px;">
-             <div class="candle-body" style="height:6px; bottom:12px;"></div>
-          </div>
-          <div class="candle green" style="left:25%; bottom:95px; height:80px;">
-             <div class="candle-body" style="height:60px; bottom:10px;"></div>
-          </div>
-          <div class="candle green" style="left:30%; bottom:160px; height:50px;">
-             <div class="candle-body" style="height:35px; bottom:5px;"></div>
-          </div>
-
-          <div class="clarity-panel">
-            <div class="clarity-title">🧠 Clarity Panel</div>
-            <div class="clarity-item"><span class="pin-icon">📌</span> Manage your emotions</div>
-            <div class="clarity-item"><span class="pin-icon">📌</span> Patience is profitable</div>
-            <div class="clarity-item"><span class="pin-icon">📌</span> Trust your analysis</div>
-          </div>
-        </div>
-      </div>
-      <div class="feature-text">
-        <h3>Discipline Coach</h3>
-        <p>An always-visible clarity panel pins reminders while you trade. Keep your psychology checks front and center on every chart.</p>
-      </div>
+      <div class="feature-text"><h3>Discipline Coach for Funded Traders</h3><p>An always-visible clarity panel pins reminders while you trade and keeps funded trader rules front and center. Review your trading journal clarity history to see how discipline influences results.</p></div>
+      <div class="feature-img"><img src="assets/clarity-panel.png" alt="Funded trading journal discipline reminders" loading="lazy"></div>
     </div>
-
   </section>
 
-  <div class="section-divider"></div>
-
-  <section id="pricing" class="pricing">
+  <!-- Plans & Pricing -->
+  <section id="pricing" class="ttr-section ttr-pricing" style="padding:5rem 0;position:relative">
     <div class="container">
       <header class="section-header">
-        <h2>Access <span class="text-gradient-neon">Protocol</span></h2>
-        <p>Select your tier. Cancel anytime.</p>
+        <h2 class="bloom">Plans &amp; Pricing</h2>
+        <p style="color:var(--text-muted);font-size:1.05rem;max-width:600px;margin:0 auto">Choose the plan that fits your trading journey.</p>
       </header>
 
-      <div class="pricing-grid">
-        <article class="pricing-card">
-          <h3 style="color:var(--text-primary); margin-bottom:0.5rem;">Monthly</h3>
-          <p class="price">$14.99<span>/mo</span></p>
-          <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem;">Flexible access. No commitment.</p>
-          <ul class="features-list" style="list-style:none; padding:0;">
-            <li>Full desktop journal access</li>
-            <li>Daily rules &amp; tilt tracking</li>
-            <li>Unlimited trade logs</li>
+      <div class="ttr-pricing-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem;max-width:900px;margin-left:auto;margin-right:auto">
+        <!-- Monthly -->
+        <article class="ttr-pricing-card" style="position:relative;background:rgba(12,15,36,0.75);backdrop-filter:blur(24px);padding:2.5rem;border-radius:18px;border:1px solid rgba(76,141,255,0.22);transition:all 0.3s ease;overflow:visible">
+          <div class="ttr-pricing-header">
+            <h3 style="font-size:1.4rem;margin-bottom:1rem;color:var(--text-primary)">Monthly</h3>
+            <p class="ttr-price" style="font-size:2.2rem;background:linear-gradient(45deg,var(--accent-electric),var(--accent-violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-bottom:0.5rem">
+              $14.99<span style="font-size:1rem;color:var(--text-muted);margin-left:4px">/month</span>
+            </p>
+            <p class="ttr-tagline" style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1.5rem">Flexible, month-to-month.</p>
+          </div>
+          <ul class="ttr-pricing-features" style="list-style:none;padding:0;margin:1.2rem 0;text-align:left">
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Full access to TradeTrakR desktop journal
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Daily rules &amp; tilt tracking
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Unlimited trade logs &amp; sessions
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Cancel anytime
+            </li>
           </ul>
-          <button class="btn btn-outline" type="button" data-open-plan="monthly" style="width:100%; margin-top:2rem;">Select Monthly</button>
+          <button class="btn primary" type="button" data-open-plan="monthly" style="width:100%;margin-top:1.5rem;padding:14px 24px;font-size:1.05rem;min-height:50px">
+            Start Monthly Plan
+          </button>
         </article>
 
-        <article class="pricing-card recommended">
-          <div class="discount-badge">Most Popular</div>
-          <h3 style="color:var(--text-primary); margin-bottom:0.5rem;">Yearly</h3>
-          <p class="price">$7.99<span>/mo</span></p>
-          <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.5rem;">Billed $95.88 annually</p>
-          <ul class="features-list" style="list-style:none; padding:0;">
-            <li><strong>3-Day Free Trial Included</strong></li>
-            <li>Save 45% vs Monthly</li>
-            <li>Priority Support</li>
-            <li>All future updates included</li>
+        <!-- Yearly -->
+        <article class="ttr-pricing-card ttr-pricing-card--highlight" style="position:relative;background:rgba(12,15,36,0.75);backdrop-filter:blur(24px);padding:2.5rem;border-radius:18px;border:2px solid rgba(76,141,255,0.55);transition:all 0.3s ease;overflow:visible;box-shadow:0 0 32px rgba(76,141,255,0.18)">
+          <div class="ttr-pricing-tag" style="position:absolute;top:-12px;right:20px;background:linear-gradient(135deg,var(--accent-electric),var(--accent-violet));color:white;font-weight:600;font-size:0.85rem;padding:0.3rem 0.7rem;border-radius:16px;transform:rotate(5deg);box-shadow:0 4px 12px rgba(0,0,0,0.3)">Most Popular</div>
+          <div class="ttr-pricing-header">
+            <h3 style="font-size:1.4rem;margin-bottom:1rem;color:var(--text-primary)">Yearly</h3>
+            <p class="ttr-price" style="font-size:2.2rem;background:linear-gradient(45deg,var(--accent-electric),var(--accent-violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-bottom:0.5rem">
+              $7.99<span style="font-size:1rem;color:var(--text-muted);margin-left:4px">/month</span>
+            </p>
+            <p class="ttr-subtext" style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.5rem">Billed as $95.88 per year</p>
+            <p class="ttr-tagline" style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1.5rem">3-day free trial included.</p>
+          </div>
+          <ul class="ttr-pricing-features" style="list-style:none;padding:0;margin:1.2rem 0;text-align:left">
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              3-day free trial – experience everything first
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Save versus monthly
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              All features &amp; updates included
+            </li>
+            <li style="margin:0.5rem 0;padding-left:1.2rem;position:relative;color:var(--text-muted)">
+              <span style="position:absolute;left:0;color:var(--accent-electric);font-weight:bold">✓</span>
+              Built for serious, consistency-focused traders
+            </li>
           </ul>
-          <button class="btn primary" type="button" data-open-plan="yearly" style="width:100%; margin-top:2rem;">Start Free Trial</button>
+          <button class="btn primary" type="button" data-open-plan="yearly" style="width:100%;margin-top:1.5rem;padding:14px 24px;font-size:1.05rem;min-height:50px">
+            Start 3-Day Free Trial
+          </button>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section id="demo" class="demo">
+    <div class="container section-header"><h2 class="bloom">Interactive Trading Journal Demo</h2></div>
+    <div class="container demo-grid">
+      <div class="demo-card glass lift"><h3>AI Insight</h3><p class="ai-text" id="aiText">“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”</p></div>
+      <div class="demo-card tilt-card glass lift">
+        <h3>Tilt Meter</h3>
+        <div class="tilt-meter">
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <defs>
+              <linearGradient id="tiltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <path class="circle-bg"
+              d="M18 2.0845
+                 a 15.9155 15.9155 0 0 1 0 31.831
+                 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <path id="tiltCircle" class="circle"
+              stroke-dasharray="0, 100"
+              d="M18 2.0845
+                 a 15.9155 15.9155 0 0 1 0 31.831
+                 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <text id="tiltText" x="18" y="20.35" class="percentage">Tilt 0%</text>
+          </svg>
+        </div>
+      </div>
+      <div class="demo-card glass lift">
+        <h3>Trading Model Stats</h3>
+        <ul class="stats-list">
+          <li><span>Win Rate:</span> 62%
+            <div class="progress"><div id="barWin" class="bar"></div></div>
+          </li>
+          <li><span>Trades:</span> 124</li>
+          <li><span>Rules Followed:</span> 87%
+            <div class="progress"><div id="barRules" class="bar"></div></div>
+          </li>
+          <li><span>Most Broken Rule:</span> Exits too early</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container" style="text-align:center;margin-top:48px;padding:32px 20px">
+      <h3 class="bloom" style="font-size:1.8rem;margin-bottom:12px">Ready to Start Your Trading Journal?</h3>
+      <p style="color:var(--muted);font-size:1.05rem;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto">Experience the full power of TradeTrakR with AI insights, psychology tracking, and rule compliance tools.</p>
+      <a href="#pricing" class="btn btn-lg" data-open-paywall style="font-size:1.1rem;padding:14px 32px">Get Started</a>
     </div>
   </section>
 
   <section class="journal-overview">
     <div class="container">
-      <h2>Why Funded Traders Choose TradeTrakR</h2>
+      <h2 class="bloom">Why Funded Traders Choose the TradeTrakR Trading Journal</h2>
+      <p>TradeTrakR combines AI-powered trade analysis, deep P&amp;L analytics, and structured note-taking so funded futures and forex traders can review every session with confidence.</p>
       <ul>
-        <li><strong>AI-Powered Insights</strong> Turn session data into actionable intelligence.</li>
-        <li><strong>Emotional Control</strong> Quantify your psychology to stabilize performance.</li>
-        <li><strong>Funded Ready</strong> Built to handle prop firm rules and risk targets.</li>
+        <li class="glass lift"><strong>AI-Powered Trade Analysis</strong> Turn session data into AI trading journal insights that highlight the patterns and setups responsible for your best returns.</li>
+        <li class="glass lift"><strong>Track P&amp;L and Emotions</strong> Pair your trading log with psychology tracking to stay disciplined, even during volatile futures trading journal sessions.</li>
+        <li class="glass lift"><strong>Designed for Funded Traders</strong> Document prop firm rules, risk targets, and execution checklists inside the best trading journal app built for serious traders.</li>
       </ul>
-      <p style="margin-top: 2rem;">Ready to go deeper? <a href="trading-journal.html">Explore the complete trading journal</a> or <a href="trading-journal-features.html">compare every trading journal feature</a>.</p>
+      <p>Ready to go deeper? <a href="trading-journal.html">Explore the complete trading journal</a> or <a href="trading-journal-features.html">compare every trading journal feature</a>.</p>
     </div>
   </section>
 
+  <!-- Community -->
   <section class="community">
-    <div class="container">
-        <h2 style="margin-bottom:1rem;">Join the Network</h2>
-        <p style="max-width:600px; margin:0 auto 2rem auto;">Get instant release alerts and trading journal tips inside our discord.</p>
-        <a class="btn btn-outline" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Enter Discord</a>
+    <div class="container community-inner">
+      <div class="community-text">
+        <h2 class="bloom">Join the TradeTrakR Trading Journal Community</h2>
+        <p>Get instant release alerts, trading journal tips, and beta invites inside our free announcements server.</p>
+      </div>
+      <a class="btn btn-outline discord-btn" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">Join Free Discord</a>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
+    <div class="container footer-inner">
       <div class="footer-links">
-        <a href="trading-journal.html">Overview</a>
-        <a href="ai-trading-journal.html">AI Analytics</a>
-        <a href="trading-journal-features.html#pl-tracker">P&amp;L Tracker</a>
-        <a href="trading-journal-features.html#funded-trader-tools">Funded Tools</a>
-        <a href="blog/index.html">Guides</a>
+        <a href="trading-journal.html">Trading Journal Overview</a>
+        <a href="ai-trading-journal.html">Trading Journal AI Analytics</a>
+        <a href="trading-journal-features.html#pl-tracker">Trading Journal P&amp;L Tracker</a>
+        <a href="trading-journal-features.html#funded-trader-tools">Trading Journal Tools for Funded Traders</a>
+        <a href="blog/index.html">Trading Journal Guides</a>
       </div>
-      <p style="color: var(--text-dim); font-size: 0.8rem;">© 2025 TradeTrakr — The Future of Trading Journals</p>
+      <p style="position: relative; z-index: 1;">© 2025 <span style="background: linear-gradient(45deg, #4a90e2, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600;">TradeTrakr</span> — The Future of Trading Journals</p>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script>
+    if (window.location.hash) { history.replaceState(null, null, ' '); }
 
-    // Scroll Progress
     const progressBar = document.getElementById("progress-bar");
-    window.addEventListener("scroll", () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (scrollTop / docHeight) * 100;
-      progressBar.style.width = scrolled + "%";
-    }, { passive: true });
-
-    // Header Hide/Show
     let lastScrollTop = 0;
     const header = document.querySelector('.header');
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > 100) {
-        if (scrollTop > lastScrollTop) { header.classList.add('hidden'); } else { header.classList.remove('hidden'); }
-      }
-      lastScrollTop = Math.max(0, scrollTop);
-    });
-
-    // --- INTERACTIVE FUNCTIONS ---
-
-    // 1. Dashboard LIVE TICKER
-    function startLiveTicker() {
-      const winEl = document.getElementById('anim-win');
-      const pfEl = document.getElementById('anim-pf');
-      const plEl = document.getElementById('anim-pl');
-      const monthlyPlEl = document.getElementById('anim-monthly-pl');
-      const tiltScoreEl = document.getElementById('tilt-score');
-      const tiltEmojiEl = document.getElementById('tilt-emoji');
+    const scrollThreshold = 100;
+    let ticking = false;
+    
+    function updateHeader(scrollTop) {
+      const scrollDiff = scrollTop - lastScrollTop;
       
-      if (!winEl || !pfEl || !plEl || !monthlyPlEl) return;
-
-      let currentWin = 83;
-      let currentPf = 1.92;
-      let currentPl = 11160.36;
-      let currentMonthlyPl = 4252.56; 
-      let currentTilt = 0.0;
-      
-      setInterval(() => {
-        const fluctuation = Math.floor(Math.random() * 5) - 2; 
-        let newVal = 83 + fluctuation;
-        winEl.innerText = newVal + "%";
-      }, 3000);
-
-      setInterval(() => {
-        const fluctuation = (Math.random() * 0.1) - 0.05; 
-        let newVal = 1.92 + fluctuation;
-        pfEl.innerText = newVal.toFixed(2);
-      }, 2500);
-
-      if(tiltScoreEl && tiltEmojiEl) {
-        setInterval(() => {
-            const change = (Math.random() * 1.5) - 0.5;
-            currentTilt += change;
-            if(currentTilt < 0) currentTilt = 0;
-            if(currentTilt > 10) currentTilt = 0;
-            tiltScoreEl.innerText = currentTilt.toFixed(1);
-            if(currentTilt < 3.0) {
-                tiltEmojiEl.innerText = "😎";
-                tiltEmojiEl.style.transform = "scale(1) rotate(0deg)";
-            } else if (currentTilt < 7.0) {
-                tiltEmojiEl.innerText = "😐";
-                tiltEmojiEl.style.transform = "scale(1) rotate(0deg)";
-            } else {
-                tiltEmojiEl.innerText = "😵‍💫";
-                tiltEmojiEl.style.transform = "scale(1.2) rotate(15deg)";
-            }
-        }, 1000);
-      }
-
-      setInterval(() => {
-        const fluctuation = (Math.random() * 150) - 50; 
-        currentPl += fluctuation;
-        currentMonthlyPl += fluctuation; 
-        plEl.innerText = "$" + currentPl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        monthlyPlEl.innerText = "$" + currentMonthlyPl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        if(fluctuation > 0) {
-            plEl.classList.remove('red');
-            plEl.classList.add('green');
-            monthlyPlEl.style.color = "#0aff68"; 
+      if (scrollTop <= scrollThreshold) {
+        header.classList.remove('hidden');
+      } else if (Math.abs(scrollDiff) > 5) {
+        if (scrollDiff > 0) {
+          header.classList.add('hidden');
         } else {
-             monthlyPlEl.style.color = "#ff3366"; 
-             setTimeout(() => { monthlyPlEl.style.color = "#fff"; }, 300);
+          header.classList.remove('hidden');
         }
-      }, 800);
+
+      }
+      
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      ticking = false;
     }
     
-    window.addEventListener('load', startLiveTicker);
+    window.addEventListener("scroll", () => {
+      const scrollTop = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = Math.min(100, (scrollTop / docHeight) * 100);
+      progressBar.style.width = scrolled + "%";
+      
+      if (!ticking) {
+        window.requestAnimationFrame(() => updateHeader(scrollTop));
+        ticking = true;
+      }
+    }, { passive: true });
 
-    // Dashboard Scroll Reveal
-    const dashObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          dashObserver.unobserve(entry.target);
-        }
-      });
+    const tiltCircle = document.getElementById("tiltCircle");
+    const tiltText = document.getElementById("tiltText");
+    function animateTilt() {
+      let value = 45, progress = 0;
+      const interval = setInterval(() => {
+        if (progress <= value) {
+          tiltCircle.setAttribute("stroke-dasharray", progress + ", 100");
+          tiltText.textContent = "Tilt " + progress + "%";
+          progress++;
+        } else clearInterval(interval);
+      }, 30);
+    }
+    const tiltSection = document.querySelector(".tilt-card");
+    const tiltObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { animateTilt(); tiltObserver.unobserve(tiltSection); } });
+    }, { threshold: 0.5 });
+    tiltObserver.observe(tiltSection);
+
+    const aiText = document.getElementById("aiText");
+    const insights = [
+      "“Your win rate is 68% on setups traded in the first 90 minutes. Discipline slips after 11am — cutting your edge by 22%.”",
+      "“Most profitable trades occur when you hold positions for 30+ minutes. Consider reducing early exits.”",
+      "“Rule adherence above 85% correlates with 2.5x higher profits. Stay consistent.”"
+    ];
+    let index = 0;
+    setInterval(() => { index = (index + 1) % insights.length; aiText.textContent = insights[index]; }, 5000);
+
+    const barWin = document.getElementById("barWin");
+    const barRules = document.getElementById("barRules");
+    function animateBars() { barWin.style.width = "62%"; barRules.style.width = "87%"; }
+    const demoSection = document.getElementById("demo");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { animateBars(); observer.unobserve(demoSection); } });
+    }, { threshold: 0.3 });
+    observer.observe(demoSection);
+
+    const sections = document.querySelectorAll("section");
+    const observer2 = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); } });
     }, { threshold: 0.2 });
+    sections.forEach(sec => observer2.observe(sec));
 
-    const dashEl = document.querySelector('.hero-dashboard-display');
-    if (dashEl) dashObserver.observe(dashEl);
-
-    // 2. AI Toggle Function
-    function toggleAi(el, text) {
-      document.querySelectorAll('.ai-pill').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.ai-response').forEach(r => r.remove());
-      el.classList.add('active');
-      const resp = document.createElement('div');
-      resp.className = 'ai-response show';
-      resp.innerText = "AI: " + text;
-      el.after(resp);
+    // ✅ SCROLL LOCK FUNCTIONS - iOS-safe implementation
+    function disableScroll() {
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
     }
 
-    // Animate Tilt Meter when visible
-    const tiltObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          tiltObserver.disconnect();
-        }
-      });
-    });
-    const tiltTrigger = document.getElementById('tilt-trigger');
-    if(tiltTrigger) tiltObserver.observe(tiltTrigger);
+    function enableScroll() {
+      const scrollY = document.body.dataset.scrollY || '0';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, parseInt(scrollY));
+      delete document.body.dataset.scrollY;
+    }
 
-    // Animate Model Stats when visible
-    const modelObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          const circle = document.getElementById('model-circle');
-          circle.style.strokeDashoffset = "50";
-          let wr = 0;
-          const wrText = document.getElementById('win-rate-text');
-          const wrInt = setInterval(() => {
-            wr++;
-            wrText.innerText = wr;
-            if(wr >= 67) clearInterval(wrInt);
-          }, 20);
-          let pl = 0;
-          const plText = document.getElementById('model-pl');
-          const plInt = setInterval(() => {
-            pl += 11;
-            plText.innerText = "+$" + pl + ".00";
-            if(pl >= 541) {
-              plText.innerText = "+$541.00";
-              clearInterval(plInt);
-            }
-          }, 10);
-          modelObserver.disconnect();
-        }
-      });
-    });
-    const modelTrigger = document.getElementById('model-trigger');
-    if(modelTrigger) modelObserver.observe(modelTrigger);
+    // Trial Modal Handler
+    const modal = document.getElementById('trial-modal');
+    const modalClose = modal.querySelector('.trial-modal__close');
+    const trialForm = document.getElementById('trial-quiz-form');
+    const activateBtn = document.getElementById('activate-btn');
+    const noThanksBtn = document.getElementById('no-thanks-btn');
+    const continueBtn = document.getElementById('continue-btn');
+    const trialError = document.getElementById('trial-error');
+    const signupState = modal.querySelector('.trial-modal__signup');
+    const successState = modal.querySelector('.trial-modal__success');
 
-    // Animate Candle Chart when visible
-    const chartObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          entry.target.classList.add('animate');
-          chartObserver.disconnect();
+    let hasShownModal = false;
+
+    // Check if user has already seen/submitted the modal
+    function shouldShowModal() {
+      // Check if they already successfully signed up (prevent auto-trigger only)
+      if (localStorage.getItem('tradetrakr_trial_subscribed') === 'true') {
+        return false;
+      }
+      
+      // Check if they dismissed it (don't show for 30 days)
+      const dismissed = localStorage.getItem('tradetrakr_trial_dismissed');
+      if (dismissed) {
+        const dismissedDate = new Date(dismissed);
+        const daysSinceDismiss = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
+        if (daysSinceDismiss < 30) {
+          return false;
         }
+      }
+      
+      return true;
+    }
+
+    function showModal(force = false, lockScrollImmediately = false) {
+      // Don't show if localStorage says they already subscribed
+      if (!force && shouldShowModal() === false) return;
+      if (!force && hasShownModal) return;
+      hasShownModal = true;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      
+      // ✅ Only lock scroll if explicitly requested (manual trigger)
+      // Auto-trigger shows modal but allows scrolling until user interacts
+      if (lockScrollImmediately) {
+        disableScroll();
+      }
+    }
+    
+    function markAsDismissed() {
+      localStorage.setItem('tradetrakr_trial_dismissed', new Date().toISOString());
+    }
+    
+    function markAsSubscribed() {
+      localStorage.setItem('tradetrakr_trial_subscribed', 'true');
+    }
+
+    function hideModal() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      enableScroll(); // ✅ Always unlock scroll on modal close
+    }
+    
+    // ✅ Lock scroll when user interacts with modal (only if not already locked)
+    function lockScrollOnInteraction() {
+      if (!document.body.dataset.scrollY) {
+        disableScroll();
+      }
+    }
+
+    function showSuccess() {
+      signupState.style.display = 'none';
+      successState.style.display = 'block';
+      markAsSubscribed(); // Never show modal again after successful quiz
+      
+      // Redirect to Whop checkout after 2 seconds
+      setTimeout(() => {
+        window.location.href = 'https://whop.com/checkout/plan_5LC9GeWOWIlEy?d2c=true';
+      }, 2000);
+    }
+
+    function setTrialError(message) {
+      trialError.textContent = message;
+    }
+
+    // ✅ Lock scroll when user interacts with modal content
+    // Attach to all interactive elements inside modal
+    const modalInteractiveElements = [
+      modal.querySelector('#activate-btn'),
+      modal.querySelector('#question-1'),
+      modal.querySelector('#question-2'),
+      modal.querySelector('#question-3'),
+      ...modal.querySelectorAll('.trial-modal__btn')
+    ].filter(Boolean); // Remove null elements
+    
+    modalInteractiveElements.forEach(element => {
+      element.addEventListener('focus', lockScrollOnInteraction, { once: true });
+      element.addEventListener('click', lockScrollOnInteraction, { once: true });
+    });
+
+    // Close modal handlers
+    modalClose.addEventListener('click', () => {
+      markAsDismissed();
+      hideModal();
+    });
+    noThanksBtn.addEventListener('click', () => {
+      markAsDismissed();
+      hideModal();
+    });
+    continueBtn.addEventListener('click', hideModal);
+
+    // Close modal on overlay click
+    modal.querySelector('.trial-modal__overlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        markAsDismissed();
+        hideModal();
+      }
+    });
+
+    // Quiz form submission
+    if (trialForm) {
+      trialForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        setTrialError('');
+        
+        const q1 = document.getElementById('question-1').value;
+        const q2 = document.getElementById('question-2').value;
+        const q3 = document.getElementById('question-3').value;
+        
+        if (!q1 || !q2 || !q3) {
+          setTrialError('Please answer all questions');
+          return;
+        }
+        
+        // Log quiz responses for your records
+        console.log('Quiz responses:', { q1, q2, q3 });
+        
+        // Show success and redirect
+        showSuccess();
       });
-    }, { threshold: 0.5 });
-    const chartTrigger = document.getElementById('candle-chart');
-    if(chartTrigger) chartObserver.observe(chartTrigger);
+    }
+
+    // ✅ DISABLED - Old modal replaced by paywall modal
+    // setTimeout(() => {
+    //   // Only show on homepage (not on subpages)
+    //   if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('.html') === false) {
+    //     showModal(false, false); // Auto-trigger: don't lock scroll until interaction
+    //   }
+    // }, 2000);
+    
+    // ✅ Safety fallback: Always unlock scroll if modal is closed
+    modal.addEventListener('transitionend', () => {
+      if (!modal.classList.contains('active')) {
+        enableScroll();
+      }
+    });
+
+    // Manual Modal Handler (for "Get Started Free" buttons)
+    const manualModal = document.getElementById('manual-trial-modal');
+    const manualModalClose = manualModal.querySelector('.manual-trial-modal__close');
+    const manualTrialForm = document.getElementById('manual-trial-quiz-form');
+    const manualNoThanksBtn = document.getElementById('manual-no-thanks-btn');
+    const manualSignupState = manualModal.querySelector('.manual-trial-modal__signup');
+    const manualSuccessState = manualModal.querySelector('.manual-trial-modal__success');
+
+    function showManualModal() {
+      // DISABLED - Old modal replaced by paywall modal
+      return;
+      manualModal.style.display = 'flex';
+      disableScroll(); // ✅ Manual trigger: lock scroll immediately (user clicked button)
+    }
+
+    function hideManualModal() {
+      manualModal.style.display = 'none';
+      enableScroll(); // ✅ Always unlock scroll on modal close
+    }
+
+    function showManualSuccess() {
+      manualSignupState.style.display = 'none';
+      manualSuccessState.style.display = 'block';
+      
+      setTimeout(() => {
+        window.location.href = 'https://whop.com/checkout/plan_5LC9GeWOWIlEy?d2c=true';
+      }, 2000);
+    }
+
+    // Close handlers - all ensure scroll unlock
+    manualModalClose.addEventListener('click', hideManualModal);
+    manualNoThanksBtn.addEventListener('click', hideManualModal);
+    manualModal.querySelector('.manual-trial-modal__overlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) hideManualModal();
+    });
+    
+    // ✅ Safety fallback for manual modal: Always unlock scroll if modal is hidden
+    manualModal.addEventListener('transitionend', () => {
+      if (manualModal.style.display === 'none') {
+        enableScroll();
+      }
+    });
+
+    // Form submission
+    if (manualTrialForm) {
+      manualTrialForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const q1 = document.getElementById('manual-question-1').value;
+        const q2 = document.getElementById('manual-question-2').value;
+        const q3 = document.getElementById('manual-question-3').value;
+        
+        if (!q1 || !q2 || !q3) {
+          document.getElementById('manual-trial-error').textContent = 'Please answer all questions';
+          return;
+        }
+        
+        console.log('Quiz responses:', { q1, q2, q3 });
+        showManualSuccess();
+      });
+    }
+
+    // Old modal triggers removed - now handled by paywall.js with data-open-paywall attribute
+
+    // ✅ Close modals with Escape key (unified handler for both modals)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (modal.classList.contains('active')) {
+          markAsDismissed();
+          hideModal();
+        }
+        if (manualModal && manualModal.style.display === 'flex') {
+          hideManualModal();
+        }
+      }
+    });
   </script>
 
-  <!-- Paywall Modal Preserved -->
+  <!-- Paywall / Onboarding Modal -->
   <div id="ttr-paywall" class="ttr-modal" aria-hidden="true" role="dialog" aria-labelledby="ttr-paywall-title">
     <div class="ttr-dialog">
       <button class="ttr-close" type="button" aria-label="Close paywall">&times;</button>
-      <div class="ttr-progress"><div class="ttr-bar" style="width:0%; background:var(--accent-cyan);"></div></div>
+
+      <!-- Progress -->
+      <div class="ttr-progress"><div class="ttr-bar" style="width:0%"></div></div>
+
+      <!-- Step container -->
       <div class="ttr-step" data-step="intro">
-        <h2 id="ttr-paywall-title" style="color:var(--text-primary);">Initialize Protocol</h2>
-        <p style="color:var(--text-secondary);">Configure your journal parameters for optimal insights.</p>
-        <button class="btn primary ttr-next" style="width:100%; margin-top:1rem;">Initialize</button>
+        <h2 id="ttr-paywall-title">Let's tailor TradeTrakR for you</h2>
+        <p>Answer a few quick questions so we can personalize your journal & insights.</p>
+        <button class="btn primary ttr-next">Get Started</button>
       </div>
+
+      <!-- Dynamic steps mount here -->
       <div id="ttr-steps-mount"></div>
+
+      <!-- Loading / "generating plan" -->
       <div class="ttr-step" data-step="generate" hidden>
-        <h2>Processing Data...</h2>
-        <div class="ttr-loader" style="border-top-color:var(--accent-cyan);"></div>
+        <h2>Building your custom plan…</h2>
+        <p>Analyzing goals, rules, and psychology prompts.</p>
+        <div class="ttr-loader"></div>
       </div>
+
+      <!-- Personalized plan -->
       <div class="ttr-step" data-step="plan" hidden>
-        <h2>Configuration Complete</h2>
-        <div id="ttr-plan-summary" class="ttr-plan" style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:8px; margin:1rem 0;"></div>
-        <button class="btn primary ttr-next" style="width:100%;">Proceed</button>
+        <h2>Your plan is ready</h2>
+        <div id="ttr-plan-summary" class="ttr-plan"></div>
+        <button class="btn primary ttr-next">Continue</button>
       </div>
+
+      <!-- Paywall -->
       <div class="ttr-step" data-step="paywall" hidden>
-        <h2>Activate Trial</h2>
-        <p class="ttr-sub" style="color:var(--text-secondary);">Unlock full AI analytics suite.</p>
+        <h2>Start your free trial</h2>
+        <p class="ttr-sub">Full access to AI insights, psychology tools, and rule tracking.</p>
         <div class="ttr-pricing">
-          <div class="ttr-pricing-option" data-plan="monthly" style="padding:1rem; margin-bottom:0.5rem; border-radius:8px; cursor:pointer;">
+          <div class="ttr-pricing-option" data-plan="monthly">
             <input type="radio" name="ttr-plan" value="monthly" id="plan-monthly">
-            <label for="plan-monthly" style="margin-left:0.5rem; cursor:pointer;">Monthly - $14.99/mo</label>
+            <div class="ttr-pricing-option-content">
+              <div class="ttr-pricing-option-title">Monthly</div>
+              <div class="ttr-pricing-option-subtitle">Billed monthly</div>
+            </div>
+            <div class="ttr-pricing-option-price">
+              <span class="ttr-pricing-option-price-main">$14.99</span>
+              <span class="ttr-pricing-option-price-sub">per month</span>
+            </div>
+            <div class="ttr-pricing-option-check"></div>
           </div>
-          <div class="ttr-pricing-option selected" data-plan="yearly" style="padding:1rem; border-radius:8px; cursor:pointer;">
+          <div class="ttr-pricing-option selected" data-plan="yearly">
             <input type="radio" name="ttr-plan" value="yearly" id="plan-yearly" checked>
-            <label for="plan-yearly" style="margin-left:0.5rem; cursor:pointer;">Yearly - $7.99/mo (billed annually)</label>
+            <div class="ttr-pricing-option-content">
+              <div class="ttr-pricing-option-title">Yearly</div>
+              <div class="ttr-pricing-option-subtitle">3-day free trial, then billed yearly</div>
+            </div>
+            <div class="ttr-pricing-option-price">
+              <span class="ttr-pricing-option-price-main">$7.99</span>
+              <span class="ttr-pricing-option-price-sub">per month</span>
+            </div>
+            <div class="ttr-pricing-option-check"></div>
           </div>
         </div>
-        <button id="ttr-checkout" class="btn primary" style="width:100%; margin-top:1.5rem;">
+        <div style="margin:20px 0;padding:16px;background:rgba(47,237,132,.08);border-radius:12px;border-left:3px solid #2fed84">
+          <p style="margin:0;color:#e6e8ef;font-size:.95rem;display:flex;align-items:center;gap:8px">
+            <span style="color:#2fed84;font-weight:700">✓</span>
+            <span>No payment now. Cancel anytime during trial.</span>
+          </p>
+        </div>
+        <button id="ttr-checkout" class="btn primary" style="width:100%;margin-top:8px">
           Start 3-Day Free Trial
         </button>
-        <p class="ttr-trust" style="text-align:center; margin-top:12px; font-size:0.8rem; color:var(--text-dim);">
-          <span id="ttr-trial-text">Free for 3 days</span>, then <span id="ttr-billing-text">billed annually</span>. Cancel anytime.
+        <p class="ttr-trust" style="text-align:center;margin-top:12px">
+          <span id="ttr-trial-text">Free for 3 days</span>, then <span id="ttr-billing-text">billed as $95.88 per year</span>. Cancel anytime.
         </p>
       </div>
+
+      <!-- One-time Offer -->
       <div class="ttr-step" data-step="one-time-offer" hidden>
         <button id="ttr-ultimate-close" class="ttr-close" type="button" aria-label="Close offer">&times;</button>
         <div class="ttr-one-time-offer">
           <h2>One-time Offer</h2>
           <p class="ttr-urgency">You will never see this again</p>
+          
           <div class="ttr-offer-box">
             <div class="ttr-gift-icon">🎁</div>
             <div class="ttr-discount-badge">
@@ -1258,10 +2589,12 @@
             <div class="ttr-ultimate-price">$5.99/mo</div>
             <p class="ttr-lowest-price">Lowest price ever</p>
           </div>
+
           <div class="ttr-no-payment">
             <span>✓</span>
             <span>No payment due now</span>
           </div>
+
           <button id="ttr-ultimate-checkout" class="ttr-ultimate-btn">
             Start my 3-days FREE
           </button>

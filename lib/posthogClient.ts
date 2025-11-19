@@ -17,7 +17,6 @@ export function initPostHog() {
   }
 
   if (isInitialized) {
-    console.log('[PostHog] Already initialized, skipping');
     return;
   }
 
@@ -25,7 +24,7 @@ export function initPostHog() {
   const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com';
 
   if (!posthogKey) {
-    console.warn('[PostHog] NEXT_PUBLIC_POSTHOG_KEY is missing');
+    console.warn('PostHog key not found. Analytics will be disabled.');
     return;
   }
 
@@ -36,16 +35,15 @@ export function initPostHog() {
       posthog.init(posthogKey, {
         api_host: posthogHost,
         loaded: (ph: any) => {
-          console.log('[PostHog] Initialized with host:', posthogHost);
           posthog = ph;
-          isInitialized = true;
         },
       });
+      isInitialized = true;
     }).catch((err) => {
-      console.error('[PostHog] Failed to load PostHog:', err);
+      console.error('Failed to load PostHog:', err);
     });
   } catch (err) {
-    console.error('[PostHog] Initialization error:', err);
+    console.error('PostHog initialization error:', err);
   }
 }
 
@@ -60,19 +58,13 @@ export function trackEvent(name: string, properties?: Record<string, any>) {
     return; // SSR guard
   }
 
-  console.log('[TRACK EVENT]', name, properties);
-
   // Initialize if not already done
-  if (!isInitialized) {
+  if (!isInitialized && !posthog) {
     initPostHog();
     // Wait a bit for initialization, then track
     setTimeout(() => {
-      if (isInitialized && posthog) {
-        try {
-          posthog.capture(name, properties);
-        } catch (e) {
-          console.error('[PostHog] capture error', e);
-        }
+      if (posthog) {
+        posthog.capture(name, properties);
       }
     }, 100);
     return;
@@ -81,8 +73,8 @@ export function trackEvent(name: string, properties?: Record<string, any>) {
   if (posthog) {
     try {
       posthog.capture(name, properties);
-    } catch (e) {
-      console.error('[PostHog] capture error', e);
+    } catch (err) {
+      console.error('PostHog tracking error:', err);
     }
   }
 }
@@ -98,17 +90,11 @@ export function identifyUser(id: string, traits?: Record<string, any>) {
     return; // SSR guard
   }
 
-  console.log('[PostHog] identifyUser', id, traits);
-
-  if (!isInitialized) {
+  if (!isInitialized && !posthog) {
     initPostHog();
     setTimeout(() => {
-      if (isInitialized && posthog) {
-        try {
-          posthog.identify(id, traits);
-        } catch (e) {
-          console.error('[PostHog] identify error', e);
-        }
+      if (posthog) {
+        posthog.identify(id, traits);
       }
     }, 100);
     return;
@@ -117,8 +103,8 @@ export function identifyUser(id: string, traits?: Record<string, any>) {
   if (posthog) {
     try {
       posthog.identify(id, traits);
-    } catch (e) {
-      console.error('[PostHog] identify error', e);
+    } catch (err) {
+      console.error('PostHog identify error:', err);
     }
   }
 }
@@ -132,6 +118,11 @@ export function getPostHogClient() {
     return null;
   }
   return posthog;
+}
+
+// Auto-initialize on import in browser
+if (typeof window !== 'undefined') {
+  initPostHog();
 }
 
 export const posthogClient = {

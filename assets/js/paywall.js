@@ -1,8 +1,8 @@
 ;(() => {
   const CHECKOUT = {
-    monthly:  'https://whop.com/checkout/plan_mkRYtNPWxqQ7O?d2c=true',
-    yearly:   'https://whop.com/checkout/plan_U7h0RWow4rgZ9?d2c=true',
-    ultimate: 'https://whop.com/checkout/plan_CEiG78wQHpn90?d2c=true',
+    monthly:  'https://whop.com/checkout/plan_mkRYtNPWxqQ7O',
+    yearly:   'https://whop.com/checkout/plan_U7h0RWow4rgZ9',
+    ultimate: 'https://whop.com/checkout/plan_CEiG78wQHpn90',
   };
 
   const modal = document.getElementById('ttr-paywall');
