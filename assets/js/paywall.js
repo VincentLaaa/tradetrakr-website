@@ -513,7 +513,15 @@
   }
 
   function openPaywallWithPlan(plan) {
+    if (!modal) {
+      console.error('[Paywall] Modal not found');
+      return;
+    }
+    
+    console.log('[Paywall] Opening with plan:', plan);
+    
     modal.setAttribute('aria-hidden', 'false');
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
     try {
@@ -639,12 +647,16 @@
     });
   });
 
-  document.querySelectorAll('[data-open-plan]').forEach(btn => {
-    btn.addEventListener('click', e => {
+  // Use event delegation for pricing buttons
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-open-plan]');
+    if (btn) {
       e.preventDefault();
+      e.stopPropagation();
       const plan = btn.getAttribute('data-open-plan') || 'yearly';
+      console.log('[Paywall] Button clicked, plan:', plan);
       openPaywallWithPlan(plan);
-    });
+    }
   });
 
   if (closeBtn) {
