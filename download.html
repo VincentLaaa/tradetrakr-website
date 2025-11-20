@@ -1,165 +1,753 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <base href="./" />
-  <title>TradeTrakR | The Smart Trading Journal for Futures & Forex Traders</title>
-  <meta name="description" content="TradeTrakR is an intelligent trading journal that helps funded traders track P&L, psychology, and performance insights with AI-powered analytics." />
-  <meta name="keywords" content="trading journal, trade tracker, funded trading, futures trading, forex trading, P&L analytics, trade log, best trading journal app, AI trading journal" />
-  <link rel="canonical" href="https://tradetrakr.com/download" />
+  <title>TradeTrakR Terminal | Dashboard</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <meta property="og:title" content="TradeTrakR Trading Journal Download Center" />
-  <meta property="og:description" content="Access the latest TradeTrakR trading journal releases, announcements, and AI analytics updates." />
-  <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
-  <meta property="og:url" content="https://tradetrakr.com/download" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="TradeTrakR Trading Journal Download Center" />
-  <meta name="twitter:description" content="Access the latest TradeTrakR trading journal releases, announcements, and AI analytics updates." />
-  <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
+
+  <!-- Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <link rel="stylesheet" href="assets/css/theme-migrate.css">
-  <script defer src="assets/js/theme-accent.js"></script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "TradeTrakR",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web, Windows, macOS",
-      "description": "TradeTrakR is a smart trading journal that helps funded traders analyze P&L, psychology, and performance using AI.",
-      "url": "https://tradetrakr.com",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* THEME VARIABLES - OBSIDIAN */
+    :root {
+      --bg-obsidian: #050505;
+      --bg-void: #000000;
+      --bg-glass: rgba(20, 20, 25, 0.7);
+      --bg-glass-hover: rgba(30, 30, 35, 0.9);
+
+      --accent-cyan: #00f3ff;
+      --accent-violet: #bd00ff;
+      --accent-blue: #2d5af5;
+      --accent-success: #0aff68;
+      --accent-danger: #ff3366;
+
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --text-dim: #475569;
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(0, 243, 255, 0.3);
+
+      --font-main: 'Inter', sans-serif;
+
+      --shadow-neon: 0 0 20px rgba(0, 243, 255, 0.15);
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+    }
+
+    /* GLOBAL RESET & BASE */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background-color: var(--bg-obsidian);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Background Tech Grid */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(45, 90, 245, 0.08), transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(189, 0, 255, 0.05), transparent 40%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+    }
+
+    /* LIVE TICKER */
+    .market-ticker-wrap {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      border-bottom: 1px solid var(--border-subtle);
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      z-index: 100;
+      height: 36px;
+      display: flex;
+      align-items: center;
+    }
+
+    .market-ticker {
+      display: inline-block;
+      animation: ticker 30s linear infinite;
+      padding-left: 100%;
+    }
+
+    .ticker-item {
+      display: inline-block;
+      padding: 0 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .ticker-up {
+      color: var(--accent-success);
+      margin-left: 5px;
+    }
+
+    .ticker-down {
+      color: var(--accent-danger);
+      margin-left: 5px;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-100%, 0, 0);
       }
     }
-  </script>
 
-  <!-- THEME BASE (non-destructive) -->
-  <style>
-    :root{
-      --accent:#6d5dfc; --accent-rgb:109,93,252; --accent-2:#4c8dff;
-      --bg-0:#05070d; --bg-1:#0a0f18; --text:#e6e8ef; --muted:#a8adbb;
-      --line:rgba(255,255,255,0.06);
-      --card:rgba(255,255,255,0.02);
+    /* HEADER */
+    .header {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(5, 5, 5, 0.5);
+      backdrop-filter: blur(10px);
     }
-    body{
-      background:
-        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
-        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
-        linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.65; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .container,.site-container{max-width:1150px;margin:0 auto;padding:0 20px}
-    .site-header{position:sticky; top:0; z-index:50; background:rgba(5,7,13,0.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--line)}
-    .site-nav a{color:#a8adbb; text-decoration:none; margin-left:18px; font-size:.98rem}
-    .site-nav a:hover{color:var(--accent)}
-    .brand,.site-brand,.logo{font-weight:700; text-decoration:none; color:var(--text)}
-    .brand span,.logo span{color:var(--accent)}
-    section.section-block, section.section {padding:72px 0; border-top:1px solid var(--line)}
-    .glass.lift, .feature-card, .testimonial, .journal-feature, .cta-banner, .sidebar-section, .card{
-      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .btn{display:inline-block; padding:10px 16px; border-radius:999px; font-weight:600; text-decoration:none}
-    .btn.ghost{color:var(--text); border:1px solid var(--line)}
-    .btn.ghost:hover{border-color:rgba(var(--accent-rgb),.6)}
-    .btn.primary{background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#051018}
-    .section-intro h2, .bloom, .section-title, h1, h2.section-title{
-      background:linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+
+    .logo::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
     }
-    /* Reveal helper (class may be added later) */
-    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
-    .reveal.is-visible{opacity:1; transform:none}
+
+    .user-controls {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .system-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--accent-success);
+      background: rgba(10, 255, 104, 0.1);
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(10, 255, 104, 0.2);
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #333, #111);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .sign-out {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .sign-out:hover {
+      color: var(--text-primary);
+    }
+
+    /* DASHBOARD CONTENT */
+    .dashboard-main {
+      padding: 3rem 0;
+      flex: 1;
+    }
+
+    .welcome-area {
+      margin-bottom: 3rem;
+    }
+
+    .welcome-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      background: linear-gradient(90deg, #fff, var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .market-status {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+
+    .status-indicator.open {
+      background: var(--accent-success);
+      box-shadow: 0 0 10px var(--accent-success);
+    }
+
+    /* STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-cyan), transparent);
+      opacity: 0.5;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stat-sub {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+
+    /* COUNTDOWN */
+    .countdown-timer {
+      font-family: 'Courier New', monospace;
+      letter-spacing: -1px;
+    }
+
+    /* ACTION GRID */
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .action-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      height: 120px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+      background: var(--bg-glass-hover);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .action-card:hover .icon-box {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+    }
+
+    .icon-box {
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .action-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .action-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .action-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* CHANGELOG */
+    .changelog-section {
+      background: rgba(10, 10, 15, 0.5);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .changelog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1rem;
+    }
+
+    .changelog-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .version-tag {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: monospace;
+    }
+
+    .update-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .update-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 1rem;
+    }
+
+    .update-icon {
+      color: var(--accent-success);
+      font-weight: bold;
+    }
+
+    .update-content {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .stats-grid,
+      .actions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
-
 </head>
-<body class="auth-page">
-  <div class="auth-ambient" aria-hidden="true"></div>
-  <main class="card dashboard-card glass lift">
-    <header class="card-header glass lift">
-      <span class="auth-badge success badge">License Verified</span>
-      <h1 class="bloom">TradeTrakR Dashboard</h1>
-      <p class="subtitle">Welcome back! Access builds, release notes, and community announcements in one place.</p>
-    </header>
 
-    <div class="dashboard-grid glass lift">
-      <section class="panel downloads-panel glass lift">
-        <h2 class="bloom">Downloads</h2>
-        <p class="panel-subtitle">Latest builds are hosted on the TradeTrakR release channel.</p>
-        <p class="release-version" id="release-version">Fetching latest release…</p>
-        <div class="download-grid release-only" id="release-actions">
-          <a class="download-link btn" id="release-link" href="https://github.com/VincentLaaa/tradetrakr-releases/releases" target="_blank" rel="noopener noreferrer">
-            <span class="action-icon github">
-              <img src="assets/icon-github.svg" alt="TradeTrakR trading journal GitHub icon" />
-            </span>
-            <div class="download-text">
-              <strong>View Latest Release</strong>
-              <small>Open the TradeTrakR release page on GitHub</small>
-            </div>
-          </a>
+<body>
+
+  <!-- Live Market Ticker -->
+  <div class="market-ticker-wrap">
+    <div class="market-ticker">
+      <span class="ticker-item">ES <span class="ticker-up">▲ 4450.00</span></span>
+      <span class="ticker-item">NQ <span class="ticker-up">▲ 15230.50</span></span>
+      <span class="ticker-item">RTY <span class="ticker-down">▼ 1845.20</span></span>
+      <span class="ticker-item">CL <span class="ticker-up">▲ 82.40</span></span>
+      <span class="ticker-item">GC <span class="ticker-down">▼ 1945.10</span></span>
+      <span class="ticker-item">BTC <span class="ticker-up">▲ 34500.00</span></span>
+      <span class="ticker-item">ETH <span class="ticker-up">▲ 1850.00</span></span>
+      <span class="ticker-item">EUR/USD <span class="ticker-down">▼ 1.0540</span></span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item">ES <span class="ticker-up">▲ 4450.00</span></span>
+      <span class="ticker-item">NQ <span class="ticker-up">▲ 15230.50</span></span>
+      <span class="ticker-item">RTY <span class="ticker-down">▼ 1845.20</span></span>
+      <span class="ticker-item">CL <span class="ticker-up">▲ 82.40</span></span>
+      <span class="ticker-item">GC <span class="ticker-down">▼ 1945.10</span></span>
+      <span class="ticker-item">BTC <span class="ticker-up">▲ 34500.00</span></span>
+      <span class="ticker-item">ETH <span class="ticker-up">▲ 1850.00</span></span>
+      <span class="ticker-item">EUR/USD <span class="ticker-down">▼ 1.0540</span></span>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">TradeTrakR</a>
+      <div class="user-controls">
+        <div class="system-status">
+          <div class="pulse-dot"></div> Systems Operational
         </div>
-      </section>
+        <div class="user-profile">
+          <div class="avatar">TR</div>
+          <span id="sign-out" class="sign-out">Sign Out</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-      <section class="panel community-panel glass lift">
-        <h2 class="bloom">Community &amp; Support</h2>
-        <p class="panel-subtitle">Stay synced with outage alerts, roadmap drops, and strategy sessions.</p>
-        <a class="discord-cta btn ghost" href="https://discord.gg/cfEh4MuduT" target="_blank" rel="noopener noreferrer">
-          <span class="action-icon">
-            <img src="assets/icon-discord.png" alt="TradeTrakR trading journal Discord icon" />
-          </span>
-          <span class="discord-text">
-            Join Announcements Discord
-          </span>
-        </a>
-      </section>
-
-      <section class="panel updates-panel glass lift">
-        <h2 class="bloom">Latest Update</h2>
-        <ul class="update-list" id="update-list">
-          <li>
-            <span class="update-title">Checking GitHub Releases…</span>
-            <span class="update-date">Please wait</span>
-          </li>
-        </ul>
-      </section>
+  <main class="container dashboard-main">
+    <div class="welcome-area">
+      <h1 class="welcome-title">Welcome back, Trader</h1>
+      <div class="market-status">
+        <div class="status-indicator" id="market-status-dot"></div>
+        <span id="market-status-text">Checking Market Status...</span>
+      </div>
     </div>
 
-    <div class="dashboard-footer-actions glass lift">
-      <button id="sign-out" type="button" class="secondary-btn sign-out btn ghost">Sign Out</button>
-      <a class="back-link btn ghost" href="/">← Return to TradeTrakR site</a>
+    <div class="stats-grid">
+      <!-- Countdown Widget -->
+      <div class="stat-card">
+        <div class="stat-label">Market Open In</div>
+        <div class="stat-value countdown-timer" id="countdown">--:--:--</div>
+        <div class="stat-sub">New York Session (09:30 EST)</div>
+      </div>
+
+      <!-- Streak Counter -->
+      <div class="stat-card">
+        <div class="stat-label">Journal Streak</div>
+        <div class="stat-value" style="font-size: 1.5rem; color: var(--text-dim);">Coming Soon</div>
+        <div class="stat-sub">Feature in development</div>
+      </div>
+
+      <!-- Daily Wisdom -->
+      <div class="stat-card">
+        <div class="stat-label">Daily Wisdom</div>
+        <div class="stat-value" style="font-size: 1.1rem; line-height: 1.4; font-weight: 400; font-style: italic;">"The
+          goal of a successful trader is to make the best trades. Money is secondary."</div>
+        <div class="stat-sub">— Alexander Elder</div>
+      </div>
+    </div>
+
+    <div class="actions-grid">
+      <!-- Download App -->
+      <a href="https://github.com/VincentLaaa/tradetrakr-releases/releases" target="_blank" class="action-card">
+        <div class="icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </div>
+        <div class="action-text">
+          <div class="action-title">Download App</div>
+          <div class="action-desc" id="version-text">Loading version...</div>
+        </div>
+      </a>
+
+      <!-- Join Discord -->
+      <a href="https://discord.gg/cfEh4MuduT" target="_blank" class="action-card">
+        <div class="icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+            </path>
+          </svg>
+        </div>
+        <div class="action-text">
+          <div class="action-title">Join Discord</div>
+          <div class="action-desc">Connect with funded traders</div>
+        </div>
+      </a>
+
+      <!-- Coming Soon Feature -->
+      <div class="action-card" style="opacity: 0.5; cursor: default;">
+        <div class="icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="action-text">
+          <div class="action-title" style="color: var(--text-dim);">Coming Soon</div>
+          <div class="action-desc">New features in development</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="changelog-section">
+      <div class="changelog-header">
+        <div class="changelog-title">Latest Updates</div>
+        <div class="version-tag" id="version-tag">Loading...</div>
+      </div>
+      <ul class="update-list" id="update-list">
+        <li class="update-item"><span class="update-icon">•</span> <span class="update-content">Fetching release
+            notes...</span></li>
+      </ul>
     </div>
   </main>
 
-  </footer>
-
   <script src="script.js" defer></script>
-
   <script>
-    (function(){
-      const els = document.querySelectorAll('.reveal');
-      if(!('IntersectionObserver' in window)) { els.forEach(el=>el.classList.add('is-visible')); return; }
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            const d = parseInt(e.target.getAttribute('data-delay')||'0',10);
-            setTimeout(()=>e.target.classList.add('is-visible'), d);
-            io.unobserve(e.target);
-          }
-        });
-      }, {threshold:.12});
-      els.forEach(el=>io.observe(el));
-    })();
-  </script>
+    const RELEASE_API_URL = "https://api.github.com/repos/VincentLaaa/tradetrakr-releases/releases/latest";
 
+    // Fetch latest release from GitHub
+    async function fetchLatestRelease() {
+      try {
+        const response = await fetch(RELEASE_API_URL, {
+          headers: { Accept: "application/vnd.github+json" }
+        });
+
+        if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
+
+        const release = await response.json();
+
+        // Update version in download card
+        const versionText = document.getElementById('version-text');
+        if (versionText) {
+          const version = release.name || release.tag_name || 'Latest';
+          versionText.textContent = `Get the latest version (${version})`;
+        }
+
+        // Update version tag in changelog
+        const versionTag = document.getElementById('version-tag');
+        if (versionTag) {
+          versionTag.textContent = release.tag_name || release.name || 'Latest';
+        }
+
+        // Update changelog/release notes
+        const updateList = document.getElementById('update-list');
+        if (updateList && release.body) {
+          updateList.innerHTML = '';
+
+          const lines = release.body
+            .split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(line => line.length > 0 && !/^#+\s*/.test(line));
+
+          const itemsToShow = lines.slice(0, 5);
+          itemsToShow.forEach(line => {
+            const li = document.createElement('li');
+            li.className = 'update-item';
+
+            const icon = document.createElement('span');
+            icon.className = 'update-icon';
+            icon.textContent = '+';
+
+            const content = document.createElement('span');
+            content.className = 'update-content';
+            content.textContent = line.replace(/^[-*•]\s*/, '');
+
+            li.appendChild(icon);
+            li.appendChild(document.createTextNode(' '));
+            li.appendChild(content);
+            updateList.appendChild(li);
+          });
+
+          if (itemsToShow.length === 0) {
+            const li = document.createElement('li');
+            li.className = 'update-item';
+            li.innerHTML = '<span class="update-icon">•</span> <span class="update-content">No release notes available</span>';
+            updateList.appendChild(li);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch release:', error);
+        // Keep loading states or show error
+        const versionText = document.getElementById('version-text');
+        if (versionText) versionText.textContent = 'View latest version';
+
+        const versionTag = document.getElementById('version-tag');
+        if (versionTag) versionTag.textContent = 'Latest';
+
+        const updateList = document.getElementById('update-list');
+        if (updateList) {
+          updateList.innerHTML = '<li class="update-item"><span class="update-icon">!</span> <span class="update-content">Unable to fetch release notes. Visit GitHub for details.</span></li>';
+        }
+      }
+    }
+
+    // Session Countdown Logic
+    function updateCountdown() {
+      const now = new Date();
+      const estTime = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+
+      let nextOpen = new Date(estTime);
+      nextOpen.setHours(9, 30, 0, 0);
+
+      // If it's past 9:30 AM today, set for tomorrow
+      if (estTime > nextOpen) {
+        nextOpen.setDate(nextOpen.getDate() + 1);
+      }
+
+      // Skip weekends
+      while (nextOpen.getDay() === 0 || nextOpen.getDay() === 6) {
+        nextOpen.setDate(nextOpen.getDate() + 1);
+      }
+
+      const diff = nextOpen - estTime;
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown').textContent =
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+      // Market Status
+      const day = estTime.getDay();
+      const hour = estTime.getHours();
+      const minute = estTime.getMinutes();
+      const timeVal = hour + minute / 60;
+
+      const statusDot = document.getElementById('market-status-dot');
+      const statusText = document.getElementById('market-status-text');
+
+      // Simple check for NYSE hours (Mon-Fri 9:30 - 16:00)
+      if (day >= 1 && day <= 5 && timeVal >= 9.5 && timeVal < 16) {
+        statusDot.className = 'status-indicator open';
+        statusText.textContent = 'Market is Open';
+        statusText.style.color = 'var(--accent-success)';
+      } else {
+        statusDot.className = 'status-indicator';
+        statusText.textContent = 'Market is Closed';
+        statusText.style.color = 'var(--text-secondary)';
+      }
+    }
+
+    // Initialize
+    fetchLatestRelease();
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 </body>
+
 </html>
