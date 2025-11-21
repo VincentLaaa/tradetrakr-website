@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome | TradeTrakR</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* THEME VARIABLES - OBSIDIAN */
+        :root {
+            --bg-obsidian: #050505;
+            --bg-glass: rgba(20, 20, 25, 0.7);
+            --bg-glass-hover: rgba(30, 30, 35, 0.9);
+
+            --accent-cyan: #00f3ff;
+            --accent-violet: #bd00ff;
+            --accent-danger: #ff3366;
+
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-dim: #475569;
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-focus: rgba(0, 243, 255, 0.5);
+
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-main);
+            background-color: var(--bg-obsidian);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Canvas Background */
+        #grid-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            /* Let mouse pass through to body for tracking if needed, but we'll track on window */
+        }
+
+        .onboarding-card {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-continue {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+            color: #fff;
+            font-weight: 600;
+            padding: 16px 48px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(189, 0, 255, 0.4);
+        }
+
+        .existing-key-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .existing-key-link:hover {
+            color: var(--accent-cyan);
+            text-decoration: underline;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(0, 243, 255, 0.1);
+        }
+
+        .btn-validate {
+            width: 100%;
+            background: var(--text-primary);
+            color: var(--bg-obsidian);
+            font-weight: 600;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .btn-validate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-validate:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-close {
+            margin-top: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-close:hover {
+            color: var(--text-primary);
+        }
+
+        .status-msg {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            min-height: 1.4em;
+        }
+
+        .status-msg.error {
+            color: var(--accent-danger);
+        }
+
+        .status-msg.success {
+            color: var(--accent-cyan);
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="grid-canvas"></canvas>
+
+    <div class="onboarding-card">
+        <div class="logo-container">
+            <div class="logo-icon"></div>
+        </div>
+
+        <h1>Welcome to TradeTrakR</h1>
+        <p class="subtitle">The only tool you need to become a profitable trader.</p>
+
+        <a href="onboarding-profile.html" class="btn-continue">Continue</a>
+
+        <a href="#" id="open-key-modal" class="existing-key-link">Have an existing license key?</a>
+    </div>
+
+    <!-- License Modal -->
+    <div class="modal-overlay" id="key-modal">
+        <div class="modal-card">
+            <h2 class="modal-title">Activate License</h2>
+            <p class="modal-subtitle">Enter your Whop license key to unlock full access.</p>
+
+            <div class="input-group">
+                <input type="text" id="license-key" class="input-field" placeholder="S-XXXXXX-..." autocomplete="off" />
+            </div>
+
+            <button id="validate-btn" class="btn-validate">Validate License</button>
+            <div id="validation-status" class="status-msg"></div>
+
+            <button id="close-modal" class="btn-close">Cancel</button>
+        </div>
+    </div>
+
+    <script src="onboarding.js"></script>
+</body>
+
+</html>

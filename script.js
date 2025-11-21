@@ -1,3 +1,50 @@
+// --- Dashboard Access Guard ---
+(async function checkAccess() {
+  // Skip this guard on index.html (public landing page)
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  if (currentPage === 'index.html' || currentPage === '') {
+    return;
+  }
+
+  // Initialize Supabase (Anon Key)
+  const supabaseUrl = 'https://afqsiqoksuuddplockbd.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXNpcW9rc3V1ZGRwbG9ja2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjM2NjksImV4cCI6MjA3ODk5OTY2OX0.drzxOAIUZP3ZhrdqGCJOAzBM8oaeOqVfVp7ATbacNoo';
+
+  // Ensure Supabase client is available
+  if (typeof window.supabase === 'undefined') {
+    console.error('Supabase client not loaded');
+    return;
+  }
+
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  });
+
+  // Check User Session
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    window.location.href = 'signin.html'; // Redirect to login if not authenticated
+    return;
+  }
+
+  // Check Subscription Status
+  const { data: profile, error } = await supabase
+    .from('profiles')
+    .select('subscription_tier')
+    .eq('id', user.id)
+    .single();
+
+  if (error || !profile || profile.subscription_tier !== 'paid') {
+    window.location.href = 'onboarding-paywall.html'; // Redirect to paywall if not paid
+  }
+  // If paid, allow dashboard to load
+})();
+
 const LICENSE_FLAG_KEY = "license_valid";
 const LICENSE_VALUE_KEY = "license_key";
 const WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
@@ -291,31 +338,31 @@ function initDashboardScrollAnimation() {
 
   // Initial state
   let currentScroll = window.scrollY;
-  
+
   function updateDashboardTransform() {
     const scrollY = window.scrollY;
     // Calculate progress: 0 at top, 1 after scrolling 500px (adjust as needed)
     const progress = Math.min(Math.max(scrollY / 600, 0), 1);
-    
+
     // Ease the progress for smoother feel
     const easedProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease out
-    
+
     // Interpolate values
     // RotateX: Starts at 45deg (flat), ends at 0deg (straight)
     const rotateX = 45 - (45 * easedProgress);
-    
+
     // Scale: Starts at 0.9, ends at 1.0
     const scale = 0.9 + (0.1 * easedProgress);
-    
+
     // TranslateY: Starts at 60px, ends at 0px
     const translateY = 60 - (60 * easedProgress);
-    
+
     // Apply transform
     dashboard.style.transform = `perspective(1200px) rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px)`;
-    
+
     requestAnimationFrame(updateDashboardTransform);
   }
-  
+
   // Start the animation loop
   requestAnimationFrame(updateDashboardTransform);
 }

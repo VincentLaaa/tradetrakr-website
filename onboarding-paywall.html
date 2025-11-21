@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Plan | TradeTrakR</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* THEME VARIABLES - OBSIDIAN */
+        :root {
+            --bg-obsidian: #050505;
+            --bg-void: #000000;
+            --bg-glass: rgba(20, 20, 25, 0.7);
+            --bg-glass-hover: rgba(30, 30, 35, 0.9);
+
+            --accent-cyan: #00f3ff;
+            --accent-violet: #bd00ff;
+            --accent-blue: #2d5af5;
+            --accent-success: #0aff68;
+            --accent-danger: #ff3366;
+
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-dim: #475569;
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 243, 255, 0.3);
+
+            --font-main: 'Inter', sans-serif;
+        }
+
+        /* GLOBAL RESET & BASE */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-main);
+            background-color: var(--bg-obsidian);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 300;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Tech Grid */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* BLURRED BACKGROUND CONTAINER - REMOVED BLUR */
+        .dashboard-blur-container {
+            /* filter: blur(8px);  <-- REMOVED */
+            pointer-events: none;
+            user-select: none;
+            opacity: 1;
+            /* Increased opacity for visibility */
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* --- DASHBOARD STYLES (Simplified for background) --- */
+        /* REMOVED OLD STYLES */
+
+        /* --- PAYWALL MODAL --- */
+        .paywall-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            /* Increased opacity for focus */
+            /* backdrop-filter: blur(3px); <-- REMOVED COMPLETELY */
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .paywall-modal {
+            display: flex;
+            width: 900px;
+            max-width: 95%;
+            min-height: 550px;
+            /* Changed from fixed height */
+            height: auto;
+            /* Allow growth */
+            background: var(--bg-obsidian);
+            /* Dark Theme */
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+
+        /* Left Side (Dark/Purple) */
+        .modal-left {
+            flex: 1;
+            background: linear-gradient(135deg, #0f0518 0%, #1a002e 100%);
+            /* Darker purple/black */
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            position: relative;
+            border-right: 1px solid var(--border-subtle);
+        }
+
+        .modal-left::before {
+            content: '"';
+            font-family: serif;
+            font-size: 8rem;
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            opacity: 0.1;
+            color: var(--accent-violet);
+        }
+
+        .quote-container {
+            position: relative;
+            height: 150px;
+            /* Fixed height for transitions */
+            display: flex;
+            align-items: center;
+        }
+
+        .quote-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            color: var(--text-primary);
+        }
+
+        .quote-text.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-highlight {
+            color: var(--accent-cyan);
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+        }
+
+        /* Right Side (Dark Theme) */
+        .modal-right {
+            flex: 1;
+            padding: 3rem;
+            background: var(--bg-obsidian);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .plan-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Toggle Switch Dark Mode */
+        .plan-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px;
+            border-radius: 12px;
+            width: fit-content;
+            border: 1px solid var(--border-subtle);
+            /* Removed relative/margin-top from previous step */
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .toggle-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .save-badge {
+            display: inline-block;
+            background: rgba(10, 255, 104, 0.15);
+            color: var(--accent-success);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(10, 255, 104, 0.3);
+            white-space: nowrap;
+            margin-bottom: 4px;
+            box-shadow: 0 0 10px rgba(10, 255, 104, 0.1);
+        }
+
+        .plan-price {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .price-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .price-period {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .feature-icon {
+            color: var(--accent-success);
+            font-size: 0.8rem;
+        }
+
+        .subscribe-btn {
+            margin-top: auto;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            color: #000;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+        }
+
+        .logout-link {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 101;
+            cursor: pointer;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        .logout-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* --- License Link & Modal --- */
+        .existing-key-link {
+            display: block;
+            margin-top: 1rem;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .existing-key-link:hover {
+            color: var(--accent-cyan);
+            text-decoration: underline;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            /* Higher than paywall */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(0, 243, 255, 0.1);
+        }
+
+        .btn-validate {
+            width: 100%;
+            background: var(--text-primary);
+            color: var(--bg-obsidian);
+            font-weight: 600;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .btn-validate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-validate:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-close {
+            margin-top: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-close:hover {
+            color: var(--text-primary);
+        }
+
+        .status-msg {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            min-height: 1.4em;
+        }
+
+        .status-msg.error {
+            color: var(--accent-danger);
+        }
+
+        .status-msg.success {
+            color: var(--accent-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .paywall-modal {
+                flex-direction: column;
+                height: auto;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .modal-left {
+                padding: 2rem;
+            }
+
+            .modal-right {
+                padding: 2rem;
+            }
+
+            .quote-text {
+                font-size: 1.4rem;
+                position: relative;
+                opacity: 1;
+                transform: none;
+            }
+
+            .quote-container {
+                height: auto;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DASHBOARD BACKGROUND (Visual only) -->
+    <div class="dashboard-blur-container">
+        <!-- Header -->
+        <header class="dash-header">
+            <div class="dash-logo">TRADETRAKR</div>
+            <nav class="dash-nav">
+                <div class="dash-nav-item active">Dashboard</div>
+                <div class="dash-nav-item">Stats</div>
+                <div class="dash-nav-item">AI Assistant</div>
+                <div class="dash-nav-item">Settings</div>
+                <div class="dash-nav-item">Home</div>
+            </nav>
+        </header>
+
+        <main class="dash-content">
+            <!-- Welcome Card -->
+            <div class="welcome-card">
+                <div class="bolt-icon"><i class="fas fa-bolt"></i></div>
+                <h1>Welcome, <span class="user-name">Vincent!</span></h1>
+                <div class="loading-bar"></div>
+            </div>
+
+            <!-- Main Stats Container -->
+            <div class="stats-container">
+                <!-- Calendar Header -->
+                <div class="cal-header">
+                    <div class="cal-days">
+                        <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>WEEK</span>
+                    </div>
+                    <div class="cal-controls">
+                        <button class="cal-btn"><i class="fas fa-caret-left"></i></button>
+                        <span class="cal-month">November 2025</span>
+                        <button class="cal-btn"><i class="fas fa-caret-right"></i></button>
+                        <span class="cal-pnl">Monthly P&L: <span class="green">+$1,545.00</span></span>
+                    </div>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-row">
+                    <div class="mini-stat-card">
+                        <div class="label">WIN %</div>
+                        <div class="value">100%</div>
+                        <div class="sub">2 wins - 0 losses</div>
+                    </div>
+                    <div class="mini-stat-card">
+                        <div class="label">AVG WIN / LOSS</div>
+                        <div class="value">$772.50 / —</div>
+                        <div class="sub">2 trades total</div>
+                    </div>
+                    <div class="mini-stat-card">
+                        <div class="label">PROFIT FACTOR</div>
+                        <div class="value">∞</div>
+                        <div class="sub">Gains $1545.00 / Losses $0.00</div>
+                    </div>
+                    <div class="mini-stat-card highlight">
+                        <div class="label">TOTAL P&L</div>
+                        <div class="value green">+$1,545.00</div>
+                        <div class="sub">1 day accounted</div>
+                    </div>
+                </div>
+
+                <!-- Calendar Grid (Simulated) -->
+                <div class="cal-grid">
+                    <!-- Week 1 -->
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day">1<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day week-sum">Week 1<br><span class="no-trade">No Trade</span></div>
+                    <!-- Week 2 -->
+                    <div class="cal-day">2<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">3<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">4<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">5<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">6<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">7<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">8<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day week-sum">Week 2<br><span class="no-trade">No Trade</span></div>
+                    <!-- Week 3 -->
+                    <div class="cal-day">9<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">10<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">11<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">12<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">13<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">14<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">15<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day week-sum">Week 3<br><span class="no-trade">No Trade</span></div>
+                    <!-- Week 4 (Active) -->
+                    <div class="cal-day">16<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">17<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">18<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">19<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day">20<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day active-day">21<br><span class="green">+$1,545.00</span></div>
+                    <div class="cal-day">22<br><span class="no-trade">No Trade</span></div>
+                    <div class="cal-day week-sum">Week 4<br><span class="green">+$1,545.00</span></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        /* --- NEW DASHBOARD BACKGROUND STYLES --- */
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #050505;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .dash-logo {
+            font-weight: 900;
+            font-size: 1.2rem;
+            background: linear-gradient(90deg, #00f3ff, #2d5af5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .dash-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .dash-nav-item {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #666;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            cursor: default;
+        }
+
+        .dash-nav-item.active {
+            color: #00f3ff;
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
+        .dash-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0.8;
+            /* Slight fade to keep focus on paywall */
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.2) 100%);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bolt-icon {
+            font-size: 2rem;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .welcome-card h1 {
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .user-name {
+            color: #38bdf8;
+        }
+
+        /* Loading bar animation */
+        .loading-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00f3ff, transparent);
+            width: 50%;
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes scan {
+            0% {
+                left: -50%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Stats Container */
+        .stats-container {
+            background: #0f1115;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .cal-header {
+            margin-bottom: 2rem;
+        }
+
+        .cal-days {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            text-align: center;
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .cal-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cal-btn {
+            background: #38bdf8;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .cal-month {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .cal-pnl {
+            margin-left: 1rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .green {
+            color: #22c55e;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .mini-stat-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .mini-stat-card .label {
+            font-size: 0.65rem;
+            color: #8b949e;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .mini-stat-card .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .mini-stat-card .sub {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        /* Calendar Grid */
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+        }
+
+        .cal-day {
+            background: #0d1117;
+            border: 1px solid #21262d;
+            border-radius: 6px;
+            height: 80px;
+            padding: 8px;
+            font-size: 0.8rem;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .cal-day.week-sum {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .cal-day.empty {
+            background: transparent;
+            border: none;
+        }
+
+        .no-trade {
+            font-size: 0.7rem;
+            color: #484f58;
+        }
+
+        /* Animation: Randomly highlight days */
+        .cal-day:not(.empty):not(.week-sum) {
+            animation: glow 8s infinite;
+        }
+
+        .cal-day:nth-child(odd) {
+            animation-delay: 1s;
+        }
+
+        .cal-day:nth-child(3n) {
+            animation-delay: 3s;
+        }
+
+        .cal-day:nth-child(7n) {
+            animation-delay: 5s;
+        }
+
+        @keyframes glow {
+            0% {
+                border-color: #21262d;
+                box-shadow: none;
+            }
+
+            5% {
+                border-color: #38bdf8;
+                box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            }
+
+            10% {
+                border-color: #21262d;
+                box-shadow: none;
+            }
+
+            100% {
+                border-color: #21262d;
+                box-shadow: none;
+            }
+        }
+    </style>
+
+    <!-- PAYWALL OVERLAY -->
+    <div class="paywall-overlay">
+        <div class="paywall-modal">
+            <!-- Left Side -->
+            <div class="modal-left">
+                <div class="quote-container">
+                    <div class="quote-text active" data-index="0">
+                        "90% of traders fail because they lack discipline. <span class="quote-highlight">TradeTrakR
+                            makes you part of the 10%.</span>"
+                    </div>
+                    <div class="quote-text" data-index="1">
+                        "The goal of a successful trader is to make the best trades. <span class="quote-highlight">Money
+                            is secondary.</span>"
+                    </div>
+                    <div class="quote-text" data-index="2">
+                        "Amateurs think about how much they can make. <span class="quote-highlight">Professionals think
+                            about how much they can lose.</span>"
+                    </div>
+                </div>
+                <button id="logout-btn" class="logout-link">Log out</button>
+            </div>
+
+            <!-- Right Side -->
+            <div class="modal-right">
+                <div class="plan-header">
+                    <div>
+                        <div class="plan-title">Pro Trader</div>
+                        <div class="plan-subtitle">Everything you need to succeed</div>
+                    </div>
+                    <div class="plan-price">
+                        <span class="save-badge" id="promo-badge">SAVE 45% + 3 DAY TRIAL</span>
+                        <div class="price-amount" id="price-display">$14.99</div>
+                        <div class="price-period" id="period-display">/month</div>
+                    </div>
+                </div>
+
+                <div class="plan-toggle-container">
+                    <button class="toggle-btn" id="btn-monthly">Monthly</button>
+                    <button class="toggle-btn active" id="btn-yearly">Yearly</button>
+                </div>
+
+                <ul class="features-list">
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i> Psychology Score</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i> AI Assistant</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i> Discipline Coach</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i> Auto Journaling</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i> Advanced Analytics</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited Trades</li>
+                </ul>
+
+                <a href="https://whop.com/checkout/plan_U7h0RWow4rgZ9" class="subscribe-btn" id="subscribe-btn">Start
+                    Free Trial</a>
+
+                <a href="#" id="open-key-modal" class="existing-key-link">Have an existing license key?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- License Modal -->
+    <div class="modal-overlay" id="key-modal">
+        <div class="modal-card">
+            <h2 class="modal-title">Activate License</h2>
+            <p class="modal-subtitle">Enter your Whop license key to unlock full access.</p>
+
+            <div class="input-group">
+                <input type="text" id="license-key" class="input-field" placeholder="S-XXXXXX-..." autocomplete="off" />
+            </div>
+
+            <button id="validate-btn" class="btn-validate">Validate License</button>
+            <div id="validation-status" class="status-msg"></div>
+
+            <button id="close-modal" class="btn-close">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Supabase (Reuse existing config)
+        const supabaseUrl = 'https://afqsiqoksuuddplockbd.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXNpcW9rc3V1ZGRwbG9ja2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjM2NjksImV4cCI6MjA3ODk5OTY2OX0.drzxOAIUZP3ZhrdqGCJOAzBM8oaeOqVfVp7ATbacNoo';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+            auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: true
+            }
+        });
+
+        // --- Quote Rotation ---
+        const quotes = document.querySelectorAll('.quote-text');
+        let currentQuote = 0;
+
+        setInterval(() => {
+            quotes[currentQuote].classList.remove('active');
+            currentQuote = (currentQuote + 1) % quotes.length;
+            quotes[currentQuote].classList.add('active');
+        }, 15000); // 15 seconds
+
+        // --- Plan Toggle ---
+        const btnMonthly = document.getElementById('btn-monthly');
+        const btnYearly = document.getElementById('btn-yearly');
+        const priceDisplay = document.getElementById('price-display');
+        const periodDisplay = document.getElementById('period-display');
+        const subscribeBtn = document.getElementById('subscribe-btn');
+        const promoBadge = document.getElementById('promo-badge');
+
+        const LINK_MONTHLY = 'https://whop.com/checkout/plan_mkRYtNPWxqQ7O';
+        const LINK_YEARLY = 'https://whop.com/checkout/plan_U7h0RWow4rgZ9';
+
+        // Initialize with Yearly (Default)
+        priceDisplay.textContent = '$7.99';
+        periodDisplay.textContent = '/month (billed yearly)';
+        subscribeBtn.href = LINK_YEARLY;
+        subscribeBtn.textContent = "Start Free Trial";
+        promoBadge.style.display = 'inline-block';
+
+        btnMonthly.addEventListener('click', () => {
+            btnMonthly.classList.add('active');
+            btnYearly.classList.remove('active');
+            priceDisplay.textContent = '$14.99';
+            periodDisplay.textContent = '/month';
+            subscribeBtn.href = LINK_MONTHLY;
+            subscribeBtn.textContent = "Subscribe Now";
+            promoBadge.style.display = 'none';
+        });
+
+        btnYearly.addEventListener('click', () => {
+            btnYearly.classList.add('active');
+            btnMonthly.classList.remove('active');
+            priceDisplay.textContent = '$7.99';
+            periodDisplay.textContent = '/month (billed yearly)';
+            subscribeBtn.href = LINK_YEARLY;
+            subscribeBtn.textContent = "Start Free Trial";
+            promoBadge.style.display = 'inline-block';
+        });
+
+        // Logout Logic
+        document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const { error } = await supabase.auth.signOut();
+            if (!error) {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Mark Onboarding as Complete
+        async function markOnboardingComplete() {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                await supabase
+                    .from('profiles')
+                    .update({ onboarding_complete: true })
+                    .eq('id', user.id);
+            }
+        }
+        markOnboardingComplete();
+
+        // --- License Verification Logic ---
+        const WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
+
+        async function postLicenseForValidation(licenseKey) {
+            const response = await fetch(WORKER_ENDPOINT, {
+                method: "POST",
+                body: JSON.stringify({ license: licenseKey })
+            });
+
+            const data = await response.json().catch(() => ({}));
+            return data;
+        }
+
+        // --- Modal & License UI Logic ---
+        const modal = document.getElementById('key-modal');
+        const openBtn = document.getElementById('open-key-modal');
+        const closeBtn = document.getElementById('close-modal');
+        const validateBtn = document.getElementById('validate-btn');
+        const licenseInput = document.getElementById('license-key');
+        const statusMsg = document.getElementById('validation-status');
+
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+            licenseInput.focus();
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            statusMsg.textContent = '';
+            statusMsg.className = 'status-msg';
+        });
+
+        // Close on click outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        function showStatus(msg, type) {
+            statusMsg.textContent = msg;
+            statusMsg.className = `status-msg ${type}`;
+        }
+
+        validateBtn.addEventListener('click', async () => {
+            const key = licenseInput.value.trim();
+            if (!key) return;
+
+            validateBtn.disabled = true;
+            validateBtn.textContent = 'Validating...';
+            showStatus('', '');
+
+            try {
+                // 1. Validate with Worker (No HWID)
+                const data = await postLicenseForValidation(key);
+
+                if (data?.ok) {
+                    showStatus('License verified! Updating profile...', 'success');
+
+                    // 2. Update Supabase Profile with Membership Info
+                    const { data: { user } } = await supabase.auth.getUser();
+
+                    if (user) {
+                        const { error } = await supabase
+                            .from('profiles')
+                            .update({
+                                subscription_tier: 'paid',
+                                whop_membership_id: data.membership_id,
+                                whop_plan_id: data.plan_id,
+                                whop_status: data.status,
+                                whop_last_sync_at: new Date().toISOString()
+                            })
+                            .eq('id', user.id);
+
+                        if (error) throw error;
+
+                        showStatus('Success! Redirecting...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'download.html';
+                        }, 1000);
+                    } else {
+                        showStatus('Error: User not logged in.', 'error');
+                    }
+
+                } else {
+                    // Handle errors
+                    if (data?.error === "invalid_or_expired") {
+                        showStatus("❌ Invalid or expired license.", "error");
+                    } else {
+                        showStatus(`Error: ${data?.error || "Unknown error"}`, "error");
+                    }
+                }
+
+            } catch (error) {
+                console.error(error);
+                showStatus('Connection failed. Try again.', 'error');
+            } finally {
+                validateBtn.disabled = false;
+                validateBtn.textContent = 'Validate License';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

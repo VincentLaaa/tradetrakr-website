@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onboarding | TradeTrakR</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* THEME VARIABLES - OBSIDIAN */
+        :root {
+            --bg-obsidian: #050505;
+            --bg-glass: rgba(20, 20, 25, 0.7);
+            --bg-glass-hover: rgba(30, 30, 35, 0.9);
+
+            --accent-cyan: #00f3ff;
+            --accent-violet: #bd00ff;
+            --accent-danger: #ff3366;
+
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-dim: #475569;
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-focus: rgba(0, 243, 255, 0.5);
+
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-main);
+            background-color: var(--bg-obsidian);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid var(--border-subtle);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        .progress-container {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+            width: 50%;
+            /* Step 2 of 4 approx */
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .logout-btn {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: fadeIn 0.6s ease-out;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .illustration {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.2));
+            color: var(--accent-cyan);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Custom Select Wrapper */
+        .select-wrapper {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        select {
+            width: 100%;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(0, 243, 255, 0.1);
+        }
+
+        select option {
+            background-color: #1a1a1a;
+            /* Dark background for options */
+            color: var(--text-primary);
+            padding: 10px;
+        }
+
+        .btn-continue {
+            margin-top: 3rem;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+            color: #fff;
+            font-weight: 600;
+            padding: 16px 64px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            pointer-events: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-continue.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn-continue.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(189, 0, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div style="display: flex; align-items: center;">
+            <a href="onboarding-profile.html" class="back-btn">←</a>
+            <a href="#" class="logo">Trade<span>TrakR</span></a>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <a href="#" id="logout-btn" class="logout-btn">Log out</a>
+    </header>
+
+    <main class="main-content">
+        <div class="illustration"><i class="fas fa-building-columns"></i></div>
+        <h1>Who is your primary broker?</h1>
+        <p class="subtitle">Select only one</p>
+
+        <div class="select-wrapper">
+            <select id="broker-select">
+                <option value="" disabled selected>Select broker</option>
+
+                <optgroup label="Prop Firms">
+                    <option value="topstep">Topstep</option>
+                    <option value="apex">Apex Trader Funding</option>
+                    <option value="myfundedfutures">MyFundedFutures</option>
+                    <option value="ftmo">FTMO</option>
+                    <option value="thefundedtrader">The Funded Trader</option>
+                    <option value="fundingpips">Funding Pips</option>
+                    <option value="alpha-capital">Alpha Capital Group</option>
+                </optgroup>
+
+                <optgroup label="Futures Brokers">
+                    <option value="ninjatrader">NinjaTrader</option>
+                    <option value="tradovate">Tradovate</option>
+                    <option value="rithmic">Rithmic (Generic)</option>
+                    <option value="tradestation">TradeStation</option>
+                    <option value="amp">AMP Futures</option>
+                    <option value="ironbeam">Ironbeam</option>
+                </optgroup>
+
+                <optgroup label="Forex/CFD Brokers">
+                    <option value="metatrader4">MetaTrader 4 (Generic)</option>
+                    <option value="metatrader5">MetaTrader 5 (Generic)</option>
+                    <option value="icmarkets">IC Markets</option>
+                    <option value="oanda">OANDA</option>
+                    <option value="ig">IG</option>
+                    <option value="interactivebrokers">Interactive Brokers</option>
+                </optgroup>
+
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <button id="continue-btn" class="btn-continue">Continue</button>
+    </main>
+
+    <script>
+        const brokerSelect = document.getElementById('broker-select');
+        const continueBtn = document.getElementById('continue-btn');
+
+        brokerSelect.addEventListener('change', () => {
+            if (brokerSelect.value) {
+                continueBtn.classList.add('active');
+            }
+        });
+
+        continueBtn.addEventListener('click', () => {
+            if (brokerSelect.value) {
+                console.log('Selected Broker:', brokerSelect.value);
+                // Redirect to download or next step
+                window.location.href = 'onboarding-assets.html';
+            }
+        });
+
+        // Logout Logic
+        document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const { error } = await supabase.auth.signOut();
+            if (!error) {
+                window.location.href = 'signin.html';
+            }
+        });
+
+        // Initialize Supabase (Reuse existing config)
+        const supabaseUrl = 'https://afqsiqoksuuddplockbd.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXNpcW9rc3V1ZGRwbG9ja2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjM2NjksImV4cCI6MjA3ODk5OTY2OX0.drzxOAIUZP3ZhrdqGCJOAzBM8oaeOqVfVp7ATbacNoo';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+            auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: true
+            }
+        });
+
+    </script>
+</body>
+
+</html>

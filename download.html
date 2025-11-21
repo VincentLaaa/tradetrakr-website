@@ -13,6 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap"
     rel="stylesheet">
 
+  <!-- Supabase Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     /* THEME VARIABLES - OBSIDIAN */
     :root {
@@ -747,6 +750,61 @@
     fetchLatestRelease();
     setInterval(updateCountdown, 1000);
     updateCountdown();
+  </script>
+
+  <script>
+    // Supabase Logic: Auth Guard + Sign Out
+    const supabaseUrl = 'https://afqsiqoksuuddplockbd.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXNpcW9rc3V1ZGRwbG9ja2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjM2NjksImV4cCI6MjA3ODk5OTY2OX0.drzxOAIUZP3ZhrdqGCJOAzBM8oaeOqVfVp7ATbacNoo';
+
+    if (typeof window.supabase !== 'undefined') {
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+        },
+      });
+
+      // 1. Auth Guard
+      (async function guardDownloadPage() {
+        const { data: { user } } = await supabase.auth.getUser();
+
+        if (!user) {
+          // Not signed in → send them to the landing page
+          window.location.href = 'index.html';
+          return;
+        }
+
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('subscription_tier')
+          .eq('id', user.id)
+          .single();
+
+        if (error || !profile || profile.subscription_tier !== 'paid') {
+          // Not paid → kick to paywall
+          window.location.href = 'paywall.html';
+          return;
+        }
+
+        // If we get here, user is logged in AND paid → allow page to render
+      })();
+
+      // 2. Sign Out Logic
+      const signOutEl = document.getElementById('sign-out');
+      if (signOutEl) {
+        signOutEl.addEventListener('click', async () => {
+          try {
+            await supabase.auth.signOut();
+          } catch (e) {
+            console.error('Error signing out:', e);
+          } finally {
+            window.location.href = 'index.html';
+          }
+        });
+      }
+    }
   </script>
 </body>
 
