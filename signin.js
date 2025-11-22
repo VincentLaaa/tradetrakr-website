@@ -33,60 +33,17 @@ function showSuccess(message) {
     errorMsg.style.display = 'none';
 }
 
-// Helper to check profile and redirect
-async function checkProfileAndRedirect(userId) {
-    try {
-        const { data: profile, error: profileError } = await supabase
-            .from('profiles')
-            .select('subscription_tier, onboarding_complete')
-            .eq('id', userId)
-            .single();
-
-        if (profileError && profileError.code === 'PGRST116') {
-            // Profile doesn't exist, redirect to onboarding
-            window.location.href = 'onboarding.html';
-            return;
-        }
-
-        if (profile) {
-            if (profile.subscription_tier === 'paid') {
-                window.location.href = 'download.html';
-            } else if (profile.onboarding_complete) {
-                window.location.href = 'onboarding-paywall.html';
-            } else {
-                window.location.href = 'onboarding.html';
-            }
-        } else {
-            window.location.href = 'onboarding.html';
-        }
-    } catch (error) {
-        console.error('Error checking profile:', error);
-        window.location.href = 'onboarding.html';
-    }
-}
-
-// Check for OAuth callback on page load
-(async function handleOAuthCallback() {
-    const { data: { session }, error } = await supabase.auth.getSession();
-
-    if (session && session.user) {
-        // User just signed in via OAuth
-        showSuccess('Signed in successfully! Redirecting...');
-        await checkProfileAndRedirect(session.user.id);
-    }
-})();
-
 // Google Sign-In Handler
 googleBtn.addEventListener('click', async () => {
     try {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: `${window.location.origin}/signin.html`,
                 queryParams: {
                     access_type: 'offline',
                     prompt: 'consent',
                 },
+                redirectTo: window.location.origin + '/download.html'
             },
         });
         if (error) throw error;
@@ -119,7 +76,29 @@ signinForm.addEventListener('submit', async (e) => {
         showSuccess('Signed in successfully! Checking subscription...');
 
         // Check subscription tier and onboarding status
-        await checkProfileAndRedirect(data.user.id);
+        const { data: user } = await supabase.auth.getUser();
+        if (user && user.user) {
+            const { data: profile, error: profileError } = await supabase
+                .from('profiles')
+                .select('subscription_tier, onboarding_complete')
+                .eq('id', user.user.id)
+                .single();
+
+            if (profile) {
+                if (profile.subscription_tier === 'paid') {
+                    window.location.href = 'download.html';
+                } else if (profile.onboarding_complete) {
+                    window.location.href = 'onboarding-paywall.html';
+                } else {
+                    window.location.href = 'onboarding.html';
+                }
+            } else {
+                window.location.href = 'onboarding.html';
+            }
+        } else {
+            // Fallback if user fetch fails (unlikely after sign in)
+            window.location.href = 'onboarding.html';
+        }
 
     } catch (error) {
         showError(error.message);

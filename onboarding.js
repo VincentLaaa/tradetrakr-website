@@ -145,35 +145,13 @@ draw();
 const WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
 
 async function postLicenseForValidation(licenseKey) {
-    try {
-        const hwidHex = await window.TradeTrakR.getHardwareId();
+    const response = await fetch(WORKER_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify({ license: licenseKey })
+    });
 
-        const response = await fetch(WORKER_ENDPOINT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                license: licenseKey,
-                hwid: hwidHex
-            })
-        });
-
-        if (!response.ok) {
-            console.error("Worker response not OK:", response.status);
-        }
-
-        const data = await response.json().catch(() => ({}));
-
-        if (!data.ok && data.error) {
-            console.error("License validation error:", data.error);
-        }
-
-        return data;
-    } catch (error) {
-        console.error("postLicenseForValidation error:", error);
-        throw error;
-    }
+    const data = await response.json().catch(() => ({}));
+    return data;
 }
 
 // --- Modal & License Logic ---
@@ -207,18 +185,12 @@ validateBtn.addEventListener('click', async () => {
     const key = licenseInput.value.trim();
     if (!key) return;
 
-    // Validate format before calling worker
-    if (!window.TradeTrakR.isValidLicenseKey(key)) {
-        showStatus('Invalid license key format. Expected format: X-XXXXX-XXXXX-XXXXX', 'error');
-        return;
-    }
-
     validateBtn.disabled = true;
     validateBtn.textContent = 'Validating...';
     showStatus('', '');
 
     try {
-        // 1. Validate with Worker (includes HWID)
+        // 1. Validate with Worker (No HWID)
         const data = await postLicenseForValidation(key);
 
         if (data?.ok) {
