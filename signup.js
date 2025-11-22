@@ -33,12 +33,65 @@ function showSuccess(message) {
     errorMsg.style.display = 'none';
 }
 
-// Google Sign-In Handler
+// Helper to ensure profile exists
+async function ensureProfileExists(userId) {
+    try {
+        // Check if profile already exists
+        const { data: existingProfile, error: fetchError } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('id', userId)
+            .single();
+
+        if (existingProfile) {
+            // Profile already exists
+            return true;
+        }
+
+        // Profile doesn't exist, create it
+        const { error: insertError } = await supabase
+            .from('profiles')
+            .insert({
+                id: userId,
+                subscription_tier: 'free',
+                onboarding_complete: false
+            });
+
+        if (insertError) {
+            console.error('Error creating profile:', insertError);
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error ensuring profile exists:', error);
+        return false;
+    }
+}
+
+// Check for OAuth callback on page load
+(async function handleOAuthCallback() {
+    const { data: { session }, error } = await supabase.auth.getSession();
+
+    if (session && session.user) {
+        // User just signed up/in via OAuth
+        showSuccess('Account created successfully! Setting up your profile...');
+
+        // Ensure profile exists
+        await ensureProfileExists(session.user.id);
+
+        // Redirect to onboarding
+        window.location.href = 'onboarding.html';
+    }
+})();
+
+// Google Sign-Up Handler
 googleBtn.addEventListener('click', async () => {
     try {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
+                redirectTo: `${window.location.origin}/signup.html`,
                 queryParams: {
                     access_type: 'offline',
                     prompt: 'consent',
@@ -74,29 +127,29 @@ signupForm.addEventListener('submit', async (e) => {
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
+            options: {
+                emailRedirectTo: `${window.location.origin}/signup.html`
+            }
         });
 
         if (error) throw error;
 
-        if (data.user && !data.session) {
-            // Email confirmation required
-            showSuccess('Account created! Please check your email to confirm your registration.');
-            signupForm.reset();
-        } else if (data.user && data.session) {
-            // Auto-confirmed (if disabled in settings)
-            showSuccess('Account created successfully! Checking subscription...');
+        if (data.user) {
+            // Account created
+            showSuccess('Account created successfully! Setting up your profile...');
 
-            // Check subscription tier
-            const { data: profile, error: profileError } = await supabase
-                .from('profiles')
-                .select('subscription_tier')
-                .eq('id', data.user.id)
-                .single();
+            // Ensure profile exists
+            await ensureProfileExists(data.user.id);
 
-            if (profile && profile.subscription_tier === 'paid') {
-                window.location.href = 'download.html';
+            // If session exists (email confirmation disabled), redirect immediately
+            if (data.session) {
+                setTimeout(() => {
+                    window.location.href = 'onboarding.html';
+                }, 1000);
             } else {
-                window.location.href = 'onboarding.html';
+                // Email confirmation required
+                showSuccess('Account created! Please check your email to confirm your registration, then sign in.');
+                signupForm.reset();
             }
         }
     } catch (error) {
