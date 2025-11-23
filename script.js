@@ -6,23 +6,13 @@
     return;
   }
 
-  // Initialize Supabase (Anon Key)
-  const supabaseUrl = 'https://afqsiqoksuuddplockbd.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXNpcW9rc3V1ZGRwbG9ja2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjM2NjksImV4cCI6MjA3ODk5OTY2OX0.drzxOAIUZP3ZhrdqGCJOAzBM8oaeOqVfVp7ATbacNoo';
-
-  // Ensure Supabase client is available
-  if (typeof window.supabase === 'undefined') {
-    console.error('Supabase client not loaded');
+  // Use shared Supabase client
+  if (typeof window.supabaseClient === 'undefined') {
+    console.error('Supabase client not loaded. Make sure supabaseClient.js is included before script.js');
     return;
   }
 
-  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
-  });
+  const supabase = window.supabaseClient;
 
   // Check User Session
   const { data: { user } } = await supabase.auth.getUser();

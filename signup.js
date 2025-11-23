@@ -1,15 +1,6 @@
 
-// Initialize Supabase Client
-// REPLACE WITH YOUR ACTUAL SUPABASE URL AND ANON KEY
-const supabaseUrl = 'https://afqsiqoksuuddplockbd.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXNpcW9rc3V1ZGRwbG9ja2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjM2NjksImV4cCI6MjA3ODk5OTY2OX0.drzxOAIUZP3ZhrdqGCJOAzBM8oaeOqVfVp7ATbacNoo';
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
-    auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        detectSessionInUrl: true
-    }
-});
+// Use shared Supabase client
+const supabase = window.supabaseClient;
 
 const googleBtn = document.getElementById('google-btn');
 const signupForm = document.getElementById('signup-form');

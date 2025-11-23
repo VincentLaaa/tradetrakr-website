@@ -32,6 +32,7 @@
 
   <!-- Supabase Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
 
   <script src="script.js" defer></script>
   <script type="application/ld+json">
@@ -1643,8 +1644,10 @@
         <a href="trading-journal-features.html">Journal Features</a>
       </nav>
       <div class="cta-group">
-        <a href="signup.html" target="_blank" class="btn" id="get-started-btn">Get Started</a>
-        <a id="nav-signin" href="signin.html" class="btn btn-outline">Sign In</a>
+        <a href="#" class="btn cta-logged-in" data-cta="go-dashboard" style="display:none;">Go to Dashboard</a>
+        <a href="#" class="btn cta-logged-in" data-cta="get-started" style="display:none;">Get Started</a>
+        <a href="signin.html" class="btn cta-logged-out" data-cta="get-started" id="get-started-btn">Get Started</a>
+        <a id="nav-signin" href="signin.html" class="btn btn-outline cta-logged-out">Sign In</a>
       </div>
     </div>
   </header>
@@ -1658,10 +1661,13 @@
       </div>
 
       <div class="hero-cta" style="margin-bottom: 3rem;">
-        <a id="btn-dashboard" href="download.html" class="btn btn-lg" style="display:none;">
+        <a href="#" class="btn btn-lg cta-logged-in" data-cta="go-dashboard" style="display:none;">
           Go to Dashboard
         </a>
-        <a id="btn-get-started" href="onboarding.html" class="btn btn-lg">
+        <a href="#" class="btn btn-lg cta-logged-in" data-cta="get-started" style="display:none;">
+          Get Started
+        </a>
+        <a href="signin.html" class="btn btn-lg cta-logged-out" data-cta="get-started" id="btn-get-started">
           Get Started
         </a>
       </div>
@@ -2340,78 +2346,99 @@
     </div>
   </div>
   <script>
-    // Supabase Logic: Dynamic Index CTAs (No Redirects)
-    const supabaseUrl = 'https://afqsiqoksuuddplockbd.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXNpcW9rc3V1ZGRwbG9ja2JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MjM2NjksImV4cCI6MjA3ODk5OTY2OX0.drzxOAIUZP3ZhrdqGCJOAzBM8oaeOqVfVp7ATbacNoo';
+    document.addEventListener('DOMContentLoaded', async () => {
+      const supabase = window.supabaseClient;
 
-    if (typeof window.supabase !== 'undefined') {
-      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true,
-        },
-      });
+      if (!supabase) {
+        console.warn('Supabase client not available');
+        return;
+      }
 
-      (async function setupIndexCtas() {
-        const btnDashboard = document.getElementById('btn-dashboard');
-        const btnGetStarted = document.getElementById('btn-get-started');
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
 
-        if (!btnDashboard || !btnGetStarted) return;
+        const loggedInButtons = document.querySelectorAll('.cta-logged-in');
+        const loggedOutButtons = document.querySelectorAll('.cta-logged-out');
 
-        try {
-          const { data: { user } } = await supabase.auth.getUser();
-
-          if (!user) {
-            // Not logged in → public landing page, only Get Started to onboarding
-            btnDashboard.style.display = 'none';
-            btnGetStarted.style.display = '';
-            btnGetStarted.href = 'onboarding.html';
-            return;
-          }
-
-          const { data: profile, error } = await supabase
-            .from('profiles')
-            .select('subscription_tier, onboarding_complete')
-            .eq('id', user.id)
-            .single();
-
-          if (error || !profile) {
-            // Fail-safe → treat as not paid, not onboarded
-            btnDashboard.style.display = 'none';
-            btnGetStarted.style.display = '';
-            btnGetStarted.href = 'onboarding.html';
-            return;
-          }
-
-          const isPaid = profile.subscription_tier === 'paid';
-          const finishedOnboarding = !!profile.onboarding_complete;
-
-          if (isPaid) {
-            // Paid → show Go to Dashboard, hide Get Started
-            btnDashboard.style.display = '';
-            btnDashboard.href = 'download.html';
-            btnGetStarted.style.display = 'none';
-          } else {
-            // Not paid → keep landing visible, only Get Started
-            btnDashboard.style.display = 'none';
-            btnGetStarted.style.display = '';
-
-            if (finishedOnboarding) {
-              btnGetStarted.href = 'paywall.html';
-            } else {
-              btnGetStarted.href = 'onboarding.html';
-            }
-          }
-        } catch (e) {
-          console.error('Error setting up index CTAs:', e);
-          // On any error, fall back to logged-out behavior
-          btnDashboard.style.display = 'none';
-          btnGetStarted.style.display = '';
-          btnGetStarted.href = 'onboarding.html';
+        // Helper to toggle visibility
+        function showLoggedIn() {
+          loggedInButtons.forEach(el => el.style.display = 'inline-flex');
+          loggedOutButtons.forEach(el => el.style.display = 'none');
         }
-      })();
-    }
+
+        function showLoggedOut() {
+          loggedInButtons.forEach(el => el.style.display = 'none');
+          loggedOutButtons.forEach(el => el.style.display = 'inline-flex');
+        }
+
+        if (!session || !session.user) {
+          // Completely logged out
+          showLoggedOut();
+          return;
+        }
+
+        // User is logged in – check their profile
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('subscription_tier, onboarding_complete')
+          .eq('id', session.user.id)
+          .single();
+
+        if (error) {
+          console.warn('Error fetching profile on index:', error);
+          showLoggedOut();
+          return;
+        }
+
+        // Wire the CTAs according to subscription
+        const goDashboardBtns = document.querySelectorAll('[data-cta="go-dashboard"]');
+        const getStartedBtns = document.querySelectorAll('[data-cta="get-started"]');
+
+        if (profile.subscription_tier === 'paid') {
+          // Paid user → show Go to Dashboard
+          showLoggedIn();
+          goDashboardBtns.forEach(btn => {
+            btn.style.display = 'inline-flex';
+            btn.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.location.href = 'download.html';
+            });
+          });
+          getStartedBtns.forEach(btn => {
+            if (btn.classList.contains('cta-logged-in')) {
+              btn.style.display = 'none';
+            }
+          });
+        } else {
+          // Logged in but not paid
+          showLoggedIn();
+          goDashboardBtns.forEach(btn => {
+            btn.style.display = 'none';
+          });
+          getStartedBtns.forEach(btn => {
+            if (btn.classList.contains('cta-logged-in')) {
+              btn.style.display = 'inline-flex';
+              btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (profile.onboarding_complete) {
+                  window.location.href = 'onboarding-paywall.html';
+                } else {
+                  window.location.href = 'onboarding.html';
+                }
+              });
+            }
+          });
+        }
+
+      } catch (err) {
+        console.error('Error during index auth check:', err);
+        // If anything goes wrong, just show logged-out state
+        const loggedInButtons = document.querySelectorAll('.cta-logged-in');
+        const loggedOutButtons = document.querySelectorAll('.cta-logged-out');
+        loggedInButtons.forEach(el => el.style.display = 'none');
+        loggedOutButtons.forEach(el => el.style.display = 'inline-flex');
+      }
+    });
   </script>
 </body>
 
