@@ -145,37 +145,41 @@ draw();
 const LICENSE_WORKER_ENDPOINT =
   "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
 
-// --- HWID helper (same idea as the app, but safe on web) ---
+// --- HWID helper (safe and never throws) ---
 let hwidPromise = null;
 
 async function getHardwareId() {
   if (!hwidPromise) {
-    if (window.crypto && window.crypto.subtle) {
-      // SHA-256(navigator.userAgent) -> hex string
-      hwidPromise = window.crypto.subtle
-        .digest("SHA-256", new TextEncoder().encode(navigator.userAgent))
-        .then((buffer) =>
-          Array.from(new Uint8Array(buffer))
-            .map((b) => b.toString(16).padStart(2, "0"))
-            .join("")
-        )
-        .catch((err) => {
-          console.error("HWID generation failed, using fallback:", err);
-          // Fallback so hwid is NEVER undefined
-          return (
-            "web-" +
-            Math.random().toString(16).slice(2) +
-            Date.now().toString(16)
+    // Ensure we never throw; everything is wrapped.
+    hwidPromise = (async () => {
+      try {
+        if (
+          typeof window !== "undefined" &&
+          window.crypto &&
+          window.crypto.subtle &&
+          typeof TextEncoder !== "undefined"
+        ) {
+          const enc = new TextEncoder();
+          const ua = navigator.userAgent || "tradetrakr-web";
+          const buffer = await window.crypto.subtle.digest(
+            "SHA-256",
+            enc.encode(ua)
           );
-        });
-    } else {
-      // Older browsers without crypto.subtle
-      hwidPromise = Promise.resolve(
+          return Array.from(new Uint8Array(buffer))
+            .map((b) => b.toString(16).padStart(2, "0"))
+            .join("");
+        }
+      } catch (err) {
+        console.error("HWID generation failed, using fallback:", err);
+      }
+
+      // Fallback: guaranteed non-empty string
+      return (
         "web-" +
-          Math.random().toString(16).slice(2) +
-          Date.now().toString(16)
+        Math.random().toString(16).slice(2) +
+        Date.now().toString(16)
       );
-    }
+    })();
   }
   return hwidPromise;
 }
@@ -190,16 +194,17 @@ async function validateLicenseWithWorker(licenseKey) {
   const response = await fetch(LICENSE_WORKER_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
 
   let data = {};
   try {
     data = await response.json();
   } catch (err) {
-    console.error("Failed to parse license worker response:", err);
+    console.error("Failed to parse license worker response as JSON:", err);
   }
 
+  console.log("License worker response:", response.status, data);
   return { response, data };
 }
 
@@ -237,14 +242,14 @@ modal.addEventListener('click', (e) => {
 
 if (validateBtn && licenseInput) {
   validateBtn.addEventListener("click", async () => {
-    const key = licenseInput.value.trim();
+    const key = (licenseInput.value || "").trim();
 
     if (!key) {
       showStatus("Please paste your license key.", "error");
       return;
     }
 
-    // Minimal sanity check only (no S- requirement, keys can start with any letter)
+    // Minimal sanity check (no strict pattern; keys can start with any letter)
     if (key.length < 8) {
       showStatus("That doesn't look like a valid license key.", "error");
       return;
@@ -257,10 +262,10 @@ if (validateBtn && licenseInput) {
     try {
       const { response, data } = await validateLicenseWithWorker(key);
 
-      // HTTP/network errors
-      if (!response.ok) {
-        console.error("License worker HTTP error:", response.status, data);
-        showStatus("Unable to validate license. Please try again.", "error");
+      // Network / HTTP errors
+      if (!response || !response.ok) {
+        console.error("License worker HTTP error:", response && response.status, data);
+        showStatus("Unable to reach license server. Please try again.", "error");
         return;
       }
 
@@ -280,15 +285,21 @@ if (validateBtn && licenseInput) {
             showStatus("Server authentication error. Please contact support.", "error");
             break;
           case "missing_license_or_hwid":
-            showStatus("Missing license or device ID. Please refresh and try again.", "error");
+            showStatus(
+              "Missing license or device ID. Please refresh and try again.",
+              "error"
+            );
             break;
           default:
-            showStatus("❌ Could not verify license. Please try again.", "error");
+            showStatus(
+              "❌ Could not verify license. Please try again.",
+              "error"
+            );
         }
         return;
       }
 
-      // SUCCESS: ok === true
+      // SUCCESS: data.ok === true
       // For WEBSITE ONLY: ignore securityViolation as a blocker
       if (data.securityViolation) {
         console.warn(
@@ -299,7 +310,7 @@ if (validateBtn && licenseInput) {
 
       showStatus("License verified! Updating your access…", "success");
 
-      // Optional: if user is logged into Supabase, mark them as paid
+      // Optional: if there is a logged-in Supabase user, mark them as paid
       try {
         const { data: userData } = await supabase.auth.getUser();
         const user = userData && userData.user;
@@ -318,14 +329,19 @@ if (validateBtn && licenseInput) {
         console.error("Supabase profile update error:", profileErr);
       }
 
-      // Redirect to download/dashboard page after a short delay
+      // Redirect to download/dashboard
       setTimeout(() => {
         window.location.href = "download.html";
       }, 800);
 
     } catch (err) {
+      // This is the part that was previously just "Connection failed"
       console.error("License validation exception:", err);
-      showStatus("Connection failed. Please try again.", "error");
+      const msg =
+        err && err.message
+          ? `Connection failed: ${err.message}`
+          : "Connection failed. Check console for details.";
+      showStatus(msg, "error");
     } finally {
       validateBtn.disabled = false;
       validateBtn.textContent = "Validate License";
