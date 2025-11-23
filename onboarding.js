@@ -141,9 +141,8 @@ function draw() {
 draw();
 
 
-// --- License Worker Endpoint ---
-const LICENSE_WORKER_ENDPOINT =
-  "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
+// --- License Verification Logic ---
+const LICENSE_WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
 
 // --- HWID helper (safe and never throws) ---
 let hwidPromise = null;
@@ -216,12 +215,6 @@ const validateBtn = document.getElementById('validate-btn');
 const licenseInput = document.getElementById('license-key');
 const statusMsg = document.getElementById('validation-status');
 
-function showStatus(msg, type) {
-  if (!statusMsg) return;
-  statusMsg.textContent = msg;
-  statusMsg.className = "status-msg " + (type || "");
-}
-
 openBtn.addEventListener('click', (e) => {
     e.preventDefault();
     modal.classList.add('active');
@@ -230,7 +223,8 @@ openBtn.addEventListener('click', (e) => {
 
 closeBtn.addEventListener('click', () => {
     modal.classList.remove('active');
-    showStatus('', '');
+    statusMsg.textContent = '';
+    statusMsg.className = 'status-msg';
 });
 
 // Close on click outside
@@ -240,12 +234,11 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-if (validateBtn && licenseInput) {
-  validateBtn.addEventListener("click", async () => {
-    const key = (licenseInput.value || "").trim();
-
+validateBtn.addEventListener('click', async () => {
+    const key = licenseInput.value.trim();
+    
     if (!key) {
-      showStatus("Please paste your license key.", "error");
+      showStatus('Please paste your license key.', 'error');
       return;
     }
 
@@ -256,20 +249,26 @@ if (validateBtn && licenseInput) {
     }
 
     validateBtn.disabled = true;
-    validateBtn.textContent = "Validating…";
-    showStatus("", "");
+    validateBtn.textContent = 'Validating…';
+    showStatus('', '');
 
     try {
       const { response, data } = await validateLicenseWithWorker(key);
 
-      // Network / HTTP errors
-      if (!response || !response.ok) {
-        console.error("License worker HTTP error:", response && response.status, data);
+      // 1. Handle true network / server issues
+      if (!response) {
+        console.error("License worker: no response object", data);
         showStatus("Unable to reach license server. Please try again.", "error");
         return;
       }
 
-      // Logical error from worker
+      if (response.status >= 500) {
+        console.error("License worker 5xx error:", response.status, data);
+        showStatus("License server error. Please try again.", "error");
+        return;
+      }
+
+      // 2. For everything else (2xx/3xx/4xx), we rely on data.ok and data.error
       if (!data || data.ok !== true) {
         switch (data && data.error) {
           case "invalid_or_expired":
@@ -281,25 +280,23 @@ if (validateBtn && licenseInput) {
               "error"
             );
             break;
-          case "unauthorized_whop_api_key":
-            showStatus("Server authentication error. Please contact support.", "error");
+          case "wrong_product":
+            showStatus("❌ This license is for a different product.", "error");
             break;
-          case "missing_license_or_hwid":
-            showStatus(
-              "Missing license or device ID. Please refresh and try again.",
-              "error"
-            );
+          case "missing_license":
+          case "missing_hwid":
+            showStatus("Missing license or device ID. Please refresh and try again.", "error");
             break;
           default:
             showStatus(
-              "❌ Could not verify license. Please try again.",
+              "❌ Could not verify license. Please check your key and try again.",
               "error"
             );
         }
         return;
       }
 
-      // SUCCESS: data.ok === true
+      // 3. SUCCESS: data.ok === true
       // For WEBSITE ONLY: ignore securityViolation as a blocker
       if (data.securityViolation) {
         console.warn(
@@ -335,7 +332,7 @@ if (validateBtn && licenseInput) {
       }, 800);
 
     } catch (err) {
-      // This is the part that was previously just "Connection failed"
+      // Network/CORS/JS exceptions
       console.error("License validation exception:", err);
       const msg =
         err && err.message
@@ -344,9 +341,11 @@ if (validateBtn && licenseInput) {
       showStatus(msg, "error");
     } finally {
       validateBtn.disabled = false;
-      validateBtn.textContent = "Validate License";
+      validateBtn.textContent = 'Validate License';
     }
-  });
-} else {
-  console.warn("onboarding.js: license input or validate button not found.");
+});
+
+function showStatus(msg, type) {
+    statusMsg.textContent = msg;
+    statusMsg.className = `status-msg ${type}`;
 }
