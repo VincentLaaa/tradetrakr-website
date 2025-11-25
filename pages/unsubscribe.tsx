@@ -3,25 +3,17 @@
  * 
  * Allows users to unsubscribe from TradeTrakR marketing emails.
  * 
- * URL format for email links (Resend):
- * https://tradetrakr.com/unsubscribe?email={{{contact.email}}}
- * 
- * ({{{contact.email}}} will be replaced by Resend with the recipient's actual email)
+ * Users manually enter their email address to unsubscribe.
  * 
  * Note: Unsubscribes are stored in the database. You'll need to manually remove
  * unsubscribed emails from your Resend contact list.
  */
 
 import { useState } from 'react';
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-interface UnsubscribePageProps {
-  initialEmail: string | null;
-}
-
-export default function UnsubscribePage({ initialEmail }: UnsubscribePageProps) {
-  const [email, setEmail] = useState(initialEmail || '');
+export default function UnsubscribePage() {
+  const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<{
     type: 'success' | 'error';
@@ -120,12 +112,6 @@ export default function UnsubscribePage({ initialEmail }: UnsubscribePageProps) 
             marketing emails.
           </p>
 
-          {!initialEmail && (
-            <p style={styles.noEmailNotice}>
-              No email attached to this link. Please enter the email you want to unsubscribe.
-            </p>
-          )}
-
           <form onSubmit={handleUnsubscribe} style={styles.form}>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>
@@ -142,7 +128,7 @@ export default function UnsubscribePage({ initialEmail }: UnsubscribePageProps) 
                   ...styles.input,
                   ...(isSubmitting && styles.inputDisabled),
                 }}
-                autoFocus={!initialEmail}
+                autoFocus
                 onFocus={(e) => {
                   e.target.style.borderColor = '#00f3ff';
                 }}
@@ -198,18 +184,6 @@ export default function UnsubscribePage({ initialEmail }: UnsubscribePageProps) 
   );
 }
 
-/**
- * Server-side props: Extract email from query parameter
- */
-export const getServerSideProps: GetServerSideProps<UnsubscribePageProps> = async (context) => {
-  const email = context.query.email;
-
-  return {
-    props: {
-      initialEmail: typeof email === 'string' ? email : null,
-    },
-  };
-};
 
 /**
  * Styles (inline CSS for simplicity)
@@ -246,16 +220,6 @@ const styles: Record<string, React.CSSProperties> = {
     margin: '0 0 24px 0',
     textAlign: 'center',
     lineHeight: '1.5',
-  },
-  noEmailNotice: {
-    fontSize: '14px',
-    color: '#ffa500',
-    margin: '0 0 24px 0',
-    padding: '12px',
-    backgroundColor: '#2a1a00',
-    borderRadius: '6px',
-    border: '1px solid #ffa500',
-    textAlign: 'center',
   },
   form: {
     display: 'flex',
@@ -331,20 +295,18 @@ const styles: Record<string, React.CSSProperties> = {
 };
 
 /**
- * 📧 EMAIL LINK FORMAT (Resend)
+ * 📧 EMAIL LINK FORMAT
  * 
- * Use this exact link format in your Resend email HTML templates:
+ * Use this simple link format in your Resend email HTML templates:
  * 
  * ```html
- * <a href="https://tradetrakr.com/unsubscribe?email={{{contact.email}}}">
+ * <a href="https://tradetrakr.com/unsubscribe.html">
  *   Unsubscribe here
  * </a>
  * ```
  * 
- * Resend uses triple curly braces {{{contact.email}}} for email variables.
- * 
- * The unsubscribe page will automatically pre-fill the email field
- * when users click the link.
+ * Users will manually enter their email address on the unsubscribe page.
+ * No need to include email in the URL.
  * 
  * 🔄 Manual Removal Process:
  * 

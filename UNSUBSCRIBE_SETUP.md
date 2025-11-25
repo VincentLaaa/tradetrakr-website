@@ -60,15 +60,15 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
 
 ## 📧 Email Link Format (Resend)
 
-Use this exact link format in your Resend email HTML templates:
+Use this link format in your Resend email HTML templates:
 
 ```html
-<a href="https://tradetrakr.com/unsubscribe?email={{{contact.email}}}">
+<a href="https://tradetrakr.com/unsubscribe.html">
   Unsubscribe here
 </a>
 ```
 
-**Note:** Resend uses triple curly braces `{{{contact.email}}}` for email variables.
+**Note:** Users will manually enter their email address on the unsubscribe page. No need to include email in the URL.
 
 ### Example Resend Email Template
 
@@ -78,7 +78,7 @@ Use this exact link format in your Resend email HTML templates:
 <body>
   <p>Thanks for subscribing to TradeTrakR updates!</p>
   <p>If you no longer wish to receive these emails, you can 
-    <a href="https://tradetrakr.com/unsubscribe?email={{{contact.email}}}">unsubscribe here</a>.
+    <a href="https://tradetrakr.com/unsubscribe.html">unsubscribe here</a>.
   </p>
 </body>
 </html>
