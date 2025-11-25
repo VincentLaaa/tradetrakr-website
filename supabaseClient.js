@@ -15,3 +15,4 @@ if (typeof window !== 'undefined' && window.supabase) {
   console.warn('Supabase CDN script not loaded. Make sure to include it before supabaseClient.js');
 }
 
+
