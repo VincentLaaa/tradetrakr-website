@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal Blog: Guides, Comparisons, and Research | TradeTrakR</title>
 
   <!-- SEO -->
-  <meta name="description" content="Professional, unbiased trading journal guides—comparisons, psychology, AI analytics, metrics." />
+  <meta name="description"
+    content="Professional, unbiased trading journal guides—comparisons, psychology, AI analytics, metrics." />
   <link rel="canonical" href="https://tradetrakr.com/blog/" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Trading Journal Blog: Guides, Comparisons, and Research | TradeTrakR" />
-  <meta property="og:description" content="Explore expert trading journal guides covering comparisons, psychology insights, AI analytics, and performance metrics." />
+  <meta property="og:description"
+    content="Explore expert trading journal guides covering comparisons, psychology insights, AI analytics, and performance metrics." />
   <meta property="og:url" content="https://tradetrakr.com/blog/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://tradetrakr.com/assets/preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Trading Journal Blog: Guides, Comparisons, and Research | TradeTrakR" />
-  <meta name="twitter:description" content="TradeTrakR publishes trading journal research, psychology frameworks, and AI-driven analytics to sharpen your edge." />
+  <meta name="twitter:description"
+    content="TradeTrakR publishes trading journal research, psychology frameworks, and AI-driven analytics to sharpen your edge." />
   <meta name="twitter:image" content="https://tradetrakr.com/assets/preview.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 
   <!-- Structured Data: Breadcrumbs -->
   <script type="application/ld+json">
@@ -39,132 +44,298 @@
   </script>
 
   <style>
-    :root{
-      --accent:#6d5dfc;
-      --accent-rgb:109,93,252;
-      --accent-2:#4c8dff;
-      --bg-0:#05070d;
-      --bg-1:#0a0f18;
-      --text:#e6e8ef;
-      --muted:#a8adbb;
-      --line:rgba(255,255,255,0.06);
-      --card: #0b1018; /* SOLID for blog cards */
-      --card-2:#0a0f18;
+    :root {
+      --accent: #6d5dfc;
+      --accent-rgb: 109, 93, 252;
+      --accent-2: #4c8dff;
+      --bg-0: #05070d;
+      --bg-1: #0a0f18;
+      --text: #e6e8ef;
+      --muted: #a8adbb;
+      --line: rgba(255, 255, 255, 0.06);
+      --card: #0b1018;
+      /* SOLID for blog cards */
+      --card-2: #0a0f18;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--text); line-height:1.65;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.65;
       background:
-        radial-gradient(1200px 800px at -10% -10%, rgba(99,102,241,0.06), transparent 60%),
-        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb),0.06), transparent 60%),
+        radial-gradient(1200px 800px at -10% -10%, rgba(99, 102, 241, 0.06), transparent 60%),
+        radial-gradient(1200px 800px at 110% -20%, rgba(var(--accent-rgb), 0.06), transparent 60%),
         linear-gradient(180deg, var(--bg-1), var(--bg-0) 40%, #04060b 100%);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    .container{max-width:1150px;margin:0 auto;padding:0 20px}
+
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
 
     /* Header */
-    .site-header{
-      position:sticky; top:0; z-index:50;
-      background:rgba(5,7,13,0.6);
-      backdrop-filter:saturate(140%) blur(10px);
-      border-bottom:1px solid var(--line);
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(5, 7, 13, 0.6);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--line);
     }
-    .header-inner,.footer-inner{
-      max-width:1150px;margin:0 auto;padding:14px 20px; display:flex; align-items:center; justify-content:space-between;
+
+    .header-inner,
+    .footer-inner {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .logo{font-weight:700; text-decoration:none; color:var(--text)}
-    .logo span{color:var(--accent)}
-    .site-nav a{
-      color:var(--muted); text-decoration:none; margin-left:18px; font-size:.98rem; transition:color .2s ease;
+
+    .logo {
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text)
     }
-    .site-nav a:hover{color:var(--accent)}
+
+    .logo span {
+      color: var(--accent)
+    }
+
+    .site-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: .98rem;
+      transition: color .2s ease;
+    }
+
+    .site-nav a:hover {
+      color: var(--accent)
+    }
 
     /* Breadcrumbs */
-    .breadcrumbs{
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,0.02);
+    .breadcrumbs {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
     }
-    .breadcrumbs ol{
-      max-width:1150px;margin:0 auto; padding:10px 20px; list-style:none; display:flex; gap:8px; color:var(--muted);
+
+    .breadcrumbs ol {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      color: var(--muted);
     }
-    .breadcrumbs a{text-decoration:none; color:var(--muted)}
-    .breadcrumbs a:hover{color:var(--accent)}
+
+    .breadcrumbs a {
+      text-decoration: none;
+      color: var(--muted)
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--accent)
+    }
 
     /* Intro */
-    .page-intro{padding:56px 20px 36px; text-align:center}
-    .page-intro h1{
-      font-size: clamp(1.8rem, 4.2vw, 3rem);
-      font-weight:700; line-height:1.08;
-      background:linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-      margin-bottom:10px;
+    .page-intro {
+      padding: 56px 20px 36px;
+      text-align: center
     }
-    .page-intro p{color:var(--muted); max-width:900px; margin:0 auto}
+
+    .page-intro h1 {
+      font-size: clamp(1.8rem, 4.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.08;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .page-intro p {
+      color: var(--muted);
+      max-width: 900px;
+      margin: 0 auto
+    }
 
     /* Layout */
-    .layout{
-      max-width:1150px; margin:0 auto; padding:20px; display:grid; gap:24px; grid-template-columns: 1fr 320px;
+    .layout {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr 320px;
     }
-    @media (max-width:1024px){ .layout{grid-template-columns:1fr} }
+
+    @media (max-width:1024px) {
+      .layout {
+        grid-template-columns: 1fr
+      }
+    }
 
     /* Cards Grid */
-    .cards-grid{
-      display:grid; gap:18px; grid-template-columns:repeat(12,1fr);
+    .cards-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(12, 1fr);
     }
-    .cards-grid .card{
-      grid-column:span 12;
-      background:linear-gradient(180deg, var(--card), var(--card-2));
-      border:1px solid var(--line); border-radius:14px; padding:18px;
-      transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease, background .2s ease;
+
+    .cards-grid .card {
+      grid-column: span 12;
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease, background .2s ease;
     }
-    .cards-grid .card:hover{
-      border-color:rgba(var(--accent-rgb),.45);
-      box-shadow:0 10px 30px rgba(0,0,0,.25), 0 0 0 1px rgba(var(--accent-rgb),.08) inset;
-      transform:translateY(-2px);
+
+    .cards-grid .card:hover {
+      border-color: rgba(var(--accent-rgb), .45);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .25), 0 0 0 1px rgba(var(--accent-rgb), .08) inset;
+      transform: translateY(-2px);
     }
-    .card h2{font-size:1.1rem; margin:6px 0 4px}
-    .card h2 a{color:var(--text); text-decoration:none}
-    .card h2 a:hover{color:var(--accent)}
-    .card p{color:var(--muted); font-size:.98rem}
-    .card time{display:block; color:#8f97ac; font-size:.9rem}
-    .badge{
-      display:inline-block; font-size:.78rem; font-weight:600; letter-spacing:.3px;
-      color:#06101a; padding:3px 8px; border-radius:999px;
-      background:linear-gradient(90deg, var(--accent), var(--accent-2));
-      margin-bottom:6px;
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin: 6px 0 4px
+    }
+
+    .card h2 a {
+      color: var(--text);
+      text-decoration: none
+    }
+
+    .card h2 a:hover {
+      color: var(--accent)
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .98rem
+    }
+
+    .card time {
+      display: block;
+      color: #8f97ac;
+      font-size: .9rem
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .3px;
+      color: #06101a;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      margin-bottom: 6px;
     }
 
     /* Sidebar */
-    .sidebar{display:flex; flex-direction:column; gap:18px}
-    .sidebar-section{
-      background:linear-gradient(180deg, var(--card), var(--card-2));
-      border:1px solid var(--line); border-radius:14px; padding:16px 16px 14px;
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 18px
     }
-    .sidebar-section h2{font-size:1.05rem; margin-bottom:6px}
-    .sidebar-section p{color:var(--muted); margin-bottom:8px}
-    .resource-list{display:flex; flex-direction:column; gap:8px}
-    .sidebar a{color:#c7cfe4; text-decoration:none}
-    .sidebar a:hover{color:var(--accent)}
+
+    .sidebar-section {
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+    }
+
+    .sidebar-section h2 {
+      font-size: 1.05rem;
+      margin-bottom: 6px
+    }
+
+    .sidebar-section p {
+      color: var(--muted);
+      margin-bottom: 8px
+    }
+
+    .resource-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .sidebar a {
+      color: #c7cfe4;
+      text-decoration: none
+    }
+
+    .sidebar a:hover {
+      color: var(--accent)
+    }
 
     /* Footer */
-    .site-footer{border-top:1px solid var(--line); margin-top:20px}
-    .footer-links a{
-      color:var(--muted); text-decoration:none; margin-left:14px; font-size:.95rem; transition:color .2s ease;
+    .site-footer {
+      border-top: 1px solid var(--line);
+      margin-top: 20px
     }
-    .footer-links a:hover{color:var(--accent)}
-    .site-footer p{color:var(--muted); margin-top:10px}
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 14px;
+      font-size: .95rem;
+      transition: color .2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent)
+    }
+
+    .site-footer p {
+      color: var(--muted);
+      margin-top: 10px
+    }
 
     /* Reveal */
-    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
-    .reveal.is-visible{opacity:1; transform:none}
-    @media (prefers-reduced-motion: reduce){
-      .reveal{opacity:1; transform:none}
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .5s ease, transform .5s ease
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none
+      }
     }
   </style>
 </head>
+
 <body>
   <!-- Header -->
   <header class="site-header">
@@ -191,7 +362,8 @@
   <!-- Intro -->
   <section class="page-intro">
     <h1 class="reveal">Trading Journal Blog: Guides, Comparisons, and Research</h1>
-    <p class="reveal" data-delay="60">In-depth trading journal analysis from funded trader coaches and data scientists. Compare tools, upgrade psychology, and apply AI-backed metrics in minutes.</p>
+    <p class="reveal" data-delay="60">In-depth trading journal analysis from funded trader coaches and data scientists.
+      Compare tools, upgrade psychology, and apply AI-backed metrics in minutes.</p>
   </section>
 
   <main>
@@ -200,10 +372,19 @@
       <section aria-label="Latest trading journal articles">
         <div class="cards-grid">
           <article class="card reveal">
+            <span class="category badge">[Prop Firm]</span>
+            <time datetime="2025-11-28">November 28, 2025</time>
+            <h2><a href="posts/7-common-mistakes-beginner-prop-firm-traders-should-avoid.html">7 Common Mistakes
+                Beginner Prop Firm Traders Should Avoid</a></h2>
+            <p>Discover the 7 most common mistakes beginner prop firm traders make and how to avoid them. Learn about
+              risk management, trading plans, and psychology to pass your evaluation.</p>
+          </article>
+          <article class="card reveal">
             <span class="category badge">[Guide]</span>
             <time datetime="2025-10-27">October 27, 2025</time>
             <h2><a href="posts/how-trading-journal-looks-like.html">How Trading Journal Looks Like</a></h2>
-            <p>See exactly how a trading journal looks like—Excel layouts, app screens, accountability prompts, and weekly review workflows that force improvement.</p>
+            <p>See exactly how a trading journal looks like—Excel layouts, app screens, accountability prompts, and
+              weekly review workflows that force improvement.</p>
           </article>
 
           <article class="card reveal" data-delay="40">
@@ -216,92 +397,115 @@
           <article class="card reveal" data-delay="60">
             <span class="category badge">[Psychology]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
-            <h2><a href="posts/how-to-manage-emotions-in-day-trading.html">How to Manage Emotions in Day Trading</a></h2>
-            <p>A simple, repeatable system—micro-pause protocol, emotion tags, cooldown rules—plus a free 14-Day Emotion Challenge.</p>
+            <h2><a href="posts/how-to-manage-emotions-in-day-trading.html">How to Manage Emotions in Day Trading</a>
+            </h2>
+            <p>A simple, repeatable system—micro-pause protocol, emotion tags, cooldown rules—plus a free 14-Day Emotion
+              Challenge.</p>
           </article>
 
           <article class="card reveal" data-delay="80">
             <span class="category badge">[Psychology]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
-            <h2><a href="posts/mastering-trading-psychology-for-consistent-trades.html">Mastering Trading Psychology for Consistent Trades</a></h2>
-            <p>A practical system for emotion tags, cooldown rules, and weekly reviews—includes a free Daily Psychology Log download.</p>
+            <h2><a href="posts/mastering-trading-psychology-for-consistent-trades.html">Mastering Trading Psychology for
+                Consistent Trades</a></h2>
+            <p>A practical system for emotion tags, cooldown rules, and weekly reviews—includes a free Daily Psychology
+              Log download.</p>
           </article>
 
           <article class="card reveal" data-delay="100">
             <span class="category badge">[Comparison]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
-            <h2><a href="posts/best-trading-journal-for-prop-firm-traders.html">Best Trading Journal for Prop Firm Traders</a></h2>
-            <p>A balanced “prop-fit” comparison—rule adherence, drawdown/profit target tracking, psychology, and who each journal fits (includes TradeTrakR).</p>
+            <h2><a href="posts/best-trading-journal-for-prop-firm-traders.html">Best Trading Journal for Prop Firm
+                Traders</a></h2>
+            <p>A balanced “prop-fit” comparison—rule adherence, drawdown/profit target tracking, psychology, and who
+              each journal fits (includes TradeTrakR).</p>
           </article>
 
           <article class="card reveal" data-delay="120">
             <span class="category badge">[Buyer]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
             <h2><a href="posts/automated-trade-tracker.html">Automated Trade Tracker</a></h2>
-            <p>How automated trade tracking works and how to evaluate imports, data quality, psychology prompts, and AI insights—includes TradeTrakR side-by-side.</p>
+            <p>How automated trade tracking works and how to evaluate imports, data quality, psychology prompts, and AI
+              insights—includes TradeTrakR side-by-side.</p>
           </article>
 
           <article class="card reveal" data-delay="140">
             <span class="category badge">[Buyer]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
             <h2><a href="posts/buy-trading-journal-software.html">Buy Trading Journal Software</a></h2>
-            <p>Use this buyer checklist to compare automation, psychology tracking, AI insights, data ownership, and pricing—includes TradeTrakR in side-by-side tables.</p>
+            <p>Use this buyer checklist to compare automation, psychology tracking, AI insights, data ownership, and
+              pricing—includes TradeTrakR in side-by-side tables.</p>
           </article>
 
           <article class="card reveal" data-delay="160">
             <span class="category badge">[Buyer]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
             <h2><a href="posts/trading-journal-app-for-sale.html">Trading Journal App for Sale</a></h2>
-            <p>Compare subscription vs one-time options, automation, psychology tracking, AI insights, and data ownership—includes TradeTrakR side-by-side.</p>
+            <p>Compare subscription vs one-time options, automation, psychology tracking, AI insights, and data
+              ownership—includes TradeTrakR side-by-side.</p>
           </article>
 
           <article class="card reveal" data-delay="180">
             <span class="category badge">[Comparison]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
-            <h2><a href="posts/tradersync-vs-edgewonk-vs-tradezella.html">TraderSync vs Edgewonk vs TradeZella vs TradeTrakR</a></h2>
-            <p>Neutral, side-by-side comparison of TraderSync, Edgewonk, TradeZella, and TradeTrakR—features, psychology tools, AI insights, imports, pricing notes, and who each fits.</p>
+            <h2><a href="posts/tradersync-vs-edgewonk-vs-tradezella.html">TraderSync vs Edgewonk vs TradeZella vs
+                TradeTrakR</a></h2>
+            <p>Neutral, side-by-side comparison of TraderSync, Edgewonk, TradeZella, and TradeTrakR—features, psychology
+              tools, AI insights, imports, pricing notes, and who each fits.</p>
           </article>
 
           <article class="card reveal" data-delay="200">
             <span class="category badge">[Comparison]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
-            <h2><a href="posts/trademetria-vs-tradersync-vs-edgewonk.html">Trademetria vs TraderSync vs Edgewonk vs TradeTrakR</a></h2>
-            <p>Neutral comparison of Trademetria, TraderSync, Edgewonk, and TradeTrakR—features, psychology tools, AI insights, imports, pricing notes, and who each fits.</p>
+            <h2><a href="posts/trademetria-vs-tradersync-vs-edgewonk.html">Trademetria vs TraderSync vs Edgewonk vs
+                TradeTrakR</a></h2>
+            <p>Neutral comparison of Trademetria, TraderSync, Edgewonk, and TradeTrakR—features, psychology tools, AI
+              insights, imports, pricing notes, and who each fits.</p>
           </article>
 
           <article class="card reveal" data-delay="220">
             <span class="category badge">[Comparison]</span>
             <time datetime="2025-10-25">October 25, 2025</time>
-            <h2><a href="posts/best-trading-journals-for-futures-traders.html">Best Trading Journals for Futures Traders</a></h2>
-            <p>A balanced, side-by-side comparison for futures traders: features, pros/cons, and who each journal is best for (includes TradeTrakR).</p>
+            <h2><a href="posts/best-trading-journals-for-futures-traders.html">Best Trading Journals for Futures
+                Traders</a></h2>
+            <p>A balanced, side-by-side comparison for futures traders: features, pros/cons, and who each journal is
+              best for (includes TradeTrakR).</p>
           </article>
 
           <article class="card reveal" data-delay="240">
             <span class="category badge">[Comparison]</span>
             <time datetime="2025-02-05">February 5, 2025</time>
-            <h2><a href="posts/tradetrakr-vs-edgewonk-trading-journal.html">TradeTrakR vs. Edgewonk: Which Trading Journal Fits Funded Traders?</a></h2>
-            <p>Unbiased breakdown of automation, AI insights, and prop-firm workflows so you can choose a trading journal that scales with your account.</p>
+            <h2><a href="posts/tradetrakr-vs-edgewonk-trading-journal.html">TradeTrakR vs. Edgewonk: Which Trading
+                Journal Fits Funded Traders?</a></h2>
+            <p>Unbiased breakdown of automation, AI insights, and prop-firm workflows so you can choose a trading
+              journal that scales with your account.</p>
           </article>
 
           <article class="card reveal" data-delay="260">
             <span class="category badge">[Psychology]</span>
             <time datetime="2025-01-22">January 22, 2025</time>
-            <h2><a href="posts/trading-journal-psychology-prompts-for-funded-traders.html">10 Trading Journal Psychology Prompts That Reduce Tilt in Funded Challenges</a></h2>
-            <p>Daily reflection prompts funded traders use to prevent revenge trading and maintain prop firm rule compliance under pressure.</p>
+            <h2><a href="posts/trading-journal-psychology-prompts-for-funded-traders.html">10 Trading Journal Psychology
+                Prompts That Reduce Tilt in Funded Challenges</a></h2>
+            <p>Daily reflection prompts funded traders use to prevent revenge trading and maintain prop firm rule
+              compliance under pressure.</p>
           </article>
 
           <article class="card reveal" data-delay="280">
             <span class="category badge">[AI]</span>
             <time datetime="2025-01-10">January 10, 2025</time>
-            <h2><a href="posts/how-ai-trading-journal-insights-improve-expectancy.html">How AI Trading Journal Insights Improve Expectancy in Futures Trading</a></h2>
-            <p>See exactly how machine learning surfaces entry accuracy, risk drift, and time-of-day edges that manual trade logs miss.</p>
+            <h2><a href="posts/how-ai-trading-journal-insights-improve-expectancy.html">How AI Trading Journal Insights
+                Improve Expectancy in Futures Trading</a></h2>
+            <p>See exactly how machine learning surfaces entry accuracy, risk drift, and time-of-day edges that manual
+              trade logs miss.</p>
           </article>
 
           <article class="card reveal" data-delay="300">
             <span class="category badge">[Stats]</span>
             <time datetime="2024-12-18">December 18, 2024</time>
-            <h2><a href="posts/trading-journal-metrics-that-predict-funded-account-renewals.html">Trading Journal Metrics That Predict Funded Account Renewals</a></h2>
-            <p>Data-backed KPIs showing which consistency metrics correlate with Apex, Topstep, and MyFundedFX account renewals.</p>
+            <h2><a href="posts/trading-journal-metrics-that-predict-funded-account-renewals.html">Trading Journal
+                Metrics That Predict Funded Account Renewals</a></h2>
+            <p>Data-backed KPIs showing which consistency metrics correlate with Apex, Topstep, and MyFundedFX account
+              renewals.</p>
           </article>
         </div>
       </section>
@@ -317,8 +521,10 @@
         <div class="sidebar-section reveal" data-delay="60">
           <h2>Featured Research Stats</h2>
           <div class="resource-list">
-            <a href="../stats/how-many-trades-per-day-do-day-traders-make.html">How many trades per day do day traders make?</a>
-            <a href="../stats/trading-journal-usage-and-benefits-stats.html">Trading journal usage &amp; benefits data</a>
+            <a href="../stats/how-many-trades-per-day-do-day-traders-make.html">How many trades per day do day traders
+              make?</a>
+            <a href="../stats/trading-journal-usage-and-benefits-stats.html">Trading journal usage &amp; benefits
+              data</a>
           </div>
         </div>
       </aside>
@@ -342,19 +548,20 @@
 
   <!-- Lightweight scroll-reveal (no dependencies) -->
   <script>
-    (function(){
+    (function () {
       const els = document.querySelectorAll('.reveal');
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            const delay = parseInt(e.target.getAttribute('data-delay')||'0',10);
-            setTimeout(()=>e.target.classList.add('is-visible'), delay);
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const delay = parseInt(e.target.getAttribute('data-delay') || '0', 10);
+            setTimeout(() => e.target.classList.add('is-visible'), delay);
             io.unobserve(e.target);
           }
         });
-      }, {threshold:.12});
-      els.forEach(el=>io.observe(el));
+      }, { threshold: .12 });
+      els.forEach(el => io.observe(el));
     })();
   </script>
 </body>
+
 </html>
