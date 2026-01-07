@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TradeTrakR Terminal | Dashboard</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  
+  <!-- Emergency redirect fix: Catch any old paywall.html redirects -->
+  <script>
+    // If somehow redirected to paywall.html, immediately redirect to correct page
+    if (window.location.pathname === '/paywall.html' || window.location.pathname.includes('/paywall.html')) {
+      window.location.replace('/onboarding-paywall.html');
+    }
+  </script>
 
   <!-- Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -821,8 +829,11 @@
             // Final check
             if (!profile || profile.subscription_tier !== 'paid') {
               console.log('User subscription status:', profile?.subscription_tier || 'not found');
-              // Not paid → redirect to paywall
-              window.location.href = 'onboarding-paywall.html';
+              console.log('Redirecting to onboarding-paywall.html');
+              // Not paid → redirect to paywall (using absolute path to prevent issues)
+              const paywallUrl = window.location.origin + '/onboarding-paywall.html';
+              console.log('Redirect URL:', paywallUrl);
+              window.location.href = paywallUrl;
               return;
             }
 
@@ -830,8 +841,10 @@
             console.log('User has paid subscription, allowing access to download page');
           } catch (error) {
             console.error('Error in auth guard:', error);
-            // On error, redirect to paywall to be safe
-            window.location.href = 'onboarding-paywall.html';
+            // On error, redirect to paywall to be safe (using absolute path)
+            const paywallUrl = window.location.origin + '/onboarding-paywall.html';
+            console.log('Error redirect URL:', paywallUrl);
+            window.location.href = paywallUrl;
           }
         })();
 
