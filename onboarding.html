@@ -15,6 +15,59 @@
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>
+    
+    <!-- OAuth Callback Handler: Ensure new users stay on onboarding -->
+    <script>
+        // Handle OAuth callback and prevent redirects for new users
+        document.addEventListener('DOMContentLoaded', function() {
+            function waitForSupabase(callback, maxAttempts = 15) {
+                let attempts = 0;
+                const checkSupabase = setInterval(() => {
+                    attempts++;
+                    if (window.supabaseClient) {
+                        clearInterval(checkSupabase);
+                        callback();
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkSupabase);
+                    }
+                }, 100);
+            }
+            
+            waitForSupabase(async () => {
+                const supabase = window.supabaseClient;
+                if (!supabase) return;
+                
+                try {
+                    // Check if user is authenticated
+                    const { data: { user }, error: userError } = await supabase.auth.getUser();
+                    
+                    if (userError || !user) {
+                        // Not authenticated - this is fine, they can stay on onboarding
+                        return;
+                    }
+                    
+                    // Check if this is a new user who should stay on onboarding
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('onboarding_complete, subscription_tier')
+                        .eq('id', user.id)
+                        .single();
+                    
+                    // If user hasn't completed onboarding, ensure they stay here
+                    // Don't redirect them away even if they somehow got redirected here
+                    if (!profile || !profile.onboarding_complete) {
+                        console.log('New user detected - keeping on onboarding page');
+                        // Clear any hash fragments from OAuth callback
+                        if (window.location.hash) {
+                            window.history.replaceState(null, null, window.location.pathname);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error checking user status on onboarding page:', error);
+                }
+            });
+        });
+    </script>
 
     <style>
         /* THEME VARIABLES - OBSIDIAN */

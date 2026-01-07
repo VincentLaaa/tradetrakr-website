@@ -6,6 +6,7 @@
     'index.html',
     '',
     'download.html',  // Has its own sophisticated auth guard with retry logic
+    'onboarding.html',  // Onboarding start page - new users should stay here
     'onboarding-paywall.html',
     'signin.html',
     'signup.html'
