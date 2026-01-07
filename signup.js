@@ -12,37 +12,76 @@ const successMsg = document.getElementById('success-msg');
 
 // Helper to show errors
 function showError(message) {
-    errorMsg.textContent = message;
-    errorMsg.style.display = 'block';
-    successMsg.style.display = 'none';
+    if (errorMsg) {
+        errorMsg.textContent = message;
+        errorMsg.style.display = 'block';
+        if (successMsg) successMsg.style.display = 'none';
+    }
 }
 
 // Helper to show success
 function showSuccess(message) {
-    successMsg.textContent = message;
-    successMsg.style.display = 'block';
-    errorMsg.style.display = 'none';
+    if (successMsg) {
+        successMsg.textContent = message;
+        successMsg.style.display = 'block';
+        if (errorMsg) errorMsg.style.display = 'none';
+    }
+}
+
+// Check if Supabase client is available
+if (!supabase) {
+    console.error('Supabase client not found. Ensure supabaseClient.js is loaded.');
+    showError('System error: Database connection failed. Please refresh the page.');
 }
 
 // Google Sign-In Handler
-googleBtn.addEventListener('click', async () => {
-    try {
-        const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                queryParams: {
-                    access_type: 'offline',
-                    prompt: 'consent',
+if (googleBtn) {
+    const originalButtonHTML = googleBtn.innerHTML;
+    
+    googleBtn.addEventListener('click', async () => {
+        console.log('Google Sign-Up button clicked');
+
+        if (!supabase) {
+            showError('System error: Database connection failed.');
+            return;
+        }
+
+        try {
+            console.log('Disabling button and showing loading state');
+            googleBtn.disabled = true;
+            googleBtn.innerHTML = 'Connecting...';
+
+            console.log('Initiating Supabase OAuth sign-up...');
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    queryParams: {
+                        access_type: 'offline',
+                        prompt: 'consent',
+                    },
+                    redirectTo: window.location.origin + '/onboarding.html'
                 },
-                redirectTo: window.location.origin + '/onboarding.html'
-            },
-        });
-        if (error) throw error;
-        // Supabase handles the redirect automatically
-    } catch (error) {
-        showError(error.message);
-    }
-});
+            });
+
+            if (error) {
+                console.error('Supabase OAuth error:', error);
+                throw error;
+            }
+
+            console.log('Supabase OAuth initiated successfully:', data);
+            // Supabase handles the redirect automatically
+
+        } catch (error) {
+            console.error('Catch block error:', error);
+            showError(error.message || 'Failed to sign up with Google. Please try again.');
+            googleBtn.disabled = false;
+            googleBtn.innerHTML = originalButtonHTML;
+        }
+    });
+} else {
+    console.error('Google button not found in DOM');
+    showError('Page error: Sign up button not found. Please refresh the page.');
+}
 
 // Email/Password Sign-Up Handler
 signupForm.addEventListener('submit', async (e) => {

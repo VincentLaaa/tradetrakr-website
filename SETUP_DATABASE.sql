@@ -37,3 +37,5 @@ create policy "Service role can manage unsubscribes"
 -- DONE! The table is now created and ready to use.
 -- =====================================================
 
+
+

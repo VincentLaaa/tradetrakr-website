@@ -11,8 +11,11 @@ if (typeof window !== 'undefined' && window.supabase) {
       detectSessionInUrl: true,
     },
   });
+  console.log('Supabase client initialized successfully');
 } else {
-  console.warn('Supabase CDN script not loaded. Make sure to include it before supabaseClient.js');
+  console.error('Supabase CDN script not loaded. Make sure to include it before supabaseClient.js');
 }
+
+
 
 
