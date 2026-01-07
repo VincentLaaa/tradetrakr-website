@@ -30,7 +30,11 @@
     .single();
 
   if (error || !profile || profile.subscription_tier !== 'paid') {
-    window.location.href = 'onboarding-paywall.html'; // Redirect to paywall if not paid
+    // Only redirect if we're not already on the paywall or signin page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    if (currentPage !== 'onboarding-paywall.html' && currentPage !== 'signin.html' && currentPage !== 'signup.html') {
+      window.location.href = 'onboarding-paywall.html'; // Redirect to paywall if not paid
+    }
   }
   // If paid, allow dashboard to load
 })();

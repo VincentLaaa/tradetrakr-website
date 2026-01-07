@@ -754,49 +754,102 @@
   </script>
 
   <script>
-    // Supabase Logic: Auth Guard + Sign Out
-    if (typeof window.supabaseClient !== 'undefined') {
-      const supabase = window.supabaseClient;
-
-      // 1. Auth Guard
-      (async function guardDownloadPage() {
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user) {
-          // Not signed in → send them to the landing page
-          window.location.href = 'index.html';
-          return;
-        }
-
-        const { data: profile, error } = await supabase
-          .from('profiles')
-          .select('subscription_tier')
-          .eq('id', user.id)
-          .single();
-
-        if (error || !profile || profile.subscription_tier !== 'paid') {
-          // Not paid → kick to paywall
-          window.location.href = 'paywall.html';
-          return;
-        }
-
-        // If we get here, user is logged in AND paid → allow page to render
-      })();
-
-      // 2. Sign Out Logic
-      const signOutEl = document.getElementById('sign-out');
-      if (signOutEl) {
-        signOutEl.addEventListener('click', async () => {
-          try {
-            await supabase.auth.signOut();
-          } catch (e) {
-            console.error('Error signing out:', e);
-          } finally {
-            window.location.href = 'index.html';
+    // Wait for DOM and Supabase to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for Supabase client to be initialized
+      function waitForSupabase(callback, maxAttempts = 15) {
+        let attempts = 0;
+        const checkSupabase = setInterval(() => {
+          attempts++;
+          if (window.supabaseClient) {
+            clearInterval(checkSupabase);
+            callback();
+          } else if (attempts >= maxAttempts) {
+            clearInterval(checkSupabase);
+            console.error('Supabase client not found after', maxAttempts, 'attempts');
           }
-        });
+        }, 100);
       }
-    }
+
+      waitForSupabase(() => {
+        const supabase = window.supabaseClient;
+
+        if (!supabase) {
+          console.error('Supabase client not available');
+          return;
+        }
+
+        // 1. Auth Guard - with retry logic for subscription check
+        (async function guardDownloadPage() {
+          try {
+            const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+            if (userError || !user) {
+              // Not signed in → send them to the landing page
+              window.location.href = 'index.html';
+              return;
+            }
+
+            // Retry logic: Check subscription up to 3 times with delays
+            // This handles cases where license validation just updated the profile
+            let profile = null;
+            let lastError = null;
+            
+            for (let attempt = 0; attempt < 3; attempt++) {
+              if (attempt > 0) {
+                // Wait before retrying (1s, then 2s)
+                await new Promise(resolve => setTimeout(resolve, attempt * 1000));
+              }
+
+              const { data, error } = await supabase
+                .from('profiles')
+                .select('subscription_tier')
+                .eq('id', user.id)
+                .single();
+
+              if (!error && data) {
+                profile = data;
+                // If we found a paid subscription, break early
+                if (data.subscription_tier === 'paid') {
+                  break;
+                }
+              } else {
+                lastError = error;
+              }
+            }
+
+            // Final check
+            if (!profile || profile.subscription_tier !== 'paid') {
+              console.log('User subscription status:', profile?.subscription_tier || 'not found');
+              // Not paid → redirect to paywall
+              window.location.href = 'onboarding-paywall.html';
+              return;
+            }
+
+            // If we get here, user is logged in AND paid → allow page to render
+            console.log('User has paid subscription, allowing access to download page');
+          } catch (error) {
+            console.error('Error in auth guard:', error);
+            // On error, redirect to paywall to be safe
+            window.location.href = 'onboarding-paywall.html';
+          }
+        })();
+
+        // 2. Sign Out Logic
+        const signOutEl = document.getElementById('sign-out');
+        if (signOutEl) {
+          signOutEl.addEventListener('click', async () => {
+            try {
+              await supabase.auth.signOut();
+            } catch (e) {
+              console.error('Error signing out:', e);
+            } finally {
+              window.location.href = 'index.html';
+            }
+          });
+        }
+      });
+    });
   </script>
 </body>
 
