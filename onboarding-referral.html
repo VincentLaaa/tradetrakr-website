@@ -354,44 +354,68 @@
     </main>
 
     <script>
-        const cards = document.querySelectorAll('.referral-card');
-        const continueBtn = document.getElementById('continue-btn');
-        let selectedValue = null;
+        // Wait for DOM and Supabase to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Supabase client to be initialized
+            function waitForSupabase(callback, maxAttempts = 10) {
+                let attempts = 0;
+                const checkSupabase = setInterval(() => {
+                    attempts++;
+                    if (window.supabaseClient) {
+                        clearInterval(checkSupabase);
+                        callback();
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkSupabase);
+                        console.error('Supabase client not found');
+                    }
+                }, 100);
+            }
 
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Deselect all
-                cards.forEach(c => c.classList.remove('selected'));
+            const cards = document.querySelectorAll('.referral-card');
+            const continueBtn = document.getElementById('continue-btn');
+            let selectedValue = null;
 
-                // Select clicked
-                card.classList.add('selected');
-                selectedValue = card.dataset.value;
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Deselect all
+                    cards.forEach(c => c.classList.remove('selected'));
 
-                // Enable continue button
-                continueBtn.classList.add('active');
+                    // Select clicked
+                    card.classList.add('selected');
+                    selectedValue = card.dataset.value;
+
+                    // Enable continue button
+                    if (continueBtn) {
+                        continueBtn.classList.add('active');
+                    }
+                });
+            });
+
+            if (continueBtn) {
+                continueBtn.addEventListener('click', () => {
+                    if (selectedValue) {
+                        console.log('Referral Source:', selectedValue);
+                        // Final step -> Redirect to summary
+                        window.location.href = 'onboarding-final.html';
+                    }
+                });
+            }
+
+            // Logout Logic - wait for Supabase
+            waitForSupabase(() => {
+                const supabase = window.supabaseClient;
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn && supabase) {
+                    logoutBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const { error } = await supabase.auth.signOut();
+                        if (!error) {
+                            window.location.href = 'signin.html';
+                        }
+                    });
+                }
             });
         });
-
-        continueBtn.addEventListener('click', () => {
-            if (selectedValue) {
-                console.log('Referral Source:', selectedValue);
-                // Final step -> Redirect to summary
-                window.location.href = 'onboarding-final.html';
-            }
-        });
-
-        // Logout Logic
-        document.getElementById('logout-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            const { error } = await supabase.auth.signOut();
-            if (!error) {
-                window.location.href = 'signin.html';
-            }
-        });
-
-        // Use shared Supabase client
-        const supabase = window.supabaseClient;
-
     </script>
 </body>
 
