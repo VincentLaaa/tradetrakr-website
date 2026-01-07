@@ -320,51 +320,73 @@
     </main>
 
     <script>
-        const cards = document.querySelectorAll('.option-card');
-        const continueBtn = document.getElementById('continue-btn');
-        const selectedGoals = new Set();
+        // Wait for DOM and Supabase to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Supabase client to be initialized
+            function waitForSupabase(callback, maxAttempts = 10) {
+                let attempts = 0;
+                const checkSupabase = setInterval(() => {
+                    attempts++;
+                    if (window.supabaseClient) {
+                        clearInterval(checkSupabase);
+                        callback();
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkSupabase);
+                        console.error('Supabase client not found');
+                    }
+                }, 100);
+            }
 
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                const value = card.dataset.value;
+            const cards = document.querySelectorAll('.option-card');
+            const continueBtn = document.getElementById('continue-btn');
+            const selectedGoals = new Set();
 
-                if (selectedGoals.has(value)) {
-                    selectedGoals.delete(value);
-                    card.classList.remove('selected');
-                } else {
-                    selectedGoals.add(value);
-                    card.classList.add('selected');
-                }
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const value = card.dataset.value;
 
-                // Enable continue button if at least one is selected
-                if (selectedGoals.size > 0) {
-                    continueBtn.classList.add('active');
-                } else {
-                    continueBtn.classList.remove('active');
+                    if (selectedGoals.has(value)) {
+                        selectedGoals.delete(value);
+                        card.classList.remove('selected');
+                    } else {
+                        selectedGoals.add(value);
+                        card.classList.add('selected');
+                    }
+
+                    // Enable continue button if at least one is selected
+                    if (selectedGoals.size > 0 && continueBtn) {
+                        continueBtn.classList.add('active');
+                    } else if (continueBtn) {
+                        continueBtn.classList.remove('active');
+                    }
+                });
+            });
+
+            if (continueBtn) {
+                continueBtn.addEventListener('click', () => {
+                    if (selectedGoals.size > 0) {
+                        console.log('Selected Goals:', Array.from(selectedGoals));
+                        // Final step -> Redirect to download
+                        window.location.href = 'onboarding-referral.html';
+                    }
+                });
+            }
+
+            // Logout Logic - wait for Supabase
+            waitForSupabase(() => {
+                const supabase = window.supabaseClient;
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn && supabase) {
+                    logoutBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const { error } = await supabase.auth.signOut();
+                        if (!error) {
+                            window.location.href = 'signin.html';
+                        }
+                    });
                 }
             });
         });
-
-        continueBtn.addEventListener('click', () => {
-            if (selectedGoals.size > 0) {
-                console.log('Selected Goals:', Array.from(selectedGoals));
-                // Final step -> Redirect to download
-                window.location.href = 'onboarding-referral.html';
-            }
-        });
-
-        // Logout Logic
-        document.getElementById('logout-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            const { error } = await supabase.auth.signOut();
-            if (!error) {
-                window.location.href = 'signin.html';
-            }
-        });
-
-        // Use shared Supabase client
-        const supabase = window.supabaseClient;
-
     </script>
 </body>
 

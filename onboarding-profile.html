@@ -295,48 +295,71 @@
     </main>
 
     <script>
-        // Simple selection logic
-        const cards = document.querySelectorAll('.option-card');
-        const continueBtn = document.getElementById('continue-btn');
-        let selectedValue = null;
+        // Wait for DOM and Supabase to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Supabase client to be initialized
+            function waitForSupabase(callback, maxAttempts = 10) {
+                let attempts = 0;
+                const checkSupabase = setInterval(() => {
+                    attempts++;
+                    if (window.supabaseClient) {
+                        clearInterval(checkSupabase);
+                        callback();
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkSupabase);
+                        console.error('Supabase client not found');
+                    }
+                }, 100);
+            }
 
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Deselect all
-                cards.forEach(c => c.classList.remove('selected'));
+            // Use shared Supabase client
+            const supabase = window.supabaseClient;
 
-                // Select clicked
-                card.classList.add('selected');
-                selectedValue = card.dataset.value;
+            // Simple selection logic
+            const cards = document.querySelectorAll('.option-card');
+            const continueBtn = document.getElementById('continue-btn');
+            let selectedValue = null;
 
-                // Enable continue button
-                continueBtn.classList.add('active');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Deselect all
+                    cards.forEach(c => c.classList.remove('selected'));
+
+                    // Select clicked
+                    card.classList.add('selected');
+                    selectedValue = card.dataset.value;
+
+                    // Enable continue button
+                    continueBtn.classList.add('active');
+                });
+            });
+
+            continueBtn.addEventListener('click', () => {
+                if (selectedValue) {
+                    // Save selection (e.g., to localStorage or Supabase)
+                    console.log('Selected Experience:', selectedValue);
+
+                    // For now, just redirect to download or next step
+                    // Assuming this is the only step requested for now, or redirect to download
+                    window.location.href = 'onboarding-broker.html';
+                }
+            });
+
+            // Logout Logic - wait for Supabase
+            waitForSupabase(() => {
+                const supabase = window.supabaseClient;
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn && supabase) {
+                    logoutBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const { error } = await supabase.auth.signOut();
+                        if (!error) {
+                            window.location.href = 'signin.html';
+                        }
+                    });
+                }
             });
         });
-
-        continueBtn.addEventListener('click', () => {
-            if (selectedValue) {
-                // Save selection (e.g., to localStorage or Supabase)
-                console.log('Selected Experience:', selectedValue);
-
-                // For now, just redirect to download or next step
-                // Assuming this is the only step requested for now, or redirect to download
-                window.location.href = 'onboarding-broker.html';
-            }
-        });
-
-        // Logout Logic
-        document.getElementById('logout-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            const { error } = await supabase.auth.signOut();
-            if (!error) {
-                window.location.href = 'signin.html';
-            }
-        });
-
-        // Use shared Supabase client
-        const supabase = window.supabaseClient;
-
     </script>
 </body>
 

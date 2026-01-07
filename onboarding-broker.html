@@ -310,35 +310,57 @@
     </main>
 
     <script>
-        const brokerSelect = document.getElementById('broker-select');
-        const continueBtn = document.getElementById('continue-btn');
-
-        brokerSelect.addEventListener('change', () => {
-            if (brokerSelect.value) {
-                continueBtn.classList.add('active');
+        // Wait for DOM and Supabase to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Supabase client to be initialized
+            function waitForSupabase(callback, maxAttempts = 10) {
+                let attempts = 0;
+                const checkSupabase = setInterval(() => {
+                    attempts++;
+                    if (window.supabaseClient) {
+                        clearInterval(checkSupabase);
+                        callback();
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkSupabase);
+                        console.error('Supabase client not found');
+                    }
+                }, 100);
             }
-        });
 
-        continueBtn.addEventListener('click', () => {
-            if (brokerSelect.value) {
-                console.log('Selected Broker:', brokerSelect.value);
-                // Redirect to download or next step
-                window.location.href = 'onboarding-assets.html';
+            const brokerSelect = document.getElementById('broker-select');
+            const continueBtn = document.getElementById('continue-btn');
+
+            if (brokerSelect && continueBtn) {
+                brokerSelect.addEventListener('change', () => {
+                    if (brokerSelect.value) {
+                        continueBtn.classList.add('active');
+                    }
+                });
+
+                continueBtn.addEventListener('click', () => {
+                    if (brokerSelect.value) {
+                        console.log('Selected Broker:', brokerSelect.value);
+                        // Redirect to download or next step
+                        window.location.href = 'onboarding-assets.html';
+                    }
+                });
             }
+
+            // Logout Logic - wait for Supabase
+            waitForSupabase(() => {
+                const supabase = window.supabaseClient;
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn && supabase) {
+                    logoutBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const { error } = await supabase.auth.signOut();
+                        if (!error) {
+                            window.location.href = 'signin.html';
+                        }
+                    });
+                }
+            });
         });
-
-        // Logout Logic
-        document.getElementById('logout-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            const { error } = await supabase.auth.signOut();
-            if (!error) {
-                window.location.href = 'signin.html';
-            }
-        });
-
-        // Use shared Supabase client
-        const supabase = window.supabaseClient;
-
     </script>
 </body>
 
