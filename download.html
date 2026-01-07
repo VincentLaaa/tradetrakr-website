@@ -858,6 +858,45 @@
         }, 100);
       }
 
+      // Set up sign out button handler (runs regardless of auth status)
+      function setupSignOut() {
+        const signOutEl = document.getElementById('sign-out');
+        if (signOutEl) {
+          // Check if already has event listener by checking for data attribute
+          if (signOutEl.dataset.listenerAttached === 'true') {
+            return; // Already attached
+          }
+          
+          signOutEl.dataset.listenerAttached = 'true';
+          signOutEl.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Sign out button clicked');
+            
+            try {
+              if (window.supabaseClient) {
+                await window.supabaseClient.auth.signOut();
+                console.log('Signed out successfully');
+              } else {
+                console.warn('Supabase client not available for sign out');
+              }
+            } catch (error) {
+              console.error('Error signing out:', error);
+            } finally {
+              // Always redirect, even if signOut fails
+              window.location.href = window.location.origin + '/index.html';
+            }
+          });
+          console.log('Sign out button handler attached');
+        } else {
+          console.warn('Sign out button not found in DOM');
+        }
+      }
+      
+      // Set up sign out button immediately (works even if Supabase isn't ready yet)
+      setupSignOut();
+      
+      // Also set it up after Supabase is ready (in case DOM wasn't ready earlier)
       waitForSupabase(() => {
         const supabase = window.supabaseClient;
 
@@ -873,6 +912,8 @@
               body.style.opacity = '1';
             }
           }, 5000);
+          // Still set up sign out even if Supabase fails
+          setupSignOut();
           return;
         }
 
@@ -1106,19 +1147,9 @@
             }
           })();
         });
-      });
-        const signOutEl = document.getElementById('sign-out');
-        if (signOutEl) {
-          signOutEl.addEventListener('click', async () => {
-            try {
-              await supabase.auth.signOut();
-            } catch (e) {
-              console.error('Error signing out:', e);
-            } finally {
-              window.location.href = 'index.html';
-            }
-          });
-        }
+        
+        // Ensure sign out is set up after all auth checks complete
+        setupSignOut();
       });
     });
   </script>
