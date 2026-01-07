@@ -1,43 +1,68 @@
 
-console.log('Signin script loaded');
-// Use shared Supabase client
-const supabase = window.supabaseClient;
+// Wait for DOM and Supabase to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Signin script loaded - DOM ready');
+    
+    // Get DOM elements first
+    const googleBtn = document.getElementById('google-btn');
+    console.log('Google button found:', googleBtn);
+    const signinForm = document.getElementById('signin-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submit-btn');
+    const errorMsg = document.getElementById('error-msg');
+    const successMsg = document.getElementById('success-msg');
 
-const googleBtn = document.getElementById('google-btn');
-console.log('Google button found:', googleBtn);
-const signinForm = document.getElementById('signin-form');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const submitBtn = document.getElementById('submit-btn');
-const errorMsg = document.getElementById('error-msg');
-const successMsg = document.getElementById('success-msg');
-
-// Helper to show errors
-function showError(message) {
-    if (errorMsg) {
-        errorMsg.textContent = message;
-        errorMsg.style.display = 'block';
-        if (successMsg) successMsg.style.display = 'none';
+    // Wait for Supabase client to be initialized
+    function waitForSupabase(callback, maxAttempts = 10) {
+        let attempts = 0;
+        const checkSupabase = setInterval(() => {
+            attempts++;
+            if (window.supabaseClient) {
+                clearInterval(checkSupabase);
+                console.log('Supabase client found after', attempts, 'attempts');
+                callback();
+            } else if (attempts >= maxAttempts) {
+                clearInterval(checkSupabase);
+                console.error('Supabase client not found after', maxAttempts, 'attempts');
+                if (errorMsg) {
+                    errorMsg.textContent = 'System error: Database connection failed. Please refresh the page.';
+                    errorMsg.style.display = 'block';
+                }
+            }
+        }, 100);
     }
-}
 
-// Helper to show success
-function showSuccess(message) {
-    if (successMsg) {
-        successMsg.textContent = message;
-        successMsg.style.display = 'block';
-        if (errorMsg) errorMsg.style.display = 'none';
+    // Helper to show errors
+    function showError(message) {
+        if (errorMsg) {
+            errorMsg.textContent = message;
+            errorMsg.style.display = 'block';
+            if (successMsg) successMsg.style.display = 'none';
+        }
     }
-}
 
-// Check if Supabase client is available
-if (!supabase) {
-    console.error('Supabase client not found. Ensure supabaseClient.js is loaded.');
-    showError('System error: Database connection failed. Please refresh the page.');
-}
+    // Helper to show success
+    function showSuccess(message) {
+        if (successMsg) {
+            successMsg.textContent = message;
+            successMsg.style.display = 'block';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }
+    }
 
-// Google Sign-In Handler
-if (googleBtn) {
+    // Initialize once Supabase is ready
+    waitForSupabase(() => {
+        const supabase = window.supabaseClient;
+        
+        if (!supabase) {
+            console.error('Supabase client not found. Ensure supabaseClient.js is loaded.');
+            showError('System error: Database connection failed. Please refresh the page.');
+            return;
+        }
+
+        // Google Sign-In Handler
+        if (googleBtn) {
     const originalButtonHTML = googleBtn.innerHTML;
     
     googleBtn.addEventListener('click', async () => {
@@ -53,6 +78,8 @@ if (googleBtn) {
             googleBtn.innerHTML = 'Connecting...';
 
             console.log('Initiating Supabase OAuth sign-in...');
+            console.log('Redirect URL:', window.location.origin + '/download.html');
+            
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
@@ -66,26 +93,51 @@ if (googleBtn) {
 
             if (error) {
                 console.error('Supabase OAuth error:', error);
+                console.error('Error details:', JSON.stringify(error, null, 2));
+                
+                // Check for common OAuth configuration errors
+                if (error.message && error.message.includes('redirect')) {
+                    showError('OAuth redirect URL not configured. Please check your Supabase settings.');
+                } else if (error.message && error.message.includes('provider')) {
+                    showError('Google OAuth provider not enabled. Please enable it in your Supabase dashboard.');
+                } else {
+                    showError(error.message || 'Failed to sign in with Google. Please check your Supabase OAuth configuration.');
+                }
                 throw error;
             }
 
             console.log('Supabase OAuth initiated successfully:', data);
+            
+            // If we get here but no redirect happens, there might be an issue
+            if (!data || !data.url) {
+                throw new Error('OAuth flow failed to start. Please check your Supabase OAuth configuration in the dashboard.');
+            }
+            
             // Supabase handles the redirect automatically
 
         } catch (error) {
             console.error('Catch block error:', error);
-            showError(error.message || 'Failed to sign in with Google. Please try again.');
+            const errorMessage = error.message || 'Failed to sign in with Google. Please try again.';
+            
+            // Provide helpful guidance for common issues
+            if (errorMessage.includes('OAuth') || errorMessage.includes('provider') || errorMessage.includes('redirect')) {
+                showError(errorMessage + ' If your Supabase was recently reactivated, you may need to reconfigure Google OAuth in your Supabase dashboard.');
+            } else {
+                showError(errorMessage);
+            }
+            
             googleBtn.disabled = false;
             googleBtn.innerHTML = originalButtonHTML;
         }
     });
-} else {
-    console.error('Google button not found in DOM');
-    showError('Page error: Sign in button not found. Please refresh the page.');
-}
+        } else {
+            console.error('Google button not found in DOM');
+            showError('Page error: Sign in button not found. Please refresh the page.');
+        }
 
-// Email/Password Sign-In Handler
-signinForm.addEventListener('submit', async (e) => {
+        // Email/Password Sign-In Handler
+        if (signinForm) {
+            signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const email = emailInput.value;
@@ -134,7 +186,10 @@ signinForm.addEventListener('submit', async (e) => {
     } catch (error) {
         showError(error.message);
     } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Sign in';
-    }
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Sign in';
+            }
+            });
+        }
+    });
 });
