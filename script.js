@@ -1,8 +1,17 @@
 // --- Dashboard Access Guard ---
 (async function checkAccess() {
-  // Skip this guard on index.html (public landing page)
+  // Skip this guard on certain pages that have their own auth logic
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  if (currentPage === 'index.html' || currentPage === '') {
+  const skipPages = [
+    'index.html',
+    '',
+    'download.html',  // Has its own sophisticated auth guard with retry logic
+    'onboarding-paywall.html',
+    'signin.html',
+    'signup.html'
+  ];
+  
+  if (skipPages.includes(currentPage)) {
     return;
   }
 
@@ -30,9 +39,8 @@
     .single();
 
   if (error || !profile || profile.subscription_tier !== 'paid') {
-    // Only redirect if we're not already on the paywall or signin page
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    if (currentPage !== 'onboarding-paywall.html' && currentPage !== 'signin.html' && currentPage !== 'signup.html') {
+    // Only redirect if we're not already on excluded pages
+    if (!skipPages.includes(currentPage)) {
       window.location.href = 'onboarding-paywall.html'; // Redirect to paywall if not paid
     }
   }
