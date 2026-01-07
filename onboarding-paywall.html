@@ -1101,18 +1101,70 @@
                 markOnboardingComplete();
             });
 
-        // --- License Verification Logic ---
-        const WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
+            // --- License Verification Logic ---
+            const WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
 
-        async function postLicenseForValidation(licenseKey) {
-            const response = await fetch(WORKER_ENDPOINT, {
-                method: "POST",
-                body: JSON.stringify({ license: licenseKey })
-            });
+            // --- HWID helper (safe and never throws) ---
+            let hwidPromise = null;
 
-            const data = await response.json().catch(() => ({}));
-            return data;
-        }
+            async function getHardwareId() {
+                if (!hwidPromise) {
+                    // Ensure we never throw; everything is wrapped.
+                    hwidPromise = (async () => {
+                        try {
+                            if (
+                                typeof window !== "undefined" &&
+                                window.crypto &&
+                                window.crypto.subtle &&
+                                typeof TextEncoder !== "undefined"
+                            ) {
+                                const enc = new TextEncoder();
+                                const ua = navigator.userAgent || "tradetrakr-web";
+                                const buffer = await window.crypto.subtle.digest(
+                                    "SHA-256",
+                                    enc.encode(ua)
+                                );
+                                return Array.from(new Uint8Array(buffer))
+                                    .map((b) => b.toString(16).padStart(2, "0"))
+                                    .join("");
+                            }
+                        } catch (err) {
+                            console.error("HWID generation failed, using fallback:", err);
+                        }
+
+                        // Fallback: guaranteed non-empty string
+                        return (
+                            "web-" +
+                            Math.random().toString(16).slice(2) +
+                            Date.now().toString(16)
+                        );
+                    })();
+                }
+                return hwidPromise;
+            }
+
+            async function postLicenseForValidation(licenseKey) {
+                const hwidHex = await getHardwareId();
+
+                const payload = { license: licenseKey, hwid: hwidHex };
+                console.log("Sending payload to license worker:", payload);
+
+                const response = await fetch(WORKER_ENDPOINT, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+
+                let data = {};
+                try {
+                    data = await response.json();
+                } catch (err) {
+                    console.error("Failed to parse license worker response as JSON:", err);
+                }
+
+                console.log("License worker response:", response.status, data);
+                return { response, data };
+            }
 
             // --- Modal & License UI Logic ---
             const modal = document.getElementById('key-modal');
@@ -1164,14 +1216,64 @@
                     showStatus('', '');
 
                     try {
-                        // 1. Validate with Worker (No HWID)
-                        const data = await postLicenseForValidation(key);
+                        // 1. Validate with Worker (with HWID)
+                        const { response, data } = await postLicenseForValidation(key);
+
+                        // Handle true network / server issues
+                        if (!response) {
+                            console.error("License worker: no response object", data);
+                            showStatus("Unable to reach license server. Please try again.", "error");
+                            return;
+                        }
+
+                        if (response.status >= 500) {
+                            console.error("License worker 5xx error:", response.status, data);
+                            showStatus("License server error. Please try again.", "error");
+                            return;
+                        }
 
                         // Wait for Supabase before updating profile
                         waitForSupabase(async () => {
                             const supabase = window.supabaseClient;
 
-                            if (data?.ok) {
+                            // 2. For everything else (2xx/3xx/4xx), we rely on data.ok and data.error
+                            if (!data || data.ok !== true) {
+                                switch (data && data.error) {
+                                    case "invalid_or_expired":
+                                        showStatus("❌ Invalid or expired license key.", "error");
+                                        break;
+                                    case "metadata_mismatch":
+                                        showStatus(
+                                            "⚠️ This license is already bound to another device. Please reset it in Whop or contact support.",
+                                            "error"
+                                        );
+                                        break;
+                                    case "wrong_product":
+                                        showStatus("❌ This license is for a different product.", "error");
+                                        break;
+                                    case "missing_license":
+                                    case "missing_hwid":
+                                        showStatus("Missing license or device ID. Please refresh and try again.", "error");
+                                        break;
+                                    default:
+                                        showStatus(
+                                            "❌ Could not verify license. Please check your key and try again.",
+                                            "error"
+                                        );
+                                }
+                                return;
+                            }
+
+                            // 3. SUCCESS: data.ok === true
+                            // For WEBSITE ONLY: ignore securityViolation as a blocker
+                            if (data.securityViolation) {
+                                console.warn(
+                                    "License securityViolation from worker (ignored on web):",
+                                    data.securityViolation
+                                );
+                            }
+
+                            if (data.ok) {
                                 showStatus('License verified! Updating profile...', 'success');
 
                                 // 2. Update Supabase Profile with Membership Info
@@ -1201,14 +1303,6 @@
                                     }
                                 } else {
                                     showStatus('Error: Database connection failed.', 'error');
-                                }
-
-                            } else {
-                                // Handle errors
-                                if (data?.error === "invalid_or_expired") {
-                                    showStatus("❌ Invalid or expired license.", "error");
-                                } else {
-                                    showStatus(`Error: ${data?.error || "Unknown error"}`, "error");
                                 }
                             }
                         }, 5); // Only wait 5 attempts for license validation
