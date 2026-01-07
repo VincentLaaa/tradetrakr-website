@@ -1000,6 +1000,11 @@
     </div>
 
     <script>
+        // Safety check: Redirect from old paywall.html URL if somehow accessed
+        if (window.location.pathname.includes('/paywall.html') && !window.location.pathname.includes('onboarding-paywall.html')) {
+            window.location.replace('/onboarding-paywall.html');
+        }
+
         // Wait for DOM and Supabase to be ready
         document.addEventListener('DOMContentLoaded', function() {
             // Wait for Supabase client to be initialized
