@@ -7,3 +7,6 @@
 
 # Redirect index.html to root to prevent canonicalization issues
 /index.html  /  301!
+
+# Redirect old paywall.html to correct onboarding-paywall.html
+/paywall.html  /onboarding-paywall.html  301!
