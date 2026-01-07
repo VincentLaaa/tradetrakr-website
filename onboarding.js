@@ -5,54 +5,86 @@ const supabase = window.supabaseClient;
 async function ensureUserProfile() {
     if (!supabase) {
         console.warn('Supabase client not available');
-        return;
+        return false;
     }
 
     try {
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
         
-        if (!user) {
-            return; // User not logged in
+        if (userError || !user) {
+            console.log('No user found, skipping profile creation');
+            return false;
         }
+
+        console.log('Checking for profile for user:', user.id);
 
         // Check if profile exists
         const { data: profile, error: fetchError } = await supabase
             .from('profiles')
-            .select('id')
+            .select('id, subscription_tier, onboarding_complete')
             .eq('id', user.id)
             .single();
 
         // If profile doesn't exist, create it
-        if (fetchError && fetchError.code === 'PGRST116') {
-            console.log('Profile not found, creating one...');
-            const { error: insertError } = await supabase
-                .from('profiles')
-                .insert({
-                    id: user.id,
-                    subscription_tier: 'free',
-                    onboarding_complete: false
-                });
+        if (fetchError) {
+            // PGRST116 = no rows returned
+            if (fetchError.code === 'PGRST116' || fetchError.message?.includes('No rows')) {
+                console.log('Profile not found, creating one for user:', user.id);
+                const { data: newProfile, error: insertError } = await supabase
+                    .from('profiles')
+                    .insert({
+                        id: user.id,
+                        subscription_tier: 'free',
+                        onboarding_complete: false
+                    })
+                    .select()
+                    .single();
 
-            if (insertError) {
-                console.error('Error creating profile:', insertError);
+                if (insertError) {
+                    console.error('Error creating profile:', insertError);
+                    console.error('Insert error details:', JSON.stringify(insertError, null, 2));
+                    return false;
+                } else {
+                    console.log('Profile created successfully:', newProfile);
+                    return true;
+                }
             } else {
-                console.log('Profile created successfully');
+                console.error('Error checking profile:', fetchError);
+                console.error('Fetch error details:', JSON.stringify(fetchError, null, 2));
+                return false;
             }
-        } else if (fetchError) {
-            console.error('Error checking profile:', fetchError);
+        } else {
+            console.log('Profile already exists:', profile);
+            return true;
         }
     } catch (error) {
         console.error('Error ensuring user profile:', error);
+        return false;
     }
 }
 
-// Run profile check when page loads
-if (supabase) {
-    // Wait a bit for Supabase to be ready
-    setTimeout(() => {
+// Wait for DOM and Supabase to be ready, then ensure profile
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait for Supabase client to be initialized
+    function waitForSupabase(callback, maxAttempts = 15) {
+        let attempts = 0;
+        const checkSupabase = setInterval(() => {
+            attempts++;
+            if (window.supabaseClient) {
+                clearInterval(checkSupabase);
+                console.log('Supabase client found, ensuring profile exists...');
+                callback();
+            } else if (attempts >= maxAttempts) {
+                clearInterval(checkSupabase);
+                console.error('Supabase client not found after', maxAttempts, 'attempts');
+            }
+        }, 100);
+    }
+
+    waitForSupabase(() => {
         ensureUserProfile();
-    }, 1000);
-}
+    });
+});
 
 // --- Grid Animation (3D Tilt Neon Grid) ---
 const canvas = document.getElementById('grid-canvas');
