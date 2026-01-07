@@ -1,6 +1,59 @@
 // Use shared Supabase client
 const supabase = window.supabaseClient;
 
+// Ensure user profile exists (fallback if trigger doesn't fire)
+async function ensureUserProfile() {
+    if (!supabase) {
+        console.warn('Supabase client not available');
+        return;
+    }
+
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!user) {
+            return; // User not logged in
+        }
+
+        // Check if profile exists
+        const { data: profile, error: fetchError } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('id', user.id)
+            .single();
+
+        // If profile doesn't exist, create it
+        if (fetchError && fetchError.code === 'PGRST116') {
+            console.log('Profile not found, creating one...');
+            const { error: insertError } = await supabase
+                .from('profiles')
+                .insert({
+                    id: user.id,
+                    subscription_tier: 'free',
+                    onboarding_complete: false
+                });
+
+            if (insertError) {
+                console.error('Error creating profile:', insertError);
+            } else {
+                console.log('Profile created successfully');
+            }
+        } else if (fetchError) {
+            console.error('Error checking profile:', fetchError);
+        }
+    } catch (error) {
+        console.error('Error ensuring user profile:', error);
+    }
+}
+
+// Run profile check when page loads
+if (supabase) {
+    // Wait a bit for Supabase to be ready
+    setTimeout(() => {
+        ensureUserProfile();
+    }, 1000);
+}
+
 // --- Grid Animation (3D Tilt Neon Grid) ---
 const canvas = document.getElementById('grid-canvas');
 const ctx = canvas.getContext('2d');
