@@ -1000,77 +1000,106 @@
     </div>
 
     <script>
-        // Use shared Supabase client
-        const supabase = window.supabaseClient;
-
-        // --- Quote Rotation ---
-        const quotes = document.querySelectorAll('.quote-text');
-        let currentQuote = 0;
-
-        setInterval(() => {
-            quotes[currentQuote].classList.remove('active');
-            currentQuote = (currentQuote + 1) % quotes.length;
-            quotes[currentQuote].classList.add('active');
-        }, 15000); // 15 seconds
-
-        // --- Plan Toggle ---
-        const btnMonthly = document.getElementById('btn-monthly');
-        const btnYearly = document.getElementById('btn-yearly');
-        const priceDisplay = document.getElementById('price-display');
-        const periodDisplay = document.getElementById('period-display');
-        const subscribeBtn = document.getElementById('subscribe-btn');
-        const promoBadge = document.getElementById('promo-badge');
-
-        const LINK_MONTHLY = 'https://whop.com/checkout/plan_mkRYtNPWxqQ7O';
-        const LINK_YEARLY = 'https://whop.com/checkout/plan_U7h0RWow4rgZ9';
-
-        // Initialize with Yearly (Default)
-        priceDisplay.textContent = '$7.99';
-        periodDisplay.textContent = '/month (billed yearly)';
-        subscribeBtn.href = LINK_YEARLY;
-        subscribeBtn.textContent = "Start Free Trial";
-        promoBadge.style.display = 'inline-block';
-
-        btnMonthly.addEventListener('click', () => {
-            btnMonthly.classList.add('active');
-            btnYearly.classList.remove('active');
-            priceDisplay.textContent = '$14.99';
-            periodDisplay.textContent = '/month';
-            subscribeBtn.href = LINK_MONTHLY;
-            subscribeBtn.textContent = "Subscribe Now";
-            promoBadge.style.display = 'none';
-        });
-
-        btnYearly.addEventListener('click', () => {
-            btnYearly.classList.add('active');
-            btnMonthly.classList.remove('active');
-            priceDisplay.textContent = '$7.99';
-            periodDisplay.textContent = '/month (billed yearly)';
-            subscribeBtn.href = LINK_YEARLY;
-            subscribeBtn.textContent = "Start Free Trial";
-            promoBadge.style.display = 'inline-block';
-        });
-
-        // Logout Logic
-        document.getElementById('logout-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            const { error } = await supabase.auth.signOut();
-            if (!error) {
-                window.location.href = 'index.html';
+        // Wait for DOM and Supabase to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Supabase client to be initialized
+            function waitForSupabase(callback, maxAttempts = 10) {
+                let attempts = 0;
+                const checkSupabase = setInterval(() => {
+                    attempts++;
+                    if (window.supabaseClient) {
+                        clearInterval(checkSupabase);
+                        callback();
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkSupabase);
+                        console.error('Supabase client not found');
+                    }
+                }, 100);
             }
-        });
 
-        // Mark Onboarding as Complete
-        async function markOnboardingComplete() {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                await supabase
-                    .from('profiles')
-                    .update({ onboarding_complete: true })
-                    .eq('id', user.id);
+            // Use shared Supabase client
+            const supabase = window.supabaseClient;
+
+            // --- Quote Rotation ---
+            const quotes = document.querySelectorAll('.quote-text');
+            let currentQuote = 0;
+
+            if (quotes.length > 0) {
+                setInterval(() => {
+                    quotes[currentQuote].classList.remove('active');
+                    currentQuote = (currentQuote + 1) % quotes.length;
+                    quotes[currentQuote].classList.add('active');
+                }, 15000); // 15 seconds
             }
-        }
-        markOnboardingComplete();
+
+            // --- Plan Toggle ---
+            const btnMonthly = document.getElementById('btn-monthly');
+            const btnYearly = document.getElementById('btn-yearly');
+            const priceDisplay = document.getElementById('price-display');
+            const periodDisplay = document.getElementById('period-display');
+            const subscribeBtn = document.getElementById('subscribe-btn');
+            const promoBadge = document.getElementById('promo-badge');
+
+            const LINK_MONTHLY = 'https://whop.com/checkout/plan_mkRYtNPWxqQ7O';
+            const LINK_YEARLY = 'https://whop.com/checkout/plan_U7h0RWow4rgZ9';
+
+            if (btnMonthly && btnYearly && priceDisplay && periodDisplay && subscribeBtn && promoBadge) {
+                // Initialize with Yearly (Default)
+                priceDisplay.textContent = '$7.99';
+                periodDisplay.textContent = '/month (billed yearly)';
+                subscribeBtn.href = LINK_YEARLY;
+                subscribeBtn.textContent = "Start Free Trial";
+                promoBadge.style.display = 'inline-block';
+
+                btnMonthly.addEventListener('click', () => {
+                    btnMonthly.classList.add('active');
+                    btnYearly.classList.remove('active');
+                    priceDisplay.textContent = '$14.99';
+                    periodDisplay.textContent = '/month';
+                    subscribeBtn.href = LINK_MONTHLY;
+                    subscribeBtn.textContent = "Subscribe Now";
+                    promoBadge.style.display = 'none';
+                });
+
+                btnYearly.addEventListener('click', () => {
+                    btnYearly.classList.add('active');
+                    btnMonthly.classList.remove('active');
+                    priceDisplay.textContent = '$7.99';
+                    periodDisplay.textContent = '/month (billed yearly)';
+                    subscribeBtn.href = LINK_YEARLY;
+                    subscribeBtn.textContent = "Start Free Trial";
+                    promoBadge.style.display = 'inline-block';
+                });
+            }
+
+            // Logout Logic - wait for Supabase
+            waitForSupabase(() => {
+                const supabase = window.supabaseClient;
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn && supabase) {
+                    logoutBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const { error } = await supabase.auth.signOut();
+                        if (!error) {
+                            window.location.href = 'index.html';
+                        }
+                    });
+                }
+
+                // Mark Onboarding as Complete
+                async function markOnboardingComplete() {
+                    if (supabase) {
+                        const { data: { user } } = await supabase.auth.getUser();
+                        if (user) {
+                            await supabase
+                                .from('profiles')
+                                .update({ onboarding_complete: true })
+                                .eq('id', user.id);
+                        }
+                    }
+                }
+                markOnboardingComplete();
+            });
 
         // --- License Verification Logic ---
         const WORKER_ENDPOINT = "https://tradetrak-license-worker.shockinvest.workers.dev/license/validate";
@@ -1085,93 +1114,113 @@
             return data;
         }
 
-        // --- Modal & License UI Logic ---
-        const modal = document.getElementById('key-modal');
-        const openBtn = document.getElementById('open-key-modal');
-        const closeBtn = document.getElementById('close-modal');
-        const validateBtn = document.getElementById('validate-btn');
-        const licenseInput = document.getElementById('license-key');
-        const statusMsg = document.getElementById('validation-status');
+            // --- Modal & License UI Logic ---
+            const modal = document.getElementById('key-modal');
+            const openBtn = document.getElementById('open-key-modal');
+            const closeBtn = document.getElementById('close-modal');
+            const validateBtn = document.getElementById('validate-btn');
+            const licenseInput = document.getElementById('license-key');
+            const statusMsg = document.getElementById('validation-status');
 
-        openBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.add('active');
-            licenseInput.focus();
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-            statusMsg.textContent = '';
-            statusMsg.className = 'status-msg';
-        });
-
-        // Close on click outside
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
+            if (openBtn && modal && licenseInput) {
+                openBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    licenseInput.focus();
+                });
             }
-        });
 
-        function showStatus(msg, type) {
-            statusMsg.textContent = msg;
-            statusMsg.className = `status-msg ${type}`;
-        }
+            if (closeBtn && modal && statusMsg) {
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    statusMsg.textContent = '';
+                    statusMsg.className = 'status-msg';
+                });
+            }
 
-        validateBtn.addEventListener('click', async () => {
-            const key = licenseInput.value.trim();
-            if (!key) return;
-
-            validateBtn.disabled = true;
-            validateBtn.textContent = 'Validating...';
-            showStatus('', '');
-
-            try {
-                // 1. Validate with Worker (No HWID)
-                const data = await postLicenseForValidation(key);
-
-                if (data?.ok) {
-                    showStatus('License verified! Updating profile...', 'success');
-
-                    // 2. Update Supabase Profile with Membership Info
-                    const { data: { user } } = await supabase.auth.getUser();
-
-                    if (user) {
-                        const { error } = await supabase
-                            .from('profiles')
-                            .update({
-                                subscription_tier: 'paid',
-                                whop_membership_id: data.membership_id,
-                                whop_plan_id: data.plan_id,
-                                whop_status: data.status,
-                                whop_last_sync_at: new Date().toISOString()
-                            })
-                            .eq('id', user.id);
-
-                        if (error) throw error;
-
-                        showStatus('Success! Redirecting...', 'success');
-                        setTimeout(() => {
-                            window.location.href = 'download.html';
-                        }, 1000);
-                    } else {
-                        showStatus('Error: User not logged in.', 'error');
+            if (modal) {
+                // Close on click outside
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
                     }
+                });
+            }
 
-                } else {
-                    // Handle errors
-                    if (data?.error === "invalid_or_expired") {
-                        showStatus("❌ Invalid or expired license.", "error");
-                    } else {
-                        showStatus(`Error: ${data?.error || "Unknown error"}`, "error");
-                    }
+            function showStatus(msg, type) {
+                if (statusMsg) {
+                    statusMsg.textContent = msg;
+                    statusMsg.className = `status-msg ${type}`;
                 }
+            }
 
-            } catch (error) {
-                console.error(error);
-                showStatus('Connection failed. Try again.', 'error');
-            } finally {
-                validateBtn.disabled = false;
-                validateBtn.textContent = 'Validate License';
+            if (validateBtn) {
+                validateBtn.addEventListener('click', async () => {
+                    const key = licenseInput ? licenseInput.value.trim() : '';
+                    if (!key) return;
+
+                    validateBtn.disabled = true;
+                    validateBtn.textContent = 'Validating...';
+                    showStatus('', '');
+
+                    try {
+                        // 1. Validate with Worker (No HWID)
+                        const data = await postLicenseForValidation(key);
+
+                        // Wait for Supabase before updating profile
+                        waitForSupabase(async () => {
+                            const supabase = window.supabaseClient;
+
+                            if (data?.ok) {
+                                showStatus('License verified! Updating profile...', 'success');
+
+                                // 2. Update Supabase Profile with Membership Info
+                                if (supabase) {
+                                    const { data: { user } } = await supabase.auth.getUser();
+
+                                    if (user) {
+                                        const { error } = await supabase
+                                            .from('profiles')
+                                            .update({
+                                                subscription_tier: 'paid',
+                                                whop_membership_id: data.membership_id,
+                                                whop_plan_id: data.plan_id,
+                                                whop_status: data.status,
+                                                whop_last_sync_at: new Date().toISOString()
+                                            })
+                                            .eq('id', user.id);
+
+                                        if (error) throw error;
+
+                                        showStatus('Success! Redirecting...', 'success');
+                                        setTimeout(() => {
+                                            window.location.href = 'download.html';
+                                        }, 1000);
+                                    } else {
+                                        showStatus('Error: User not logged in.', 'error');
+                                    }
+                                } else {
+                                    showStatus('Error: Database connection failed.', 'error');
+                                }
+
+                            } else {
+                                // Handle errors
+                                if (data?.error === "invalid_or_expired") {
+                                    showStatus("❌ Invalid or expired license.", "error");
+                                } else {
+                                    showStatus(`Error: ${data?.error || "Unknown error"}`, "error");
+                                }
+                            }
+                        }, 5); // Only wait 5 attempts for license validation
+
+                    } catch (error) {
+                        console.error(error);
+                        showStatus('Connection failed. Try again.', 'error');
+                    } finally {
+                        validateBtn.disabled = false;
+                        validateBtn.textContent = 'Validate License';
+                    }
+                });
             }
         });
     </script>
