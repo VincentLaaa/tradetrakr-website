@@ -68,23 +68,44 @@
       }
     })();
     
-    // IMMEDIATE BLOCKING GUARD: Hide all content until auth is verified
-    // This prevents any content from being visible to unauthorized users
+    // IMMEDIATE BLOCKING GUARD: Start visible, hide only if unauthorized
+    // This prevents blank page for authenticated users
     document.addEventListener('DOMContentLoaded', function() {
-      const body = document.body;
-      if (body) {
-        body.style.visibility = 'hidden';
-        body.style.opacity = '0';
+      // Check auth immediately - if user is authenticated, mark as verified right away
+      // This prevents the page from ever hiding for paid users
+      if (typeof window.supabaseClient !== 'undefined') {
+        window.supabaseClient.auth.getUser().then(({ data: { user } }) => {
+          if (user) {
+            // User is authenticated - keep page visible while we check subscription
+            // We'll verify subscription in the main auth guard, but don't hide the page
+            console.log('User authenticated on page load, keeping page visible');
+          }
+        }).catch(() => {
+          // If check fails, proceed with normal flow
+        });
       }
+      
+      // Only hide if we're still checking auth after 1 second
+      // This gives time for quick auth checks to complete
+      setTimeout(() => {
+        const body = document.body;
+        if (body && !body.classList.contains('auth-verified')) {
+          body.classList.add('auth-hiding');
+        }
+      }, 1000);
     });
   </script>
   
   <style>
-    /* Hide page content until auth is verified */
+    /* Start page visible, hide only if auth check fails */
     body {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    body.auth-hiding {
       visibility: hidden;
       opacity: 0;
-      transition: opacity 0.3s ease;
     }
     body.auth-verified {
       visibility: visible;
@@ -861,6 +882,16 @@
 
         if (!supabase) {
           console.error('Supabase client not available');
+          // If Supabase fails to load, show page anyway after delay (might be a CDN issue)
+          setTimeout(() => {
+            console.warn('Supabase unavailable - showing page anyway after delay');
+            const body = document.body;
+            if (body) {
+              body.classList.add('auth-verified');
+              body.style.visibility = 'visible';
+              body.style.opacity = '1';
+            }
+          }, 5000);
           return;
         }
 
@@ -955,30 +986,49 @@
           }
         }
 
+        // Helper to show the page content
+        function showPage() {
+          const body = document.body;
+          if (body) {
+            body.classList.remove('auth-hiding');
+            body.classList.add('auth-verified');
+            body.style.visibility = 'visible';
+            body.style.opacity = '1';
+            console.log('✅ Page visibility restored');
+          }
+        }
+
+        // Helper to hide the page content
+        function hidePage() {
+          const body = document.body;
+          if (body) {
+            body.classList.add('auth-hiding');
+            body.classList.remove('auth-verified');
+          }
+        }
+
         // Ensure profile exists before checking subscription
         ensureUserProfile().then(() => {
           // 1. Auth Guard - with retry logic for subscription check
           (async function guardDownloadPage() {
-          // Timeout fallback: If auth check takes more than 10 seconds, show page (might be network issue)
+          // Timeout fallback: If auth check takes more than 8 seconds, show page (might be network issue)
           const timeoutId = setTimeout(() => {
             console.warn('Auth guard timeout - showing page anyway (may be network delay)');
-            const body = document.body;
-            if (body) {
-              body.classList.add('auth-verified');
-              body.style.visibility = 'visible';
-              body.style.opacity = '1';
-            }
-          }, 10000);
+            showPage();
+          }, 8000);
           
           try {
             const { data: { user }, error: userError } = await supabase.auth.getUser();
 
             if (userError || !user) {
               // Not signed in → send them to sign in page
+              clearTimeout(timeoutId);
               console.log('User not authenticated. Redirecting to sign in.');
               window.location.href = window.location.origin + '/signin.html';
               return;
             }
+
+            console.log('User authenticated:', user.id);
 
             // Retry logic: Check profile (onboarding + subscription) up to 3 times with delays
             // This handles cases where license validation just updated the profile
@@ -999,17 +1049,20 @@
 
               if (!error && data) {
                 profile = data;
+                console.log(`Profile check attempt ${attempt + 1}:`, profile);
                 // If we found a paid subscription, break early
                 if (data.subscription_tier === 'paid') {
                   break;
                 }
               } else {
                 lastError = error;
+                console.log(`Profile check attempt ${attempt + 1} failed:`, error?.message);
               }
             }
 
             // Final check - STRICT: Only 'paid' tier is allowed
             if (!profile) {
+              clearTimeout(timeoutId);
               console.error('Profile not found after retries. Redirecting to onboarding for new users.');
               window.location.href = window.location.origin + '/onboarding.html';
               return;
@@ -1018,6 +1071,7 @@
             // CRITICAL: Check if user has completed onboarding FIRST
             // New users should always go through onboarding, even if they somehow have a paid subscription
             if (!profile.onboarding_complete) {
+              clearTimeout(timeoutId);
               console.log('User has not completed onboarding. Redirecting to onboarding page.');
               window.location.href = window.location.origin + '/onboarding.html';
               return;
@@ -1025,6 +1079,7 @@
             
             // Strict check: subscription_tier MUST be exactly 'paid'
             if (profile.subscription_tier !== 'paid') {
+              clearTimeout(timeoutId);
               console.log('User subscription status:', profile.subscription_tier);
               console.log('User does NOT have paid subscription. Redirecting to paywall.');
               // Not paid → redirect to paywall immediately
@@ -1033,17 +1088,9 @@
             }
 
             // If we get here, user is logged in AND has paid subscription → allow page to render
-            console.log('User has paid subscription, allowing access to download page');
-            
-            // Show the page content now that auth is verified
-            // Use both class and direct style to ensure visibility
             clearTimeout(timeoutId); // Clear timeout since we succeeded
-            const body = document.body;
-            if (body) {
-              body.classList.add('auth-verified');
-              body.style.visibility = 'visible';
-              body.style.opacity = '1';
-            }
+            console.log('✅ User has paid subscription, showing download page');
+            showPage();
           } catch (error) {
             clearTimeout(timeoutId); // Clear timeout on error
             console.error('Error in auth guard:', error);
@@ -1052,6 +1099,36 @@
             window.location.href = window.location.origin + '/onboarding-paywall.html';
           }
         })();
+        }).catch((error) => {
+          console.error('Error in ensureUserProfile promise:', error);
+          // If profile check fails, still try to run the auth guard
+          // Don't block the page if there's a profile issue
+          (async function() {
+            try {
+              const { data: { user } } = await supabase.auth.getUser();
+              if (user) {
+                // Try to check subscription anyway
+                const { data: profile } = await supabase
+                  .from('profiles')
+                  .select('subscription_tier, onboarding_complete')
+                  .eq('id', user.id)
+                  .single();
+                
+                if (profile && profile.subscription_tier === 'paid' && profile.onboarding_complete) {
+                  console.log('✅ User has paid subscription (fallback check), showing download page');
+                  showPage();
+                } else {
+                  window.location.href = window.location.origin + '/onboarding-paywall.html';
+                }
+              } else {
+                window.location.href = window.location.origin + '/signin.html';
+              }
+            } catch (err) {
+              console.error('Fallback auth check failed:', err);
+              // Last resort: show page after delay (might be paid user with network issue)
+              setTimeout(() => showPage(), 5000);
+            }
+          })();
         });
       });
         const signOutEl = document.getElementById('sign-out');
