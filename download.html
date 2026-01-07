@@ -13,7 +13,30 @@
     if (window.location.pathname === '/paywall.html' || window.location.pathname.includes('/paywall.html')) {
       window.location.replace('/onboarding-paywall.html');
     }
+    
+    // IMMEDIATE BLOCKING GUARD: Hide all content until auth is verified
+    // This prevents any content from being visible to unauthorized users
+    document.addEventListener('DOMContentLoaded', function() {
+      const body = document.body;
+      if (body) {
+        body.style.visibility = 'hidden';
+        body.style.opacity = '0';
+      }
+    });
   </script>
+  
+  <style>
+    /* Hide page content until auth is verified */
+    body {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    body.auth-verified {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
 
   <!-- Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -886,8 +909,9 @@
             const { data: { user }, error: userError } = await supabase.auth.getUser();
 
             if (userError || !user) {
-              // Not signed in → send them to the landing page
-              window.location.href = 'index.html';
+              // Not signed in → send them to sign in page
+              console.log('User not authenticated. Redirecting to sign in.');
+              window.location.href = window.location.origin + '/signin.html';
               return;
             }
 
@@ -919,25 +943,32 @@
               }
             }
 
-            // Final check
-            if (!profile || profile.subscription_tier !== 'paid') {
-              console.log('User subscription status:', profile?.subscription_tier || 'not found');
-              console.log('Redirecting to onboarding-paywall.html');
-              // Not paid → redirect to paywall (using absolute path to prevent issues)
-              const paywallUrl = window.location.origin + '/onboarding-paywall.html';
-              console.log('Redirect URL:', paywallUrl);
-              window.location.href = paywallUrl;
+            // Final check - STRICT: Only 'paid' tier is allowed
+            if (!profile) {
+              console.error('Profile not found after retries. Redirecting to paywall.');
+              window.location.href = window.location.origin + '/onboarding-paywall.html';
+              return;
+            }
+            
+            // Strict check: subscription_tier MUST be exactly 'paid'
+            if (profile.subscription_tier !== 'paid') {
+              console.log('User subscription status:', profile.subscription_tier);
+              console.log('User does NOT have paid subscription. Redirecting to paywall.');
+              // Not paid → redirect to paywall immediately
+              window.location.href = window.location.origin + '/onboarding-paywall.html';
               return;
             }
 
-            // If we get here, user is logged in AND paid → allow page to render
+            // If we get here, user is logged in AND has paid subscription → allow page to render
             console.log('User has paid subscription, allowing access to download page');
+            
+            // Show the page content now that auth is verified
+            document.body.classList.add('auth-verified');
           } catch (error) {
             console.error('Error in auth guard:', error);
-            // On error, redirect to paywall to be safe (using absolute path)
-            const paywallUrl = window.location.origin + '/onboarding-paywall.html';
-            console.log('Error redirect URL:', paywallUrl);
-            window.location.href = paywallUrl;
+            console.error('Error details:', error);
+            // On error, redirect to paywall to be safe - deny access by default
+            window.location.href = window.location.origin + '/onboarding-paywall.html';
           }
         })();
         });
