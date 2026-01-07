@@ -168,20 +168,11 @@ document.addEventListener('DOMContentLoaded', function() {
             signupForm.reset();
         } else if (data.user && data.session) {
             // Auto-confirmed (if disabled in settings)
-            showSuccess('Account created successfully! Checking subscription...');
+            showSuccess('Account created successfully! Redirecting to onboarding...');
 
-            // Check subscription tier
-            const { data: profile, error: profileError } = await supabase
-                .from('profiles')
-                .select('subscription_tier')
-                .eq('id', data.user.id)
-                .single();
-
-            if (profile && profile.subscription_tier === 'paid') {
-                window.location.href = 'download.html';
-            } else {
-                window.location.href = 'onboarding.html';
-            }
+            // All new users should go to onboarding first
+            // They can only access download.html after completing onboarding and having a valid license
+            window.location.href = 'onboarding.html';
         }
     } catch (error) {
         showError(error.message);
