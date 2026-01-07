@@ -16,6 +16,7 @@
     
     // IMMEDIATE NEW USER REDIRECT: Catch OAuth callbacks for new users
     // Run this immediately, before Supabase even loads, to prevent any flash of content
+    // BUT only redirect if we're absolutely sure - don't block paid users
     (async function immediateNewUserRedirect() {
       // Check if this might be an OAuth callback (has hash with session tokens)
       const hasAuthHash = window.location.hash && (
@@ -36,19 +37,32 @@
             if (user) {
               const { data: profile } = await supabase
                 .from('profiles')
-                .select('onboarding_complete')
+                .select('onboarding_complete, subscription_tier')
                 .eq('id', user.id)
                 .single();
               
-              // If new user (hasn't completed onboarding), redirect immediately
-              if (!profile || !profile.onboarding_complete) {
-                console.log('New user detected on download page - redirecting to onboarding');
+              // Only redirect if:
+              // 1. Profile doesn't exist (new user), OR
+              // 2. User hasn't completed onboarding AND doesn't have paid subscription
+              // Don't redirect paid users even if onboarding isn't complete (edge case handling)
+              if (!profile) {
+                console.log('No profile found on download page - redirecting to onboarding');
                 window.location.replace(window.location.origin + '/onboarding.html');
                 return;
               }
+              
+              if (!profile.onboarding_complete && profile.subscription_tier !== 'paid') {
+                console.log('New user (no onboarding, not paid) detected on download page - redirecting to onboarding');
+                window.location.replace(window.location.origin + '/onboarding.html');
+                return;
+              }
+              
+              // If we get here, user has profile and either completed onboarding or has paid subscription
+              // Let the main auth guard handle the rest
             }
           } catch (error) {
             console.error('Error in immediate new user redirect check:', error);
+            // Don't redirect on error - let main auth guard handle it
           }
         }
       }
@@ -945,6 +959,17 @@
         ensureUserProfile().then(() => {
           // 1. Auth Guard - with retry logic for subscription check
           (async function guardDownloadPage() {
+          // Timeout fallback: If auth check takes more than 10 seconds, show page (might be network issue)
+          const timeoutId = setTimeout(() => {
+            console.warn('Auth guard timeout - showing page anyway (may be network delay)');
+            const body = document.body;
+            if (body) {
+              body.classList.add('auth-verified');
+              body.style.visibility = 'visible';
+              body.style.opacity = '1';
+            }
+          }, 10000);
+          
           try {
             const { data: { user }, error: userError } = await supabase.auth.getUser();
 
@@ -1011,10 +1036,18 @@
             console.log('User has paid subscription, allowing access to download page');
             
             // Show the page content now that auth is verified
-            document.body.classList.add('auth-verified');
+            // Use both class and direct style to ensure visibility
+            clearTimeout(timeoutId); // Clear timeout since we succeeded
+            const body = document.body;
+            if (body) {
+              body.classList.add('auth-verified');
+              body.style.visibility = 'visible';
+              body.style.opacity = '1';
+            }
           } catch (error) {
+            clearTimeout(timeoutId); // Clear timeout on error
             console.error('Error in auth guard:', error);
-            console.error('Error details:', error);
+            console.error('Error details:', JSON.stringify(error, null, 2));
             // On error, redirect to paywall to be safe - deny access by default
             window.location.href = window.location.origin + '/onboarding-paywall.html';
           }
