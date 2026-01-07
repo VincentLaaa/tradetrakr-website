@@ -1105,10 +1105,21 @@
                         // PGRST116 = no rows returned
                         if (fetchError.code === 'PGRST116' || fetchError.message?.includes('No rows')) {
                             console.log('Profile not found, creating one for user:', user.id);
+                            console.log('User email:', user.email);
+                            console.log('User metadata:', user.user_metadata);
+                            
+                            // Extract user info from auth user
+                            const email = user.email || user.user_metadata?.email || null;
+                            const fullName = user.user_metadata?.full_name || user.user_metadata?.name || null;
+                            const avatarUrl = user.user_metadata?.avatar_url || user.user_metadata?.picture || null;
+                            
                             const { data: newProfile, error: insertError } = await supabase
                                 .from('profiles')
                                 .insert({
                                     id: user.id,
+                                    email: email,
+                                    full_name: fullName,
+                                    avatar_url: avatarUrl,
                                     subscription_tier: 'free',
                                     onboarding_complete: false
                                 })
@@ -1130,6 +1141,29 @@
                         }
                     } else {
                         console.log('Profile already exists:', profile);
+                        // Update profile with latest user metadata if missing
+                        const email = user.email || user.user_metadata?.email || null;
+                        const fullName = user.user_metadata?.full_name || user.user_metadata?.name || null;
+                        const avatarUrl = user.user_metadata?.avatar_url || user.user_metadata?.picture || null;
+                        
+                        if ((email && !profile.email) || (fullName && !profile.full_name) || (avatarUrl && !profile.avatar_url)) {
+                            console.log('Updating profile with user metadata...');
+                            const updates = {};
+                            if (email && !profile.email) updates.email = email;
+                            if (fullName && !profile.full_name) updates.full_name = fullName;
+                            if (avatarUrl && !profile.avatar_url) updates.avatar_url = avatarUrl;
+                            
+                            const { error: updateError } = await supabase
+                                .from('profiles')
+                                .update(updates)
+                                .eq('id', user.id);
+                                
+                            if (updateError) {
+                                console.error('Error updating profile metadata:', updateError);
+                            } else {
+                                console.log('Profile metadata updated successfully');
+                            }
+                        }
                         return true;
                     }
                 } catch (error) {

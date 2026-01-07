@@ -17,6 +17,9 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+  email TEXT,
+  full_name TEXT,
+  avatar_url TEXT,
   subscription_tier TEXT DEFAULT 'free' NOT NULL,
   onboarding_complete BOOLEAN DEFAULT FALSE NOT NULL,
   whop_membership_id TEXT,
@@ -51,12 +54,23 @@ CREATE POLICY "Users can insert own profile"
   WITH CHECK (auth.uid() = id);
 
 -- Function to create a profile for a new user
+-- Extracts email, name, and avatar from user_metadata (Google OAuth provides these)
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, subscription_tier, onboarding_complete)
+  INSERT INTO public.profiles (
+    id,
+    email,
+    full_name,
+    avatar_url,
+    subscription_tier,
+    onboarding_complete
+  )
   VALUES (
     NEW.id,
+    COALESCE(NEW.email, NEW.raw_user_meta_data->>'email'),
+    COALESCE(NEW.raw_user_meta_data->>'full_name', NEW.raw_user_meta_data->>'name'),
+    NEW.raw_user_meta_data->>'avatar_url',
     'free',
     FALSE
   );
